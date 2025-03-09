@@ -1,0 +1,26 @@
+
+.start_page{
+    padding-top: 67;
+}
+.edit{
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+}
+.edit:hover{
+    font-size: 2.5rem;
+    color: blue;
+}
+.input-group-text{
+    height: 100%;
+}
+.btn-save{
+    /* width: 100%;*/
+    margin-top: 5px; 
+}
+.error-message{
+    color: red;
+}
+.my_active{
+    color: orange !important;
+}

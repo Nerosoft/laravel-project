@@ -1,0 +1,12 @@
+.btn-addItem{
+    margin: 0 !important;
+}
+.custom th, .custom tr{
+    line-height: 2rem;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+.discount-size{
+    min-width: 46px;
+}
