@@ -19,7 +19,7 @@ class SetupMenu extends InitPage{
                         }
                 }
             else if(isset($value->Item)){
-                $this->myMenuApp[$key]['name'] = $key;
+                $this->myMenuApp[$key]['name'] = $value->Name;
                 $this->myMenuApp[$key]['icon'] = $myMenuApp->getIconByKey($key);
                 $this->myMenuApp[$key]['items'] = array();
                 foreach ($value->Item as $key2 => $item) {
