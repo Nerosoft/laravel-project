@@ -63,7 +63,7 @@ class LanguageController extends Controller
         }
     }
     public function getAllMenu($allLanguage, $data, $myKey, $id, $direction = null, $myId = null){
-        if($id === 'Menu' || $id === 'MenuAdmin' || $id === 'CustomMenuLanguage'){//only menu
+        if($id === 'Menu'){//only menu
             foreach ($data as $key => $value)
                 if(isset($value['Item'])){
                     array_push($this->arr, array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value['Name']));
