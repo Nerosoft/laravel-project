@@ -68,8 +68,6 @@ class LanguageController extends Controller
                     array_push($this->arr, array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value['Name']));
                     $this->getAllMenu($allLanguage, $value['Item'], $myKey, $id, null, $key);
                 }
-                else if(is_array($value))
-                    $this->getAllMenu($allLanguage, $value, $myKey, $id);
                 else
                     array_push($this->arr, $myId === null ? array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value) : array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$myId, 'id'=>$id, 'name'=>$value, 'item'=>$key));  
         }else
