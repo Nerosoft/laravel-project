@@ -36,17 +36,16 @@ class LanguageController extends Controller
         if(isset(Rays::find(request()->session()->get('userId'))[$nameLanguage][$id!== LanguageController::AllLang ? $id : $nameLanguage]) || $nameLanguage === 'AllLanguage'){
             $lang = $this->setupLanguage('AllLanguage', $id !== null ? $id : $nameLanguage);
             $lang->myMenuApp[$nameLanguage]['active'] = 'my_active';
-            if($id !== null)
+            if($id !== null){
                 $lang->myMenuApp[$nameLanguage]['items'][$id]['active'] = 'my_active';
+                $this->getAllMenu($lang->myAllLanguage[$nameLanguage][$nameLanguage][$nameLanguage], $id!== LanguageController::AllLang ? $lang->myAllLanguage[$nameLanguage][$id] : $lang->myAllLanguage[$nameLanguage][$nameLanguage], $nameLanguage, $id, $id !== 'Html' ? null :  $lang->myDirectionOption);
+            }else
+                foreach ($lang->myAllLanguage as $myKey => $value)
+                    foreach ($value as $key => $data)
+                        $this->getAllMenu($lang->myAllLanguage[$lang->language][$lang->language][$myKey], $data, $myKey, $key, ($key === 'Html' ? $lang->myAllLanguage[$lang->language]['Direction'] : null));   
             return view('all_language', [
                 'lang'=> $lang,
-                'table'=>  $id !== null ?
-                 $this->getAllMenu(
-                    $lang->myAllLanguage[$nameLanguage][$nameLanguage][$nameLanguage],
-                    //my key of site aut and this key not like my key in database
-                    $id!== LanguageController::AllLang ? $lang->myAllLanguage[$nameLanguage][$id] : $lang->myAllLanguage[$nameLanguage][$nameLanguage],
-                    $nameLanguage, $id, $id !== 'Html' ? null :  $lang->myDirectionOption)
-                    : $this->setUpTable($lang->myAllLanguage, $lang->language),
+                'table'=> $this->arr,
                 'state'=>$id === null
             ]);
         }else if($nameLanguage === 'ChangeLanguage'){
@@ -76,23 +75,6 @@ class LanguageController extends Controller
         }else
             foreach ($data as $key => $value) 
                 array_push($this->arr, $direction === null ? array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value) : array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value, 'direction'=>$direction));
-        return $this->arr;
-    }
-    public function setUpTable($allLanguage, $language){
-        //get data by key like data->getValue(key)
-        //id in blade php Menu and html
-        $this->arr = array();
-        foreach ($allLanguage as $myKey => $value){
-            foreach ($value as $key => $data)
-                $this->getAllMenu(
-                    $allLanguage[$language][$language][$myKey],
-                    $data,
-                    $myKey,
-                    $key,
-                ($key === 'Html' ? $allLanguage[$language]['Direction'] : null));
-                 
-        } 
-        return $this->arr;
     }
     public function editAllLanguage(Request $request, $myLang, $id, $name, $item = null){
         //allLang and menu
