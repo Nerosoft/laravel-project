@@ -259,4 +259,4 @@ Route::get('/test', function () {
 Route::controller(RaysController::class)->group(function () {
     Route::get('/{id?}', 'index')->name('PatentDashboard')->middleware(IsLogin::class.':patent');
 });
-//make interface initError and initError2 initError 3 variable names and ar view and setup app importaint.
+//make variable names and ar view and setup app importaint.
