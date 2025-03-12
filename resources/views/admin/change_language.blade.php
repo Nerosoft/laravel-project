@@ -36,9 +36,17 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="LangForm{{$i.$index}}" action="{{$i !== 0 ? route('language.change') : route('language.copy')}}" method="POST">
+                                        <form id="LangForm{{$i.$index}}" action="{{$i !== 0 ? route('language.change') : route('language.copy')}}" method="POST" onsubmit="return @json($i) !== 0 ? true : validName($(this).find('#lang_name'))">
                                             @csrf
                                             <input type="hidden" id="language-select" name="language-select" value="{{$index}}">
+                                            @if($i === 0)
+                                            <div class="input-group input-group-lg mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label7}}</span>
+                                            </div>
+                                                <input type="text" name="lang_name" id="lang_name" value="{{old('lang_name')}}" placeholder='{{$lang->hint1}}' class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                                            </div>
+                                            @endif
                                         </form>
                                         {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->Name}}</spam>
                                     </div>
@@ -63,7 +71,21 @@
             
         </table>
     </div>
-                    
+<!-- Toast Container -->
+<div style="position: fixed; top: 70px; right: 10px; z-index: 9999;">
+    <div id="myToast1" class="toast align-items-center text-bg-danger border-0 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">{{ $lang->error1 }}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <div id="myToast2" class="toast align-items-center text-bg-danger border-0 mt-2" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">{{ $lang->error2 }}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div> 
 <script src="{{asset('js/admin/change_language.js')}}" type="text/javascript"></script>
 @extends('layout.table_setting')
 @endsection

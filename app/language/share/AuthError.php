@@ -1,13 +1,15 @@
 <?php
 namespace App\language\share;
-class AuthError extends InitPage{
+use App\Http\interface\initError;
+use App\Http\interface\initError2;
+class AuthError extends InitPage implements initError, initError2{
     protected $error;
     protected function __construct($error, $state, $language, $title, $direction){
         parent::__construct($language, $title, $direction);
         $this->error = $error;
         $this->initError($state);
     }
-    protected function initError($state){
+    public function initError($state, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
         if($state === 'login'){//admin
             $this->error1 = $this->error['UserEmail'];
             $this->error2 = $this->error['UserEmailRequired'];
@@ -34,7 +36,7 @@ class AuthError extends InitPage{
             $this->error2 = $this->error['LoginPatentCodeRequired'];
         }
     }
-    protected function initError2($state){
+    public function initError2($state, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
         if($state === 'login')//admin
             $this->error5 = $this->error['UserPasswordDntMatch'];
         else if($state === 'doctor')

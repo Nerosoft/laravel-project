@@ -5,7 +5,12 @@ use App\instance\admin\test_cultures\Cultures;
 use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\MyCurrentOffers;
 use App\language\menu\AdminTopMenu;
-class TestParent extends AdminTopMenu{
+
+use App\Http\interface\initError;
+use App\Http\interface\initError2;
+use App\Http\interface\initError3;
+
+class TestParent extends AdminTopMenu implements initError, initError2, initError3{
     protected $error;
     protected function __construct($error, $myState, $AppId, $Language, $AppSettingAdmin, $Direction, $Branch, $StateAppId, $_id, $Title, $Menu, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
         //dont call constractor in edit and delete
@@ -13,7 +18,7 @@ class TestParent extends AdminTopMenu{
         $this->error = $error;
         $this->initError($myState, $ob, $var1, $var2, $var3, $var4, $var5, $var6);
     }
-    protected function initError($myState, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
+    public function initError($myState, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
         if($myState === 'AllTestCultures'){
             $this->error1 = $this->error['TestNameRequired'];
             $this->error2 = $this->error['TestNameInvalid'];
@@ -110,11 +115,9 @@ class TestParent extends AdminTopMenu{
             $this->initAllTestAndOffer($ob, $var1, $var2, $var3, $var4, $var5, $var6);
         }
         else if($myState === 'ChangeLanguage'){
-            $this->error1 = $this->error['ChangeLanguageRequired'];
-            $this->error2 = $this->error['ChangeLanguageInvalid'];
-            $this->size1 = $ob;
-        }
-        
+            $this->error1 = $this->error['NewLangNameRequired'];
+            $this->error2 = $this->error['NewLangNameInvalid'];
+        } 
         else {//if($myState === 'AllLanguage'){
             $this->initMyAllLanguage($ob);
             $this->error1 = $this->error['TextRequired'];
@@ -128,7 +131,7 @@ class TestParent extends AdminTopMenu{
         foreach ($ob[$ob['Setting']['Language']][$ob['Setting']['Language']] as $key => $value)
             $this->myAllLanguage[$key] = $ob[$key];
     }
-    protected function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
+    public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
         if($myState === 'AllTestCultures'){
             $this->error5 = $this->error['TestPriceInvalid'];
             $this->error6 = $this->error['TestInputOutputLabInvalid'];
@@ -187,8 +190,11 @@ class TestParent extends AdminTopMenu{
             $this->arr1 = $var2;
             $this->paymentKeys = $var3;
             
-        }else if($myState === 'ChangeLanguage')
-            $this->error3 = $this->error['ChangeLanguageUsed'];
+        }else if($myState === 'ChangeLanguage'){
+            $this->error3 = $this->error['ChangeLanguageRequired'];
+            $this->error4 = $this->error['ChangeLanguageInvalid'];
+            $this->size1 = $var1;
+        }
         else{
             $this->error8 = $this->error['CurrentOffersPriceInvalid'];
             $this->error9 = $this->error['CurrentOffersDisplayPriceInvalid'];
@@ -196,7 +202,7 @@ class TestParent extends AdminTopMenu{
             $this->inputOutPutKeys = $var1;
         }
     }
-    protected function initError3($myState){
+    public function initError3($myState){
         if($myState === 'AllTestCultures'){
             $this->error7 = $this->error['TestIdRequired'];
             $this->error8 = $this->error['TestIdInvalid'];
@@ -219,7 +225,8 @@ class TestParent extends AdminTopMenu{
         }else if($myState === 'PatientRegisteration'){
             $this->error18 = $this->error['PatientRegisterationIdRequired'];
             $this->error19 = $this->error['PatientRegisterationIdInvalid'];
-        }
+        }else if($myState === 'ChangeLanguage')
+            $this->error5 = $this->error['ChangeLanguageUsed'];
         else{
             $this->error11 = $this->error['CurrentOffersIdRequired'];
             $this->error12 = $this->error['CurrentOffersIdInvalid'];

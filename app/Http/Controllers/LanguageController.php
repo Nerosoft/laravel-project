@@ -36,17 +36,16 @@ class LanguageController extends Controller
         if(isset(Rays::find(request()->session()->get('userId'))[$nameLanguage][$id!== LanguageController::AllLang ? $id : $nameLanguage]) || $nameLanguage === 'AllLanguage'){
             $lang = $this->setupLanguage('AllLanguage', $id !== null ? $id : $nameLanguage);
             $lang->myMenuApp[$nameLanguage]['active'] = 'my_active';
-            if($id !== null)
+            if($id !== null){
                 $lang->myMenuApp[$nameLanguage]['items'][$id]['active'] = 'my_active';
+                $this->getAllMenu($lang->myAllLanguage[$nameLanguage][$nameLanguage][$nameLanguage], $id!== LanguageController::AllLang ? $lang->myAllLanguage[$nameLanguage][$id] : $lang->myAllLanguage[$nameLanguage][$nameLanguage], $nameLanguage, $id, $id !== 'Html' ? null :  $lang->myDirectionOption);
+            }else
+                foreach ($lang->myAllLanguage as $myKey => $value)
+                    foreach ($value as $key => $data)
+                        $this->getAllMenu($lang->myAllLanguage[$lang->language][$lang->language][$myKey], $data, $myKey, $key, ($key === 'Html' ? $lang->myAllLanguage[$lang->language]['Direction'] : null));   
             return view('all_language', [
                 'lang'=> $lang,
-                'table'=>  $id !== null ?
-                 $this->getAllMenu(
-                    $lang->myAllLanguage[$nameLanguage][$nameLanguage][$nameLanguage],
-                    //my key of site aut and this key not like my key in database
-                    $id!== LanguageController::AllLang ? $lang->myAllLanguage[$nameLanguage][$id] : $lang->myAllLanguage[$nameLanguage][$nameLanguage],
-                    $nameLanguage, $id, $id !== 'Html' ? null :  $lang->myDirectionOption)
-                    : $this->setUpTable($lang->myAllLanguage, $lang->language),
+                'table'=> $this->arr,
                 'state'=>$id === null
             ]);
         }else if($nameLanguage === 'ChangeLanguage'){
@@ -63,36 +62,17 @@ class LanguageController extends Controller
         }
     }
     public function getAllMenu($allLanguage, $data, $myKey, $id, $direction = null, $myId = null){
-        if($id === 'Menu' || $id === 'MenuAdmin' || $id === 'CustomMenuLanguage'){//only menu
+        if($id === 'Menu'){//only menu
             foreach ($data as $key => $value)
                 if(isset($value['Item'])){
                     array_push($this->arr, array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value['Name']));
                     $this->getAllMenu($allLanguage, $value['Item'], $myKey, $id, null, $key);
                 }
-                else if(is_array($value))
-                    $this->getAllMenu($allLanguage, $value, $myKey, $id);
                 else
                     array_push($this->arr, $myId === null ? array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value) : array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$myId, 'id'=>$id, 'name'=>$value, 'item'=>$key));  
         }else
             foreach ($data as $key => $value) 
                 array_push($this->arr, $direction === null ? array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value) : array('languageName'=>$allLanguage, 'lang'=>$myKey, 'myName'=>$key, 'id'=>$id, 'name'=>$value, 'direction'=>$direction));
-        return $this->arr;
-    }
-    public function setUpTable($allLanguage, $language){
-        //get data by key like data->getValue(key)
-        //id in blade php Menu and html
-        $this->arr = array();
-        foreach ($allLanguage as $myKey => $value){
-            foreach ($value as $key => $data)
-                $this->getAllMenu(
-                    $allLanguage[$language][$language][$myKey],
-                    $data,
-                    $myKey,
-                    $key,
-                ($key === 'Html' ? $allLanguage[$language]['Direction'] : null));
-                 
-        } 
-        return $this->arr;
     }
     public function editAllLanguage(Request $request, $myLang, $id, $name, $item = null){
         //allLang and menu
@@ -147,8 +127,8 @@ class LanguageController extends Controller
         request()->validate([
             'language-select' =>['required', Rule::in($lang->size1)]
         ], [
-            'language-select.required' => $lang->error1,
-            'language-select.in' => $lang->error2
+            'language-select.required' => $lang->error3,
+            'language-select.in' => $lang->error4
         ]);
         $model = Rays::find(request()->session()->get('userId'));
         $setting = $model['Setting'];
@@ -160,17 +140,20 @@ class LanguageController extends Controller
     public function copyLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_copy', Rays::find(request()->session()->get('userId')));
         request()->validate([
-            'language-select' =>['required', Rule::in($lang->size1)]
+            'language-select' =>['required', Rule::in($lang->size1)],
+            'lang_name' =>['required', 'min:3']
         ], [
-            'language-select.required' => $lang->error1,
-            'language-select.in' => $lang->error2
+            'lang_name.required' => $lang->error1,
+            'lang_name.min' => $lang->error2,
+            'language-select.required' => $lang->error3,
+            'language-select.in' => $lang->error4
         ]);
         $newKey = $this->generateUniqueIdentifier();
         $model = Rays::find(request()->session()->get('userId'));
         foreach ($lang->myAllLanguage as $key => $value) {
             $myLang = $model[$key];
-            $myLang['MyNameLanguage'][$newKey] = $lang->myAllLanguage[$key][$key][request()->input('language-select')];
-            $myLang[$key][$newKey] = $lang->myAllLanguage[$key][$key][request()->input('language-select')];
+            $myLang['MyNameLanguage'][$newKey] = request()->input('lang_name');
+            $myLang[$key][$newKey] = request()->input('lang_name');
             $model[$key] = $myLang;
         }
         $myNewLang = $model[request()->input('language-select')];
@@ -186,9 +169,9 @@ class LanguageController extends Controller
         request()->validate([
             'id' =>['required', Rule::in($lang->size1), Rule::notIn($lang->language)]
         ], [
-            'id.required' => $lang->error1,
-            'id.in' => $lang->error2,
-            'id.not_in' => $lang->error3,
+            'id.required' => $lang->error3,
+            'id.in' => $lang->error4,
+            'id.not_in' => $lang->error5,
         ]);
         $model = Rays::find(request()->session()->get('userId'));
         foreach ($lang->myAllLanguage as $key => $value) {

@@ -480,6 +480,7 @@ class RaysSeeder extends Seeder
                         'ChangeLanguageMessage'=>'do you want to change language',
                         'CopyLanguageMessage'=>'do you want to copy language',
                         'DeleteLanguageMessage'=>'do you want to delete language',
+                        'NewLangName'=>'Name'
                     ],
                     'CheckBox'=>[
                         'PatentHemophilia'=>'Hemophilia',
@@ -716,7 +717,8 @@ class RaysSeeder extends Seeder
                         'CurrentOffersName'=>'Name',
                         'CurrentOffersShortcut'=>'shortcut',
                         'CurrentOffersPrice'=>'Price',
-                        'CurrentOffersDisplayPrice'=>'Display price'
+                        'CurrentOffersDisplayPrice'=>'Display price',
+                        'NewLangName'=>'Enter new language name'
                     ],
                     'SelectBox'=>[
                         
@@ -972,7 +974,10 @@ class RaysSeeder extends Seeder
                         'ChangeLanguageInvalid'=>'Invalid language',
                         'ChangeLanguageUsed'=>'language is used',
                         'BranchInvalid'=>'invalid branch',
-                        'PageError'=>'Error page'
+                        'PageError'=>'Error page',
+                        'NewLangNameRequired'=>'required new language name',
+                        'NewLangNameInvalid'=>'invalid new language name'
+
                     ],
                     'Message'=>[
                         'LoginPatentCode'=>'seccessfully login',
@@ -1590,6 +1595,8 @@ class RaysSeeder extends Seeder
                         'ChangeLanguageMessage'=>'هل تريد تغير اللغة',
                         'CopyLanguageMessage'=>'هل تريد نقل اللغة',
                         'DeleteLanguageMessage'=>'هل تريد حذف اللغة',
+                        'NewLangName'=>'الاسم'
+
                     ],
                     'CheckBox'=>[
                         'PatentHemophilia'=>'مريض سيولة',
@@ -1820,7 +1827,8 @@ class RaysSeeder extends Seeder
                         'CurrentOffersName'=>'الاسم',
                         'CurrentOffersShortcut'=>'الاختصار',
                         'CurrentOffersPrice'=>'السعر',
-                        'CurrentOffersDisplayPrice'=>'السعر العرض'
+                        'CurrentOffersDisplayPrice'=>'السعر العرض',
+                        'NewLangName'=>'ادخل اسم اللغة الجديد'
                     ],
                     'SelectBox'=>[
                         
@@ -2070,7 +2078,9 @@ class RaysSeeder extends Seeder
                         'ChangeLanguageInvalid'=>'اللغة غير صحيحة',
                         'ChangeLanguageUsed'=>'لا يمكن حذف اللغة لانها مستخدمة',
                         'BranchInvalid'=>'الفرع غير صحيح',
-                        'PageError'=>'لم يتم العثور علي الصفحة'
+                        'PageError'=>'لم يتم العثور علي الصفحة',
+                        'NewLangNameRequired'=>'يرجي ادخال اسم اللغة',
+                        'NewLangNameInvalid'=>'اسم اللغة غير صحيح'
                     ],
                     'Message'=>[
                         'LoginPatentCode'=>'تم التسجيل بنجاح',

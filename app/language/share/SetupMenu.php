@@ -1,10 +1,10 @@
 <?php
 namespace App\language\share;
 class SetupMenu extends InitPage{
-    public $myMenuApp = array();
     protected function __construct($language, $title, $direction, $myMenuApp, $AppSetting)
     {
         parent::__construct($language, $title, $direction);
+        $this->myMenuApp = array();
         $this->title101 = $AppSetting['Offcanvas'];
         $this->label1 = $AppSetting['Logout'];
         $this->label2 = $AppSetting['AdminDashboard'];
@@ -19,7 +19,7 @@ class SetupMenu extends InitPage{
                         }
                 }
             else if(isset($value->Item)){
-                $this->myMenuApp[$key]['name'] = $key;
+                $this->myMenuApp[$key]['name'] = $value->Name;
                 $this->myMenuApp[$key]['icon'] = $myMenuApp->getIconByKey($key);
                 $this->myMenuApp[$key]['items'] = array();
                 foreach ($value->Item as $key2 => $item) {

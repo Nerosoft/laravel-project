@@ -66,6 +66,9 @@ class ChangeLanguage extends DeleteModel
 
             $this->label5 = $ob[$this->language]['Label']['ChangeLanguageMessage'];
             $this->label6 = $ob[$this->language]['Label']['CopyLanguageMessage'];
+            $this->label7 = $ob[$this->language]['Label']['NewLangName'];
+            //hint
+            $this->hint1 = $ob[$this->language]['Hint']['NewLangName'];
             //init button
 
             $this->button4 = $ob[$this->language]['Button']['ChangeLanguageMessage'];

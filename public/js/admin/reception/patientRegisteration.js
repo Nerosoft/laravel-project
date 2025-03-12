@@ -84,7 +84,6 @@ function initCurrentOffers(currentOffers, idHeddinSelectBox){
 }
 
 async function openPDF(url, titleReceipt, label29, label30, label31, label32, label33, label34, label35, label36, label37, label38, label39, label40, label41, label42, label43, numberReceipt, dateReceipt, namePatient, codePatient, allTests, egp, Subtotal, TotalDiscount, Total, PaymentDate, AmountPaid, PaymentMethod, Due) {
-    console.log(PaymentMethod);
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({
         orientation: "portrait",
