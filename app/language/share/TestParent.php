@@ -122,7 +122,6 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->initMyAllLanguage($ob);
             $this->error1 = $this->error['TextRequired'];
             $this->error2 = $this->error['TextLenght'];
-            $this->error3 = $this->error['Language'];
             $this->error4 = $this->error['DirectionRequired'];
             $this->error5 = $this->error['DirectionWord'];
         }
@@ -195,6 +194,8 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error4 = $this->error['ChangeLanguageInvalid'];
             $this->size1 = $var1;
         }
+        else if($myState === 'AllLanguage')
+            $this->error3 = $this->error['Language'];//call this error in error 2
         else{
             $this->error8 = $this->error['CurrentOffersPriceInvalid'];
             $this->error9 = $this->error['CurrentOffersDisplayPriceInvalid'];
@@ -202,7 +203,9 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->inputOutPutKeys = $var1;
         }
     }
-    public function initError3($myState){
+    public function initError3($myState, $var1){
+        $this->size1 = $var1;
+
         if($myState === 'AllTestCultures'){
             $this->error7 = $this->error['TestIdRequired'];
             $this->error8 = $this->error['TestIdInvalid'];

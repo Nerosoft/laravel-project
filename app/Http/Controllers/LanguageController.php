@@ -3,9 +3,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\language\AllLanguage;
 use App\language\admin\action\AppModel;
-use App\language\admin\action\change_language\MyChangeLanguage;
-use App\language\admin\action\change_language\CopyLanguage;
-use App\language\admin\action\change_language\DeleteLanguage;
 use App\language\admin\ChangeLanguage;
 use App\Models\Rays;
 use Illuminate\Validation\Rule;
@@ -18,17 +15,15 @@ class LanguageController extends Controller
             case 'AllLanguage':
                 return new AllLanguage($state, $ob);
             case 'edit':
-                return new AppModel(false, $ob[$ob['Setting']['Language']]['Error'], 'AllLanguage', $ob[$ob['Setting']['Language']]['Message']['AllLanguageEdit'], null, null, null, null, $ob);
+                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'AllLanguage', $ob[$ob['Setting']['Language']]['Message']['AllLanguageEdit'], null, null, null, null, $ob);
             case 'ChangeLanguage':
                 return new ChangeLanguage($state);
             case 'ChangeLanguage_edit':
-                return new MyChangeLanguage($ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob['Setting']['Language']);
+                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob['Setting']['Language']);
             case 'ChangeLanguage_copy':
-                return new CopyLanguage($ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob);
+                return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob);
             case 'ChangeLanguage_delete':
-                return new DeleteLanguage($ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', 
-                $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'],
-                array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob);
+                return new AppModel('option9', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob);
         }
     }
     public function index($nameLanguage, $id = null){

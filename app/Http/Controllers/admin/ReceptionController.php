@@ -14,9 +14,6 @@ use App\language\admin\reception\Patients;
 use App\language\admin\reception\Prefix;
 use App\language\admin\reception\Knows;
 use App\language\admin\action\AppModel;
-use App\language\admin\action\reception\PatientEdit;
-use App\language\admin\action\reception\RegisterationEdit;
-use App\language\share\AppDelete;
 
 class ReceptionController extends Controller
 {
@@ -292,30 +289,30 @@ class ReceptionController extends Controller
             case 'PatientRegisteration':
                 return new PatientRegisteration($id);
             case 'patientRegisteration_create':
-                return new AppModel(true, $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationAdd'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), null, $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
+                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationAdd'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), null, $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
             case 'patientRegisteration_edit':
-                return new RegisterationEdit($mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationEdit'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
+                return new AppModel('option5', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationEdit'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
             case 'patientRegisteration_delete':
-                return new AppDelete($mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationDelete'], isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), 'DeleteOption');
+                return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationDelete'], isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), 'DeleteOption');
             
 
             case 'Patients':
                 return new Patients($id);
             case 'patients_create':
-                return new AppModel(true, $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
+                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_edit':
-                return new PatientEdit($mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), $mes['Patent'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
+                return new AppModel('option4', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), $mes['Patent'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
             case 'patients_delete':
-                return new AppDelete($mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsDelete'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
+                return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsDelete'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
 
             case 'Knows':
                 return new Knows($id);
             case 'knows_create':
-                return new AppModel(false, $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsAdd']);
+                return new AppModel('option3', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsAdd']);
             case 'knows_edit':
-                return new AppModel(true, $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsEdit'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
+                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsEdit'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
             case 'knows_delete':
-                return new AppDelete($mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsDelete'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
+                return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsDelete'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
             default :
                 return null;
         }

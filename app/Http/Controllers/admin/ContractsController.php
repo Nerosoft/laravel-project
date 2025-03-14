@@ -8,7 +8,6 @@ use App\Models\Rays;
 use Illuminate\Validation\Rule;
 use App\language\admin\contracts\PackagesContracts;
 use App\language\admin\action\AppModel;
-use App\language\share\AppDelete;
 use App\language\admin\contracts\Governments;
 use App\language\admin\contracts\TheContracts;
 use App\language\admin\contracts\PricesListContracts;
@@ -64,11 +63,11 @@ class ContractsController extends Controller
             case 'PackagesContracts':
                 return new PackagesContracts($id);
             case 'Create-Nero-Soft-Contracts':
-                return new AppModel(false, $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsAdd']);
+                return new AppModel('option3', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsAdd']);
             case 'Edit-Nero-Soft-Contracts':
-                return new AppModel(true, $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsEdit'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
+                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsEdit'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
             case 'Delete-Nero-Soft-Contracts':
-                return new AppDelete($ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsDelete'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
+                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsDelete'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
 
             case 'Governments':
                 return new Governments();

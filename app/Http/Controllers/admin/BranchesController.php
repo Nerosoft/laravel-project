@@ -8,9 +8,7 @@ use App\Models\Rays;
 use App\language\admin\Branches;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
-use App\language\admin\action\branch\CreateBranch;
-use App\language\admin\action\branch\EditBranch;
-use App\language\share\AppDelete;
+use App\language\admin\action\AppModel;
 
 class BranchesController extends Controller
 {
@@ -19,15 +17,15 @@ class BranchesController extends Controller
             case 'Branch':
                 return new Branches($init);
             case 'branch_create':
-                return new CreateBranch($ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), $ob['AppId']);    
+                return new AppModel('option6', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), $ob['AppId']);    
             case 'branch_edit':
-                return new EditBranch($ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), isset($ob['Branch']) ? array_keys($ob['Branch']) : array());    
+                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), isset($ob['Branch']) ? array_keys($ob['Branch']) : array());    
             case 'branch_delete':{
                 $arr1 = array();
                 if(isset($ob['Branch']))
                     foreach ($ob['Branch'] as $key => $branch)
                         array_push($arr1, $branch['id']);
-                return new AppDelete($ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesDelete'], $arr1);    
+                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesDelete'], $arr1);    
             }
         }
     }
