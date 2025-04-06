@@ -10,9 +10,9 @@ class BranchesCustodyController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['BranchesCustody']['active'] = 'my_active';
         return view('admin.branches_custody',[
             'lang'=> $lang,
+            'active'=>'BranchesCustody'
         ]);
     }
 }

@@ -19,54 +19,69 @@ class TestCulturesController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Categories'){
-            $view = view('admin.test_cultures.categories',[
+            return view('admin.test_cultures.categories',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'Categories'
             ]);
         }
         else if($id === 'AllTestCultures'){
-            $view = view('admin.test_cultures.all_test_cultures',[
-                'lang'=> $lang,             
+            return view('admin.test_cultures.all_test_cultures',[
+                'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'AllTestCultures'        
             ]);
         }
         else if($id === 'SampleTypes'){
-            $view = view('admin.test_cultures.sample_types',[
+            return view('admin.test_cultures.sample_types',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'SampleTypes'
             ]);
         }
         else if($id === 'TheCultures'){
-            $view = view('admin.test_cultures.the_cultures',[
+            return view('admin.test_cultures.the_cultures',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'TheCultures'
             ]);
         }
         else if($id === 'CultureOptions'){
-            $view = view('admin.test_cultures.culture_options',[
+            return view('admin.test_cultures.culture_options',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'CultureOptions'
             ]);
         }
         else if($id === 'Antibiotics'){
-            $view = view('admin.test_cultures.antibiotics',[
+            return view('admin.test_cultures.antibiotics',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'Antibiotics'
             ]);
         }
         else if($id === 'PackagesCultures'){
-            $view = view('admin.test_cultures.packages_cultures',[
+            return view('admin.test_cultures.packages_cultures',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'PackagesCultures'
             ]);
         }
         else if($id === 'ExtraService'){
-            $view = view('admin.test_cultures.extra_service',[
+            return view('admin.test_cultures.extra_service',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'ExtraService'
             ]);
         }
         else if($id === 'CurrentOffers'){
-            $view = view('admin.test_cultures.current_offers',[
+            return view('admin.test_cultures.current_offers',[
                 'lang'=> $lang,
+                'active'=>'TestCultures',
+                'activeItem'=>'CurrentOffers'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['TestCultures']['active'] = 'my_active';
-        $lang->myMenuApp['TestCultures']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     public function createTest(){
         $lang = $this->initLanguage('Create-Test', Rays::find(request()->session()->get('userId')));

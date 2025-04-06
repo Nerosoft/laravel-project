@@ -9,19 +9,20 @@ class UserRolesController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Roles'){
-            $view = view('admin.user_roles.roles',[
-                'lang'=> $lang, 
+            return view('admin.user_roles.roles',[
+                'lang'=> $lang,
+                'active'=>'UserRoles',
+                'activeItem'=>'Roles' 
             ]);
         }
         else if($id === 'User'){
-            $view = view('admin.user_roles.user',[
+            return view('admin.user_roles.user',[
                 'lang'=> $lang,
+                'active'=>'UserRoles',
+                'activeItem'=>'User'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['UserRoles']['active'] = 'my_active';
-        $lang->myMenuApp['UserRoles']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

@@ -9,19 +9,20 @@ class NotificationsController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Notification'){
-            $view = view('admin.notifications.notification',[
-                'lang'=> $lang,                
+            return view('admin.notifications.notification',[
+                'lang'=> $lang,
+                'active'=>'Notifications',
+                'activeItem'=>'Notification'                
             ]);
         }
         else if($id === 'CreateNotifications'){
-            $view = view('admin.notifications.create_notifications',[
-                'lang'=> $lang,                
+            return view('admin.notifications.create_notifications',[
+                'lang'=> $lang,
+                'active'=>'Notifications',
+                'activeItem'=>'CreateNotifications'                
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['Notifications']['active'] = 'my_active';
-        $lang->myMenuApp['Notifications']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

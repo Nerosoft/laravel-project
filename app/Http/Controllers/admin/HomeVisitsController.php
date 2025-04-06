@@ -10,27 +10,27 @@ class HomeVisitsController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'HomeVisit'){
-            $View = view('admin.home_visits.home_visit',[
+            return view('admin.home_visits.home_visit',[
                 'lang'=> $lang,
-                
+                'active'=>'HomeVisits',
+                'activeItem'=>'HomeVisit'
             ]);
         }
         else if($id === 'Bookings'){
-            $View = view('admin.home_visits.bookings',[
+            return view('admin.home_visits.bookings',[
                 'lang'=> $lang,
-                
+                'active'=>'HomeVisits',
+                'activeItem'=>'Bookings'
             ]);
         }
         else if($id === 'Prescriptions'){
-            $View = view('admin.home_visits.prescriptions',[
+            return view('admin.home_visits.prescriptions',[
                 'lang'=> $lang,
-                
+                'active'=>'HomeVisits',
+                'activeItem'=>'Prescriptions'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['HomeVisits']['active'] = 'my_active';
-        $lang->myMenuApp['HomeVisits']['items'][$id]['active'] = 'my_active';
-        return $View;
     }
     private function initLanguage($id){
         switch ($id) {

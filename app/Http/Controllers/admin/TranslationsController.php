@@ -10,9 +10,9 @@ class TranslationsController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['Translations']['active'] = 'my_active';
         return view('admin.translations',[
-            'lang'=> $lang,            
+            'lang'=> $lang, 
+            'active'=>'Translations'           
         ]);
     }
 }

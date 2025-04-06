@@ -10,9 +10,9 @@ class AdminController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['Home']['active'] = 'my_active';
         return view('admin.user', [
             'lang'=> $lang,
+            'active'=>'Home'
         ]);
     }
 }

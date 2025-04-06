@@ -10,9 +10,9 @@ class ClearCacheController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['ClearCache']['active'] = 'my_active';
         return view('admin.clear_cache',[
-            'lang'=> $lang,            
+            'lang'=> $lang, 
+            'active'=>'ClearCache'           
         ]);
     }
 

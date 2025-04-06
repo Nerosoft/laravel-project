@@ -27,129 +27,146 @@ class ReportingController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'ContractsReports'){
-            $view = view('admin.reporting.contracts_reports',[
+            return view('admin.reporting.contracts_reports',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'ContractsReports'
             ]);
         }
         else if($id === 'DelayedMoney'){
-            $view = view('admin.reporting.delayed_money',[
+            return view('admin.reporting.delayed_money',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'DelayedMoney'
             ]);
         }
         else if($id === 'AccountingReport'){
-            $view = view('admin.reporting.accounting_report',[
+            return view('admin.reporting.accounting_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'AccountingReport'
             ]);
         }
         else if($id === 'NormalDoctorReport'){
-            $view = view('admin.reporting.normal_doctor_report',[
+            return view('admin.reporting.normal_doctor_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'NormalDoctorReport'
             ]);
         }
         else if($id === 'AllDoctorReport'){
-            $view = view('admin.reporting.all_doctor_report',[
+            return view('admin.reporting.all_doctor_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'AllDoctorReport'
             ]);
         }
         else if($id === 'DoctorReport'){
-            $view = view('admin.reporting.doctor_report',[
+            return view('admin.reporting.doctor_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'DoctorReport'
             ]);
         }
         else if($id === 'SupplierReport'){
-            $view = view('admin.reporting.supplier_report',[
+            return view('admin.reporting.supplier_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'SupplierReport'
             ]);
         }
         else if($id === 'PurchasesReport'){
-            $view = view('admin.reporting.purchases_report',[
+            return view('admin.reporting.purchases_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'PurchasesReport'
             ]);
         }
         else if($id === 'InventoryReport'){
-            $view = view('admin.reporting.inventory_report',[
+            return view('admin.reporting.inventory_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'InventoryReport'
             ]);
         }
         else if($id === 'ProductsReport'){
-            $view = view('admin.reporting.products_report',[
+            return view('admin.reporting.products_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'ProductsReport'
             ]);
         }
         else if($id === 'WorkloadMonthly'){
-            $view = view('admin.reporting.workload_monthly',[
+            return view('admin.reporting.workload_monthly',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'WorkloadMonthly'
             ]);
         }
         else if($id === 'WorkloadDaily'){
-            $view = view('admin.reporting.workload_daily',[
+            return view('admin.reporting.workload_daily',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'WorkloadDaily'
             ]);
         }
         else if($id === 'TestesBranchReport'){
-            $view = view('admin.reporting.testes_branch_report',[
+            return view('admin.reporting.testes_branch_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'TestesBranchReport'
             ]);
         }
         else if($id === 'ExpensesReport'){
-            $view = view('admin.reporting.expenses_report',[
+            return view('admin.reporting.expenses_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'ExpensesReport'
             ]);
         }
         else if($id === 'CustodyReport'){
-            $view = view('admin.reporting.custody_report',[
+            return view('admin.reporting.custody_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'CustodyReport'
             ]);
         }
         else if($id === 'ContractReport'){
-            $view = view('admin.reporting.contract_report',[
+            return view('admin.reporting.contract_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'ContractReport'
             ]);
         }
         else if($id === 'EmployeesReport'){
-            $view = view('admin.reporting.employees_report',[
+            return view('admin.reporting.employees_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'EmployeesReport'
             ]);
         }
         else if($id === 'RaysReport'){
-            $view = view('admin.reporting.rays_report',[
+            return view('admin.reporting.rays_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'RaysReport'
             ]);
         }
         else if($id === 'RaysCategoriesReport'){
-            $view = view('admin.reporting.rays_categories_report',[
+            return view('admin.reporting.rays_categories_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'RaysCategoriesReport'
             ]);
         }
         else if($id === 'SafeTransferReport'){
-            $view = view('admin.reporting.safe_Transfer_report',[
+            return view('admin.reporting.safe_Transfer_report',[
                 'lang'=> $lang,
-                
+                'active'=>'Reporting',
+                'activeItem'=>'SafeTransferReport'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['Reporting']['active'] = 'my_active';
-        $lang->myMenuApp['Reporting']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

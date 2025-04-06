@@ -11,29 +11,34 @@ class PriceListController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Test'){
-            $view = view('admin.price_list.test',[
-                'lang'=> $lang, 
+            return view('admin.price_list.test',[
+                'lang'=> $lang,
+                'active'=>'PriceList',
+                'activeItem'=>'Test'
             ]);
         }
         else if($id === 'CulturesPrice'){
-            $view = view('admin.price_list.cultures_price',[
+            return view('admin.price_list.cultures_price',[
                 'lang'=> $lang,
+                'active'=>'PriceList',
+                'activeItem'=>'CulturesPrice'
             ]);
         }
         else if($id === 'Packages'){
-            $view = view('admin.price_list.packages',[
-                'lang'=> $lang,  
+            return view('admin.price_list.packages',[
+                'lang'=> $lang,
+                'active'=>'PriceList',
+                'activeItem'=>'Packages'
             ]);
         }
         else if($id === 'PricesList'){
-            $view = view('admin.price_list.prices_list',[
-                'lang'=> $lang,     
+            return view('admin.price_list.prices_list',[
+                'lang'=> $lang,
+                'active'=>'PriceList',
+                'activeItem'=>'PricesList'    
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['PriceList']['active'] = 'my_active';
-        $lang->myMenuApp['PriceList']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

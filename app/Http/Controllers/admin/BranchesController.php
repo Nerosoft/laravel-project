@@ -31,10 +31,10 @@ class BranchesController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage('Branch');
-        $lang->myMenuApp['Branches']['active'] = 'my_active';
         return view('admin.branches',[
             'lang'=> $lang,
-            'newBranchRays'=>route('addBranchRays')
+            'newBranchRays'=>route('addBranchRays'),
+            'active'=>'Branches'
         ]);
     }
     private function saveBranch($model, $id){

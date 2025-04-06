@@ -9,10 +9,10 @@ class RaysController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['PatentDashboard']['active'] = 'my_active';
         return view('patent.dashboard',[
             'lang'=> $lang,
-             'logOut'=>route('logoutPatent')
+            'logOut'=>route('logoutPatent'),
+            'active'=>'PatentDashboard'
         ]);
     }
 }

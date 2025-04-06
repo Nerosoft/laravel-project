@@ -10,10 +10,10 @@ class DoctorDashboardController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['DoctorDashboard']['active'] = 'my_active';
         return view('doctor.doctor_dashboard',[
             'lang'=> $lang,
-             'logOut'=>route('logoutDoctor')
+            'logOut'=>route('logoutDoctor'),
+            'active'=>'DoctorDashboard'
         ]);
     }
 }

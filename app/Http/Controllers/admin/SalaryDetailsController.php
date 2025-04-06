@@ -15,49 +15,62 @@ class SalaryDetailsController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Salary'){
-            $view = view('admin.salary_details.salary',[
+            return view('admin.salary_details.salary',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'Salary'
             ]);
         }
         else if($id === 'ThInventory'){
-            $view = view('admin.salary_details.th_inventory',[
-                'lang'=> $lang, 
+            return view('admin.salary_details.th_inventory',[
+                'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThInventory' 
             ]);
         }
         else if($id === 'ThSuppliers'){
-            $view = view('admin.salary_details.th_suppliers',[
+            return view('admin.salary_details.th_suppliers',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThSuppliers'
             ]);
         }
         else if($id === 'ThProducts'){
-            $view = view('admin.salary_details.th_products',[
+            return view('admin.salary_details.th_products',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThProducts'
             ]);
         }
         else if($id === 'ThFixedAssets'){
-            $view = view('admin.salary_details.th_fixed_assets',[
+            return view('admin.salary_details.th_fixed_assets',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThFixedAssets'
             ]);
         }
         else if($id === 'ThPurchases'){
-            $view = view('admin.salary_details.th_purchases',[
+            return view('admin.salary_details.th_purchases',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThPurchases'
             ]);
         }
         else if($id === 'ThAdjustments'){
-            $view = view('admin.salary_details.th_adjustments',[
-                'lang'=> $lang, 
+            return view('admin.salary_details.th_adjustments',[
+                'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThAdjustments' 
             ]);
         }
         else if($id === 'ThTransfers'){
-            $view = view('admin.salary_details.th_transfers',[
+            return view('admin.salary_details.th_transfers',[
                 'lang'=> $lang,
+                'active'=>'SalaryDetails',
+                'activeItem'=>'ThTransfers'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['SalaryDetails']['active'] = 'my_active';
-        $lang->myMenuApp['SalaryDetails']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

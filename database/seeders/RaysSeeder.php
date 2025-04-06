@@ -3,6 +3,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Rays;
+use App\Http\Controllers\LanguageController;
 class RaysSeeder extends Seeder
 {
     /**
@@ -318,7 +319,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'Title',
                         'Hint'=>'Hint',
                         'Button'=>'Button',
-                        'AllLang'=>'Language',
+                        LanguageController::AllLang=>'Language',
                         'Html'=>'Html',
                         'Menu'=>'Menu',
                         'Error'=>'Error',
@@ -347,7 +348,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'Title',
                         'Hint'=>'Hint',
                         'Button'=>'Button',
-                        'AllLang'=>'Language',
+                        LanguageController::AllLang=>'Language',
                         'Html'=>'Html',
                         'Menu'=>'Menu',
                         'Error'=>'Error',
@@ -1433,7 +1434,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'العنوان',
                         'Hint'=>'التلميحات',
                         'Button'=>'الزراير',
-                        'AllLang'=>'اللغه',
+                        LanguageController::AllLang=>'اللغه',
                         'Html'=>'الصفحه',
                         'Menu'=>'القائمة',
                         'Error'=>'الاخطاء',
@@ -1464,7 +1465,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'العناوين',
                         'Hint'=>'التلميحات',
                         'Button'=>'اسماء الزراير',
-                        'AllLang'=>'اللغات',
+                        LanguageController::AllLang=>'اللغات',
                         'Html'=>'الصفحة',
                         'Menu'=>'القائمة',
                         'Error'=>'الاخطاء',

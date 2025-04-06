@@ -9,9 +9,9 @@ class ActivityLogsController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['ActivityLogs']['active'] = 'my_active';
         return view('admin.activity_logs',[
             'lang'=> $lang,
+            'active'=>'ActivityLogs'
         ]);
     }
 }

@@ -9,10 +9,10 @@ class TheDoctorReportController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['TheDoctorReport']['active'] = 'my_active';
         return view('doctor.the_doctor_report',[
             'lang'=> $lang,
-             'logOut'=>route('logoutDoctor')
+            'logOut'=>route('logoutDoctor'),
+            'active'=>'TheDoctorReport'
         ]);
     }
 }

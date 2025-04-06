@@ -9,10 +9,10 @@ class TechnicalSupportsController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['TechnicalSupports']['active'] = 'my_active';
         return view('doctor.technical_supports',[
             'lang'=> $lang,
-             'logOut'=>route('logoutDoctor')
+            'logOut'=>route('logoutDoctor'),
+            'active'=>'TechnicalSupports'
         ]);
     }
 }

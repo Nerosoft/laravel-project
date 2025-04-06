@@ -10,9 +10,9 @@ class ChatController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['Chat']['active'] = 'my_active';
         return view('admin.chat',[
-            'lang'=> $lang,            
+            'lang'=> $lang,
+            'active'=>'Chat'            
         ]);
     }
 }

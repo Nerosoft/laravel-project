@@ -14,51 +14,55 @@ class HREmployeesController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Employees'){
-            $view = view('admin.hr_employees.employees',[
+            return view('admin.hr_employees.employees',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Employees'
             ]);
         }
         else if($id === 'Violations'){
-            $view = view('admin.hr_employees.violations',[
+            return view('admin.hr_employees.violations',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Violations'
             ]);
         }
         else if($id === 'Vocations'){
-            $view = view('admin.hr_employees.vocations',[
+            return view('admin.hr_employees.vocations',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Vocations'
             ]);
         }
         else if($id === 'Incentives'){
-            $view = view('admin.hr_employees.incentives',[
+            return view('admin.hr_employees.incentives',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Incentives'
             ]);
         }
         else if($id === 'Deductions'){
-            $view = view('admin.hr_employees.deductions',[
+            return view('admin.hr_employees.deductions',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Deductions'
             ]);
         }
         else if($id === 'Attendance'){
-            $view = view('admin.hr_employees.attendance',[
+            return view('admin.hr_employees.attendance',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Attendance'
             ]);
         }
         else if($id === 'Shifts'){
-            $view = view('admin.hr_employees.shifts',[
+            return view('admin.hr_employees.shifts',[
                 'lang'=> $lang,
-                
+                'active'=>'HREmployees',
+                'activeItem'=>'Shifts'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['HREmployees']['active'] = 'my_active';
-        $lang->myMenuApp['HREmployees']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

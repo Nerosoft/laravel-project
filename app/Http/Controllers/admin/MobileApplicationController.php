@@ -10,24 +10,27 @@ class MobileApplicationController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'TipsAndOffer'){
-            $view = view('admin.mobile_application.tips_and_offer',[
+            return view('admin.mobile_application.tips_and_offer',[
                 'lang'=> $lang,
+                'active'=>'MobileApplication',
+                'activeItem'=>'TipsAndOffer'
             ]);
         }
         else if($id === 'StaticPage'){
-            $view = view('admin.mobile_application.static_page',[
+            return view('admin.mobile_application.static_page',[
                 'lang'=> $lang,
+                'active'=>'MobileApplication',
+                'activeItem'=>'StaticPage'
             ]);
         }
         else if($id === 'Sliders'){
-            $view = view('admin.mobile_application.sliders',[
+            return view('admin.mobile_application.sliders',[
                 'lang'=> $lang,
+                'active'=>'MobileApplication',
+                'activeItem'=>'Sliders'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['MobileApplication']['active'] = 'my_active';
-        $lang->myMenuApp['MobileApplication']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

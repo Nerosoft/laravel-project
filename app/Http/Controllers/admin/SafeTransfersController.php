@@ -10,24 +10,27 @@ class SafeTransfersController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'RejectedTransfers'){
-            $view = view('admin.safe_transfers.rejected_transfers',[
+            return view('admin.safe_transfers.rejected_transfers',[
                 'lang'=> $lang,
+                'active'=>'SafeTransfers',
+                'activeItem'=>'RejectedTransfers'
             ]);
         }
         else if($id === 'TransferToOwner'){
-            $view = view('admin.safe_transfers.transfer_to_owner',[
+            return view('admin.safe_transfers.transfer_to_owner',[
                 'lang'=> $lang,
+                'active'=>'SafeTransfers',
+                'activeItem'=>'TransferToOwner'
             ]);
         }
         else if($id === 'AllTransfers'){
-            $view = view('admin.safe_transfers.all_transfers',[
-                'lang'=> $lang, 
+            return view('admin.safe_transfers.all_transfers',[
+                'lang'=> $lang,
+                'active'=>'SafeTransfers',
+                'activeItem'=>'AllTransfers' 
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['SafeTransfers']['active'] = 'my_active';
-        $lang->myMenuApp['SafeTransfers']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

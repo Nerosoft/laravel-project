@@ -10,9 +10,9 @@ class SettingAppController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['SettingApp']['active'] = 'my_active';
         return view('admin.setting_app',[
-            'lang'=> $lang,            
+            'lang'=> $lang,
+            'active'=>'SettingApp'            
         ]);
     }
 }

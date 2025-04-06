@@ -19,44 +19,55 @@ class ContractsController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Governments'){
-            $view = view('admin.contracts.governments',[
+            return view('admin.contracts.governments',[
                 'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'Governments'
             ]);
         }
         else if($id === 'TheContracts'){
-            $view = view('admin.contracts.the_contracts',[
+            return view('admin.contracts.the_contracts',[
                 'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'TheContracts'
             ]);
         }
         else if($id === 'PackagesContracts'){
-            $view = view('admin.contracts.packages_contracts',[
-                'lang'=> $lang, 
+            return view('admin.contracts.packages_contracts',[
+                'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'PackagesContracts' 
             ]);
         }
         else if($id === 'PricesListContracts'){
-            $view = view('admin.contracts.prices_list_contracts',[
+            return view('admin.contracts.prices_list_contracts',[
                 'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'PricesListContracts'
             ]);
         }
         else if($id === 'Labs'){
-            $view = view('admin.contracts.labs',[
+            return view('admin.contracts.labs',[
                 'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'Labs'
             ]);
         }
         else if($id === 'LabsOut'){
-            $view = view('admin.contracts.labs_out',[
-                'lang'=> $lang, 
+            return view('admin.contracts.labs_out',[
+                'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'LabsOut' 
             ]);
         }
         else if($id === 'Doctors'){
-            $view = view('admin.contracts.doctors',[
+            return view('admin.contracts.doctors',[
                 'lang'=> $lang,
+                'active'=>'Contracts',
+                'activeItem'=>'Doctors'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['Contracts']['active'] = 'my_active';
-        $lang->myMenuApp['Contracts']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id, $ob = null){
         switch ($id) {

@@ -13,45 +13,48 @@ class InventoryController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Suppliers'){
-            $view = view('admin.inventory.suppliers',[
+            return view('admin.inventory.suppliers',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'Suppliers'
             ]);
         }
         else if($id === 'Products'){
-            $view = view('admin.inventory.products',[
+            return view('admin.inventory.products',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'Products'
             ]);
         }
         else if($id === 'FixedAssets'){
-            $view = view('admin.inventory.fixed_assets',[
+            return view('admin.inventory.fixed_assets',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'FixedAssets'
             ]);
         }
         else if($id === 'Purchases'){
-            $view = view('admin.inventory.purchases',[
+            return view('admin.inventory.purchases',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'Purchases'
             ]);
         }
         else if($id === 'Adjustments'){
-            $view = view('admin.inventory.adjustments',[
+            return view('admin.inventory.adjustments',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'Adjustments'
             ]);
         }
         else if($id === 'Transfers'){
-            $view = view('admin.inventory.transfers',[
+            return view('admin.inventory.transfers',[
                 'lang'=> $lang,
-                
+                'active'=>'Inventory',
+                'activeItem'=>'Transfers'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['Inventory']['active'] = 'my_active';
-        $lang->myMenuApp['Inventory']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

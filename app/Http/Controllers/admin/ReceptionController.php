@@ -35,45 +35,56 @@ class ReceptionController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'Vault'){
-            $view = view('admin.reception.vault',[
-                'lang'=> $lang,      
+            return view('admin.reception.vault',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Vault',      
             ]);
         }
         else if($id === 'Invoices'){
-            $view = view('admin.reception.invoices',[
-                'lang'=> $lang,       
+            return view('admin.reception.invoices',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Invoices',       
             ]);
         }
         else if($id === 'PatientRegisteration'){
-            $view = view('admin.reception.patientRegisteration',[
+            return view('admin.reception.patientRegisteration',[
                 'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'PatientRegisteration',
                 'allRes'=>$this->initArray($lang->arr6),
             ]);
         }
         else if($id === 'Retrieved'){
-            $view = view('admin.reception.retrieved',[
-                'lang'=> $lang,           
+            return view('admin.reception.retrieved',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Retrieved',           
             ]);
         }
         else if($id === 'Patients'){
-            $view = view('admin.reception.patients',[
-                'lang'=> $lang,           
+            return view('admin.reception.patients',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Patients',           
             ]);
         }
         else if($id === 'Prefix'){
-            $view = view('admin.reception.prefix',[
-                'lang'=> $lang,    
+            return view('admin.reception.prefix',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Prefix',    
             ]);
         }
         else if($id === 'Knows'){
-            $view = view('admin.reception.knows',[
-                'lang'=> $lang,   
+            return view('admin.reception.knows',[
+                'lang'=> $lang,
+                'active'=>'Reception',
+                'activeItem'=>'Knows',   
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['Reception']['active'] = 'my_active';
-        $lang->myMenuApp['Reception']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     
     public function createPatientServices(Request $request){

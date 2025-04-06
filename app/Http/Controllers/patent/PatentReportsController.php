@@ -10,10 +10,10 @@ class PatentReportsController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['PatentReports']['active'] = 'my_active';
         return view('patent.Reports',[
             'lang'=> $lang,
-             'logOut'=>route('logoutPatent')
+            'logOut'=>route('logoutPatent'),
+            'active'=>'PatentReports'
         ]);
     }
 }

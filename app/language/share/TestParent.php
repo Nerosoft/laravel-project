@@ -119,16 +119,20 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error2 = $this->error['NewLangNameInvalid'];
         } 
         else {//if($myState === 'AllLanguage'){
-            $this->initMyAllLanguage($ob);
+            $this->initMyAllLanguage($ob, $myState, $var1);
             $this->error1 = $this->error['TextRequired'];
             $this->error2 = $this->error['TextLenght'];
             $this->error4 = $this->error['DirectionRequired'];
             $this->error5 = $this->error['DirectionWord'];
         }
     }
-    protected function initMyAllLanguage($ob){
-        foreach ($ob[$ob['Setting']['Language']][$ob['Setting']['Language']] as $key => $value)
-            $this->myAllLanguage[$key] = $ob[$key];
+    protected function initMyAllLanguage($ob, $id, $idLang){
+        if($id === 'AllLanguage')
+            foreach ($ob[$ob['Setting']['Language']][$ob['Setting']['Language']] as $key => $value)
+                $this->myAllLanguage[$key] = $ob[$key];
+        else
+            $this->myAllLanguage = $ob[$id][$idLang];
+            
     }
     public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
         if($myState === 'AllTestCultures'){
@@ -205,7 +209,6 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
     }
     public function initError3($myState, $var1){
         $this->size1 = $var1;
-
         if($myState === 'AllTestCultures'){
             $this->error7 = $this->error['TestIdRequired'];
             $this->error8 = $this->error['TestIdInvalid'];

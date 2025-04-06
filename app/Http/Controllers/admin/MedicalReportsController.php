@@ -13,39 +13,48 @@ class MedicalReportsController extends Controller
     public function index($id){
         $lang = $this->initLanguage($id);
         if($id === 'AllMedicalReports'){
-            $view = view('admin.medical_reports.allMedicalReports',[
+            return view('admin.medical_reports.allMedicalReports',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'AllMedicalReports'
             ]);
         }
         else if($id === 'DoneReports'){
-            $view = view('admin.medical_reports.doneReports',[
+            return view('admin.medical_reports.doneReports',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'DoneReports'
             ]);
         }
         else if($id === 'PendingReports'){
-            $view = view('admin.medical_reports.pendingReports',[
+            return view('admin.medical_reports.pendingReports',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'PendingReports'
             ]);
         }
         else if($id === 'UnsigendReports'){
-            $view = view('admin.medical_reports.unsigendReports',[
+            return view('admin.medical_reports.unsigendReports',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'UnsigendReports'
             ]);
         }
         else if($id === 'SendToLab'){
-            $view = view('admin.medical_reports.SendToLab',[
+            return view('admin.medical_reports.SendToLab',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'SendToLab'
             ]);
         }
         else if($id === 'SampleStatus'){
-            $view = view('admin.medical_reports.sampleStatus',[
+            return view('admin.medical_reports.sampleStatus',[
                 'lang'=> $lang,
+                'active'=>'MedicalReports',
+                'activeItem'=>'SampleStatus'
             ]);
         }else
             abort(404);
-        $lang->myMenuApp['MedicalReports']['active'] = 'my_active';
-        $lang->myMenuApp['MedicalReports']['items'][$id]['active'] = 'my_active';
-        return $view;
     }
     private function initLanguage($id){
         switch ($id) {

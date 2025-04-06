@@ -10,10 +10,10 @@ class TheClearCacheController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['TheClearCache']['active'] = 'my_active';
         return view('doctor.the_Clear_Cache',[
             'lang'=> $lang,
-             'logOut'=>route('logoutDoctor')
+            'logOut'=>route('logoutDoctor'),
+            'active'=>'TheClearCache'
         ]);
     }
 }

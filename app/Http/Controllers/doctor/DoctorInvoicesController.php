@@ -10,10 +10,10 @@ class DoctorInvoicesController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['DoctorInvoices']['active'] = 'my_active';
         return view('doctor.doctor_invoices',[
             'lang'=> $lang,
-             'logOut'=>route('logoutDoctor')
+            'logOut'=>route('logoutDoctor'),
+            'active'=>'DoctorInvoices'
         ]);
     }
 }

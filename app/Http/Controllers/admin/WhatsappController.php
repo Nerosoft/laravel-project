@@ -10,9 +10,9 @@ class WhatsappController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['Whatsapp']['active'] = 'my_active';
         return view('admin.whatsapp',[
-            'lang'=> $lang,            
+            'lang'=> $lang,
+            'active'=>'Whatsapp'            
         ]);
     }
 }

@@ -10,10 +10,10 @@ class TestsLibraryController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['TestsLibrary']['active'] = 'my_active';
         return view('patent.tests_library',[
             'lang'=> $lang,
-             'logOut'=>route('logoutPatent')
+            'logOut'=>route('logoutPatent'),
+            'active'=>'TestsLibrary'
         ]);
     }
 }

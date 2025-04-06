@@ -9,10 +9,10 @@ class PatentHomeVisitController extends Controller
     }
     public function index(){
         $lang = $this->setupLanguage();
-        $lang->myMenuApp['PatentHomeVisit']['active'] = 'my_active';
         return view('patent.home_visit',[
             'lang'=> $lang,
-            'logOut'=>route('logoutPatent')
+            'logOut'=>route('logoutPatent'),
+            'active'=>'PatentHomeVisit'
         ]);
     }
 }

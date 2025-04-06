@@ -3,13 +3,14 @@ namespace App\language;
 use App\Menu;
 use App\language\share\TableSetting;
 use App\Models\Rays;
+use App\Http\Controllers\LanguageController;
 class AllLanguage extends TableSetting
 {
     public $myAllLanguage = array();
     /**
      * Create a new class instance.
      */
-    public function __construct($state, $title = null)
+    public function __construct($state, $title)
     {   
         $ob = Rays::find(request()->session()->get('userId'));
         //---------------------------------------------
@@ -24,32 +25,28 @@ class AllLanguage extends TableSetting
             $ob['AppId'] !== $ob['_id'] ? false : true,
             $ob['_id'],
 
-            isset($ob[$ob['Setting']['Language']]['TitleCustomLang'][$title]) ? $ob[$ob['Setting']['Language']]['TitleCustomLang'][$title] : '',
+            $ob[$ob['Setting']['Language']]['TitleCustomLang'][$state === $title ? LanguageController::AllLang : $title],
             $ob[$ob['Setting']['Language']]['TableInfo'],
 
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['MyNameLanguage']), $ob);
+            $ob[$ob['Setting']['Language']]['MyNameLanguage']), $ob, $title);
 
             //label
-            $this->myDirectionOption = $this->myAllLanguage[$this->language]['Direction'];
+            $this->myDirectionOption = $state !== 'AllLanguage' ?  $ob[$this->language]['Direction'] : $this->myAllLanguage[$this->language]['Direction'];
             //init label
-            $this->label3 = $this->myAllLanguage[$this->language]['Label']['Text'];
-            $this->label4 = $this->myAllLanguage[$this->language]['Label']['DirectionPage']; 
+            $this->label3 = $state !== 'AllLanguage' ? $ob[$this->language]['Label']['Text'] : $this->myAllLanguage[$this->language]['Label']['Text'];
+            $this->label4 = $state !== 'AllLanguage' ? $ob[$this->language]['Label']['DirectionPage'] : $this->myAllLanguage[$this->language]['Label']['DirectionPage']; 
             //table
-            $this->table7 = $this->myAllLanguage[$this->language]['Table']['LanguageValue'];
-            $this->table8 = $this->myAllLanguage[$this->language]['Table']['LanguageEvent'];
-            $this->table9 = $this->myAllLanguage[$this->language]['Table']['LanguageId'];
-            $this->table10 = $this->myAllLanguage[$this->language]['Table']['LanguageName'];
-            //error
-            // $this->initError($this->myAllLanguage[$this->language]['Error']);
-            $this->error6 = $this->myAllLanguage[$this->language]['Error']['PageError'];
+            $this->table7 = $state !== 'AllLanguage' ? $ob[$this->language]['Table']['LanguageValue'] : $this->myAllLanguage[$this->language]['Table']['LanguageValue'];
+            $this->table8 = $state !== 'AllLanguage' ? $ob[$this->language]['Table']['LanguageEvent'] : $this->myAllLanguage[$this->language]['Table']['LanguageEvent'];
+            $this->table9 = $state !== 'AllLanguage' ? $ob[$this->language]['Table']['LanguageId'] : $this->myAllLanguage[$this->language]['Table']['LanguageId'];
+            $this->table10 = $state !== 'AllLanguage' ? $ob[$this->language]['Table']['LanguageName'] : $this->myAllLanguage[$this->language]['Table']['LanguageName'];
             //model
-            $this->model1 = $this->myAllLanguage[$this->language]['Model']['Title'];
-            $this->model2 = $this->myAllLanguage[$this->language]['Model']['TitleDirection'];
+            $this->model1 = $state !== 'AllLanguage' ? $ob[$this->language]['Model']['Title'] : $this->myAllLanguage[$this->language]['Model']['Title'];
+            $this->model2 = $state !== 'AllLanguage' ? $ob[$this->language]['Model']['TitleDirection'] : $this->myAllLanguage[$this->language]['Model']['TitleDirection'];
             //button
-            //$this->button1 = $this->myAllLanguage[$this->language]['Button']['SelectDirection'];
-            $this->button2 = $this->myAllLanguage[$this->language]['Button']['SaveDirection'];
-            $this->button3 = $this->myAllLanguage[$this->language]['Button']['SaveText'];
+            $this->button2 = $state !== 'AllLanguage' ? $ob[$this->language]['Button']['SaveDirection'] : $this->myAllLanguage[$this->language]['Button']['SaveDirection'];
+            $this->button3 = $state !== 'AllLanguage' ? $ob[$this->language]['Button']['SaveText'] : $this->myAllLanguage[$this->language]['Button']['SaveText'];
     }
 }

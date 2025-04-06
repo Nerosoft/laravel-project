@@ -2,8 +2,21 @@
 @section('title') {{$lang->title1}} @endsection
 <link rel="stylesheet" href="{{asset('css/admin/reception/patientRegisteration.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-@section('containt')
 @extends('layout.nav_admin')
+@section('branch')
+    <div class="dropdown">
+        <a class="btn btn-danger dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{$lang->selectBox3}}
+        </a>
+        <ul class="dropdown-menu">
+        <li><a class="dropdown-item {{$lang->active1 ? 'active' : ''}}" href="{{ route('branchMain', $lang->id1) }}">{{$lang->selectBox4}}</a></li>
+        @foreach($lang->MyBranch as $branch)
+        <li><a class="dropdown-item {{$lang->id2 === $branch->getId()? 'active' : ''}}" href="{{ route('branchMain', $branch->getId()) }}">{{$branch->getName()}}</a></li>
+        @endforeach
+        </ul>
+    </div>
+@endsection
+@section('containt')
 <div class="space-page container">
 <button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button1}}</button>
 @include('layout.all_models.admin.reception.patient_register')
