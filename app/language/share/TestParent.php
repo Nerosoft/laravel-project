@@ -126,7 +126,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error5 = $this->error['DirectionWord'];
         }
     }
-    protected function initMyAllLanguage($ob, $id, $idLang = null){
+    protected function initMyAllLanguage($ob, $id, $idLang){
         if($id === 'AllLanguage')
             foreach ($ob[$ob['Setting']['Language']][$ob['Setting']['Language']] as $key => $value)
                 $this->myAllLanguage[$key] = $ob[$key];

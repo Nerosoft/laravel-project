@@ -26,8 +26,6 @@ class ChangeLanguage extends DeleteModel
     public $error1;
     public $error2;
     //--------------------
-    public $myAllLanguage;
-    //--------------------
     public $successfully1;
     /**
      * Create a new class instance.

@@ -42,14 +42,14 @@ class AppModel extends TestParent{
         else if($option === 'option8'){
             $this->initError($state, $var5, $var6, $var7, $var8);
             $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initMyAllLanguage($var2, 'AllLanguage');
+            $this->myAllLanguage = array_keys($var2[$var2['Setting']['Language']][$var2['Setting']['Language']]);
         }else if($option === 'option9'){
             $this->initError2($state, $var1, $var2, $var3, $var4);
             $this->initError3($state, $var1);
             $this->language = $var2['Setting']['Language'];
             unset($this->size1[0]);
             unset($this->size1[1]);
-            $this->initMyAllLanguage($var2, 'AllLanguage');
+            $this->myAllLanguage = array_keys($var2[$var2['Setting']['Language']][$var2['Setting']['Language']]);
         }
         else //delete
             $this->initError3($state, $var1);

@@ -100,6 +100,7 @@ class LanguageController extends Controller
     }
     public function copyLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_copy', Rays::find(request()->session()->get('userId')));
+
         request()->validate([
             'language-select' =>['required', Rule::in($lang->size1)],
             'lang_name' =>['required', 'min:3']
@@ -111,7 +112,7 @@ class LanguageController extends Controller
         ]);
         $newKey = $this->generateUniqueIdentifier();
         $model = Rays::find(request()->session()->get('userId'));
-        foreach ($lang->myAllLanguage as $key => $value) {
+        foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
             $myLang['MyNameLanguage'][$newKey] = request()->input('lang_name');
             $myLang[$key][$newKey] = request()->input('lang_name');
@@ -135,7 +136,7 @@ class LanguageController extends Controller
             'id.not_in' => $lang->error5,
         ]);
         $model = Rays::find(request()->session()->get('userId'));
-        foreach ($lang->myAllLanguage as $key => $value) {
+        foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
             unset($myLang['MyNameLanguage'][request()->input('id')]);
             unset($myLang[$key][request()->input('id')]);
