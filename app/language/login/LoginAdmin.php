@@ -21,7 +21,7 @@ class LoginAdmin extends AuthError
         $this->button2 = $ob[$this->language]['Button']['SaveLanguage'];
         $this->button3 = $ob[$this->language]['Button']['LoginUser'];
 
-        $this->myLanguage = $ob[$this->language][$this->language];
+        $this->myLanguage = $ob[$this->language]['AllNamesLanguage'];
         $this->RaysId = $ob['_id']; 
     }
 }

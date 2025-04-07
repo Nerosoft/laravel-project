@@ -32,7 +32,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                     @foreach($myValue->Item as $keyItem=>$customItem)
                     <li>
-                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem !== \App\Http\Controllers\LanguageController::AllLang ? $keyItem : $key2, 'lang'=>$key2])}}">
+                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem, 'lang'=>$key2])}}">
                         <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}}" style="font-size: 1rem; color: cornflowerblue;"></i>
                         {{$customItem}}
                       </a>
@@ -51,22 +51,15 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                     @foreach($myValue->Item as $keyItem=>$customItem)
                     <li>
-                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem !== \App\Http\Controllers\LanguageController::AllLang ? $keyItem : $key2, 'lang'=>$key2])}}">
-                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}} {{$keyItem === $activeItem && $key2 === $active || $active === $key2 && $activeItem === $active && $keyItem === \App\Http\Controllers\LanguageController::AllLang? 'my_active':''}}" style="font-size: 1rem; color: cornflowerblue;"></i>
-                        <test class="{{$keyItem === $activeItem && $key2 === $active || $key2 === $active && $activeItem === $active && $keyItem === \App\Http\Controllers\LanguageController::AllLang? 'my_active':''}}">{{$customItem}}</test>
+                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem, 'lang'=>$key2])}}">
+                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}} {{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}" style="font-size: 1rem; color: cornflowerblue;"></i>
+                        <test class="{{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}">{{$customItem}}</test>
                       </a>
                     </li>
                     @endforeach
                     </ul>
                   </li>
                 @endforeach
-              @elseif($key === 'AllLanguage' || $key === 'ChangeLanguage')
-                <li class="nav-item">
-                  <a class="nav-link {{$key === $active?'my_active':''}}" aria-current="page" href="{{route('Setting', $key)}}">
-                  <i class="{{$lang->myMenuApp->getIconByKey($key)}} {{$key === $active?'my_active':''}}" style="font-size: 1.3rem; color: cornflowerblue;"></i>
-                  {{$item}}
-                  </a>
-                </li>
               @elseif(isset($item->Item) && isset($active) && isset($activeItem))
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle {{$key === $active?'my_active':''}}"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -103,7 +96,7 @@
                 </li>
               @else
                 <li class="nav-item">
-                  <a class="nav-link {{$key === $active?'my_active':''}}" aria-current="page" href="{{route($key)}}">
+                  <a class="nav-link {{$key === $active?'my_active':''}}" aria-current="page" href="{{$key === 'AllLanguage' || $key === 'ChangeLanguage' ? route('Setting', $key) : route($key)}}">
                   <i class="{{$lang->myMenuApp->getIconByKey($key)}} {{$key === $active?'my_active':''}}" style="font-size: 1.3rem; color: cornflowerblue;"></i>
                   {{$item}}
                   </a>

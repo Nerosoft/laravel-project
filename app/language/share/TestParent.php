@@ -128,7 +128,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
     }
     protected function initMyAllLanguage($ob, $id, $idLang){
         if($id === 'AllLanguage')
-            foreach ($ob[$ob['Setting']['Language']][$ob['Setting']['Language']] as $key => $value)
+            foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key => $value)
                 $this->myAllLanguage[$key] = $ob[$key];
         else
             $this->myAllLanguage = $ob[$id][$idLang];

@@ -188,14 +188,7 @@ class UserController extends Controller
         else
             return $userRays['Setting']['Language'];
 
-        // $lang = request()->cookie(request()->input('userId')) ? unserialize(request()->cookie(request()->input('userId'))): ((object)$userRays->Setting)->Language;
-        // if(isset($userRays[$lang]))
-        //     return $lang;
-        // else{
-        //     //use language system if admin delete language and save the language in cookie
-        //     Cookie::queue($userRays->_id, serialize($userRays['Setting']['Language']),2628000);
-        //     return ((object)$userRays->Setting)->Language;
-        // }
+        
     }
     //page
     private function getLanguage1($userRays){
@@ -210,14 +203,7 @@ class UserController extends Controller
         else
             return $userRays['Setting']['Language'];
 
-        // $lang = request()->cookie($userRays->_id) ? unserialize(request()->cookie($userRays->_id)) : ((object)$userRays->Setting)->Language;
-        // if(isset($userRays[$lang]))
-        //     return $lang;
-        // else {
-        //     //use language system if admin delete language and save the language in cookie
-        //     Cookie::queue($userRays->_id, serialize($userRays['Setting']['Language']),2628000);
-        //     return ((object)$userRays->Setting)->Language;
-        // }
+        
     }
     function setupLanguage($id, $userRays){
         switch ($id) {
@@ -226,7 +212,7 @@ class UserController extends Controller
             case 'login_admin'://login admin
             case 'language_patent'://login patient
             case 'language_doctor'://login doctor
-                return new ChangeLanguage(array_keys($userRays[$this->getLanguage2($userRays)][$this->getLanguage2($userRays)]), $userRays[$this->getLanguage2($userRays)]['Error']['LoginPatentLanguageRequired']);
+                return new ChangeLanguage(array_keys($userRays[$this->getLanguage2($userRays)]['AllNamesLanguage']), $userRays[$this->getLanguage2($userRays)]['Error']['LoginPatentLanguageRequired']);
             case 'register_init2'://post register
                 return new MyRegisterAdmin($userRays[$this->getLanguage2($userRays)]['Error'], 'register', $userRays['User']);
             case 'register'://page register admin

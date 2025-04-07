@@ -40,7 +40,7 @@
                         @foreach($myData as $key2=>$menu)      
                             <tr>
                                 <th>{{$index++}}</th>
-                                <th>{{$lang->myAllLanguage[$lang->language][$lang->language][$myNameLang]}}</th>
+                                <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                 <th>{{is_array($menu) ? $menu['Name'] : $menu}}</th>
                                 <th>
                                     <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -76,7 +76,7 @@
                                 @foreach($menu['Item'] as $key3=>$item)
                                     <tr>
                                         <th>{{$index++}}</th>
-                                        <th>{{$lang->myAllLanguage[$lang->language][$lang->language][$myNameLang]}}</th>
+                                        <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                         <th>{{$item}}</th>
                                         <th>
                                             <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -115,7 +115,7 @@
                     @foreach($myData as $key2=>$item)
                         <tr>
                             <th>{{$index++}}</th>
-                            <th>{{$lang->myAllLanguage[$lang->language][$lang->language][$myNameLang]}}</th>
+                            <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                             <th>{{$item}}</th>
                             <th>
                                 @if($key !== 'Html')

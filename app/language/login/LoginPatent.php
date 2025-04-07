@@ -18,6 +18,6 @@ class LoginPatent extends AuthError
         $this->button2 = $ob[$this->language]['Button']['CloseLanguage'];
         $this->button3 = $ob[$this->language]['Button']['SaveLanguage'];
         $this->button4 = $ob[$this->language]['Button']['Language'];
-        $this->myLanguage = $ob[$this->language][$this->language];
+        $this->myLanguage = $ob[$this->language]['AllNamesLanguage'];
     }
 }

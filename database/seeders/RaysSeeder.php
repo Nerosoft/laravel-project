@@ -3,7 +3,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Rays;
-use App\Http\Controllers\LanguageController;
 class RaysSeeder extends Seeder
 {
     /**
@@ -319,7 +318,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'Title',
                         'Hint'=>'Hint',
                         'Button'=>'Button',
-                        LanguageController::AllLang=>'Language',
+                        'AllNamesLanguage'=>'Language',
                         'Html'=>'Html',
                         'Menu'=>'Menu',
                         'Error'=>'Error',
@@ -348,7 +347,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'Title',
                         'Hint'=>'Hint',
                         'Button'=>'Button',
-                        LanguageController::AllLang=>'Language',
+                        'AllNamesLanguage'=>'Language',
                         'Html'=>'Html',
                         'Menu'=>'Menu',
                         'Error'=>'Error',
@@ -371,7 +370,7 @@ class RaysSeeder extends Seeder
                         'SelectGenderBox'=>'title Select Gender Box',
                         'PaymentMethodBox'=>'title Select Payment Method Box',
                     ],
-                    'english'=>[
+                    'AllNamesLanguage'=>[
                         'english'=>'English language',
                         'arabic'=>'Arabic language'
                     ],
@@ -1434,7 +1433,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'العنوان',
                         'Hint'=>'التلميحات',
                         'Button'=>'الزراير',
-                        LanguageController::AllLang=>'اللغه',
+                        'AllNamesLanguage'=>'اللغه',
                         'Html'=>'الصفحه',
                         'Menu'=>'القائمة',
                         'Error'=>'الاخطاء',
@@ -1465,7 +1464,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'العناوين',
                         'Hint'=>'التلميحات',
                         'Button'=>'اسماء الزراير',
-                        LanguageController::AllLang=>'اللغات',
+                        'AllNamesLanguage'=>'اللغات',
                         'Html'=>'الصفحة',
                         'Menu'=>'القائمة',
                         'Error'=>'الاخطاء',
@@ -1487,7 +1486,7 @@ class RaysSeeder extends Seeder
                         'SelectGenderBox'=>'عنوان صفحة صندوق النوع',
                         'PaymentMethodBox'=>'عنوان صفحة صندوق الدفع'
                     ],
-                    'arabic'=>[
+                    'AllNamesLanguage'=>[
                         'english'=>'اللغة الانجليزية',
                         'arabic'=>'اللغة العربية'
                     ],

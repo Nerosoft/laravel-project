@@ -76,6 +76,6 @@ class ChangeLanguage extends DeleteModel
             $this->title3 = $ob[$this->language]['Title']['CopyLanguageMessage'];
 
             //init lang
-            $this->myLanguage = $ob[$this->language][$this->language];
+            $this->myLanguage = $ob[$this->language]['AllNamesLanguage'];
     }
 }

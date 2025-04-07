@@ -3,7 +3,6 @@ namespace App\language;
 use App\Menu;
 use App\language\share\TableSetting;
 use App\Models\Rays;
-use App\Http\Controllers\LanguageController;
 class AllLanguage extends TableSetting
 {
     public $myAllLanguage = array();
@@ -25,7 +24,7 @@ class AllLanguage extends TableSetting
             $ob['AppId'] !== $ob['_id'] ? false : true,
             $ob['_id'],
 
-            $ob[$ob['Setting']['Language']]['TitleCustomLang'][$state === $title ? LanguageController::AllLang : $title],
+            $ob[$ob['Setting']['Language']]['TitleCustomLang'][$title],
             $ob[$ob['Setting']['Language']]['TableInfo'],
 
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',

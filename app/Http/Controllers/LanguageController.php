@@ -8,7 +8,6 @@ use App\Models\Rays;
 use Illuminate\Validation\Rule;
 class LanguageController extends Controller
 {
-    const AllLang = 'AllLang';
     public function setupLanguage($state, $ob = null){
         switch ($state) {
             case 'edit':
@@ -16,11 +15,11 @@ class LanguageController extends Controller
             case 'ChangeLanguage':
                 return new ChangeLanguage($state);
             case 'ChangeLanguage_edit':
-                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob['Setting']['Language']);
+                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
             case 'ChangeLanguage_copy':
-                return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]));
+                return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_delete':
-                return new AppModel('option9', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), array_keys($ob[$ob['Setting']['Language']][$ob['Setting']['Language']]), $ob['Setting']['Language']);
+                return new AppModel('option9', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
             default:
                 return new AllLanguage($state, $ob);
         }
@@ -115,14 +114,10 @@ class LanguageController extends Controller
         foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
             $myLang['MyNameLanguage'][$newKey] = request()->input('lang_name');
-            $myLang[$key][$newKey] = request()->input('lang_name');
+            $myLang['AllNamesLanguage'][$newKey] = request()->input('lang_name');
             $model[$key] = $myLang;
         }
-        $myNewLang = $model[request()->input('language-select')];
-        $myLang = $myNewLang[request()->input('language-select')];
-        unset($myNewLang[request()->input('language-select')]);
-        $myNewLang[$newKey] =  $myLang;
-        $model[$newKey] = $myNewLang;
+        $model[$newKey] = $model[request()->input('language-select')];
         $model->save();
         return back()->with('success', $lang->successfully1);
     }
@@ -139,7 +134,7 @@ class LanguageController extends Controller
         foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
             unset($myLang['MyNameLanguage'][request()->input('id')]);
-            unset($myLang[$key][request()->input('id')]);
+            unset($myLang['AllNamesLanguage'][request()->input('id')]);
             $model[$key] = $myLang;
         }
         unset($model[request()->input('id')]);

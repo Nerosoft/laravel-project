@@ -24,7 +24,7 @@ class RegisterAdmin extends AuthError
         $this->button2 = $ob[$this->language]['Button']['Language'];
         $this->button3 = $ob[$this->language]['Button']['CloseLanguage'];
         $this->button4 = $ob[$this->language]['Button']['SaveLanguage'];
-        $this->myLanguage = $ob[$this->language][$this->language];
+        $this->myLanguage = $ob[$this->language]['AllNamesLanguage'];
         $this->RaysId = $ob['_id'];
     }
 }

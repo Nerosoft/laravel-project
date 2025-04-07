@@ -384,7 +384,7 @@ class Menu
             return 'bi bi-cart4';
         else if($key === 'Button')
             return 'bi bi-fonts';
-        else if($key === 'AllLang')
+        else if($key === 'AllNamesLanguage')
             return 'bi bi-globe-europe-africa';
         else if($key === 'Menu')
             return 'bi bi-menu-button-fill';
@@ -429,6 +429,8 @@ class Menu
         else if($key === 'SelectGenderBox')
             return 'bi bi-clipboard2-check';
         else if($key === 'PaymentMethodBox')
+            return 'bi bi-clipboard2-check';
+        else
             return 'bi bi-clipboard2-check';
     }
 }
