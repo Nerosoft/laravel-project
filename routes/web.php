@@ -30,6 +30,7 @@ use App\Http\Controllers\admin\ActivityLogsController;
 use App\Http\Controllers\admin\ClearCacheController;
 
 use App\Http\Middleware\IsLogin;
+use App\Http\Middleware\EnsureTestValid;
 use App\Http\Middleware\Auth;
 use Illuminate\Http\Request;
 use App\Models\Rays;
@@ -119,9 +120,9 @@ Route::controller(MedicalReportsController::class)->group(function () {
 //TestCultures
 Route::controller(TestCulturesController::class)->group(function () {
     Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/createTest/{id?}', 'createTest')->name('createTest')->middleware(IsLogin::class.':admin');
-    Route::post('/editTest/{id?}', 'editTest')->name('editTest')->middleware(IsLogin::class.':admin');
-    Route::post('/deleteTest/{id?}', 'deleteTest')->name('deleteTest')->middleware(IsLogin::class.':admin');
+    Route::post('/createTest/{id?}', 'createTest')->name('createTest')->middleware([IsLogin::class.':admin', EnsureTestValid::class]);
+    Route::post('/editTest/{id?}', 'editTest')->name('editTest')->middleware([IsLogin::class.':admin', EnsureTestValid::class]);
+    Route::post('/deleteTest/{id?}', 'deleteTest')->name('deleteTest')->middleware([IsLogin::class.':admin', EnsureTestValid::class]);
     Route::post('/createCurrentOffers', 'createCurrentOffers')->name('createCurrentOffers')->middleware(IsLogin::class.':admin');
     Route::post('/editCurrentOffers', 'editCurrentOffers')->name('editCurrentOffers')->middleware(IsLogin::class.':admin');
     Route::post('/deleteCurrentOffers', 'deleteCurrentOffers')->name('deleteCurrentOffers')->middleware(IsLogin::class.':admin');

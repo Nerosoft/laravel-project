@@ -70,8 +70,6 @@ class TestCulturesController extends Controller
             abort(404);
     }
     public function createTest($myId){
-        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
-            return back();
         $lang = $this->initLanguage('Create-Test', Rays::find(request()->session()->get('userId')), $myId);
         request()->validate([
             'name' => ['required', 'min:3'],
@@ -95,8 +93,6 @@ class TestCulturesController extends Controller
         return back()->with('success', $lang->successfully1);
     }
     public function editTest($myId){
-        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
-            return back();
         $lang = $this->initLanguage('Edit-Test', Rays::find(request()->session()->get('userId')), $myId);
         $validator = Validator::make(request()->all(),[
             'id' => ['required', Rule::in($lang->size1)],
@@ -127,8 +123,6 @@ class TestCulturesController extends Controller
         }
     }
     public function deleteTest($myId){
-        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
-            return back();
         $lang = $this->initLanguage('Delete-Test', Rays::find(request()->session()->get('userId')), $myId);        
         request()->validate([
             'id' => ['required', Rule::in($lang->size1)],
