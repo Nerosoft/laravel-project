@@ -119,15 +119,9 @@ Route::controller(MedicalReportsController::class)->group(function () {
 //TestCultures
 Route::controller(TestCulturesController::class)->group(function () {
     Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/createTest', 'createTest')->name('createTest')->middleware(IsLogin::class.':admin');
-    Route::post('/editTest', 'editTest')->name('editTest')->middleware(IsLogin::class.':admin');
-    Route::post('/deleteTest', 'deleteTest')->name('deleteTest')->middleware(IsLogin::class.':admin');
-    Route::post('/createCultures', 'createCultures')->name('createCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/editCultures', 'editCultures')->name('editCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/deleteCultures', 'deleteCultures')->name('deleteCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/createPackages', 'createPackages')->name('createPackages')->middleware(IsLogin::class.':admin');
-    Route::post('/editPackages', 'editPackages')->name('editPackages')->middleware(IsLogin::class.':admin');
-    Route::post('/deletePackages', 'deletePackages')->name('deletePackages')->middleware(IsLogin::class.':admin');
+    Route::post('/createTest/{id?}', 'createTest')->name('createTest')->middleware(IsLogin::class.':admin');
+    Route::post('/editTest/{id?}', 'editTest')->name('editTest')->middleware(IsLogin::class.':admin');
+    Route::post('/deleteTest/{id?}', 'deleteTest')->name('deleteTest')->middleware(IsLogin::class.':admin');
     Route::post('/createCurrentOffers', 'createCurrentOffers')->name('createCurrentOffers')->middleware(IsLogin::class.':admin');
     Route::post('/editCurrentOffers', 'editCurrentOffers')->name('editCurrentOffers')->middleware(IsLogin::class.':admin');
     Route::post('/deleteCurrentOffers', 'deleteCurrentOffers')->name('deleteCurrentOffers')->middleware(IsLogin::class.':admin');

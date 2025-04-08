@@ -25,11 +25,11 @@ class TestCulturesController extends Controller
                 'activeItem'=>'Categories'
             ]);
         }
-        else if($id === 'AllTestCultures'){
+        else if($id === 'AllTestCultures' || $id === 'TheCultures' || $id === 'PackagesCultures'){
             return view('admin.test_cultures.all_test_cultures',[
                 'lang'=> $lang,
                 'active'=>'TestCultures',
-                'activeItem'=>'AllTestCultures'        
+                'activeItem'=>$id !== 'AllTestCultures' ? ($id !== 'TheCultures' ? 'PackagesCultures' : 'TheCultures') : 'AllTestCultures',        
             ]);
         }
         else if($id === 'SampleTypes'){
@@ -37,13 +37,6 @@ class TestCulturesController extends Controller
                 'lang'=> $lang,
                 'active'=>'TestCultures',
                 'activeItem'=>'SampleTypes'
-            ]);
-        }
-        else if($id === 'TheCultures'){
-            return view('admin.test_cultures.the_cultures',[
-                'lang'=> $lang,
-                'active'=>'TestCultures',
-                'activeItem'=>'TheCultures'
             ]);
         }
         else if($id === 'CultureOptions'){
@@ -58,13 +51,6 @@ class TestCulturesController extends Controller
                 'lang'=> $lang,
                 'active'=>'TestCultures',
                 'activeItem'=>'Antibiotics'
-            ]);
-        }
-        else if($id === 'PackagesCultures'){
-            return view('admin.test_cultures.packages_cultures',[
-                'lang'=> $lang,
-                'active'=>'TestCultures',
-                'activeItem'=>'PackagesCultures'
             ]);
         }
         else if($id === 'ExtraService'){
@@ -83,8 +69,10 @@ class TestCulturesController extends Controller
         }else
             abort(404);
     }
-    public function createTest(){
-        $lang = $this->initLanguage('Create-Test', Rays::find(request()->session()->get('userId')));
+    public function createTest($myId){
+        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
+            return back();
+        $lang = $this->initLanguage('Create-Test', Rays::find(request()->session()->get('userId')), $myId);
         request()->validate([
             'name' => ['required', 'min:3'],
             'shortcut' => ['required', 'min:3'],
@@ -101,13 +89,15 @@ class TestCulturesController extends Controller
             'input-output-lab.in' => $lang->error6,
         ]);
         $Id = $this->generateUniqueIdentifier();
-        $this->getCreateDataBase('Test',['Name'=>request()->input('name'),
+        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test',['Name'=>request()->input('name'),
         'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'),
         'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$Id], $Id);
         return back()->with('success', $lang->successfully1);
     }
-    public function editTest(){
-        $lang = $this->initLanguage('Edit-Test', Rays::find(request()->session()->get('userId')));
+    public function editTest($myId){
+        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
+            return back();
+        $lang = $this->initLanguage('Edit-Test', Rays::find(request()->session()->get('userId')), $myId);
         $validator = Validator::make(request()->all(),[
             'id' => ['required', Rule::in($lang->size1)],
             'name' => ['required', 'min:3'],
@@ -126,168 +116,30 @@ class TestCulturesController extends Controller
             'id.required'=>$lang->error7,
             'id.in'=>$lang->error8,
         ]);
-        if ($validator->fails())
+        if($validator->fails())
             return back()->withErrors($validator);
         else{
-            $this->getEditDataBase('Test', 
+            $this->getEditDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', 
             ['Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'),
             'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'),
             'Id'=>request()->input('id')]);
             return back()->with('success', $lang->successfully1);
         }
     }
-    public function deleteTest(){
-        $lang = $this->initLanguage('Delete-Test', Rays::find(request()->session()->get('userId')));        
-        // $lang = new TestDelete('Test');
+    public function deleteTest($myId){
+        if($myId !== 'AllTestCultures' && $myId !== 'TheCultures' && $myId !== 'PackagesCultures')
+            return back();
+        $lang = $this->initLanguage('Delete-Test', Rays::find(request()->session()->get('userId')), $myId);        
         request()->validate([
             'id' => ['required', Rule::in($lang->size1)],
         ], [
             'id.required'=>$lang->error7,
             'id.in'=>$lang->error8,
         ]);
-        $this->getDeleteDatabade('Test');
+        $this->getDeleteDatabade($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test');
         return back()->with('success', $lang->successfully1);
     }
     
-    public function createCultures(){
-        $lang = $this->initLanguage('Create-Cultures', Rays::find(request()->session()->get('userId')));
-        request()->validate([
-            'name' => ['required', 'min:3'],
-            'shortcut' => ['required', 'min:3'],
-            'price' => ['required', 'integer'],
-            'input-output-lab' => ['required', Rule::in($lang->inputOutPutKeys)],
-        ], [
-            'name.required' => $lang->error1,
-            'name.min' => $lang->error2,
-            'shortcut.required' => $lang->error9,
-            'shortcut.min' => $lang->error10,
-            'price.required' => $lang->error3,
-            'price.integer' => $lang->error5,
-            'input-output-lab.required' => $lang->error4,
-            'input-output-lab.in' => $lang->error6,
-        ]);
-        $Id = $this->generateUniqueIdentifier();
-        $this->getCreateDataBase('Cultures', [
-        'Name'=>request()->input('name'),
-        'Shortcut'=>request()->input('shortcut'),
-        'Price'=>request()->input('price'),
-        'InputOutputLab'=>request()->input('input-output-lab'),
-        'Id'=>$Id], $Id);
-        return back()->with('success', $lang->successfully1);
-    }
-    public function editCultures(){
-        $lang = $this->initLanguage('Edit-Cultures', Rays::find(request()->session()->get('userId')));
-        $validator = Validator::make(request()->all(),[
-            'id' => ['required', Rule::in($lang->size1)],
-            'name' => ['required', 'min:3'],
-            'shortcut' => ['required', 'min:3'],
-            'price' => ['required', 'integer'],
-            'input-output-lab' => ['required', Rule::in($lang->inputOutPutKeys)],
-        ], [
-            'name.required' => $lang->error1,
-            'name.min' => $lang->error2,
-            'shortcut.required' => $lang->error9,
-            'shortcut.min' => $lang->error10,
-            'price.required' => $lang->error3,
-            'price.integer' => $lang->error5,
-            'input-output-lab.required' => $lang->error4,
-            'input-output-lab.in' => $lang->error6,
-            'id.required'=>$lang->error7,
-            'id.in'=>$lang->error8,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase('Cultures', [
-            'Name'=>request()->input('name'),
-            'Shortcut'=>request()->input('shortcut'),
-            'Price'=>request()->input('price'),
-            'InputOutputLab'=>request()->input('input-output-lab'),
-            'Id'=>request()->input('id')]);
-            return back()->with('success', $lang->successfully1);
-        }
-    }
-    public function deleteCultures(){
-        $lang = $this->initLanguage('Delete-Cultures', Rays::find(request()->session()->get('userId')));
-        request()->validate([
-            'id' => ['required', Rule::in($lang->size1)],
-        ], [
-            'id.required'=>$lang->error7,
-            'id.in'=>$lang->error8,
-        ]);
-        $this->getDeleteDatabade('Cultures');
-        return back()->with('success', $lang->successfully1);
-    }
-    
-    public function createPackages(){
-        $lang = $this->initLanguage('Create-Packages', Rays::find(request()->session()->get('userId')));
-        request()->validate([
-            'name' => ['required', 'min:3'],
-            'shortcut' => ['required', 'min:3'],
-            'price' => ['required', 'integer'],
-            'input-output-lab' => ['required', Rule::in($lang->inputOutPutKeys)],
-        ], [
-            'name.required' => $lang->error1,
-            'name.min' => $lang->error2,
-            'shortcut.required' => $lang->error9,
-            'shortcut.min' => $lang->error10,
-            'price.required' => $lang->error3,
-            'price.integer' => $lang->error5,
-            'input-output-lab.required' => $lang->error4,
-            'input-output-lab.in' => $lang->error6,
-        ]);
-        $Id = $this->generateUniqueIdentifier();
-        $this->getCreateDataBase('Packages', [
-        'Name'=>request()->input('name'),
-        'Shortcut'=>request()->input('shortcut'),
-        'Price'=>request()->input('price'),
-        'InputOutputLab'=>request()->input('input-output-lab'),
-        'Id'=>$Id], $Id);
-        return back()->with('success', $lang->successfully1);
-    }
-    public function editPackages(){
-        $lang = $this->initLanguage('Edit-Packages', Rays::find(request()->session()->get('userId')));
-        $validator = Validator::make(request()->all(),[
-            'id' => ['required', Rule::in($lang->size1)],
-            'name' => ['required', 'min:3'],
-            'shortcut' => ['required', 'min:3'],
-            'price' => ['required', 'integer'],
-            'input-output-lab' => ['required', Rule::in($lang->inputOutPutKeys)],
-        ], [
-            'name.required' => $lang->error1,
-            'name.min' => $lang->error2,
-            'shortcut.required' => $lang->error9,
-            'shortcut.min' => $lang->error10,
-            'price.required' => $lang->error3,
-            'price.integer' => $lang->error5,
-            'input-output-lab.required' => $lang->error4,
-            'input-output-lab.in' => $lang->error6,
-            'id.required'=>$lang->error7,
-            'id.in'=>$lang->error8,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase('Packages', [
-            'Name'=>request()->input('name'),
-            'Shortcut'=>request()->input('shortcut'),
-            'Price'=>request()->input('price'),
-            'InputOutputLab'=>request()->input('input-output-lab'),
-            'Id'=>request()->input('id')]);
-            return back()->with('success', $lang->successfully1);
-        }
-    }
-    public function deletePackages(){
-        $lang = $this->initLanguage('Delete-Packages', Rays::find(request()->session()->get('userId')));
-        request()->validate([
-            'id' => ['required', Rule::in($lang->size1)],
-        ], [
-            'id.required'=>$lang->error7,
-            'id.in'=>$lang->error8,
-        ]);
-        $this->getDeleteDatabade('Packages');
-        return back()->with('success', $lang->successfully1);
-    }
     
     public function createCurrentOffers(){
         $lang = $this->initLanguage('Create-Offers', Rays::find(request()->session()->get('userId')));
@@ -366,34 +218,21 @@ class TestCulturesController extends Controller
         $this->getDeleteDatabade('CurrentOffers');
         return back()->with('success', $lang->successfully1);
     }
-    private function initLanguage($id, $ob = null){
+    private function initLanguage($id, $ob = null, $option = null){
         switch ($id) {
-            case 'CurrentOffers':
             case 'TheCultures':
             case 'PackagesCultures':
             case 'AllTestCultures':
-                return $id !== 'CurrentOffers' ? new TestView($id) : new OfferView($id);
+                return new TestView($id);
+            case 'CurrentOffers':
+                return new OfferView($id);
 
             case 'Create-Test':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'AllTestCultures', $ob[$ob['Setting']['Language']]['Message']['TestAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));
+                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesAdd' : 'CulturesAdd') : 'TestAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));
             case 'Edit-Test':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'AllTestCultures', $ob[$ob['Setting']['Language']]['Message']['TestEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']), isset($ob['Test']) ? array_keys($ob['Test']) : array());    
+                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesEdit' : 'CulturesEdit') : 'TestEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']), isset($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) ? array_keys($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) : array());    
             case 'Delete-Test':
-                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'AllTestCultures', $ob[$ob['Setting']['Language']]['Message']['TestDelete'], isset($ob['Test']) ? array_keys($ob['Test']) : array());
-
-            case 'Create-Packages':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'PackagesCultures', $ob[$ob['Setting']['Language']]['Message']['PackagesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));
-            case 'Edit-Packages':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'PackagesCultures', $ob[$ob['Setting']['Language']]['Message']['PackagesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']), isset($ob['Packages']) ? array_keys($ob['Packages']) : array());    
-            case 'Delete-Packages':
-                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'PackagesCultures', $ob[$ob['Setting']['Language']]['Message']['PackagesDelete'], isset($ob['Packages']) ? array_keys($ob['Packages']) : array());
-            
-            case 'Create-Cultures':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'TheCultures', $ob[$ob['Setting']['Language']]['Message']['CulturesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));
-            case 'Edit-Cultures':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'TheCultures', $ob[$ob['Setting']['Language']]['Message']['CulturesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']), isset($ob['Cultures']) ? array_keys($ob['Cultures']) : array());    
-            case 'Delete-Cultures':
-                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'TheCultures', $ob[$ob['Setting']['Language']]['Message']['CulturesDelete'], isset($ob['Cultures']) ? array_keys($ob['Cultures']) : array());        
+                return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesDelete' : 'CulturesDelete') : 'TestDelete'], isset($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) ? array_keys($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) : array());
 
             case 'Create-Offers':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'CurrentOffers', $ob[$ob['Setting']['Language']]['Message']['CurrentOffersAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectOfferBox']));

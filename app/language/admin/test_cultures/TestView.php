@@ -15,8 +15,8 @@ class TestView extends Page{
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
         $ob[$ob['Setting']['Language']]['Label'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
         $ob[$ob['Setting']['Language']]['Button'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
-
-        route($state === 'AllTestCultures' ? 'deleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'deleteCultures' : 'deleteCurrentOffers') : 'deletePackages')), 
+        //$state !== 'CurrentOffers' ? route($state === 'AllTestCultures' ? 'deleteTest' : ($state === 'PackagesCultures' ? 'deletePackages' : 'deleteCultures'), $state) : route('DeleteCurrentOffers'), 
+        $state === 'CurrentOffers' ? route('deleteCurrentOffers') : route('deleteTest', $state), 
         $ob[$ob['Setting']['Language']]['TableInfo'], 
 
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'AllTestCultures' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'TheCultures' : 'CurrentOffers') : 'PackagesCultures')], 

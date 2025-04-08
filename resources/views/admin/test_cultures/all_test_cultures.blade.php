@@ -18,7 +18,7 @@
 @section('containt')
 <div class="space-page container">
 <button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button1}}</button>
-@include('layout.all_tests.create_edit_tests', ['action'=>route('createTest')])
+@include('layout.all_tests.create_edit_tests')
 <table id="example" class="table table-striped">
     <thead>
             <tr>
@@ -41,7 +41,7 @@
                 <th>
                 @include('layout.model_delete', ['name'=>$test->getName()])
                 <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm('editModel{{$index}}', $('#editForm{{$index}}').find('#name'), $('#editForm{{$index}}').find('#shortcut'), $('#editForm{{$index}}').find('#price'), $('#editForm{{$index}}').find('#input-output-lab option'), '{{$test->getName()}}', '{{$test->getShortcut()}}', '{{$test->getPrice()}}', '{{$test->getInputOutputLabId()}}')"></i>
-                @include('layout.all_tests.create_edit_tests', ['action'=>route('editTest')])
+                @include('layout.all_tests.create_edit_tests')
                 </th>
             </tr>
             @endforeach
