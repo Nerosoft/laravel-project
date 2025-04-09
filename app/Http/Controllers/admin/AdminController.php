@@ -12,7 +12,8 @@ class AdminController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.user', [
             'lang'=> $lang,
-            'active'=>'Home'
+            'active'=>'Home',
+            'logOut'=>route('admin.logout')
         ]);
     }
 }

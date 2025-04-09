@@ -12,7 +12,8 @@ class ChatController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.chat',[
             'lang'=> $lang,
-            'active'=>'Chat'            
+            'active'=>'Chat',
+            'logOut'=>route('admin.logout')           
         ]);
     }
 }

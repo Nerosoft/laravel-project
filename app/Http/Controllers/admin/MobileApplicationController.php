@@ -12,6 +12,7 @@ class MobileApplicationController extends Controller
         if($id === 'TipsAndOffer'){
             return view('admin.mobile_application.tips_and_offer',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MobileApplication',
                 'activeItem'=>'TipsAndOffer'
             ]);
@@ -19,6 +20,7 @@ class MobileApplicationController extends Controller
         else if($id === 'StaticPage'){
             return view('admin.mobile_application.static_page',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MobileApplication',
                 'activeItem'=>'StaticPage'
             ]);
@@ -26,6 +28,7 @@ class MobileApplicationController extends Controller
         else if($id === 'Sliders'){
             return view('admin.mobile_application.sliders',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MobileApplication',
                 'activeItem'=>'Sliders'
             ]);

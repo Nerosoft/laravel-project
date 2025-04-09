@@ -15,6 +15,7 @@ class MedicalReportsController extends Controller
         if($id === 'AllMedicalReports'){
             return view('admin.medical_reports.allMedicalReports',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'AllMedicalReports'
             ]);
@@ -22,6 +23,7 @@ class MedicalReportsController extends Controller
         else if($id === 'DoneReports'){
             return view('admin.medical_reports.doneReports',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'DoneReports'
             ]);
@@ -29,6 +31,7 @@ class MedicalReportsController extends Controller
         else if($id === 'PendingReports'){
             return view('admin.medical_reports.pendingReports',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'PendingReports'
             ]);
@@ -36,6 +39,7 @@ class MedicalReportsController extends Controller
         else if($id === 'UnsigendReports'){
             return view('admin.medical_reports.unsigendReports',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'UnsigendReports'
             ]);
@@ -43,6 +47,7 @@ class MedicalReportsController extends Controller
         else if($id === 'SendToLab'){
             return view('admin.medical_reports.SendToLab',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'SendToLab'
             ]);
@@ -50,6 +55,7 @@ class MedicalReportsController extends Controller
         else if($id === 'SampleStatus'){
             return view('admin.medical_reports.sampleStatus',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'MedicalReports',
                 'activeItem'=>'SampleStatus'
             ]);

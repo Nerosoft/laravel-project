@@ -12,7 +12,8 @@ class BranchesCustodyController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.branches_custody',[
             'lang'=> $lang,
-            'active'=>'BranchesCustody'
+            'active'=>'BranchesCustody',
+            'logOut'=>route('admin.logout')
         ]);
     }
 }

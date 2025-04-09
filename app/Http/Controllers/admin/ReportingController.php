@@ -29,6 +29,7 @@ class ReportingController extends Controller
         if($id === 'ContractsReports'){
             return view('admin.reporting.contracts_reports',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'ContractsReports'
             ]);
@@ -36,6 +37,7 @@ class ReportingController extends Controller
         else if($id === 'DelayedMoney'){
             return view('admin.reporting.delayed_money',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'DelayedMoney'
             ]);
@@ -43,6 +45,7 @@ class ReportingController extends Controller
         else if($id === 'AccountingReport'){
             return view('admin.reporting.accounting_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'AccountingReport'
             ]);
@@ -50,6 +53,7 @@ class ReportingController extends Controller
         else if($id === 'NormalDoctorReport'){
             return view('admin.reporting.normal_doctor_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'NormalDoctorReport'
             ]);
@@ -57,6 +61,7 @@ class ReportingController extends Controller
         else if($id === 'AllDoctorReport'){
             return view('admin.reporting.all_doctor_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'AllDoctorReport'
             ]);
@@ -64,6 +69,7 @@ class ReportingController extends Controller
         else if($id === 'DoctorReport'){
             return view('admin.reporting.doctor_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'DoctorReport'
             ]);
@@ -71,6 +77,7 @@ class ReportingController extends Controller
         else if($id === 'SupplierReport'){
             return view('admin.reporting.supplier_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'SupplierReport'
             ]);
@@ -78,6 +85,7 @@ class ReportingController extends Controller
         else if($id === 'PurchasesReport'){
             return view('admin.reporting.purchases_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'PurchasesReport'
             ]);
@@ -85,6 +93,7 @@ class ReportingController extends Controller
         else if($id === 'InventoryReport'){
             return view('admin.reporting.inventory_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'InventoryReport'
             ]);
@@ -92,6 +101,7 @@ class ReportingController extends Controller
         else if($id === 'ProductsReport'){
             return view('admin.reporting.products_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'ProductsReport'
             ]);
@@ -99,6 +109,7 @@ class ReportingController extends Controller
         else if($id === 'WorkloadMonthly'){
             return view('admin.reporting.workload_monthly',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'WorkloadMonthly'
             ]);
@@ -106,6 +117,7 @@ class ReportingController extends Controller
         else if($id === 'WorkloadDaily'){
             return view('admin.reporting.workload_daily',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'WorkloadDaily'
             ]);
@@ -113,6 +125,7 @@ class ReportingController extends Controller
         else if($id === 'TestesBranchReport'){
             return view('admin.reporting.testes_branch_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'TestesBranchReport'
             ]);
@@ -120,6 +133,7 @@ class ReportingController extends Controller
         else if($id === 'ExpensesReport'){
             return view('admin.reporting.expenses_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'ExpensesReport'
             ]);
@@ -127,6 +141,7 @@ class ReportingController extends Controller
         else if($id === 'CustodyReport'){
             return view('admin.reporting.custody_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'CustodyReport'
             ]);
@@ -134,6 +149,7 @@ class ReportingController extends Controller
         else if($id === 'ContractReport'){
             return view('admin.reporting.contract_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'ContractReport'
             ]);
@@ -141,6 +157,7 @@ class ReportingController extends Controller
         else if($id === 'EmployeesReport'){
             return view('admin.reporting.employees_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'EmployeesReport'
             ]);
@@ -148,6 +165,7 @@ class ReportingController extends Controller
         else if($id === 'RaysReport'){
             return view('admin.reporting.rays_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'RaysReport'
             ]);
@@ -155,6 +173,7 @@ class ReportingController extends Controller
         else if($id === 'RaysCategoriesReport'){
             return view('admin.reporting.rays_categories_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'RaysCategoriesReport'
             ]);
@@ -162,6 +181,7 @@ class ReportingController extends Controller
         else if($id === 'SafeTransferReport'){
             return view('admin.reporting.safe_Transfer_report',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reporting',
                 'activeItem'=>'SafeTransferReport'
             ]);

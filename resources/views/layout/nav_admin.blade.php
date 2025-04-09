@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="#">{{$lang->label2}}</a>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="{{isset($logOut) ? $logOut : route('admin.logout')}}">{{$lang->label1}}</a>
+        <a class="nav-link" href="{{$logOut}}">{{$lang->label1}}</a>
       </li>
     </ul>
  

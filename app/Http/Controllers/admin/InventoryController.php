@@ -15,6 +15,7 @@ class InventoryController extends Controller
         if($id === 'Suppliers'){
             return view('admin.inventory.suppliers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'Suppliers'
             ]);
@@ -22,6 +23,7 @@ class InventoryController extends Controller
         else if($id === 'Products'){
             return view('admin.inventory.products',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'Products'
             ]);
@@ -29,6 +31,7 @@ class InventoryController extends Controller
         else if($id === 'FixedAssets'){
             return view('admin.inventory.fixed_assets',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'FixedAssets'
             ]);
@@ -36,6 +39,7 @@ class InventoryController extends Controller
         else if($id === 'Purchases'){
             return view('admin.inventory.purchases',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'Purchases'
             ]);
@@ -43,6 +47,7 @@ class InventoryController extends Controller
         else if($id === 'Adjustments'){
             return view('admin.inventory.adjustments',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'Adjustments'
             ]);
@@ -50,6 +55,7 @@ class InventoryController extends Controller
         else if($id === 'Transfers'){
             return view('admin.inventory.transfers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Inventory',
                 'activeItem'=>'Transfers'
             ]);

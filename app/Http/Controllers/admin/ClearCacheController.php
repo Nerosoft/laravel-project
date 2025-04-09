@@ -12,7 +12,8 @@ class ClearCacheController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.clear_cache',[
             'lang'=> $lang, 
-            'active'=>'ClearCache'           
+            'active'=>'ClearCache',
+            'logOut'=>route('admin.logout')          
         ]);
     }
 

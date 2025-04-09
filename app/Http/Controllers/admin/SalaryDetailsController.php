@@ -17,6 +17,7 @@ class SalaryDetailsController extends Controller
         if($id === 'Salary'){
             return view('admin.salary_details.salary',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'Salary'
             ]);
@@ -24,6 +25,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThInventory'){
             return view('admin.salary_details.th_inventory',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThInventory' 
             ]);
@@ -31,6 +33,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThSuppliers'){
             return view('admin.salary_details.th_suppliers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThSuppliers'
             ]);
@@ -38,6 +41,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThProducts'){
             return view('admin.salary_details.th_products',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThProducts'
             ]);
@@ -45,6 +49,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThFixedAssets'){
             return view('admin.salary_details.th_fixed_assets',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThFixedAssets'
             ]);
@@ -52,6 +57,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThPurchases'){
             return view('admin.salary_details.th_purchases',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThPurchases'
             ]);
@@ -59,6 +65,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThAdjustments'){
             return view('admin.salary_details.th_adjustments',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThAdjustments' 
             ]);
@@ -66,6 +73,7 @@ class SalaryDetailsController extends Controller
         else if($id === 'ThTransfers'){
             return view('admin.salary_details.th_transfers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SalaryDetails',
                 'activeItem'=>'ThTransfers'
             ]);

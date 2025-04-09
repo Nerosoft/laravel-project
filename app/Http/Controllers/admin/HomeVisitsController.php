@@ -12,6 +12,7 @@ class HomeVisitsController extends Controller
         if($id === 'HomeVisit'){
             return view('admin.home_visits.home_visit',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HomeVisits',
                 'activeItem'=>'HomeVisit'
             ]);
@@ -19,6 +20,7 @@ class HomeVisitsController extends Controller
         else if($id === 'Bookings'){
             return view('admin.home_visits.bookings',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HomeVisits',
                 'activeItem'=>'Bookings'
             ]);
@@ -26,6 +28,7 @@ class HomeVisitsController extends Controller
         else if($id === 'Prescriptions'){
             return view('admin.home_visits.prescriptions',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HomeVisits',
                 'activeItem'=>'Prescriptions'
             ]);

@@ -13,6 +13,7 @@ class PriceListController extends Controller
         if($id === 'Test'){
             return view('admin.price_list.test',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'PriceList',
                 'activeItem'=>'Test'
             ]);
@@ -20,6 +21,7 @@ class PriceListController extends Controller
         else if($id === 'CulturesPrice'){
             return view('admin.price_list.cultures_price',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'PriceList',
                 'activeItem'=>'CulturesPrice'
             ]);
@@ -27,6 +29,7 @@ class PriceListController extends Controller
         else if($id === 'Packages'){
             return view('admin.price_list.packages',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'PriceList',
                 'activeItem'=>'Packages'
             ]);
@@ -34,6 +37,7 @@ class PriceListController extends Controller
         else if($id === 'PricesList'){
             return view('admin.price_list.prices_list',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'PriceList',
                 'activeItem'=>'PricesList'    
             ]);

@@ -12,6 +12,7 @@ class SafeTransfersController extends Controller
         if($id === 'RejectedTransfers'){
             return view('admin.safe_transfers.rejected_transfers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SafeTransfers',
                 'activeItem'=>'RejectedTransfers'
             ]);
@@ -19,6 +20,7 @@ class SafeTransfersController extends Controller
         else if($id === 'TransferToOwner'){
             return view('admin.safe_transfers.transfer_to_owner',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SafeTransfers',
                 'activeItem'=>'TransferToOwner'
             ]);
@@ -26,6 +28,7 @@ class SafeTransfersController extends Controller
         else if($id === 'AllTransfers'){
             return view('admin.safe_transfers.all_transfers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'SafeTransfers',
                 'activeItem'=>'AllTransfers' 
             ]);

@@ -16,6 +16,7 @@ class HREmployeesController extends Controller
         if($id === 'Employees'){
             return view('admin.hr_employees.employees',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Employees'
             ]);
@@ -23,6 +24,7 @@ class HREmployeesController extends Controller
         else if($id === 'Violations'){
             return view('admin.hr_employees.violations',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Violations'
             ]);
@@ -30,6 +32,7 @@ class HREmployeesController extends Controller
         else if($id === 'Vocations'){
             return view('admin.hr_employees.vocations',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Vocations'
             ]);
@@ -37,6 +40,7 @@ class HREmployeesController extends Controller
         else if($id === 'Incentives'){
             return view('admin.hr_employees.incentives',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Incentives'
             ]);
@@ -44,6 +48,7 @@ class HREmployeesController extends Controller
         else if($id === 'Deductions'){
             return view('admin.hr_employees.deductions',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Deductions'
             ]);
@@ -51,6 +56,7 @@ class HREmployeesController extends Controller
         else if($id === 'Attendance'){
             return view('admin.hr_employees.attendance',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Attendance'
             ]);
@@ -58,6 +64,7 @@ class HREmployeesController extends Controller
         else if($id === 'Shifts'){
             return view('admin.hr_employees.shifts',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'HREmployees',
                 'activeItem'=>'Shifts'
             ]);

@@ -37,6 +37,7 @@ class ReceptionController extends Controller
         if($id === 'Vault'){
             return view('admin.reception.vault',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Vault',      
             ]);
@@ -44,6 +45,7 @@ class ReceptionController extends Controller
         else if($id === 'Invoices'){
             return view('admin.reception.invoices',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Invoices',       
             ]);
@@ -51,6 +53,7 @@ class ReceptionController extends Controller
         else if($id === 'PatientRegisteration'){
             return view('admin.reception.patientRegisteration',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'PatientRegisteration',
                 'allRes'=>$this->initArray($lang->arr6),
@@ -59,6 +62,7 @@ class ReceptionController extends Controller
         else if($id === 'Retrieved'){
             return view('admin.reception.retrieved',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Retrieved',           
             ]);
@@ -66,6 +70,7 @@ class ReceptionController extends Controller
         else if($id === 'Patients'){
             return view('admin.reception.patients',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Patients',           
             ]);
@@ -73,6 +78,7 @@ class ReceptionController extends Controller
         else if($id === 'Prefix'){
             return view('admin.reception.prefix',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Prefix',    
             ]);
@@ -80,6 +86,7 @@ class ReceptionController extends Controller
         else if($id === 'Knows'){
             return view('admin.reception.knows',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Reception',
                 'activeItem'=>'Knows',   
             ]);

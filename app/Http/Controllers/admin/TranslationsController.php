@@ -11,7 +11,8 @@ class TranslationsController extends Controller
     public function index(){
         $lang = $this->setupLanguage();
         return view('admin.translations',[
-            'lang'=> $lang, 
+            'lang'=> $lang,
+            'logOut'=>route('admin.logout'),
             'active'=>'Translations'           
         ]);
     }

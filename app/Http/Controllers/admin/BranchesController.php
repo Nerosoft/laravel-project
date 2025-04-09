@@ -34,7 +34,8 @@ class BranchesController extends Controller
         return view('admin.branches',[
             'lang'=> $lang,
             'newBranchRays'=>route('addBranchRays'),
-            'active'=>'Branches'
+            'active'=>'Branches',
+            'logOut'=>route('admin.logout')
         ]);
     }
     private function saveBranch($model, $id){

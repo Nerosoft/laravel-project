@@ -21,6 +21,7 @@ class TestCulturesController extends Controller
         if($id === 'Categories'){
             return view('admin.test_cultures.categories',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'Categories'
             ]);
@@ -28,6 +29,7 @@ class TestCulturesController extends Controller
         else if($id === 'AllTestCultures' || $id === 'TheCultures' || $id === 'PackagesCultures'){
             return view('admin.test_cultures.all_test_cultures',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>$id !== 'AllTestCultures' ? ($id !== 'TheCultures' ? 'PackagesCultures' : 'TheCultures') : 'AllTestCultures',        
             ]);
@@ -35,6 +37,7 @@ class TestCulturesController extends Controller
         else if($id === 'SampleTypes'){
             return view('admin.test_cultures.sample_types',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'SampleTypes'
             ]);
@@ -42,6 +45,7 @@ class TestCulturesController extends Controller
         else if($id === 'CultureOptions'){
             return view('admin.test_cultures.culture_options',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'CultureOptions'
             ]);
@@ -49,6 +53,7 @@ class TestCulturesController extends Controller
         else if($id === 'Antibiotics'){
             return view('admin.test_cultures.antibiotics',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'Antibiotics'
             ]);
@@ -56,6 +61,7 @@ class TestCulturesController extends Controller
         else if($id === 'ExtraService'){
             return view('admin.test_cultures.extra_service',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'ExtraService'
             ]);
@@ -63,6 +69,7 @@ class TestCulturesController extends Controller
         else if($id === 'CurrentOffers'){
             return view('admin.test_cultures.current_offers',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>'CurrentOffers'
             ]);

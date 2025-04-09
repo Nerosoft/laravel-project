@@ -32,7 +32,8 @@ class LanguageController extends Controller
                 'lang'=> $lang,
                 'active'=>$nameLanguage !== null ? $nameLanguage : $id,
                 'activeItem'=>$id,
-                'state'=>$id === null
+                'state'=>$id === null,
+                'logOut'=>route('admin.logout')
             ]);
         }else if($nameLanguage === 'ChangeLanguage'){
             $lang = $this->setupLanguage($nameLanguage);
@@ -40,6 +41,7 @@ class LanguageController extends Controller
                 'lang'=>$lang,
                 'active'=>'ChangeLanguage',
                 'myRadios'=>$this->setupRadios($lang->myLanguage),
+                'logOut'=>route('admin.logout')
             ]);
         }
         else

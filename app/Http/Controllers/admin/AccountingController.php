@@ -15,28 +15,32 @@ class AccountingController extends Controller
             return view('admin.accounting.payment_methods',[
                 'lang'=> $lang,
                 'active'=>'Accounting',
-                'activeItem'=>'PaymentMethods'
+                'activeItem'=>'PaymentMethods',
+                'logOut'=>route('admin.logout')
             ]);
         }
         else if($id === 'ExpenseCategories'){
             return view('admin.accounting.expense_categories',[
                 'lang'=> $lang,
                 'active'=>'Accounting',
-                'activeItem'=>'ExpenseCategories'
+                'activeItem'=>'ExpenseCategories',
+                'logOut'=>route('admin.logout')
             ]);
         }
         else if($id === 'ViewExpenses'){
             return view('admin.accounting.view_expenses',[
                 'lang'=> $lang,
                 'active'=>'Accounting',
-                'activeItem'=>'ViewExpenses'
+                'activeItem'=>'ViewExpenses',
+                'logOut'=>route('admin.logout')
             ]);
         }
         else if($id === 'Expenses'){
             return view('admin.accounting.expenses',[
                 'lang'=> $lang,
                 'active'=>'Accounting',
-                'activeItem'=>'Expenses'   
+                'activeItem'=>'Expenses',
+                'logOut'=>route('admin.logout')  
             ]);
         }else
             abort(404);

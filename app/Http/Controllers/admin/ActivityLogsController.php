@@ -11,7 +11,8 @@ class ActivityLogsController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.activity_logs',[
             'lang'=> $lang,
-            'active'=>'ActivityLogs'
+            'active'=>'ActivityLogs',
+            'logOut'=>route('admin.logout')
         ]);
     }
 }

@@ -11,6 +11,7 @@ class NotificationsController extends Controller
         if($id === 'Notification'){
             return view('admin.notifications.notification',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Notifications',
                 'activeItem'=>'Notification'                
             ]);
@@ -18,6 +19,7 @@ class NotificationsController extends Controller
         else if($id === 'CreateNotifications'){
             return view('admin.notifications.create_notifications',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Notifications',
                 'activeItem'=>'CreateNotifications'                
             ]);

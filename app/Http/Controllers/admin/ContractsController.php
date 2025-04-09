@@ -21,6 +21,7 @@ class ContractsController extends Controller
         if($id === 'Governments'){
             return view('admin.contracts.governments',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'Governments'
             ]);
@@ -28,6 +29,7 @@ class ContractsController extends Controller
         else if($id === 'TheContracts'){
             return view('admin.contracts.the_contracts',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'TheContracts'
             ]);
@@ -35,6 +37,7 @@ class ContractsController extends Controller
         else if($id === 'PackagesContracts'){
             return view('admin.contracts.packages_contracts',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'PackagesContracts' 
             ]);
@@ -42,6 +45,7 @@ class ContractsController extends Controller
         else if($id === 'PricesListContracts'){
             return view('admin.contracts.prices_list_contracts',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'PricesListContracts'
             ]);
@@ -49,6 +53,7 @@ class ContractsController extends Controller
         else if($id === 'Labs'){
             return view('admin.contracts.labs',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'Labs'
             ]);
@@ -56,6 +61,7 @@ class ContractsController extends Controller
         else if($id === 'LabsOut'){
             return view('admin.contracts.labs_out',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'LabsOut' 
             ]);
@@ -63,6 +69,7 @@ class ContractsController extends Controller
         else if($id === 'Doctors'){
             return view('admin.contracts.doctors',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'Contracts',
                 'activeItem'=>'Doctors'
             ]);

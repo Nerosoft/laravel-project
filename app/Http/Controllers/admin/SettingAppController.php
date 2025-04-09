@@ -12,6 +12,7 @@ class SettingAppController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.setting_app',[
             'lang'=> $lang,
+            'logOut'=>route('admin.logout'),
             'active'=>'SettingApp'            
         ]);
     }

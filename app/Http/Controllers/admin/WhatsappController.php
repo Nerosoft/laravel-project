@@ -12,6 +12,7 @@ class WhatsappController extends Controller
         $lang = $this->setupLanguage();
         return view('admin.whatsapp',[
             'lang'=> $lang,
+            'logOut'=>route('admin.logout'),
             'active'=>'Whatsapp'            
         ]);
     }

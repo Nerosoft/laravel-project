@@ -11,6 +11,7 @@ class UserRolesController extends Controller
         if($id === 'Roles'){
             return view('admin.user_roles.roles',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'UserRoles',
                 'activeItem'=>'Roles' 
             ]);
@@ -18,6 +19,7 @@ class UserRolesController extends Controller
         else if($id === 'User'){
             return view('admin.user_roles.user',[
                 'lang'=> $lang,
+                'logOut'=>route('admin.logout'),
                 'active'=>'UserRoles',
                 'activeItem'=>'User'
             ]);
