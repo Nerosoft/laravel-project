@@ -15,9 +15,6 @@ class Account
         $this->Password = $password;
         $this->Email = $email;
     }
-    public function getObject(){
-        return get_object_vars($this);
-    }
     public function getKey(){
         return $this->Key;
     }

@@ -18,7 +18,7 @@ class RaysSeeder extends Seeder
                     'Language'=>'english',
                 ],
                 'User'=>[
-                    'abdullah@rays.com'=>[
+                    'yQd40431'=>[
                         'Password'=>'12345678',
                         'Key'=>'123456789',
                         'Email'=>'abdullah@rays.com'
