@@ -22,7 +22,7 @@
         <thead>
             <tr>
                 <th>{{$lang->table9}}</th>
-                @if($state)
+                @if($active === 'AllLanguage')
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->table7}}</th>
@@ -369,7 +369,7 @@
         <tfoot>
             <tr>
                 <th>{{$lang->table9}}</th>
-                @if($state)
+                @if($active === 'AllLanguage')
                 <th>{{$lang->table10}}</th>
                 @endif
                 <th>{{$lang->table7}}</th>
@@ -379,7 +379,7 @@
     </table>
 </div>
 <script type="text/javascript">
-let setting = @json($state) ? [
+let setting = @json($active === 'AllLanguage') ? [
                 { 'searchable': true },
                 { 'searchable': false },
                 { 'searchable': true },

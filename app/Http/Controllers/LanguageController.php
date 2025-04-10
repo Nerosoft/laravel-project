@@ -28,11 +28,10 @@ class LanguageController extends Controller
         if(isset(Rays::find(request()->session()->get('userId'))[$nameLanguage][$id]) || $nameLanguage === 'AllLanguage'){
             //check id is null to call title all language
             $lang = $this->setupLanguage($nameLanguage, $id !== null ? $id : $nameLanguage);
-            return view('all_language', [
+            return view('all_language',[
                 'lang'=> $lang,
                 'active'=>$nameLanguage !== null ? $nameLanguage : $id,
                 'activeItem'=>$id,
-                'state'=>$id === null,
                 'logOut'=>route('admin.logout')
             ]);
         }else if($nameLanguage === 'ChangeLanguage'){
