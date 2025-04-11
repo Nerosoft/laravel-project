@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Rays;
-use App\language\admin\action\auth\login\MyLoginAdmin;
 use App\language\admin\action\auth\login\MyLoginPatient;
 use App\language\admin\action\auth\login\MyLoginDoctor;
 use App\language\admin\action\auth\MyLoginRegisterAdmin;
