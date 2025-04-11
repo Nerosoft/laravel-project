@@ -214,7 +214,7 @@ class UserController extends Controller
                 return new ChangeLanguage(array_keys($userRays[$this->getLanguage2($userRays)]['AllNamesLanguage']), $userRays[$this->getLanguage2($userRays)]['Error']['LoginPatentLanguageRequired']);
             case 'login_admin_init2'://post
             case 'register_init2'://post register
-                return new MyLoginRegisterAdmin($userRays[$this->getLanguage2($userRays)]['Error'], $state, isset($userRays['User'])?$userRays['User']:null);
+                return new MyLoginRegisterAdmin($userRays[$this->getLanguage2($userRays)]['Error'], $state, $userRays['User']);
             case 'register'://page register admin
                 return new RegisterAdmin($userRays, $id, $this->getLanguage1($userRays));
             case 'id_not_found1':

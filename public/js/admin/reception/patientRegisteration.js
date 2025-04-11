@@ -417,7 +417,6 @@ function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, pa
 }
 
 function validateT2(test_select, tests_name, selectPatient, know, payment_date, payment_amount, payment_method, patent_code, discount, delayedMoney, key, url, message, state){
-
     let isValid = false;
     if(test_select.val() === null && keyValueMap.get(key).itemsTest.length === 0){
         (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
