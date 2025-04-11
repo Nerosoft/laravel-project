@@ -7,7 +7,7 @@ use App\Models\Rays;
 use App\language\admin\action\auth\login\MyLoginAdmin;
 use App\language\admin\action\auth\login\MyLoginPatient;
 use App\language\admin\action\auth\login\MyLoginDoctor;
-use App\language\admin\action\auth\MyRegisterAdmin;
+use App\language\admin\action\auth\MyLoginRegisterAdmin;
 use App\language\admin\action\auth\ChangeLanguage;
 use App\language\admin\action\auth\ShowError;
 use App\language\login\RegisterAdmin;
@@ -47,7 +47,7 @@ class UserController extends Controller
     }
     public function registerUser(Request $request){
         if(Rays::find($request->input('userId'))){
-            $lang = $this->setupLanguage('register_init2', Rays::find(request()->input('userId')));
+            $lang = $this->setupLanguage('register_init2', Rays::find(request()->input('userId')), 'register');
             $rules = [
                 'email' => ['required', 'email'],
                 'password' => ['required', 'confirmed', 'min:8'],
@@ -91,7 +91,7 @@ class UserController extends Controller
     }
     public function loginUser(Request $request){
         if(Rays::find($request->input('userId'))){
-            $lang = $this->setupLanguage('login_admin_init2', Rays::find(request()->input('userId')));
+            $lang = $this->setupLanguage('login_admin_init2', Rays::find(request()->input('userId')), 'login');
             $rules = [
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
@@ -205,7 +205,7 @@ class UserController extends Controller
 
         
     }
-    function setupLanguage($id, $userRays){
+    function setupLanguage($id, $userRays, $state = null){
         switch ($id) {
               //post change language
             case 'register_admin'://register admin  
@@ -213,14 +213,13 @@ class UserController extends Controller
             case 'language_patent'://login patient
             case 'language_doctor'://login doctor
                 return new ChangeLanguage(array_keys($userRays[$this->getLanguage2($userRays)]['AllNamesLanguage']), $userRays[$this->getLanguage2($userRays)]['Error']['LoginPatentLanguageRequired']);
+            case 'login_admin_init2'://post
             case 'register_init2'://post register
-                return new MyRegisterAdmin($userRays[$this->getLanguage2($userRays)]['Error'], 'register', $userRays['User']);
+                return new MyLoginRegisterAdmin($userRays[$this->getLanguage2($userRays)]['Error'], $state, isset($userRays['User'])?$userRays['User']:null);
             case 'register'://page register admin
                 return new RegisterAdmin($userRays, $id, $this->getLanguage1($userRays));
             case 'id_not_found1':
                 return new ShowError($userRays[$userRays['Setting']['Language']]['Error']['Language']);
-            case 'login_admin_init2'://post
-                return new MyLoginAdmin($userRays[$this->getLanguage2($userRays)]['Error'], 'login', $userRays['User']);
             case 'login':
                 return new LoginAdmin($userRays, $id, $this->getLanguage1($userRays));
             case 'id_not_found2':
