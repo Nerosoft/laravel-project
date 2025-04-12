@@ -406,8 +406,6 @@ class Menu
             return 'bi bi-clipboard2-check';
         else if($key === 'CutomLang')
             return 'bi bi-clipboard2-check';
-        else if($key === 'MyNameLanguage')
-            return 'bi bi-clipboard2-check';
         else if($key === 'TitleCustomLang')
             return 'bi bi-clipboard2-check';
         else if($key === 'TableInfo')

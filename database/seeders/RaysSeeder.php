@@ -257,10 +257,6 @@ class RaysSeeder extends Seeder
                         'Logout'=>'Logout',
                         'AdminDashboard'=>'Salamatak for medical analysis and radiology',
                     ],
-                    'MyNameLanguage'=>[                        
-                        'english'=>'english language',
-                        'arabic'=>'arabic language',  
-                    ],
                     'SelectTestBox'=>[
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
@@ -327,7 +323,6 @@ class RaysSeeder extends Seeder
                         'Model'=>'Model',
                         'CheckBox'=>'Checkbox',
                         'CutomLang'=>'Cutom Lang',
-                        'MyNameLanguage'=>'My Language',
                         'TitleCustomLang'=>'Title Custom Lang',
                         'TableInfo'=>'Table info',
                         'AppSettingAdmin'=>'App Setting Admin',
@@ -356,7 +351,6 @@ class RaysSeeder extends Seeder
                         'Model'=>'Model',
                         'CheckBox'=>'CheckBox',
                         'CutomLang'=>'title Cutom Lang',
-                        'MyNameLanguage'=>'title My Language',
                         'TitleCustomLang'=>'title page lang',
                         'AllLanguage'=>'All language',
                         'TableInfo'=>'title table info',
@@ -1373,10 +1367,6 @@ class RaysSeeder extends Seeder
                         'Logout'=>'تسجيل خروج',
                         'AdminDashboard'=>'سلامتك للتحاليل الطبية والأشعة',
                     ],
-                    'MyNameLanguage'=>[
-                        'arabic'=>'اللغة العربية',
-                        'english'=>'اللغة الانجليزية',
-                    ],
                     'SelectTestBox'=>[
                         'TestInput'=>'داخل',
                         'TestOutput'=>'خارج',
@@ -1441,7 +1431,6 @@ class RaysSeeder extends Seeder
                         'Table'=>'الجدول',
                         'Model'=>'النموزج',
                         'CheckBox'=>'مربع اختيار',
-                        'MyNameLanguage'=>'ـعديل اسماء اللغات',
                         'CutomLang'=>'تعديل ثائمة اللغة',
                         'SelectBox'=>'صندوق الاختيار',
                         'TitleCustomLang'=>'تعديل عناوين الصفح',
@@ -1458,7 +1447,6 @@ class RaysSeeder extends Seeder
                     ],
                     'TitleCustomLang'=>[
                         'CutomLang'=>'عنوان محتويات الفائمة',
-                        'MyNameLanguage'=>'عنوان اسماء اللغات',
                         'Direction'=>'الاتجاه',
                         'Label'=>'العناوين',
                         'Title'=>'العناوين',

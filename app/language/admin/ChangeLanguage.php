@@ -51,7 +51,7 @@ class ChangeLanguage extends DeleteModel
             $ob['_id'],
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['MyNameLanguage']));
+            $ob[$ob['Setting']['Language']]['AllNamesLanguage']));
 
 
             //init table

@@ -114,7 +114,6 @@ class LanguageController extends Controller
         $model = Rays::find(request()->session()->get('userId'));
         foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
-            $myLang['MyNameLanguage'][$newKey] = request()->input('lang_name');
             $myLang['AllNamesLanguage'][$newKey] = request()->input('lang_name');
             $model[$key] = $myLang;
         }
@@ -134,7 +133,6 @@ class LanguageController extends Controller
         $model = Rays::find(request()->session()->get('userId'));
         foreach ($lang->myAllLanguage as $key) {
             $myLang = $model[$key];
-            unset($myLang['MyNameLanguage'][request()->input('id')]);
             unset($myLang['AllNamesLanguage'][request()->input('id')]);
             $model[$key] = $myLang;
         }
