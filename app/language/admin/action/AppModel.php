@@ -22,7 +22,7 @@ class AppModel extends TestParent{
             $this->initError2($state, $var1, $var2, $var3, $var4);
             $this->initError3($state, $var6);
             $this->myPatent = array();
-            if($var5)
+            if(isset($var5))
                 foreach ($var5 as $key => $patent)
                     $this->myPatent[$key] = new Patent($patent['PatentCode'], $patent['Avatar']);
         }else if($option === 'option5'){
