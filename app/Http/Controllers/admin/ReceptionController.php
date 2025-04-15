@@ -477,9 +477,10 @@ class ReceptionController extends Controller
             return back()->withErrors($validator);
 
         else if(request()->input('choices') || request()->input('patent-other')){
+            $myPatient = $lang->findPatient((string)request()->input('id'));
             $this->getEditDataBase('Patent', [
-            'PatentCode'=>$lang->findPatient((string)request()->input('id'))->getPatentCode(),
-            'Avatar'=>request()->file('avatar') ? $this->getMyPatentImage(request()->file('avatar')) : $lang->findPatient((string)request()->input('id'))->getAvatar(),
+            'PatentCode'=>$myPatient->getPatentCode(),
+            'Avatar'=>request()->file('avatar') ? $this->getMyPatentImage(request()->file('avatar')) : $myPatient->getAvatar(),
             'Name'=>request()->input('patent-name'),
             'Nationality'=>request()->input('patent-nationality'),
             'NationalId'=>request()->input('patent-national-id'),
