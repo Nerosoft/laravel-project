@@ -14,22 +14,9 @@ class AppModel extends TestParent{
         }else if($option === 'option2'){
             $this->initError($state, $var5, $var6, $var7, $var8);
             $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initError3($state, $var2);
+            $this->initError3($state, $state !== 'Patients' ? ($state !== 'PatientRegisteration' ? $var2 : $var4) : $var5);
         }else if($option === 'option3')
             $this->initError($state, $var5, $var6, $var7, $var8);
-        else if($option === 'option4'){
-            $this->initError($state, $var5, $var6, $var7, $var8);
-            $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initError3($state, $var6);
-            $this->myPatent = array();
-            if(isset($var5))
-                foreach ($var5 as $key => $patent)
-                    $this->myPatent[$key] = new Patent($patent['PatentCode'], $patent['Avatar']);
-        }else if($option === 'option5'){
-            $this->initError($state, $var5, $var6, $var7, $var8);
-            $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initError3($state, $var4);
-        }
         else if($option === 'option7')
             $this->initError2($state, $var1, $var2, $var3, $var4);
         else if($option === 'option8'){
@@ -44,5 +31,8 @@ class AppModel extends TestParent{
         unset($mySize[0]);
         unset($mySize[1]);
         return $mySize;
+    }
+    public function findPatient($code){
+        return new Patent(Rays::find(request()->session()->get('userId'))['Patent'][$code]['PatentCode'], Rays::find(request()->session()->get('userId'))['Patent'][$code]['Avatar']);
     }
 }
