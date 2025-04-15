@@ -17,7 +17,7 @@ class BranchesController extends Controller
             case 'Branch':
                 return new Branches($init);
             case 'branch_create':
-                return new AppModel('option6', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), $ob['AppId']);    
+                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']));    
             case 'branch_edit':
                 return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), isset($ob['Branch']) ? array_keys($ob['Branch']) : array());    
             case 'branch_delete':{
@@ -88,7 +88,7 @@ class BranchesController extends Controller
             'brance_rays_follow.in' => $lang->error19
         ]);
         //find model in database and save that model in my variable
-        $myDb = Rays::find($lang->id1);
+        $myDb = Rays::find(request()->session()->get('userLogout'));
         $myId = Str::uuid()->toString();
         //if branch exist in my database push it branch in my brancy in database and save all branch
         if(isset($myDb->Branch)){
@@ -120,7 +120,7 @@ class BranchesController extends Controller
         //save brance name in _id 
         $myBranch['_id'] = $myId;
         //save father id
-        $myBranch['AppId'] = $lang->id1;
+        $myBranch['AppId'] = request()->session()->get('userLogout');
         //insert the object in database
         Rays::insert($myBranch);
         return back()->with('success', $lang->successfully1);
