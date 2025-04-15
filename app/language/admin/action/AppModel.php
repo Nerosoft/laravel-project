@@ -40,18 +40,17 @@ class AppModel extends TestParent{
             $this->language = $var2;
         }
         else if($option === 'option8'){
-            $this->initError($state, $var5, $var6, $var7, $var8);
-            $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->myAllLanguage = $var2;
-        }else if($option === 'option9'){
             $this->initError2($state, $var1, $var2, $var3, $var4);
             $this->initError3($state, $var1);
-            $this->language = $var3;
-            unset($this->size1[0]);
-            unset($this->size1[1]);
-            $this->myAllLanguage = $var2;
+            $this->language = $var2;
         }
         else //delete
             $this->initError3($state, $var1);
+    }
+    public function editSizeLanguage(){
+        $mySize = $this->size1;
+        unset($mySize[0]);
+        unset($mySize[1]);
+        return $mySize;
     }
 }

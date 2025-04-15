@@ -17,9 +17,9 @@ class LanguageController extends Controller
             case 'ChangeLanguage_edit':
                 return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
             case 'ChangeLanguage_copy':
-                return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
+                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_delete':
-                return new AppModel('option9', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
+                return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
             default:
                 return new AllLanguage($state, $ob);
         }
@@ -100,7 +100,6 @@ class LanguageController extends Controller
     }
     public function copyLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_copy', Rays::find(request()->session()->get('userId')));
-
         request()->validate([
             'language-select' =>['required', Rule::in($lang->size1)],
             'lang_name' =>['required', 'min:3']
@@ -112,11 +111,12 @@ class LanguageController extends Controller
         ]);
         $newKey = $this->generateUniqueIdentifier();
         $model = Rays::find(request()->session()->get('userId'));
-        foreach ($lang->myAllLanguage as $key) {
+        foreach ($lang->size1 as $key) {
             $myLang = $model[$key];
             $myLang['AllNamesLanguage'][$newKey] = request()->input('lang_name');
             $model[$key] = $myLang;
         }
+        //after add new language name
         $model[$newKey] = $model[request()->input('language-select')];
         $model->save();
         return back()->with('success', $lang->successfully1);
@@ -124,14 +124,14 @@ class LanguageController extends Controller
     public function deleteLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_delete', Rays::find(request()->session()->get('userId')));
         request()->validate([
-            'id' =>['required', Rule::in($lang->size1), Rule::notIn($lang->language)]
+            'id' =>['required', Rule::in($lang->editSizeLanguage()), Rule::notIn($lang->language)]
         ], [
             'id.required' => $lang->error3,
             'id.in' => $lang->error4,
             'id.not_in' => $lang->error5,
         ]);
         $model = Rays::find(request()->session()->get('userId'));
-        foreach ($lang->myAllLanguage as $key) {
+        foreach ($lang->size1 as $key) {
             $myLang = $model[$key];
             unset($myLang['AllNamesLanguage'][request()->input('id')]);
             $model[$key] = $myLang;
