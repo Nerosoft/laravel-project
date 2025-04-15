@@ -49,12 +49,13 @@ class LanguageController extends Controller
     public function editAllLanguage(Request $request, $myLang, $id, $name, $item = null){
         $lang = $this->setupLanguage('edit', Rays::find(request()->session()->get('userId')));
         $rules = ['word' => ['required', $id !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])]];        
-        $messages = $id !== 'Html' ? [
+        $messages =  $id !== 'Html' ? [
             'word.required' => $lang->error1,
             'word.min' => $lang->error2,
-        ] :  [
-            'word.required' => $lang->error4,
-            'word.in' => $lang->error5,  
+        ] : [
+            'word.required' => $lang->error1,
+            'word.min' => $lang->error2,
+            'word.in' => $lang->error2,  
         ];
         $request->validate($rules, $messages);
         //only menu item

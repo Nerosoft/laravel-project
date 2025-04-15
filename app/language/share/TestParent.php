@@ -108,8 +108,6 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->initMyAllLanguage($ob, $myState, $var1);
             $this->error1 = $this->error['TextRequired'];
             $this->error2 = $this->error['TextLenght'];
-            $this->error4 = $this->error['DirectionRequired'];
-            $this->error5 = $this->error['DirectionWord'];
         }
     }
     protected function initMyAllLanguage($ob, $id, $idLang){
