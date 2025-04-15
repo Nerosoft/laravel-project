@@ -12,9 +12,9 @@ use App\Http\interface\initError3;
 
 class TestParent extends AdminTopMenu implements initError, initError2, initError3{
     protected $error;
-    protected function __construct($error, $myState, $AppId, $Language, $AppSettingAdmin, $Direction, $Branch, $StateAppId, $_id, $Title, $Menu, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
+    protected function __construct($error, $myState, $Language, $AppSettingAdmin, $Direction, $Branch, $Title, $Menu, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
         //dont call constractor in edit and delete
-        parent::__construct($Language, $AppSettingAdmin, $Direction, $Branch, $AppId, $StateAppId, $_id, $Title, $Menu);
+        parent::__construct($Language, $AppSettingAdmin, $Direction, $Branch, $Title, $Menu);
         $this->error = $error;
         $this->initError($myState, $ob, $var1, $var2, $var3, $var4, $var5, $var6);
     }

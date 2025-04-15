@@ -16,7 +16,7 @@ class Patients extends Page
     {
         $ob = Rays::find(request()->session()->get('userId'));
         parent::__construct($ob[$ob['Setting']['Language']]['Error'], $state, 
-            $ob['Setting']['Language'], $ob['AppId'],
+            $ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Title']['PatentDelete'],
             $ob[$ob['Setting']['Language']]['Label']['PatentDelete'],
             $ob[$ob['Setting']['Language']]['Button']['PatentDelete'],
@@ -29,7 +29,7 @@ class Patients extends Page
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             
-            $ob['Branch'], $ob['AppId'] !== $ob['_id'] ? false : true, $ob['_id'],
+            $ob['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
             $ob[$ob['Setting']['Language']]['Title']['AddPatent'],
             $ob[$ob['Setting']['Language']]['Title']['PatentEdit'],

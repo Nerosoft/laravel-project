@@ -8,10 +8,9 @@ use App\language\share\Page;
 use App\Menu;
 class TestView extends Page{
     public $arr1 = array();
-    public function __construct($state){ 
-        $ob = Rays::find(request()->session()->get('userId'));  
+    public function __construct($state, $ob){   
         parent::__construct($ob[$ob['Setting']['Language']]['Error'],
-        $state, $ob['Setting']['Language'], $ob['AppId'],
+        $state, $ob['Setting']['Language'],
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
         $ob[$ob['Setting']['Language']]['Label'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
         $ob[$ob['Setting']['Language']]['Button'][$state === 'AllTestCultures' ? 'DeleteTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'DeleteCultures' : 'DeleteCurrentOffers') : 'DeletePackages')], 
@@ -23,8 +22,6 @@ class TestView extends Page{
         $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
         $ob[$ob['Setting']['Language']]['Html']['Direction'], 
         $ob['Branch'], 
-        $ob['AppId'] !== $ob['_id'] ? false : true, 
-        $ob['_id'], 
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'CreateTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'CreateCultures' : 'CreateCurrentOffers') : 'CreatePackages')],
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'EditTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'EditCultures' : 'EditCurrentOffers') : 'EditPackages')],

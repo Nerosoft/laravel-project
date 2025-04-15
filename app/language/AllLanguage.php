@@ -20,9 +20,7 @@ class AllLanguage extends TableSetting
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
 
-            $ob['Branch'], $ob['AppId'],
-            $ob['AppId'] !== $ob['_id'] ? false : true,
-            $ob['_id'],
+            $ob['Branch'],
 
             $ob[$ob['Setting']['Language']]['TitleCustomLang'][$title],
             $ob[$ob['Setting']['Language']]['TableInfo'],

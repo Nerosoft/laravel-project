@@ -31,7 +31,7 @@ class Admin extends AdminTopMenu
         parent::__construct($ob['Setting']['Language'],
         $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
         $ob[$ob['Setting']['Language']]['Html']['Direction'],
-        $ob['Branch'], $ob['AppId'], $ob['AppId'] !== $ob['_id'] ? false : true,$ob['_id'],
+        $ob['Branch'],
         $ob[$ob['Setting']['Language']]['Title']['AdminUser'],
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'));
         

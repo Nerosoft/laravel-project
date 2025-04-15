@@ -8,9 +8,9 @@
             {{$lang->selectBox3}}
         </a>
         <ul class="dropdown-menu">
-        <li><a class="dropdown-item {{$lang->active1 ? 'active' : ''}}" href="{{ route('branchMain', $lang->id1) }}">{{$lang->selectBox4}}</a></li>
+        <li><a class="dropdown-item {{request()->session()->get('userId') === request()->session()->get('userLogout') ? 'active' : ''}}" href="{{ route('branchMain', request()->session()->get('userLogout')) }}">{{$lang->selectBox4}}</a></li>
         @foreach($lang->MyBranch as $index=>$branch)
-        <li><a class="dropdown-item {{$lang->id2 === $branch->getId()? 'active' : ''}}" href="{{ route('branchMain', $branch->getId()) }}">{{$branch->getName()}}</a></li>
+        <li><a class="dropdown-item {{request()->session()->get('userId') === $branch->getId()? 'active' : ''}}" href="{{ route('branchMain', $branch->getId()) }}">{{$branch->getName()}}</a></li>
         @endforeach
         </ul>
     </div>

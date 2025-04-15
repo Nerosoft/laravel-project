@@ -8,15 +8,9 @@ class AdminTopMenu extends SetupMenu
     /**
      * Create a new class instance.
     */
-    protected function __construct($language, $AppSetting, $direction, $branch, $id, $active1, $_id, $title, $myMenuApp){
+    protected function __construct($language, $AppSetting, $direction, $branch, $title, $myMenuApp){
         parent::__construct($language, $title, $direction, $myMenuApp, $AppSetting);
         $this->MyBranch = array();
-        //make active
-        $this->active1 = $active1;
-        //make id2
-        $this->id2 = $_id;
-        //make id
-        $this->id1 = $id;
         //init select box
         $this->selectBox3 = $AppSetting['BranchesCompany'];
         //init branch main

@@ -224,9 +224,9 @@ class TestCulturesController extends Controller
             case 'TheCultures':
             case 'PackagesCultures':
             case 'AllTestCultures':
-                return new TestView($id);
+                return new TestView($id, Rays::find(request()->session()->get('userId')));
             case 'CurrentOffers':
-                return new OfferView($id);
+                return new OfferView($id, Rays::find(request()->session()->get('userId')));
 
             case 'Create-Test':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesAdd' : 'CulturesAdd') : 'TestAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));

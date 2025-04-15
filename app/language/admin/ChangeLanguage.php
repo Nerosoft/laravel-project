@@ -36,7 +36,7 @@ class ChangeLanguage extends DeleteModel
         parent::__construct($ob[$ob['Setting']['Language']]['Error'],
             $state,
             $ob['Setting']['Language'],
-            $ob['AppId'],
+            
             $ob[$ob['Setting']['Language']]['Title']['DeleteLanguageMessage'],
             $ob[$ob['Setting']['Language']]['Label']['DeleteLanguageMessage'],
             $ob[$ob['Setting']['Language']]['Button']['DeleteLanguageMessage'],
@@ -47,8 +47,7 @@ class ChangeLanguage extends DeleteModel
             $ob[$ob['Setting']['Language']]['Title']['ChangeLanguage'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            $ob['Branch'],  $ob['AppId'] !== $ob['_id'] ? false : true,
-            $ob['_id'],
+            $ob['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
             $ob[$ob['Setting']['Language']]['AllNamesLanguage']));

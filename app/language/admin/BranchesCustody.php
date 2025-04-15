@@ -17,10 +17,7 @@ class BranchesCustody extends AdminTopMenu
         $ob[$ob['Setting']['Language']]['Html']['Direction'],
 
        
-        $ob['Branch'], $ob['AppId'],
-        $ob['AppId'] !== $ob['_id'] ? false : true,
-        $ob['_id'],
-
+        $ob['Branch'],
         $ob[$ob['Setting']['Language']]['Title']['BranchesCustody'],
         
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'));
