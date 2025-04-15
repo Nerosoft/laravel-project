@@ -48,19 +48,17 @@ class LanguageController extends Controller
     }
     public function editAllLanguage(Request $request, $myLang, $id, $name, $item = null){
         $lang = $this->setupLanguage('edit', Rays::find(request()->session()->get('userId')));
-        $rules = $id !== 'Html' ? ['word' => ['required', 'min:2']] : ['dir' =>['required', Rule::in(['ltr', 'rtl'])]];        
+        $rules = ['word' => ['required', $id !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])]];        
         $messages = $id !== 'Html' ? [
             'word.required' => $lang->error1,
             'word.min' => $lang->error2,
         ] :  [
-            'dir.required' => $lang->error4,
-            'dir.in' => $lang->error5,  
+            'word.required' => $lang->error4,
+            'word.in' => $lang->error5,  
         ];
         $request->validate($rules, $messages);
-        if($request->input('dir') === 'ltr' && isset($lang->myAllLanguage[$myLang][$id][$name]) && $item === null 
-        || $request->input('dir') ==='rtl' && isset($lang->myAllLanguage[$myLang][$id][$name]) && $item === null
         //only menu item
-        || isset($lang->myAllLanguage[$myLang][$id][$name]['Item'][$item]) && $request->input('word') && strlen($request->input('word')) > 2
+        if(isset($lang->myAllLanguage[$myLang][$id][$name]['Item'][$item]) && $request->input('word') && strlen($request->input('word')) > 2
         ||isset($lang->myAllLanguage[$myLang][$id][$name]) && $item === null && $request->input('word') && strlen($request->input('word')) > 2
         || isset($lang->myAllLanguage[$myLang][$id][$name]) && $id !== 'Menu' && $item === null && $request->input('word') && strlen($request->input('word')) > 2){
             $value = Rays::find($request->session()->get('userId'));
@@ -71,7 +69,7 @@ class LanguageController extends Controller
             else if($id === 'Menu' && $item !== null)
                 $var1[$id][$name]['Item'][$item] = $request->input('word');
             else
-                $var1[$id === $myLang ? $myLang : $id][$name] = $id !== 'Html' ? $request->input('word') : $request->input('dir');
+                $var1[$id === $myLang ? $myLang : $id][$name] = $request->input('word');
             //my key of site aut and this key not like my key in database
             //svae data using new object and send my data to constructor and call setValue to save new value and return object                
             $value[$myLang] = $var1;

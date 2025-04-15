@@ -160,7 +160,7 @@
                                                     <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$myNameLang, 'id'=>$key, 'name'=>$key2]) }}" method="POST">
                                                         @csrf
                                                         <h3>{{$lang->label4}} <span id="label" class="badge text-bg-secondary"></span></h3>
-                                                        <select id="mySelectBox" name="dir" class="form-select" aria-label="Default select example">
+                                                        <select id="mySelectBox" name="word" class="form-select" aria-label="Default select example">
                                                         @foreach($lang->myDirectionOption as $key =>$dir)
                                                         <option class="dropdown-item" {{strtolower($key) === strtolower($item) ? 'selected':''}} value="{{strtolower($key)}}">{{$dir}}</option>
                                                         @endforeach
@@ -273,7 +273,7 @@
                                     <form id="editForm{{$index}}" action="{{route('edit.editAllLanguage', ['lang'=>$active, 'id'=>$activeItem, 'name'=>$key]) }}" method="POST">
                                         @csrf
                                         <h3>{{$lang->label4}} <span id="label" class="badge text-bg-secondary"></span></h3>
-                                        <select id="mySelectBox" name="dir" class="form-select" aria-label="Default select example">
+                                        <select id="mySelectBox" name="word" class="form-select" aria-label="Default select example">
                                         @foreach($lang->myDirectionOption as $key =>$dir)
                                         <option class="dropdown-item" {{strtolower($key) === strtolower($data) ? 'selected':''}} value="{{strtolower($key)}}">{{$dir}}</option>
                                         @endforeach
