@@ -123,7 +123,7 @@ class LanguageController extends Controller
     public function deleteLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_delete', Rays::find(request()->session()->get('userId')));
         request()->validate([
-            'id' =>['required', Rule::in($lang->editSizeLanguage()), Rule::notIn($lang->language)]
+            'id' =>['required', Rule::in($lang->size1), Rule::notIn([$lang->language, $lang->size1[0], $lang->size1[1]])]
         ], [
             'id.required' => $lang->error3,
             'id.in' => $lang->error4,

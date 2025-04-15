@@ -26,12 +26,6 @@ class AppModel extends TestParent{
         else //delete
             $this->initError3($state, $var1);
     }
-    public function editSizeLanguage(){
-        $mySize = $this->size1;
-        unset($mySize[0]);
-        unset($mySize[1]);
-        return $mySize;
-    }
     public function findPatient($code){
         return new Patent(Rays::find(request()->session()->get('userId'))['Patent'][$code]['PatentCode'], Rays::find(request()->session()->get('userId'))['Patent'][$code]['Avatar']);
     }
