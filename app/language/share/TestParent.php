@@ -183,7 +183,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->inputOutPutKeys = $var1;
         }
     }
-    public function initError3($myState, $var1){
+    public function initError3($myState, $var1, $var2 = null){
         $this->size1 = $var1;
         if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
             $this->error7 = $this->error['TestIdRequired'];
@@ -201,8 +201,10 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
         }else if($myState === 'PatientRegisteration'){
             $this->error18 = $this->error['PatientRegisterationIdRequired'];
             $this->error19 = $this->error['PatientRegisterationIdInvalid'];
-        }else if($myState === 'ChangeLanguage')
+        }else if($myState === 'ChangeLanguage'){
             $this->error5 = $this->error['ChangeLanguageUsed'];
+            $this->language = $var2;
+        }
         else{
             $this->error11 = $this->error['CurrentOffersIdRequired'];
             $this->error12 = $this->error['CurrentOffersIdInvalid'];

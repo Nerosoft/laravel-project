@@ -34,15 +34,11 @@ class AppModel extends TestParent{
             $this->initError2($state, $var1, $var2, $var3, $var4);
             $this->id1 = $var2;
         }
-        else if($option === 'option7'){
+        else if($option === 'option7')
             $this->initError2($state, $var1, $var2, $var3, $var4);
-            //dont put in initError2 function bucase option8 not define language
-            $this->language = $var2;
-        }
         else if($option === 'option8'){
             $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initError3($state, $var1);
-            $this->language = $var2;
+            $this->initError3($state, $var1, $var2);
         }
         else //delete
             $this->initError3($state, $var1);

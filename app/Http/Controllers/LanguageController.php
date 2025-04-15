@@ -15,7 +15,7 @@ class LanguageController extends Controller
             case 'ChangeLanguage':
                 return new ChangeLanguage($state);
             case 'ChangeLanguage_edit':
-                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
+                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[  isset($ob[request()->input('language-select')]) ? request()->input('language-select') : $ob['Setting']['Language'] ]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_copy':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_delete':
@@ -95,7 +95,7 @@ class LanguageController extends Controller
         $setting['Language'] = request()->input('language-select');
         $model['Setting'] = $setting;
         $model->save();
-        return back()->with('success', request()->input('language-select') != $lang->language ? Rays::find(request()->session()->get('userId'))[request()->input('language-select')]['Message']['ChangeLanguage']: $lang->successfully1);
+        return back()->with('success', $lang->successfully1);
     }
     public function copyLanguage(){
         $lang = $this->setupLanguage('ChangeLanguage_copy', Rays::find(request()->session()->get('userId')));
