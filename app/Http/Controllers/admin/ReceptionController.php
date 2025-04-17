@@ -508,9 +508,6 @@ class ReceptionController extends Controller
         else
             return back()->withInput()->withErrors($lang->error16);
     }
-    private function getMyPatentImage($file){
-        return 'data:' . $file->getClientMimeType() . ';base64,' . base64_encode(file_get_contents($file));
-    }
     public function deletePatent(){
         $lang = $this->initLanguage('patients_delete', Rays::find(request()->session()->get('userId')));
         request()->validate([
