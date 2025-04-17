@@ -26,7 +26,7 @@ class AppModel extends TestParent{
         else //delete
             $this->initError3($state, $var1);
     }
-    public function findPatient($code){
-        return new Patent(Rays::find(request()->session()->get('userId'))['Patent'][$code]['PatentCode'], Rays::find(request()->session()->get('userId'))['Patent'][$code]['Avatar']);
+    public function findPatient(){
+        return new Patent(Rays::find(request()->session()->get('userId'))['Patent'][(string)request()->input('id')]['PatentCode'], Rays::find(request()->session()->get('userId'))['Patent'][(string)request()->input('id')]['Avatar']);
     }
 }
