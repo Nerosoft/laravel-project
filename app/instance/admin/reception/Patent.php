@@ -26,7 +26,7 @@ class Patent extends SearchId
     private $Disease;
     private $PatentCode;
     
-    public function __construct($PatentCode, $Avatar, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
+    public function __construct($PatentCode, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
     $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
     $DateBirth = null, $Address = null, $Contracting = null, $Hours = null,
     $Disease = null)
@@ -123,8 +123,5 @@ class Patent extends SearchId
             return $arr;
         }else
             return $this->Disease;
-    }
-    public function setupImage(){
-        return $this->Avatar !== null ? 'data:' . $this->Avatar->getClientMimeType() . ';base64,' . base64_encode(file_get_contents($this->Avatar)) : null;
     }
 }
