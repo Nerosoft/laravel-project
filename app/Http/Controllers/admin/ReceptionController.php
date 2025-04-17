@@ -309,7 +309,15 @@ class ReceptionController extends Controller
             case 'patientRegisteration_create':
                 return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationAdd'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), null, $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
             case 'patientRegisteration_edit':
-                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationEdit'], $mes['Patent'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array(), array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']), isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), $mes['Test'], $mes['Cultures'], $mes['Packages'], $mes['CurrentOffers']);
+                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationEdit'],
+                isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(),//var4
+                $mes['Patent'],//var1
+                isset($mes['Knows']) ? array_keys($mes['Knows']) : array(),//var2
+                array_keys($mes[$mes['Setting']['Language']]['PaymentMethodBox']),//var3
+                $mes['Test'],//var5
+                $mes['Cultures'],//var6
+                $mes['Packages'],//var7
+                $mes['CurrentOffers']);//var8
             case 'patientRegisteration_delete':
                 return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'PatientRegisteration', $mes[$mes['Setting']['Language']]['Message']['PatientRegisterationDelete'], isset($mes['Receipt']) ? array_keys($mes['Receipt']) : array(), 'DeleteOption');
             
@@ -319,7 +327,8 @@ class ReceptionController extends Controller
             case 'patients_create':
                 return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_edit':
-                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
+                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'],
+                 isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_delete':
                 return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsDelete'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
 
@@ -454,7 +463,7 @@ class ReceptionController extends Controller
             'patent-address.min' => $lang->error14, 
             'patent-hours.required'=>$lang->error15,
             'patent-hours.integer' => $lang->error34,
-            'avatar.dimensions' => $lang->error16,
+            'avatar.dimensions' => $lang->PatentAvatarDimensions,
             'patent-nationality.required'=>$lang->error17,
             'patent-nationality.in'=>$lang->error33,
             'patent-gender.required'=>$lang->error18,

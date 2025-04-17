@@ -231,14 +231,14 @@ class TestCulturesController extends Controller
             case 'Create-Test':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesAdd' : 'CulturesAdd') : 'TestAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));
             case 'Edit-Test':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesEdit' : 'CulturesEdit') : 'TestEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']), isset($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) ? array_keys($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) : array());    
+                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesEdit' : 'CulturesEdit') : 'TestEdit'], isset($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) ? array_keys($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) : array(), array_keys($ob[$ob['Setting']['Language']]['SelectTestBox']));    
             case 'Delete-Test':
                 return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], $option, $ob[$ob['Setting']['Language']]['Message'][$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'PackagesDelete' : 'CulturesDelete') : 'TestDelete'], isset($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) ? array_keys($ob[$option !== 'AllTestCultures' ? ($option !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test']) : array());
 
             case 'Create-Offers':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'CurrentOffers', $ob[$ob['Setting']['Language']]['Message']['CurrentOffersAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectOfferBox']));
             case 'Edit-Offers':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'CurrentOffers', $ob[$ob['Setting']['Language']]['Message']['CurrentOffersEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectOfferBox']), isset($ob['CurrentOffers']) ? array_keys($ob['CurrentOffers']) : array());    
+                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'CurrentOffers', $ob[$ob['Setting']['Language']]['Message']['CurrentOffersEdit'], isset($ob['CurrentOffers']) ? array_keys($ob['CurrentOffers']) : array(), array_keys($ob[$ob['Setting']['Language']]['SelectOfferBox']));    
             case 'Delete-Offers':
                 return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'CurrentOffers', $ob[$ob['Setting']['Language']]['Message']['CurrentOffersDelete'], isset($ob['CurrentOffers']) ? array_keys($ob['CurrentOffers']) : array());        
 

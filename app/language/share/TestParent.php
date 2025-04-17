@@ -145,6 +145,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error30 = $this->error['PatentAvatarImage'];
             $this->error31 = $this->error['PatentAvatarMimes'];
             $this->error32 = $this->error['PatentAvatarMax'];
+            $this->PatentAvatarDimensions = $this->error['PatentAvatarDimensions'];
             $this->error33 = $this->error['PatentNationalityInvalid'];
             $this->error34 = $this->error['PatentFastingHoursInvalid'];
             $this->nationalityKeys = $var1;

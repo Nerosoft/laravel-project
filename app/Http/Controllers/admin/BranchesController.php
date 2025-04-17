@@ -19,7 +19,7 @@ class BranchesController extends Controller
             case 'branch_create':
                 return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']));    
             case 'branch_edit':
-                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'], array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']), isset($ob['Branch']) ? array_keys($ob['Branch']) : array());    
+                return new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'Branch', $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'], isset($ob['Branch']) ? array_keys($ob['Branch']) : array(), array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']));    
             case 'branch_delete':{
                 $arr1 = array();
                 if(isset($ob['Branch']))
