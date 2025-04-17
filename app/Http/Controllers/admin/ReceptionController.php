@@ -14,6 +14,7 @@ use App\language\admin\reception\Patients;
 use App\language\admin\reception\Prefix;
 use App\language\admin\reception\Knows;
 use App\language\admin\action\AppModel;
+use App\instance\admin\reception\Patent;
 
 class ReceptionController extends Controller
 {
@@ -327,8 +328,7 @@ class ReceptionController extends Controller
             case 'patients_create':
                 return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_edit':
-                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'],
-                 isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
+                return isset($mes['Patent'][(string)request()->input('id')]) ? new AppModel('option4', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), new Patent($mes['Patent'][(string)request()->input('id')]['PatentCode'], $mes['Patent'][(string)request()->input('id')]['Avatar'])) : new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_delete':
                 return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsDelete'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
 
@@ -486,10 +486,9 @@ class ReceptionController extends Controller
             return back()->withErrors($validator);
 
         else if(request()->input('choices') || request()->input('patent-other')){
-            $myPatient = $lang->findPatient();
             $this->getEditDataBase('Patent', [
-            'PatentCode'=>$myPatient->getPatentCode(),
-            'Avatar'=>request()->file('avatar') ? $this->getMyPatentImage(request()->file('avatar')) : $myPatient->getAvatar(),
+            'PatentCode'=>$lang->myPatient->getPatentCode(),
+            'Avatar'=>request()->file('avatar') ? $this->getMyPatentImage(request()->file('avatar')) : $lang->myPatient->getAvatar(),
             'Name'=>request()->input('patent-name'),
             'Nationality'=>request()->input('patent-nationality'),
             'NationalId'=>request()->input('patent-national-id'),
