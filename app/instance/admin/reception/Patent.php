@@ -124,4 +124,7 @@ class Patent extends SearchId
         }else
             return $this->Disease;
     }
+    public function setupImage(){
+        return $this->Avatar !== null ? 'data:' . $this->Avatar->getClientMimeType() . ';base64,' . base64_encode(file_get_contents($this->Avatar)) : null;
+    }
 }
