@@ -21,14 +21,10 @@ abstract class Controller
     }
     protected function getEditDataBase($item, $newObject){
         $model = Rays::find(request()->session()->get('userId'));
-        foreach ($model[$item] as $key => $value)
-            if($key == request()->input('id')){
-                $arr = $model[$item];
-                $arr[$key] = $newObject;
-                $model[$item] = $arr;
-                $model->save();
-                break;
-            }
+        $arr = $model[$item];
+        $arr[request()->input('id')] = $newObject;
+        $model[$item] = $arr;
+        $model->save();
     }
     protected function getCreateDataBase($item, $newObject, $Id = null){
         $model = Rays::find(request()->session()->exists('userId') ? request()->session()->get('userId') : request()->input('userId'));
