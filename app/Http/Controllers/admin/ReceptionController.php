@@ -326,9 +326,9 @@ class ReceptionController extends Controller
             case 'Patients':
                 return new Patients($id);
             case 'patients_create':
-                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), new Patent($this->generateUniqueIdentifier()));
+                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), new Patent($this->generateUniqueIdentifier(), request()->file('avatar') ? request()->file('avatar') : null, request()->input('patent-name'), request()->input('patent-nationality'), request()->input('patent-national-id'), request()->input('patent-passport-no'), request()->input('patent-email'), request()->input('patent-phone'), request()->input('patent-phone2'), request()->input('patent-gender'), request()->input('last-period-date'), request()->input('date-birth'), request()->input('patent-address'), request()->input('patent-contracting'), request()->input('patent-hours'), request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices')));
             case 'patients_edit':
-                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), isset($mes['Patent'][(string)request()->input('id')]) ? new Patent($mes['Patent'][(string)request()->input('id')]['PatentCode'], $mes['Patent'][(string)request()->input('id')]['Avatar']) : null);
+                return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), isset($mes['Patent'][(string)request()->input('id')]) ? new Patent($mes['Patent'][(string)request()->input('id')]['PatentCode'], request()->file('avatar') ? request()->file('avatar') : $mes['Patent'][(string)request()->input('id')]['Avatar'], request()->input('patent-name'), request()->input('patent-nationality'), request()->input('patent-national-id'), request()->input('patent-passport-no'), request()->input('patent-email'), request()->input('patent-phone'), request()->input('patent-phone2'), request()->input('patent-gender'), request()->input('last-period-date'), request()->input('date-birth'), request()->input('patent-address'), request()->input('patent-contracting'), request()->input('patent-hours'), request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices')) : new Patent());
             case 'patients_delete':
                 return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsDelete'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array());
 
@@ -344,12 +344,9 @@ class ReceptionController extends Controller
                 return null;
         }
     }
-    public function setupImage(){
-        return 'data:' . request()->file('avatar')->getClientMimeType() . ';base64,' . base64_encode(file_get_contents(request()->file('avatar')));
-    }
     public function createPatent(){
         $lang = $this->initLanguage('patients_create', Rays::find(request()->session()->get('userId')));
-        request()->validate([
+        $this->getCreateDataBase('Patent', $lang->myPatient->validPatient([
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
             'patent-nationality' => ['required', Rule::in($lang->nationalityKeys)],
@@ -364,9 +361,9 @@ class ReceptionController extends Controller
             'patent-address' => ['required', 'min:3'],
             'patent-contracting' => ['required', Rule::in($lang->arr1)],
             'patent-hours' => ['required', 'integer'],
-            'choices' => ['array'], // Ensure at least one checkbox is selected
+            'choices' => ['required_without:patent-other', 'array'], // Ensure at least one checkbox is selected
             'choices.*'=>[Rule::in($lang->disKeys)],
-            'patent-other'=>['nullable', 'min:3']
+            'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
         ], [
             'patent-name.required'=>$lang->error1,
             'patent-name.min'=>$lang->error2,
@@ -402,32 +399,14 @@ class ReceptionController extends Controller
             'avatar.image'=> $lang->error30,
             'avatar.mimes'=> $lang->error31,
             'avatar.max'=> $lang->error32,
-        ]);
-        if(request()->input('choices') || request()->input('patent-other')){ $this->getCreateDataBase('Patent', [
-            'PatentCode'=>$lang->myPatient->getPatentCode(),
-            'Avatar'=>request()->file('avatar') ? $this->setupImage() : null,
-            'Name'=>request()->input('patent-name'),
-            'Nationality'=>request()->input('patent-nationality'),
-            'NationalId'=>request()->input('patent-national-id'),
-            'PassportNo'=>request()->input('patent-passport-no'),
-            'Email'=>request()->input('patent-email'),
-            'Phone'=>request()->input('patent-phone'),
-            'Phone2'=>request()->input('patent-phone2'),
-            'Gender'=>request()->input('patent-gender'),
-            'LastPeriodDate'=>request()->input('last-period-date'),
-            'DateBirth'=>request()->input('date-birth'), 
-            'Address'=>request()->input('patent-address'),
-            'Contracting'=>request()->input('patent-contracting'), 
-            'Hours'=>request()->input('patent-hours'),
-            'Disease'=>request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices')]);
-            return back()->with('success', $lang->successfully1);
-        }
-        else
-            return back()->withInput()->withErrors($lang->error16);
+            'choices.required_without'=>$lang->error16,
+            'patent-other.required_without'=>$lang->error16,
+        ]));
+        return back()->with('success', $lang->successfully1);
     }
     public function editPatent(){
         $lang = $this->initLanguage('patients_edit', Rays::find(request()->session()->get('userId')));
-        $validator = Validator::make(request()->all(),[
+        $this->getEditDataBase('Patent', $lang->myPatient->validPatient([
             'id' => ['required', Rule::in($lang->size1)],
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
@@ -443,13 +422,12 @@ class ReceptionController extends Controller
             'patent-address' => ['required', 'min:3'],
             'patent-contracting' => ['required', Rule::in($lang->arr1)],
             'patent-hours' => ['required', 'integer'],
-            'choices' => ['array'], // Ensure at least one checkbox is selected
+            'choices' => ['required_without:patent-other', 'array'], // Ensure at least one checkbox is selected
             'choices.*'=>[Rule::in($lang->disKeys)],
-            'patent-other'=>['nullable', 'min:3']
-        ], [
+            'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
+        ],[
             'id.required' => $lang->error35,
             'id.in' => $lang->error36,
-
             'patent-name.required'=>$lang->error1,
             'patent-name.min'=>$lang->error2,
             'patent-national-id.required'=>$lang->error3,
@@ -484,32 +462,10 @@ class ReceptionController extends Controller
             'avatar.image'=> $lang->error30,
             'avatar.mimes'=> $lang->error31,
             'avatar.max'=> $lang->error32,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-
-        else if(request()->input('choices') || request()->input('patent-other')){
-            $this->getEditDataBase('Patent', [
-            'PatentCode'=>$lang->myPatient->getPatentCode(),
-            'Avatar'=>request()->file('avatar') ? $this->setupImage() : $lang->myPatient->getAvatar(),
-            'Name'=>request()->input('patent-name'),
-            'Nationality'=>request()->input('patent-nationality'),
-            'NationalId'=>request()->input('patent-national-id'),
-            'PassportNo'=>request()->input('patent-passport-no'), 
-            'Email'=>request()->input('patent-email'),
-            'Phone'=>request()->input('patent-phone'), 
-            'Phone2'=>request()->input('patent-phone2'),
-            'Gender'=>request()->input('patent-gender'), 
-            'LastPeriodDate'=>request()->input('last-period-date'),
-            'DateBirth'=>request()->input('date-birth'), 
-            'Address'=>request()->input('patent-address'),
-            'Contracting'=>request()->input('patent-contracting'), 
-            'Hours'=>request()->input('patent-hours'),
-            'Disease'=>request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices')]);
-            return back()->with('success', $lang->successfully1);
-        }
-        else
-            return back()->withInput()->withErrors($lang->error16);
+            'choices.required_without'=>$lang->error16,
+            'patent-other.required_without'=>$lang->error16,
+        ]));
+        return back()->with('success', $lang->successfully1);
     }
     public function deletePatent(){
         $lang = $this->initLanguage('patients_delete', Rays::find(request()->session()->get('userId')));

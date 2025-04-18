@@ -3,6 +3,7 @@
 namespace App\instance\admin\reception;
 use App\instance\share\SearchId;
 use App\Models\Rays;
+use Illuminate\Support\Str;
 
 class Patent extends SearchId
 {
@@ -26,7 +27,7 @@ class Patent extends SearchId
     private $Disease;
     private $PatentCode;
     
-    public function __construct($PatentCode, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
+    public function __construct($PatentCode = null, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
     $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
     $DateBirth = null, $Address = null, $Contracting = null, $Hours = null,
     $Disease = null)
@@ -123,5 +124,14 @@ class Patent extends SearchId
             return $arr;
         }else
             return $this->Disease;
+    }
+    private function setupImage(){
+        $this->Avatar = 'data:' . $this->Avatar->getClientMimeType() . ';base64,' . base64_encode(file_get_contents($this->Avatar));
+    }
+    public function validPatient($rull, $message){
+        request()->validate($rull, $message);
+        if(request()->file('avatar'))
+            $this->setupImage();
+        return get_object_vars($this);
     }
 }
