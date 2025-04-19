@@ -11,8 +11,8 @@ class Contracts
     public function __construct($name, $governorate = null, $area = null)
     {
         $this->Name = $name;
-        $this->Governorate = $governorate ?? $this->Governorate;
-        $this->Area = $area ?? $this->Area;
+        $this->Governorate = $governorate;
+        $this->Area = $area;
     }
     public function getName(){
         return $this->Name;

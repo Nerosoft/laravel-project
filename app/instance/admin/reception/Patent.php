@@ -27,7 +27,7 @@ class Patent extends SearchId
     private $Disease;
     private $PatentCode;
     
-    public function __construct($PatentCode = null, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
+    public function __construct($PatentCode, $Avatar, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
     $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
     $DateBirth = null, $Address = null, $Contracting = null, $Hours = null,
     $Disease = null)
