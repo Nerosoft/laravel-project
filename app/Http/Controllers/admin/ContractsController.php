@@ -14,7 +14,8 @@ use App\language\admin\contracts\PricesListContracts;
 use App\language\admin\contracts\Labs;
 use App\language\admin\contracts\LabsOut;
 use App\language\admin\contracts\Doctors;
-class ContractsController extends Controller
+use App\Http\interface\LangObject;
+class ContractsController extends Controller implements LangObject
 {
     public function index($id){
         $lang = $this->initLanguage($id);
@@ -117,10 +118,7 @@ class ContractsController extends Controller
             'area.required' => $lang->error5,
             'area.min' => $lang->error6,
         ]);
-        $this->getCreateDataBase('Contracts', [
-        'Name'=>request()->input('name'),
-        'Governorate'=>request()->input('governorate'), 
-        'Area'=>request()->input('area')]);
+        $this->getCreateDataBase('Contracts', $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editContract(){
@@ -143,10 +141,7 @@ class ContractsController extends Controller
         if ($validator->fails())
             return back()->withErrors($validator);
         else{
-            $this->getEditDataBase('Contracts', [
-            'Name'=>request()->input('name'), 
-            'Governorate'=>request()->input('governorate'), 
-            'Area'=>request()->input('area')]);
+            $this->getEditDataBase('Contracts', $this);
             return back()->with('success', $lang->successfully1);
         }
     }
@@ -160,5 +155,9 @@ class ContractsController extends Controller
         ]);
         $this->getDeleteDatabade('Contracts');
         return back()->with('success', $lang->successfully1);
+    }
+
+    public function getMyObject($name, $id = null){
+        return array('Name'=>request()->input('name'), 'Governorate'=>request()->input('governorate'), 'Area'=>request()->input('area'));
     }
 }

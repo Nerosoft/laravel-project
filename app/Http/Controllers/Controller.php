@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\Rays;
 use Illuminate\Support\Str;
 use App\MyLanguage;
+use App\Http\interface\LangObject;
 abstract class Controller
 {
     protected function getDeleteDatabade($item){
@@ -19,21 +20,21 @@ abstract class Controller
                 }
         $model->save();
     }
-    protected function getEditDataBase($item, $newObject){
+    protected function getEditDataBase($item, LangObject $newObject){
         $model = Rays::find(request()->session()->get('userId'));
         $arr = $model[$item];
-        $arr[request()->input('id')] = $newObject;
+        $arr[request()->input('id')] = $newObject->getMyObject($item);
         $model[$item] = $arr;
         $model->save();
     }
-    protected function getCreateDataBase($item, $newObject, $Id = null){
+    protected function getCreateDataBase($item, LangObject $newObject, $Id = null){
         $model = Rays::find(request()->session()->exists('userId') ? request()->session()->get('userId') : request()->input('userId'));
         if(isset($model[$item])){
             $arr = $model[$item];
-            $arr[$Id !== null ? $Id : $this->generateUniqueIdentifier()] = $newObject;
+            $arr[$Id !== null ? $Id : $this->generateUniqueIdentifier()] = $newObject->getMyObject($item, $Id);
             $model[$item] = $arr;
         }else
-            $model[$item] = array($Id !== null ? $Id : $this->generateUniqueIdentifier()=>$newObject);
+            $model[$item] = array($Id !== null ? $Id : $this->generateUniqueIdentifier()=>$newObject->getMyObject($item, $Id));
         $model->save();
     }
     protected function generateUniqueIdentifier($length = 8){

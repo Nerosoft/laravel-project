@@ -1,5 +1,5 @@
 <?php
 namespace App\Http\interface;
 interface initError{
-    public function initError($myState, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null);
+    public function initError($myState, $ob, $var1, $var2, $var3, $var4, $var5, $var6);
 }

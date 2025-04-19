@@ -14,7 +14,8 @@ use App\language\login\LoginAdmin;
 use App\language\login\LoginPatent;
 use App\language\login\LoginDoctor;
 use Illuminate\Validation\Rule;
-class UserController extends Controller
+use App\Http\interface\LangObject;
+class UserController extends Controller implements LangObject
 {
     public function makeResponse($page, $lang){
         return request()->cookie($lang->RaysId) ? (new Response(view($page,[
@@ -72,10 +73,7 @@ class UserController extends Controller
                 if($user->getEmail() === $request->input('email'))
                     // return error email exsist
                     return back()->withInput()->withErrors($lang->error10);
-            $this->getCreateDataBase('User', [
-            'Key'=>$request->input('codePassword'),
-            'Password'=>$request->input('password'),
-            'Email'=>$request->input('email')]);     
+            $this->getCreateDataBase('User', $this);     
             
            
             $request->session()->put('userId', $request->input('userId'));
@@ -258,5 +256,8 @@ class UserController extends Controller
             return back()->withInput()->withErrors($this->setupLanguage('id_not_found3', Rays::first())->error1);
         else //if($id === 'language_doctor')
             return back()->withInput()->withErrors($this->setupLanguage('id_not_found4', Rays::first())->error1);
+    }
+    public function getMyObject($name, $id = null){
+        return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }
 }

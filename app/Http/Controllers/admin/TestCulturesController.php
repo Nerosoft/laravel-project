@@ -14,7 +14,8 @@ use App\language\admin\test_cultures\CultureOptions;
 use App\language\admin\test_cultures\ExtraService;
 use App\language\admin\test_cultures\SampleTypes;
 use App\language\admin\action\AppModel;
-class TestCulturesController extends Controller
+use App\Http\interface\LangObject;
+class TestCulturesController extends Controller implements LangObject
 {
     public function index($id){
         $lang = $this->initLanguage($id);
@@ -93,10 +94,7 @@ class TestCulturesController extends Controller
             'input-output-lab.required' => $lang->error4,
             'input-output-lab.in' => $lang->error6,
         ]);
-        $Id = $this->generateUniqueIdentifier();
-        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test',['Name'=>request()->input('name'),
-        'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'),
-        'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$Id], $Id);
+        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this, $this->generateUniqueIdentifier());
         return back()->with('success', $lang->successfully1);
     }
     public function editTest($myId){
@@ -122,10 +120,7 @@ class TestCulturesController extends Controller
         if($validator->fails())
             return back()->withErrors($validator);
         else{
-            $this->getEditDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', 
-            ['Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'),
-            'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'),
-            'Id'=>request()->input('id')]);
+            $this->getEditDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this);
             return back()->with('success', $lang->successfully1);
         }
     }
@@ -162,14 +157,7 @@ class TestCulturesController extends Controller
             'state.required' => $lang->error7,
             'state.in' => $lang->error10,
         ]);
-        $Id = $this->generateUniqueIdentifier();
-        $this->getCreateDataBase('CurrentOffers', [
-        'Name'=>request()->input('name'),
-        'Shortcut'=>request()->input('shortcut'),
-        'Price'=>request()->input('price'),
-        'DisplayPrice'=>request()->input('display-price'),
-        'State'=>request()->input('state'),
-        'Id'=>$Id], $Id);
+        $this->getCreateDataBase('CurrentOffers', $this, $this->generateUniqueIdentifier());
         return back()->with('success', $lang->successfully1);
     }
     public function editCurrentOffers(){
@@ -198,13 +186,7 @@ class TestCulturesController extends Controller
         if ($validator->fails())
             return back()->withErrors($validator);
         else{
-            $this->getEditDataBase('CurrentOffers', [
-            'Name'=>request()->input('name'),
-            'Shortcut'=>request()->input('shortcut'),
-            'Price'=>request()->input('price'),
-            'DisplayPrice'=>request()->input('display-price'),
-            'State'=>request()->input('state'),
-            'Id'=>request()->input('id')]);
+            $this->getEditDataBase('CurrentOffers', $this);
             return back()->with('success', $lang->successfully1);
         }
     }
@@ -256,5 +238,10 @@ class TestCulturesController extends Controller
                 return null;
         }
     }
-    
+    public function getMyObject($name, $id = null){
+        if($name === 'CurrentOffers')
+            return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'DisplayPrice'=>request()->input('display-price'), 'State'=>request()->input('state'), 'Id'=>$id !== null ? $id : request()->input('id'));
+        else
+            return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$id !== null ? $id : request()->input('id'));
+    }
 }

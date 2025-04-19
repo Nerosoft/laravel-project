@@ -15,11 +15,13 @@ use App\language\admin\reception\Prefix;
 use App\language\admin\reception\Knows;
 use App\language\admin\action\AppModel;
 use App\instance\admin\reception\Patent;
+use App\Http\interface\LangObject;
 
-class ReceptionController extends Controller
+class ReceptionController extends Controller implements LangObject
 {
     private $testArr = array();
     private $currentOffersArr = array();
+    private $lang;
     public function initArray($arr){
         $myArr = array();
         foreach ($arr as $mykey => $res) {
@@ -154,13 +156,7 @@ class ReceptionController extends Controller
             'item.*.required'=>$lang->error13,
             'item2.*.required'=>$lang->error13
         ]);
-        $MyReceipt = new Receipt(request()->input('patentCode'),
-        request()->input('know'),
-        empty($this->currentOffersArr) ? null : $this->currentOffersArr, $this->testArr,
-        (int)request()->input('discount'), (int)request()->input('delayedMoney'),
-        request()->input('paymentDate'), (int)request()->input('paymentAmount'),
-        request()->input('paymentMethod'));
-        $this->getCreateDataBase('Receipt', $MyReceipt->getObject());
+        $this->getCreateDataBase('Receipt', $this);
         return response()->json([
             'success' => true,
             'message'=>$lang->successfully1
@@ -228,13 +224,7 @@ class ReceptionController extends Controller
             'item.*.required'=>$lang->error13,
             'item2.*.required'=>$lang->error13
         ]);
-        $MyReceipt = new Receipt(request()->input('patentCode'),
-        request()->input('know'),
-        empty($this->currentOffersArr) ? null : $this->currentOffersArr, $this->testArr,
-        (int)request()->input('discount'), (int)request()->input('delayedMoney'),
-        request()->input('paymentDate'), (int)request()->input('paymentAmount'),
-        request()->input('paymentMethod'));
-        $this->getEditDataBase('Receipt', $MyReceipt->getObject());  
+        $this->getEditDataBase('Receipt', $this);  
         return response()->json([
             'success' => true,
             'message'=>$lang->successfully1
@@ -259,7 +249,7 @@ class ReceptionController extends Controller
             'name.required' => $lang->error1,
             'name.min' => $lang->error2,
         ]);
-        $this->getCreateDataBase('Knows', ['Name'=>request()->input('name')]);
+        $this->getCreateDataBase('Knows', $this);
         return back()->with('success', $lang->successfully1);
 
     }
@@ -277,7 +267,7 @@ class ReceptionController extends Controller
         if ($validator->fails())
             return back()->withErrors($validator);
         else{
-            $this->getEditDataBase('Knows', ['Name'=>request()->input('name')]);
+            $this->getEditDataBase('Knows', $this);
             return back()->with('success', $lang->successfully1);
         }
   
@@ -345,128 +335,129 @@ class ReceptionController extends Controller
         }
     }
     public function createPatent(){
-        $lang = $this->initLanguage('patients_create', Rays::find(request()->session()->get('userId')));
-        $this->getCreateDataBase('Patent', $lang->myPatient->validPatient([
+        $this->lang = $this->initLanguage('patients_create', Rays::find(request()->session()->get('userId')));
+        request()->validate([
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
-            'patent-nationality' => ['required', Rule::in($lang->nationalityKeys)],
+            'patent-nationality' => ['required', Rule::in($this->lang->nationalityKeys)],
             'patent-national-id' => ['required', 'min:3'],
             'patent-passport-no' => ['required', 'min:3'],
             'patent-email' => ['required', 'email'],
             'patent-phone' => ['required', 'regex:/^[0-9]{11}$/'],
             'patent-phone2' => ['required', 'regex:/^[0-9]{11}$/'],
-            'patent-gender' => ['required', Rule::in($lang->genderKeys)],
+            'patent-gender' => ['required', Rule::in($this->lang->genderKeys)],
             'last-period-date' => ['required', 'date'],
             'date-birth' => ['required', 'date'],
             'patent-address' => ['required', 'min:3'],
-            'patent-contracting' => ['required', Rule::in($lang->arr1)],
+            'patent-contracting' => ['required', Rule::in($this->lang->arr1)],
             'patent-hours' => ['required', 'integer'],
             'choices' => ['required_without:patent-other', 'array'], // Ensure at least one checkbox is selected
-            'choices.*'=>[Rule::in($lang->disKeys)],
+            'choices.*'=>[Rule::in($this->lang->disKeys)],
             'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
         ], [
-            'patent-name.required'=>$lang->error1,
-            'patent-name.min'=>$lang->error2,
-            'patent-national-id.required'=>$lang->error3,
-            'patent-national-id.min'=>$lang->error4,
-            'patent-passport-no.required'=>$lang->error5,
-            'patent-passport-no.min'=>$lang->error6,
-            'patent-email.required'=>$lang->error7,
-            'patent-email.email'=>$lang->error8,
-            'patent-phone.required'=>$lang->error9,
-            'patent-phone.regex'=>$lang->error10,
-            'patent-phone2.required'=>$lang->error11,
-            'patent-phone2.regex'=>$lang->error12,
-            'patent-address.required'=>$lang->error13,
-            'patent-address.min' => $lang->error14, 
-            'patent-hours.required'=>$lang->error15,
-            'patent-hours.integer' => $lang->error34,
-            'avatar.dimensions' => $lang->PatentAvatarDimensions,
-            'patent-nationality.required'=>$lang->error17,
-            'patent-nationality.in'=>$lang->error33,
-            'patent-gender.required'=>$lang->error18,
-            'patent-gender.in'=>$lang->error24,
-            'last-period-date.required'=>$lang->error19,
-            'last-period-date.date' => $lang->error25,
-            'date-birth.required'=>$lang->error20,
-            'date-birth.date' => $lang->error26,
-            'patent-contracting.required'=>$lang->error21,
-            'patent-contracting.in' => $lang->error27, 
+            'patent-name.required'=>$this->lang->error1,
+            'patent-name.min'=>$this->lang->error2,
+            'patent-national-id.required'=>$this->lang->error3,
+            'patent-national-id.min'=>$this->lang->error4,
+            'patent-passport-no.required'=>$this->lang->error5,
+            'patent-passport-no.min'=>$this->lang->error6,
+            'patent-email.required'=>$this->lang->error7,
+            'patent-email.email'=>$this->lang->error8,
+            'patent-phone.required'=>$this->lang->error9,
+            'patent-phone.regex'=>$this->lang->error10,
+            'patent-phone2.required'=>$this->lang->error11,
+            'patent-phone2.regex'=>$this->lang->error12,
+            'patent-address.required'=>$this->lang->error13,
+            'patent-address.min' => $this->lang->error14, 
+            'patent-hours.required'=>$this->lang->error15,
+            'patent-hours.integer' => $this->lang->error34,
+            'avatar.dimensions' => $this->lang->PatentAvatarDimensions,
+            'patent-nationality.required'=>$this->lang->error17,
+            'patent-nationality.in'=>$this->lang->error33,
+            'patent-gender.required'=>$this->lang->error18,
+            'patent-gender.in'=>$this->lang->error24,
+            'last-period-date.required'=>$this->lang->error19,
+            'last-period-date.date' => $this->lang->error25,
+            'date-birth.required'=>$this->lang->error20,
+            'date-birth.date' => $this->lang->error26,
+            'patent-contracting.required'=>$this->lang->error21,
+            'patent-contracting.in' => $this->lang->error27, 
             
-            'choices.array' =>$lang->error28,
-            'choices.*.in' =>$lang->error28,
-            'patent-other.min'=>$lang->error22,
-            'avatar.image'=> $lang->error30,
-            'avatar.mimes'=> $lang->error31,
-            'avatar.max'=> $lang->error32,
-            'choices.required_without'=>$lang->error16,
-            'patent-other.required_without'=>$lang->error16,
-        ]));
-        return back()->with('success', $lang->successfully1);
+            'choices.array' =>$this->lang->error28,
+            'choices.*.in' =>$this->lang->error28,
+            'patent-other.min'=>$this->lang->error22,
+            'avatar.image'=> $this->lang->error30,
+            'avatar.mimes'=> $this->lang->error31,
+            'avatar.max'=> $this->lang->error32,
+            'choices.required_without'=>$this->lang->error16,
+            'patent-other.required_without'=>$this->lang->error16,
+        ]);
+        $this->getCreateDataBase('Patent', $this);
+        return back()->with('success', $this->lang->successfully1);
     }
     public function editPatent(){
-        $lang = $this->initLanguage('patients_edit', Rays::find(request()->session()->get('userId')));
+        $this->lang = $this->initLanguage('patients_edit', Rays::find(request()->session()->get('userId')));
         request()->validate([
-            'id' => ['required', Rule::in($lang->size1)],
+            'id' => ['required', Rule::in($this->lang->size1)],
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
-            'patent-nationality' => ['required', Rule::in($lang->nationalityKeys)],
+            'patent-nationality' => ['required', Rule::in($this->lang->nationalityKeys)],
             'patent-national-id' => ['required', 'min:3'],
             'patent-passport-no' => ['required', 'min:3'],
             'patent-email' => ['required', 'email'],
             'patent-phone' => ['required', 'regex:/^[0-9]{11}$/'],
             'patent-phone2' => ['required', 'regex:/^[0-9]{11}$/'],
-            'patent-gender' => ['required', Rule::in($lang->genderKeys)],
+            'patent-gender' => ['required', Rule::in($this->lang->genderKeys)],
             'last-period-date' => ['required', 'date'],
             'date-birth' => ['required', 'date'],
             'patent-address' => ['required', 'min:3'],
-            'patent-contracting' => ['required', Rule::in($lang->arr1)],
+            'patent-contracting' => ['required', Rule::in($this->lang->arr1)],
             'patent-hours' => ['required', 'integer'],
             'choices' => ['required_without:patent-other', 'array'], // Ensure at least one checkbox is selected
-            'choices.*'=>[Rule::in($lang->disKeys)],
+            'choices.*'=>[Rule::in($this->lang->disKeys)],
             'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
         ], [
-            'id.required' => $lang->error35,
-            'id.in' => $lang->error36,
-            'patent-name.required'=>$lang->error1,
-            'patent-name.min'=>$lang->error2,
-            'patent-national-id.required'=>$lang->error3,
-            'patent-national-id.min'=>$lang->error4,
-            'patent-passport-no.required'=>$lang->error5,
-            'patent-passport-no.min'=>$lang->error6,
-            'patent-email.required'=>$lang->error7,
-            'patent-email.email'=>$lang->error8,
-            'patent-phone.required'=>$lang->error9,
-            'patent-phone.regex'=>$lang->error10,
-            'patent-phone2.required'=>$lang->error11,
-            'patent-phone2.regex'=>$lang->error12,
-            'patent-address.required'=>$lang->error13,
-            'patent-address.min' => $lang->error14, 
-            'patent-hours.required'=>$lang->error15,
-            'patent-hours.integer' => $lang->error34,
-            'avatar.dimensions' => $lang->PatentAvatarDimensions,
-            'patent-nationality.required'=>$lang->error17,
-            'patent-nationality.in'=>$lang->error33,
-            'patent-gender.required'=>$lang->error18,
-            'patent-gender.in'=>$lang->error24,
-            'last-period-date.required'=>$lang->error19,
-            'last-period-date.date' => $lang->error25,
-            'date-birth.required'=>$lang->error20,
-            'date-birth.date' => $lang->error26,
-            'patent-contracting.required'=>$lang->error21,
-            'patent-contracting.in' => $lang->error27, 
+            'id.required' => $this->lang->error35,
+            'id.in' => $this->lang->error36,
+            'patent-name.required'=>$this->lang->error1,
+            'patent-name.min'=>$this->lang->error2,
+            'patent-national-id.required'=>$this->lang->error3,
+            'patent-national-id.min'=>$this->lang->error4,
+            'patent-passport-no.required'=>$this->lang->error5,
+            'patent-passport-no.min'=>$this->lang->error6,
+            'patent-email.required'=>$this->lang->error7,
+            'patent-email.email'=>$this->lang->error8,
+            'patent-phone.required'=>$this->lang->error9,
+            'patent-phone.regex'=>$this->lang->error10,
+            'patent-phone2.required'=>$this->lang->error11,
+            'patent-phone2.regex'=>$this->lang->error12,
+            'patent-address.required'=>$this->lang->error13,
+            'patent-address.min' => $this->lang->error14, 
+            'patent-hours.required'=>$this->lang->error15,
+            'patent-hours.integer' => $this->lang->error34,
+            'avatar.dimensions' => $this->lang->PatentAvatarDimensions,
+            'patent-nationality.required'=>$this->lang->error17,
+            'patent-nationality.in'=>$this->lang->error33,
+            'patent-gender.required'=>$this->lang->error18,
+            'patent-gender.in'=>$this->lang->error24,
+            'last-period-date.required'=>$this->lang->error19,
+            'last-period-date.date' => $this->lang->error25,
+            'date-birth.required'=>$this->lang->error20,
+            'date-birth.date' => $this->lang->error26,
+            'patent-contracting.required'=>$this->lang->error21,
+            'patent-contracting.in' => $this->lang->error27, 
             
-            'choices.array' =>$lang->error28,
-            'choices.*.in' =>$lang->error28,
-            'patent-other.min'=>$lang->error22,
-            'avatar.image'=> $lang->error30,
-            'avatar.mimes'=> $lang->error31,
-            'avatar.max'=> $lang->error32,
-            'choices.required_without'=>$lang->error16,
-            'patent-other.required_without'=>$lang->error16,
+            'choices.array' =>$this->lang->error28,
+            'choices.*.in' =>$this->lang->error28,
+            'patent-other.min'=>$this->lang->error22,
+            'avatar.image'=> $this->lang->error30,
+            'avatar.mimes'=> $this->lang->error31,
+            'avatar.max'=> $this->lang->error32,
+            'choices.required_without'=>$this->lang->error16,
+            'patent-other.required_without'=>$this->lang->error16,
         ]);
-        $this->getEditDataBase('Patent', $lang->myPatient->validPatient2());
-        return back()->with('success', $lang->successfully1);
+        $this->getEditDataBase('Patent', $this);
+        return back()->with('success', $this->lang->successfully1);
     }
     public function deletePatent(){
         $lang = $this->initLanguage('patients_delete', Rays::find(request()->session()->get('userId')));
@@ -478,5 +469,13 @@ class ReceptionController extends Controller
         ]);
         $this->getDeleteDatabade('Patent');
         return back()->with('success', $lang->successfully1);
+    }
+    public function getMyObject($name, $id = null){
+        if($name === 'Knows')
+            return array('Name'=>request()->input('name'));
+        else if($name === 'Receipt')
+            return (new Receipt(request()->input('patentCode'), request()->input('know'), empty($this->currentOffersArr) ? null : $this->currentOffersArr, $this->testArr, (int)request()->input('discount'), (int)request()->input('delayedMoney'), request()->input('paymentDate'), (int)request()->input('paymentAmount'), request()->input('paymentMethod')))->getObject();
+        else
+            return $this->lang->myPatient->validPatient2();
     }
 }
