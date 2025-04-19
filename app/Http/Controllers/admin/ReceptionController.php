@@ -406,7 +406,7 @@ class ReceptionController extends Controller
     }
     public function editPatent(){
         $lang = $this->initLanguage('patients_edit', Rays::find(request()->session()->get('userId')));
-        $rull = [
+        request()->validate([
             'id' => ['required', Rule::in($lang->size1)],
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
@@ -425,8 +425,7 @@ class ReceptionController extends Controller
             'choices' => ['required_without:patent-other', 'array'], // Ensure at least one checkbox is selected
             'choices.*'=>[Rule::in($lang->disKeys)],
             'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
-        ];
-        $message = [
+        ], [
             'id.required' => $lang->error35,
             'id.in' => $lang->error36,
             'patent-name.required'=>$lang->error1,
@@ -465,10 +464,8 @@ class ReceptionController extends Controller
             'avatar.max'=> $lang->error32,
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
-        ];
-        if($lang->myPatient === null)
-            request()->validate($rull, $message);
-        $this->getEditDataBase('Patent', $lang->myPatient->validPatient($rull, $message));
+        ]);
+        $this->getEditDataBase('Patent', $lang->myPatient->validPatient2());
         return back()->with('success', $lang->successfully1);
     }
     public function deletePatent(){

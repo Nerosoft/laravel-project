@@ -134,4 +134,9 @@ class Patent extends SearchId
             $this->setupImage();
         return get_object_vars($this);
     }
+    public function validPatient2(){
+        if(request()->file('avatar'))
+            $this->setupImage();
+        return get_object_vars($this);
+    }
 }
