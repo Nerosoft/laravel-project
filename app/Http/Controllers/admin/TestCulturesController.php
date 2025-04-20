@@ -94,7 +94,7 @@ class TestCulturesController extends Controller implements LangObject
             'input-output-lab.required' => $lang->error4,
             'input-output-lab.in' => $lang->error6,
         ]);
-        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this, $this->generateUniqueIdentifier());
+        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editTest($myId){
@@ -157,7 +157,7 @@ class TestCulturesController extends Controller implements LangObject
             'state.required' => $lang->error7,
             'state.in' => $lang->error10,
         ]);
-        $this->getCreateDataBase('CurrentOffers', $this, $this->generateUniqueIdentifier());
+        $this->getCreateDataBase('CurrentOffers', $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editCurrentOffers(){
