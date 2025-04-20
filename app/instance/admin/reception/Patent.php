@@ -124,13 +124,4 @@ class Patent extends SearchId
         }else
             return $this->Disease;
     }
-    private function setupImage(){
-        $this->Avatar = 'data:' . $this->Avatar->getClientMimeType() . ';base64,' . base64_encode(file_get_contents($this->Avatar));
-    }
-    public function validPatient2($rull, $message){
-        request()->validate($rull, $message);
-        if(request()->file('avatar'))
-            $this->setupImage();
-        return get_object_vars($this);
-    }
 }

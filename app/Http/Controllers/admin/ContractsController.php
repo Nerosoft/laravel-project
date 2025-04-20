@@ -157,7 +157,7 @@ class ContractsController extends Controller implements LangObject
         return back()->with('success', $lang->successfully1);
     }
 
-    public function getMyObject($name, $id = null){
+    public function getMyObject($name, $id = null, $image = null){
         return array('Name'=>request()->input('name'), 'Governorate'=>request()->input('governorate'), 'Area'=>request()->input('area'));
     }
 }

@@ -36,7 +36,7 @@ class AuthError extends InitPage implements initError, initError2{
             $this->error2 = $this->error['LoginPatentCodeRequired'];
         }
     }
-    public function initError2($state, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null){
+    public function initError2($state, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
         if($state === 'login')//admin
             $this->error5 = $this->error['UserPasswordDntMatch'];
         else if($state === 'doctor')

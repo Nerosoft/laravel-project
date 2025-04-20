@@ -20,22 +20,22 @@ abstract class Controller
                 }
         $model->save();
     }
-    protected function getEditDataBase($item, LangObject | array $newObject){
+    protected function getEditDataBase($item, LangObject $newObject, $image = null){
         $model = Rays::find(request()->session()->get('userId'));
         $arr = $model[$item];
-        $arr[request()->input('id')] = is_array($newObject) ? $newObject : $newObject->getMyObject($item);
+        $arr[request()->input('id')] = $newObject->getMyObject($item, null, $image);
         $model[$item] = $arr;
         $model->save();
     }
-    protected function getCreateDataBase($item, LangObject | array $newObject){
+    protected function getCreateDataBase($item, LangObject $newObject){
         $model = Rays::find(request()->session()->exists('userId') ? request()->session()->get('userId') : request()->input('userId'));
         $Id = $this->generateUniqueIdentifier();
         if(isset($model[$item])){
             $arr = $model[$item];
-            $arr[$Id] = is_array($newObject) ? $newObject : $newObject->getMyObject($item, $Id);
+            $arr[$Id] = $newObject->getMyObject($item, $Id);
             $model[$item] = $arr;
         }else
-            $model[$item] = array($Id=>is_array($newObject) ? $newObject : $newObject->getMyObject($item, $Id));
+            $model[$item] = array($Id=>$newObject->getMyObject($item, $Id));
         $model->save();
     }
     protected function generateUniqueIdentifier($length = 8){

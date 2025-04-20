@@ -257,7 +257,7 @@ class UserController extends Controller implements LangObject
         else //if($id === 'language_doctor')
             return back()->withInput()->withErrors($this->setupLanguage('id_not_found4', Rays::first())->error1);
     }
-    public function getMyObject($name, $id = null){
+    public function getMyObject($name, $id = null, $image = null){
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }
 }
