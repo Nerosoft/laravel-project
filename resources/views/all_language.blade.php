@@ -405,6 +405,7 @@ let setting = @json($active === 'AllLanguage') ? [
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
+</div>
 <script src="{{asset('js/all_language.js')}}" type="text/javascript"></script>
 @extends('layout.table_setting')
 @endsection
