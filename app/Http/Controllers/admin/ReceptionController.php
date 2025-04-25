@@ -395,11 +395,7 @@ class ReceptionController extends Controller implements LangObject
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
-        if($lang->avatar !== null)
-            $this->getCreateDataBase('Patent', $this, $lang->avatar);
-        else
-            $this->getCreateDataBase('Patent', $this);
-
+        $this->getCreateDataBase('Patent', $this, $lang->avatar);
         return back()->with('success', $lang->successfully1);
     }
     public function editPatent(){
