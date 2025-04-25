@@ -35,7 +35,7 @@ abstract class Controller
             $arr[$Id] = $newObject->getMyObject($item, $Id, $image);
             $model[$item] = $arr;
         }else
-            $model[$item] = array($Id=>$newObject->getMyObject($item, $Id, $image = null));
+            $model[$item] = array($Id=>$newObject->getMyObject($item, $Id, $image));
         $model->save();
     }
     protected function generateUniqueIdentifier($length = 8){
