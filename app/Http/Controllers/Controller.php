@@ -23,7 +23,7 @@ abstract class Controller
     protected function getEditDataBase($item, LangObject $newObject, $image = null){
         $model = Rays::find(request()->session()->get('userId'));
         $arr = $model[$item];
-        $arr[request()->input('id')] = $newObject->getMyObject($item, null, $image);
+        $arr[request()->input('id')] = $newObject->getMyObject($item, $image);
         $model[$item] = $arr;
         $model->save();
     }
@@ -32,10 +32,10 @@ abstract class Controller
         $Id = $this->generateUniqueIdentifier();
         if(isset($model[$item])){
             $arr = $model[$item];
-            $arr[$Id] = $newObject->getMyObject($item, $Id, $image);
+            $arr[$Id] = $newObject->getMyObject($item, $image, $Id);
             $model[$item] = $arr;
         }else
-            $model[$item] = array($Id=>$newObject->getMyObject($item, $Id, $image));
+            $model[$item] = array($Id=>$newObject->getMyObject($item, $image, $Id));
         $model->save();
     }
     protected function generateUniqueIdentifier($length = 8){

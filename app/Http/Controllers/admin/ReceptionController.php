@@ -473,7 +473,7 @@ class ReceptionController extends Controller implements LangObject
         $this->getDeleteDatabade('Patent');
         return back()->with('success', $lang->successfully1);
     }
-    public function getMyObject($name, $id = null, $image = null){
+    public function getMyObject($name, $image = null, $id = null){
         if($name === 'Knows')
             return array('Name'=>request()->input('name'));
         else if($name === 'Receipt')

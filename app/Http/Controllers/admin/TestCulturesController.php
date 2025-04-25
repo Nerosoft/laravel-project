@@ -238,7 +238,7 @@ class TestCulturesController extends Controller implements LangObject
                 return null;
         }
     }
-    public function getMyObject($name, $id = null, $image = null){
+    public function getMyObject($name, $image = null, $id = null){
         if($name === 'CurrentOffers')
             return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'DisplayPrice'=>request()->input('display-price'), 'State'=>request()->input('state'), 'Id'=>$id !== null ? $id : request()->input('id'));
         else
