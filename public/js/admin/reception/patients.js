@@ -19,8 +19,7 @@ let setting = [
   { 'searchable': false, className: "text-left" },
 ];
 function validatePatent(patent_name, patent_nationality, patent_gender, patent_contracting, patent_national_id, patent_passport_no, patent_email, patent_phone, patent_phone2, patent_address, patent_hours, patent_other, checkBoxLength, last_period_date, date_birth, file, preview){
-      return true;
-  let isValid = true;
+      let isValid = true;
       if (patent_name.val() === "" || patent_name.val().length < 3){
         (new bootstrap.Toast($(patent_name.val() === '' ? '#myToast1' : '#myToast2'), { delay: 10000 })).show();
         patent_name.addClass('error-message');
