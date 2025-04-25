@@ -27,12 +27,12 @@ abstract class Controller
         $model[$item] = $arr;
         $model->save();
     }
-    protected function getCreateDataBase($item, LangObject $newObject){
+    protected function getCreateDataBase($item, LangObject $newObject, $image = null){
         $model = Rays::find(request()->session()->exists('userId') ? request()->session()->get('userId') : request()->input('userId'));
         $Id = $this->generateUniqueIdentifier();
         if(isset($model[$item])){
             $arr = $model[$item];
-            $arr[$Id] = $newObject->getMyObject($item, $Id);
+            $arr[$Id] = $newObject->getMyObject($item, $Id, $image);
             $model[$item] = $arr;
         }else
             $model[$item] = array($Id=>$newObject->getMyObject($item, $Id));

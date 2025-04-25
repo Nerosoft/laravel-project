@@ -118,7 +118,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->myAllLanguage = $ob[$id][$idLang];
             
     }
-    public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null){
+    public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $avatar = null){
         if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
             $this->error5 = $this->error['TestPriceInvalid'];
             $this->error6 = $this->error['TestInputOutputLabInvalid'];
@@ -152,6 +152,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->genderKeys = $var2;
             $this->disKeys = $var3;
             $this->arr1 = $var4;
+            $this->avatar = $avatar;
         }else if($myState === 'PatientRegisteration'){
             $this->error8 = $this->error['PatientRegisterationPaymentMethodInvalid'];
             $this->error9 = $this->error['PatientRegisterationDiscountRequired'];
