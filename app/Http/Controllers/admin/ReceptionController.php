@@ -316,7 +316,7 @@ class ReceptionController extends Controller implements LangObject
             case 'Patients':
                 return new Patients($id);
             case 'patients_create':
-                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), request()->file('avatar') ? $this->setupImage() : null);
+                return request()->file('avatar') ? new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), $this->setupImage()) : new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsAdd'], array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array());
             case 'patients_edit':
                 return new AppModel('option2', $mes[$mes['Setting']['Language']]['Error'], 'Patients', $mes[$mes['Setting']['Language']]['Message']['PatientsEdit'], isset($mes['Patent']) ? array_keys($mes['Patent']) : array(), array_keys($mes[$mes['Setting']['Language']]['SelectNationalityBox']), array_keys($mes[$mes['Setting']['Language']]['SelectGenderBox']), array_keys($mes[$mes['Setting']['Language']]['CheckBox']), isset($mes['Contracts']) ? array_keys($mes['Contracts']) : array(), request()->file('avatar') ? $this->setupImage():(isset($mes['Patent'][(string)request()->input('id')]) ? $mes['Patent'][(string)request()->input('id')]['Avatar'] : null));
             case 'patients_delete':
@@ -395,7 +395,11 @@ class ReceptionController extends Controller implements LangObject
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
-        $this->getCreateDataBase('Patent', $this, $lang->avatar);
+        if($lang->avatar !== null)
+            $this->getCreateDataBase('Patent', $this, $lang->avatar);
+        else
+            $this->getCreateDataBase('Patent', $this);
+
         return back()->with('success', $lang->successfully1);
     }
     public function editPatent(){
