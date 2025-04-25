@@ -58,12 +58,12 @@ class LanguageController extends Controller
             'word.in' => $lang->error2,  
         ];
         $request->validate($rules, $messages);
+        $model = Rays::find($request->session()->get('userId'));
         //only menu item
-        if(isset($lang->myAllLanguage[$myLang][$id][$name]['Item'][$item]) && $request->input('word') && strlen($request->input('word')) > 2
-        ||isset($lang->myAllLanguage[$myLang][$id][$name]) && $item === null && $request->input('word') && strlen($request->input('word')) > 2
-        || isset($lang->myAllLanguage[$myLang][$id][$name]) && $id !== 'Menu' && $item === null && $request->input('word') && strlen($request->input('word')) > 2){
-            $value = Rays::find($request->session()->get('userId'));
-            $var1 = $value[$myLang];
+        if(isset($model[$myLang][$id][$name]['Item'][$item]) && $request->input('word') && strlen($request->input('word')) > 2
+        ||isset($model[$myLang][$id][$name]) && $item === null && $request->input('word') && strlen($request->input('word')) > 2
+        || isset($model[$myLang][$id][$name]) && $id !== 'Menu' && $item === null && $request->input('word') && strlen($request->input('word')) > 2){
+            $var1 = $model[$myLang];
             //make array first order importaint
             if($id === 'Menu' && $item === null && is_array($var1[$id][$name]))
                 $var1[$id][$name]['Name'] = $request->input('word');
@@ -73,8 +73,8 @@ class LanguageController extends Controller
                 $var1[$id === $myLang ? $myLang : $id][$name] = $request->input('word');
             //my key of site aut and this key not like my key in database
             //svae data using new object and send my data to constructor and call setValue to save new value and return object                
-            $value[$myLang] = $var1;
-            $value->save();
+            $model[$myLang] = $var1;
+            $model->save();
             return back()->with('success', $lang->successfully1);             
         }else
             // show error 

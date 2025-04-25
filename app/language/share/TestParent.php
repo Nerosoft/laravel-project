@@ -105,33 +105,16 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error2 = $this->error['NewLangNameInvalid'];
         } 
         else {//if($myState === 'AllLanguage'){
-            $this->initMyAllLanguage($ob, $myState, $var1);
             $this->error1 = $this->error['TextRequired'];
             $this->error2 = $this->error['TextLenght'];
         }
-    }
-    protected function initMyAllLanguage($ob, $id, $idLang){
-        if($id === 'AllLanguage')
-            foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key => $value)
-                $this->myAllLanguage[$key] = $ob[$key];
-        else
-            $this->myAllLanguage = $ob[$id][$idLang];
-            
     }
     public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $avatar = null){
         if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
             $this->error5 = $this->error['TestPriceInvalid'];
             $this->error6 = $this->error['TestInputOutputLabInvalid'];
             $this->inputOutPutKeys = $var1;
-        }else if ($myState === 'PackagesContracts'){
-            $this->initErrorContract();
-            $this->size1 = $var1;
-        }
-        else if($myState === 'Knows'){
-            $this->initErrorKnow();
-            $this->size1 = $var1;
-        }
-        else if($myState === 'Branch'){
+        }else if($myState === 'Branch'){
             $this->error18 = $this->error['BranceRaysFollowLength'];
             $this->error19 = $this->error['BranceRaysFollowValue'];
             $this->branchInputOutputKeys = $var1;
@@ -190,10 +173,13 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
         if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
             $this->error7 = $this->error['TestIdRequired'];
             $this->error8 = $this->error['TestIdInvalid'];
-        }else if ($myState === 'PackagesContracts')
-            $this->initErrorContract();
-        else if($myState === 'Knows')
-            $this->initErrorKnow();
+        }else if ($myState === 'PackagesContracts'){
+            $this->error7 = $this->error['ContractIdRequired'];
+            $this->error8 = $this->error['ContractIdInvalid'];
+        }else if($myState === 'Knows'){
+            $this->error3 = $this->error['KnowsIdRequired'];
+            $this->error4 = $this->error['KnowsIdInvalid'];
+        }
         else if($myState === 'Branch'){
             $this->error20 = $this->error['BranchRaysId'];
             $this->error21 = $this->error['BranchRaysLenght'];
@@ -211,14 +197,6 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error11 = $this->error['CurrentOffersIdRequired'];
             $this->error12 = $this->error['CurrentOffersIdInvalid'];
         }
-    }
-    private function initErrorContract(){
-        $this->error7 = $this->error['ContractIdRequired'];
-        $this->error8 = $this->error['ContractIdInvalid'];
-    }
-    private function initErrorKnow(){
-        $this->error3 = $this->error['KnowsIdRequired'];
-        $this->error4 = $this->error['KnowsIdInvalid'];
     }
     private function initAllTestAndOffer($Test, $Cultures, $Packages, $CurrentOffers, $state = false, $SelectTestBox = null, $SelectOfferBox = null){
         if(isset($Test))

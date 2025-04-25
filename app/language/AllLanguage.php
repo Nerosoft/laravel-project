@@ -27,8 +27,13 @@ class AllLanguage extends TableSetting
 
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob, $title);
+            $ob[$ob['Setting']['Language']]['AllNamesLanguage']));
 
+            if($state === 'AllLanguage')
+                foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key => $value)
+                    $this->myAllLanguage[$key] = $ob[$key];
+                else
+                    $this->myAllLanguage = $ob[$state][$title];
             //label
             $this->myDirectionOption = $state !== 'AllLanguage' ?  $ob[$this->language]['Direction'] : $this->myAllLanguage[$this->language]['Direction'];
             //init label

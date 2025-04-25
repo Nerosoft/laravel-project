@@ -327,7 +327,7 @@ class ReceptionController extends Controller implements LangObject
             case 'knows_create':
                 return new AppModel('option3', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsAdd']);
             case 'knows_edit':
-                return new AppModel('option1', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsEdit'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
+                return new AppModel('option4', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsEdit'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
             case 'knows_delete':
                 return new AppModel('delete', $mes[$mes['Setting']['Language']]['Error'], 'Knows', $mes[$mes['Setting']['Language']]['Message']['KnowsDelete'], isset($mes['Knows']) ? array_keys($mes['Knows']) : array());
             default :

@@ -84,7 +84,7 @@ class ContractsController extends Controller implements LangObject
             case 'Create-Nero-Soft-Contracts':
                 return new AppModel('option3', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsAdd']);
             case 'Edit-Nero-Soft-Contracts':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsEdit'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
+                return new AppModel('option4', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsEdit'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
             case 'Delete-Nero-Soft-Contracts':
                 return new AppModel('delete', $ob[$ob['Setting']['Language']]['Error'], 'PackagesContracts', $ob[$ob['Setting']['Language']]['Message']['ContractsDelete'], isset($ob['Contracts']) ? array_keys($ob['Contracts']) : array());
 
