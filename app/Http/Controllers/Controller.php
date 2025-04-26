@@ -8,16 +8,13 @@ abstract class Controller
 {
     protected function getDeleteDatabade($item){
         $model = Rays::find(request()->session()->get('userId'));
-            foreach ($model[$item] as $key => $value)
-                if($key == request()->input('id') && count($model[$item]) === 1){
-                    unset($model[$item]);
-                    break;
-                }else if ($key == request()->input('id')){
-                    $arr = $model[$item];
-                    unset($arr[$key]);
-                    $model[$item] = $arr;
-                    break;
-                }
+        if(count($model[$item]) === 1)
+            unset($model[$item]);
+        else{
+            $arr = $model[$item];
+            unset($arr[request()->input('id')]);
+            $model[$item] = $arr;
+        }
         $model->save();
     }
     protected function getEditDataBase($item, LangObject $newObject, $image = null){
