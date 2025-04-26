@@ -19,13 +19,27 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
         $this->initError($myState, $ob, $var1, $var2, $var3, $var4, $var5, $var6);
     }
     public function initError($myState, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
-        if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
+        if($myState === 'AllTestCultures'){
             $this->error1 = $this->error['TestNameRequired'];
             $this->error2 = $this->error['TestNameInvalid'];
             $this->error3 = $this->error['TestPriceRequired'];
             $this->error4 = $this->error['TestInputOutputLabRequired'];
             $this->error9 = $this->error['TestShortcutRequired'];
             $this->error10 = $this->error['TestShortcutInvalid'];
+        }else if($myState === 'PackagesCultures'){
+            $this->error1 = $this->error['PackagesNameRequired'];
+            $this->error2 = $this->error['PackagesNameInvalid'];
+            $this->error3 = $this->error['PackagesPriceRequired'];
+            $this->error4 = $this->error['PackagesInputOutputLabRequired'];
+            $this->error9 = $this->error['PackagesShortcutRequired'];
+            $this->error10 = $this->error['PackagesShortcutInvalid'];
+        }else if($myState === 'TheCultures'){
+            $this->error1 = $this->error['CulturesNameRequired'];
+            $this->error2 = $this->error['CulturesNameInvalid'];
+            $this->error3 = $this->error['CulturesPriceRequired'];
+            $this->error4 = $this->error['CulturesInputOutputLabRequired'];
+            $this->error9 = $this->error['CulturesShortcutRequired'];
+            $this->error10 = $this->error['CulturesShortcutInvalid'];
         }else if($myState === 'PackagesContracts'){
             $this->error1 = $this->error['ContractNameRequired'];
             $this->error2 = $this->error['ContractNameInvalid'];
@@ -86,8 +100,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error21 = $this->error['PatentContractingRequired'];
             $this->error22 = $this->error['PatentDiseasOtherInvalid'];
             $this->error23 = $this->error['PatentAvatarImage'];
-        }
-        else if($myState === 'PatientRegisteration'){
+        }else if($myState === 'PatientRegisteration'){
             $this->error2 = $this->error['PatientRegisterationPaymentMethodRequired'];
             $this->error3 = $this->error['PatientRegisterationPatentCodeRequired'];
             $this->error4 = $this->error['PatientRegisterationKnowRequired'];
@@ -110,9 +123,17 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
         }
     }
     public function initError2($myState, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $avatar = null){
-        if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
+        if($myState === 'AllTestCultures'){
             $this->error5 = $this->error['TestPriceInvalid'];
             $this->error6 = $this->error['TestInputOutputLabInvalid'];
+            $this->inputOutPutKeys = $var1;
+        }else if($myState === 'PackagesCultures'){
+            $this->error5 = $this->error['PackagesPriceInvalid'];
+            $this->error6 = $this->error['PackagesInputOutputLabInvalid'];
+            $this->inputOutPutKeys = $var1;
+        }else if($myState === 'TheCultures'){
+            $this->error5 = $this->error['CulturesPriceInvalid'];
+            $this->error6 = $this->error['CulturesInputOutputLabInvalid'];
             $this->inputOutPutKeys = $var1;
         }else if($myState === 'Branch'){
             $this->error18 = $this->error['BranceRaysFollowLength'];
@@ -155,11 +176,9 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->paymentKeys = $var3;
             
         }else if($myState === 'ChangeLanguage'){
-            $this->error3 = $this->error['ChangeLanguageRequired'];
-            $this->error4 = $this->error['ChangeLanguageInvalid'];
-            $this->size1 = $var1;
-        }
-        else if($myState === 'AllLanguage')
+            $this->error5 = $this->error['ChangeLanguageUsed'];
+            $this->language = $var1;
+        }else if($myState === 'AllLanguage')
             $this->error3 = $this->error['Language'];//call this error in error 2
         else{
             $this->error8 = $this->error['CurrentOffersPriceInvalid'];
@@ -168,19 +187,24 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->inputOutPutKeys = $var1;
         }
     }
-    public function initError3($myState, $var1, $var2 = null){
+    public function initError3($myState, $var1){
         $this->size1 = $var1;
-        if($myState === 'AllTestCultures' || $myState === 'PackagesCultures' || $myState === 'TheCultures'){
+        if($myState === 'AllTestCultures'){
             $this->error7 = $this->error['TestIdRequired'];
             $this->error8 = $this->error['TestIdInvalid'];
+        }else if($myState === 'PackagesCultures'){
+            $this->error7 = $this->error['PackagesIdRequired'];
+            $this->error8 = $this->error['PackagesIdInvalid'];
+        }else if($myState === 'TheCultures'){
+            $this->error7 = $this->error['CulturesIdRequired'];
+            $this->error8 = $this->error['CulturesIdInvalid'];
         }else if ($myState === 'PackagesContracts'){
             $this->error7 = $this->error['ContractIdRequired'];
             $this->error8 = $this->error['ContractIdInvalid'];
         }else if($myState === 'Knows'){
             $this->error3 = $this->error['KnowsIdRequired'];
             $this->error4 = $this->error['KnowsIdInvalid'];
-        }
-        else if($myState === 'Branch'){
+        }else if($myState === 'Branch'){
             $this->error20 = $this->error['BranchRaysId'];
             $this->error21 = $this->error['BranchRaysLenght'];
         }else if($myState === 'Patients'){
@@ -190,8 +214,8 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error18 = $this->error['PatientRegisterationIdRequired'];
             $this->error19 = $this->error['PatientRegisterationIdInvalid'];
         }else if($myState === 'ChangeLanguage'){
-            $this->error5 = $this->error['ChangeLanguageUsed'];
-            $this->language = $var2;
+            $this->error3 = $this->error['ChangeLanguageRequired'];
+            $this->error4 = $this->error['ChangeLanguageInvalid'];
         }
         else{
             $this->error11 = $this->error['CurrentOffersIdRequired'];

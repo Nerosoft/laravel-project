@@ -15,9 +15,9 @@ class LanguageController extends Controller
             case 'ChangeLanguage':
                 return new ChangeLanguage($state);
             case 'ChangeLanguage_edit':
-                return new AppModel('option7', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[  isset($ob[request()->input('language-select')]) ? request()->input('language-select') : $ob['Setting']['Language'] ]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
+                return new AppModel('use delete option', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[  isset($ob[request()->input('language-select')]) ? request()->input('language-select') : $ob['Setting']['Language'] ]['Message']['ChangeLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_copy':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
+                return new AppModel('option4', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             case 'ChangeLanguage_delete':
                 return new AppModel('option8', $ob[$ob['Setting']['Language']]['Error'], 'ChangeLanguage', $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), $ob['Setting']['Language']);
             default:

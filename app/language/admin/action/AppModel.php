@@ -20,13 +20,10 @@ class AppModel extends TestParent{
             $this->initError3($state, $var1);            
         }else if($option === 'option3')
             $this->initError($state, $var5, $var6, $var7, $var8);
-        else if($option === 'option7')
-            $this->initError2($state, $var1, $var2, $var3, $var4);
         else if($option === 'option8'){
-            $this->initError2($state, $var1, $var2, $var3, $var4);
-            $this->initError3($state, $var1, $var2);
-        }
-        else //delete
+            $this->initError2($state, $var2);
+            $this->initError3($state, $var1);
+        }else //delete
             $this->initError3($state, $var1);
     }
 }
