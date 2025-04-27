@@ -14,7 +14,6 @@ class AppModel extends TestParent{
             $this->initError($state, $var5, $var6, $var7, $var8);
             $this->initError2($state, $var2, $var3, $var4, $var5, $var6);
             $this->initError3($state, $var1);
-        //contract and know          
         }else if($option === 'option4'){
             $this->initError($state);
             $this->initError3($state, $var1);            
