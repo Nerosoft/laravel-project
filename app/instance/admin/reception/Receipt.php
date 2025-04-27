@@ -121,7 +121,7 @@ class Receipt extends SearchId
     }
     public function setPatient($myPatient){
         foreach ($myPatient as $key => $patient)
-            if($patient->getPatentCode() === $this->PatientCode){
+            if($key === $this->PatientCode){
                 $this->myPatient = $patient;
                 return $this;
             }

@@ -181,8 +181,8 @@ class PatientRegisteration extends Page
             //---------------------------
             if(isset($ob['Patent']))
                 foreach ($ob['Patent'] as $key => $patent)
-                    $this->myPatent[$key] = new Patent($patent['PatentCode'], $patent['Avatar'], $patent['Name'], $patent['Nationality'], $patent['NationalId'], $patent['PassportNo'], $patent['Email'], $patent['Phone'], $patent['Phone2'], $patent['Gender'], $patent['LastPeriodDate'], $patent['DateBirth'], $patent['Address'], $patent['Contracting'], $patent['Hours'], $patent['Disease']);
-            if(isset($ob['Receipt']))//check if patient exsit
+                    $this->myPatent[$key] = new Patent($key, $patent['Avatar'], $patent['Name'], $patent['Nationality'], $patent['NationalId'], $patent['PassportNo'], $patent['Email'], $patent['Phone'], $patent['Phone2'], $patent['Gender'], $patent['LastPeriodDate'], $patent['DateBirth'], $patent['Address'], $patent['Contracting'], $patent['Hours'], $patent['Disease']);
+            if(isset($ob['Receipt']))
                 foreach ($ob['Receipt'] as $key => $receipt)
                     $this->arr6[$key] = (new Receipt($receipt['PatientCode'], $receipt['Know'],  $receipt['CurrentOffers'] != null ? array_reduce($receipt['CurrentOffers'], function ($acc, $item) {return is_array($acc) ? [...$acc, new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id'])] : array(new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id']));}, 0) : null, array_reduce($receipt['Test'], function ($acc, $item){return is_array($acc) ? [...$acc, new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id'])] : array( new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id']));}, 0), $receipt['Discount'], $receipt['DelayedMoney'], $receipt['PaymentDate'], $receipt['AmountPaid'], $receipt['PaymentMethod']))->setPatient($this->myPatent);
             if(isset($ob['Knows']))

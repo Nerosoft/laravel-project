@@ -32,7 +32,7 @@
                                 <select class="form-select" onchange="initPatient(this, $('{{isset($index) ? "#editForm".$index : "#createForm"}}'), '{{asset("img/admin/avatar1.png")}}')" id="selectPatient">
                                     <option selected disabled>{{$lang->selectBox2}}</option>
                                     @foreach($lang->myPatent as $key=>$patient)
-                                    <option {{isset($index) ? ($receipt->getMyPatient()->getPatentCode() === $patient->getPatentCode() ? 'selected' : '') : ''}} value="{{json_encode($lang->myPatent[$key]->getObject2())}}">{{$patient->getName()}}</option>
+                                    <option {{isset($index) ? ($receipt->getMyPatient()->getPatentCode() === $key ? 'selected' : '') : ''}} value="{{json_encode($lang->myPatent[$key]->getObject2())}}">{{$patient->getName()}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -36,7 +36,8 @@
           @foreach(array_reverse($lang->myPatent) as $index=>$patent)
             <tr>
               <td>{{$loop->index+1}}</td>
-              <td>{{$patent->getPatentCode()}}</td>
+              <!-- patient code -->
+              <td>{{$index}}</td>
               <td><img id="preview" src="{{$patent->getAvatar() != null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}" alt="Avatar Preview" class="avatar2 preview"></td>
               <td>{{$patent->getName()}}</td>
               <td>{{$patent->getNationality()}}</td>

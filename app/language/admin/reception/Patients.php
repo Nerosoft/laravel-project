@@ -99,7 +99,7 @@ class Patients extends Page
             //make patent
             if(isset($ob['Patent']))
                 foreach ($ob['Patent'] as $key => $patent)
-                    $this->myPatent[$key] = new Patent($patent['PatentCode'], $patent['Avatar'], $patent['Name'], $patent['Nationality'],
+                    $this->myPatent[$key] = new Patent($key, $patent['Avatar'], $patent['Name'], $patent['Nationality'],
                     $patent['NationalId'], $patent['PassportNo'], $patent['Email'], $patent['Phone'],
                     $patent['Phone2'], $patent['Gender'], $patent['LastPeriodDate'], $patent['DateBirth'],
                     $patent['Address'], $patent['Contracting'], $patent['Hours'], $patent['Disease']);
