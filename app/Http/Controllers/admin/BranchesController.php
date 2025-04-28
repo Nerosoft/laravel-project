@@ -90,16 +90,18 @@ class BranchesController extends Controller
         //find model in database and save that model in my variable
         $myDb = Rays::find(request()->session()->get('userLogout'));
         $myId = Str::uuid()->toString();
-        $newKeyBranch = $this->generateUniqueIdentifier();
         //if branch exist in my database push it branch in my brancy in database and save all branch
         if(isset($myDb->Branch)){
+            $newKeyBranch = $this->generateUniqueIdentifier();
             foreach ($myDb->Branch as $key => $value)
                 $this->saveBranch(Rays::find($value['id']), $myId, $newKeyBranch);  
             $this->saveBranch($myDb, $myId, $newKeyBranch);
         }
         //if no exist brance in my database make branch and save it branch in database
-        else
+        else{
+            $newKeyBranch = $this->generateUniqueIdentifier();
             $this->saveBranch($myDb, $myId, $newKeyBranch);
+        }
         //conver model database to array        
         $myBranch = $myDb->toArray();
         //delete object user
