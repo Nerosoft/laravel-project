@@ -98,10 +98,8 @@ class BranchesController extends Controller
             $this->saveBranch($myDb, $myId, $newKeyBranch);
         }
         //if no exist brance in my database make branch and save it branch in database
-        else{
-            $newKeyBranch = $this->generateUniqueIdentifier();
-            $this->saveBranch($myDb, $myId, $newKeyBranch);
-        }
+        else
+            $this->saveBranch($myDb, $myId, $this->generateUniqueIdentifier());
         //conver model database to array        
         $myBranch = $myDb->toArray();
         //delete object user
