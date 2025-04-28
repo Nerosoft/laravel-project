@@ -99,7 +99,7 @@ class BranchesController extends Controller
         }
         //if no exist brance in my database make branch and save it branch in database
         else{
-            $myDb->Branch = array($this->generateUniqueIdentifier()=>[
+            $myDb->Branch = array($newKeyBranch=>[
             'Name'=>$request->input('brance_rays_name'),
             'Phone'=>$request->input('brance_rays_phone'),
             'Governments'=>$request->input('brance_rays_governments'),
