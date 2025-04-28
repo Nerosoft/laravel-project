@@ -38,9 +38,9 @@ class BranchesController extends Controller
             'logOut'=>route('admin.logout')
         ]);
     }
-    private function saveBranch($model, $id){
+    private function saveBranch($model, $id, $newKeyBranch){
         $arr = $model->Branch;
-        $arr[$this->generateUniqueIdentifier()] = [
+        $arr[$newKeyBranch] = [
         'Name'=>request()->input('brance_rays_name'),
         'Phone'=>request()->input('brance_rays_phone'),
         'Governments'=>request()->input('brance_rays_governments'),
@@ -90,13 +90,12 @@ class BranchesController extends Controller
         //find model in database and save that model in my variable
         $myDb = Rays::find(request()->session()->get('userLogout'));
         $myId = Str::uuid()->toString();
+        $newKeyBranch = $this->generateUniqueIdentifier();
         //if branch exist in my database push it branch in my brancy in database and save all branch
         if(isset($myDb->Branch)){
-            foreach ($myDb->Branch as $key => $value){
-                $model = Rays::find($value['id']);
-                $this->saveBranch($model, $myId);
-            }   
-            $this->saveBranch($myDb, $myId);
+            foreach ($myDb->Branch as $key => $value)
+                $this->saveBranch(Rays::find($value['id']), $myId, $newKeyBranch);  
+            $this->saveBranch($myDb, $myId, $newKeyBranch);
         }
         //if no exist brance in my database make branch and save it branch in database
         else{
@@ -167,25 +166,22 @@ class BranchesController extends Controller
         else{
             foreach (Rays::all() as $index => $ob){
                 $model = $ob->get()[$index];
-                if($model->AppId === request()->session()->get('userLogout') || $model->_id === request()->session()->get('userLogout'))
-                    foreach ($model->Branch as $key => $branch)
-                        if($key == request()->input('id')){
-                            $arr = $model->Branch;
-                            $arr[request()->input('id')] = [
-                            'Name'=>request()->input('brance_rays_name'),
-                            'Phone'=>request()->input('brance_rays_phone'),
-                            'Governments'=>request()->input('brance_rays_governments'), 
-                            'City'=>request()->input('brance_rays_city'),
-                            'Street'=>request()->input('brance_rays_street'), 
-                            'Building'=>request()->input('brance_rays_building'),
-                            'Address'=>request()->input('brance_rays_address'), 
-                            'Country'=>request()->input('brance_rays_country'),
-                            'Follow'=>request()->input('brance_rays_follow'), 
-                            'id'=>$arr[request()->input('id')]['id']];
-                            $model->Branch = $arr;
-                            $model->save();
-                            break;
-                        }    
+                if($model->AppId === request()->session()->get('userLogout') || $model->_id === request()->session()->get('userLogout')){
+                    $arr = $model->Branch;
+                    $arr[request()->input('id')] = [
+                    'Name'=>request()->input('brance_rays_name'),
+                    'Phone'=>request()->input('brance_rays_phone'),
+                    'Governments'=>request()->input('brance_rays_governments'), 
+                    'City'=>request()->input('brance_rays_city'),
+                    'Street'=>request()->input('brance_rays_street'), 
+                    'Building'=>request()->input('brance_rays_building'),
+                    'Address'=>request()->input('brance_rays_address'), 
+                    'Country'=>request()->input('brance_rays_country'),
+                    'Follow'=>request()->input('brance_rays_follow'), 
+                    'id'=>$arr[request()->input('id')]['id']];
+                    $model->Branch = $arr;
+                    $model->save();
+                }
             }             
             return back()->with('success', $lang->successfully1);
         }
@@ -201,28 +197,28 @@ class BranchesController extends Controller
             ]);
         Rays::find(request()->input('id'))->delete();
         $model = Rays::find(request()->session()->get('userLogout'));
-            foreach ($model->Branch as $key => $branch) {
-                if($branch['id'] === request()->input('id')){
-                    $arr = $model->Branch;
-                    unset($arr[$key]);
-                    if(count($arr) === 0)
-                        unset($model['Branch']);
-                    else
-                        $model->Branch = $arr;
-                    $model->save();
-                }else{
-                    $model2 = Rays::find($branch['id']);
-                    foreach ($model2->Branch as $key => $branch) {
-                        if($branch['id'] === request()->input('id')){
-                            $arr = $model2->Branch;
-                            unset($arr[$key]);
-                            $model2->Branch = $arr;
-                            $model2->save();
-                            break;
-                        }
+        foreach ($model->Branch as $key => $branch) {
+            if($branch['id'] === request()->input('id')){
+                $arr = $model->Branch;
+                unset($arr[$key]);
+                if(count($arr) === 0)
+                    unset($model['Branch']);
+                else
+                    $model->Branch = $arr;
+                $model->save();
+            }else{
+                $model2 = Rays::find($branch['id']);
+                foreach ($model2->Branch as $key => $branch) {
+                    if($branch['id'] === request()->input('id')){
+                        $arr = $model2->Branch;
+                        unset($arr[$key]);
+                        $model2->Branch = $arr;
+                        $model2->save();
+                        break;
                     }
                 }
             }
-            return back()->with('success', $lang->successfully1);  
+        }
+        return back()->with('success', $lang->successfully1);  
     }
 }
