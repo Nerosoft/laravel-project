@@ -98,20 +98,8 @@ class BranchesController extends Controller
             $this->saveBranch($myDb, $myId, $newKeyBranch);
         }
         //if no exist brance in my database make branch and save it branch in database
-        else{
-            $myDb->Branch = array($newKeyBranch=>[
-            'Name'=>$request->input('brance_rays_name'),
-            'Phone'=>$request->input('brance_rays_phone'),
-            'Governments'=>$request->input('brance_rays_governments'),
-            'City'=>$request->input('brance_rays_city'),
-            'Street'=>$request->input('brance_rays_street'),
-            'Building'=>$request->input('brance_rays_building'),
-            'Address'=>$request->input('brance_rays_address'),
-            'Country'=>$request->input('brance_rays_country'),
-            'Follow'=>$request->input('brance_rays_follow'),
-            'id'=>$myId]);
-            $myDb->save();
-        }
+        else
+            $this->saveBranch($myDb, $myId, $newKeyBranch);
         //conver model database to array        
         $myBranch = $myDb->toArray();
         //delete object user
