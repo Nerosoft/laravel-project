@@ -120,13 +120,8 @@ class Receipt extends SearchId
         return $this->getValue($this->PaymentMethod, 'PaymentMethodBox');
     }
     public function setPatient($myPatient){
-        foreach ($myPatient as $key => $patient)
-            if($key === $this->PatientCode){
-                $this->myPatient = $patient;
-                return $this;
-            }
         //if patient not exist return new patient
-        $this->myPatient = new Patent('', null);
+        $this->myPatient = isset($myPatient[$this->PatientCode])?$myPatient[$this->PatientCode]:new Patent('', null);
         return $this;
     }
     public function getMyPatient(){
