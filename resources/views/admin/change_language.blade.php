@@ -25,9 +25,12 @@
                     <th>
                     @if($loop->index < (count($myRadios) - 2))
                     @include('layout.model_delete', ['name'=>$myLang->Name])
-                    @endif   
                     <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
                     <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
+                    @else
+                    <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
+                    <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
+                    @endif   
                     @for ($i = 0; $i < 2; $i++)
                         <div class="modal" id="LangModel{{$i.$index}}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
