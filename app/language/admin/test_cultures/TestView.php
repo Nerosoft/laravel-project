@@ -6,6 +6,7 @@ use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\Cultures;
 use App\language\share\Page;
 use App\Menu;
+use App\instance\admin\test_cultures\MyCurrentOffers;
 class TestView extends Page{
     public $arr1 = array();
     public function __construct($state, $ob){   
@@ -49,17 +50,17 @@ class TestView extends Page{
         $this->hint3 = $ob[$this->language]['Hint'][$state === 'AllTestCultures' ? 'TestShortcut': ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'CulturesShortcut' : 'CurrentOffersShortcut') : 'PackagesShortcut')];
         
 
-        if(isset($ob['Test']) && $state === 'AllTestCultures'){
+        if(isset($ob['Test']) && $state === 'AllTestCultures')
             foreach ($ob['Test'] as $key => $test)
                 $this->arr1[$key] = new Test($test['Name'], $test['Shortcut'], $test['Price'], $test['InputOutputLab']);
-        }
-        else if(isset($ob['Packages']) && $state === 'PackagesCultures'){
+        else if(isset($ob['Packages']) && $state === 'PackagesCultures')
             foreach ($ob['Packages'] as $key => $packages)
                 $this->arr1[$key] = new Packages($packages['Name'], $packages['Shortcut'], $packages['Price'], $packages['InputOutputLab']);
-        }
-        else if(isset($ob['Cultures']) && $state === 'TheCultures'){
+        else if(isset($ob['Cultures']) && $state === 'TheCultures')
             foreach ($ob['Cultures'] as $key => $cultures)
                 $this->arr1[$key] = new Cultures($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $cultures['InputOutputLab']);
-        }
+        else if(isset($ob['CurrentOffers']))
+            foreach ($ob['CurrentOffers'] as $key => $currentOffers)
+                $this->arr1[$key] = new MyCurrentOffers($currentOffers['Name'], $currentOffers['Shortcut'], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['State']);
     }
 }
