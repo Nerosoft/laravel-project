@@ -27,10 +27,6 @@
                     @include('layout.model_delete', ['name'=>$myLang->Name])
                     <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
                     <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
-                    @else
-                    <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
-                    <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
-                    @endif   
                     @for ($i = 0; $i < 2; $i++)
                         <div class="modal" id="LangModel{{$i.$index}}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
@@ -63,6 +59,42 @@
                             </div>
                         </div>
                     @endfor
+                    @else
+                    <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
+                    <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
+                    @for ($i = 0; $i < 2; $i++)
+                        <div class="modal" id="LangModel{{$i.$index}}" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{$i !== 0 ? $lang->title2 : $lang->title3}}</h5>
+                                        <button type="button" onclick="closeForm('LangModel{{$i.$index}}')" class="btn btn-dark">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="LangForm{{$i.$index}}" action="{{$i !== 0 ? route('language.change') : route('language.copy')}}" method="POST" onsubmit="return @json($i) !== 0 ? true : validName($(this).find('#lang_name'))">
+                                            @csrf
+                                            <input type="hidden" id="language-select" name="language-select" value="{{$index}}">
+                                            @if($i === 0)
+                                            <div class="input-group input-group-lg mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-lg">{{$lang->label7}}</span>
+                                            </div>
+                                                <input type="text" name="lang_name" id="lang_name" value="{{old('lang_name')}}" placeholder='{{$lang->hint1}}' class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                                            </div>
+                                            @endif
+                                        </form>
+                                        {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->Name}}</spam>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button form="LangForm{{$i.$index}}" class="btn btn-danger">{{$i !== 0 ? $lang->button4 : $lang->button5}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endfor
+                    @endif   
                     </th>
                 </tr>
                 @endforeach
