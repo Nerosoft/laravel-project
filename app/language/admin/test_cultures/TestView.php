@@ -59,7 +59,7 @@ class TestView extends Page{
         else if(isset($ob['Cultures']) && $state === 'TheCultures')
             foreach ($ob['Cultures'] as $key => $cultures)
                 $this->arr1[$key] = new Cultures($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $cultures['InputOutputLab']);
-        else if(isset($ob['CurrentOffers']))
+        else if(isset($ob['CurrentOffers']) && $state === 'CurrentOffers')
             foreach ($ob['CurrentOffers'] as $key => $currentOffers)
                 $this->arr1[$key] = new MyCurrentOffers($currentOffers['Name'], $currentOffers['Shortcut'], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['State']);
     }

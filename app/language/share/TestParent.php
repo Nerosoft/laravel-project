@@ -111,9 +111,20 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->arr3 = array();
             $this->arr4 = array();
             $this->arr5 = array();
-            $this->initAllTestAndOffer($ob, $var1, $var2, $var3, $var4, $var5, $var6);
-        }
-        else if($myState === 'ChangeLanguage'){
+            if(isset($ob))
+                foreach ($ob as $test)
+                    array_push($this->arr2, $var4 ? array($test['Name'], $test['Shortcut'], $test['Price'], $var5[$test['InputOutputLab']], $test['Id']) : new Test($test['Name'], $test['Shortcut'], $test['Price'], $test['InputOutputLab'], $test['Id']));
+            if(isset($var1))
+                foreach ($var1 as $key => $cultures)
+                    array_push($this->arr3, $var4 ? array($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $var5[$cultures['InputOutputLab']], $cultures['Id']) : new Cultures($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $cultures['InputOutputLab'], $cultures['Id']));
+            //init Packages
+            if(isset($var2))
+                foreach ($var2 as $key => $packages)
+                    array_push($this->arr4, $var4 ? array($packages['Name'], $packages['Shortcut'], $packages['Price'], $var5[$packages['InputOutputLab']], $packages['Id']) : new Packages($packages['Name'], $packages['Shortcut'], $packages['Price'], $packages['InputOutputLab'], $packages['Id']));
+            if(isset($var3))
+                foreach ($var3 as $key => $currentOffers)
+                    array_push($this->arr5, $var4 ? array($currentOffers['Name'], $currentOffers['Shortcut'], $var6[$currentOffers['State']], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['Id']) : new MyCurrentOffers($currentOffers['Name'], $currentOffers['Shortcut'], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['State'], $currentOffers['Id']));    
+        }else if($myState === 'ChangeLanguage'){
             $this->error1 = $this->error['NewLangNameRequired'];
             $this->error2 = $this->error['NewLangNameInvalid'];
         } 
@@ -221,20 +232,5 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error11 = $this->error['CurrentOffersIdRequired'];
             $this->error12 = $this->error['CurrentOffersIdInvalid'];
         }
-    }
-    private function initAllTestAndOffer($Test, $Cultures, $Packages, $CurrentOffers, $state = false, $SelectTestBox = null, $SelectOfferBox = null){
-        if(isset($Test))
-            foreach ($Test as $test)
-                array_push($this->arr2, $state ? array($test['Name'], $test['Shortcut'], $test['Price'], $SelectTestBox[$test['InputOutputLab']], $test['Id']) : new Test($test['Name'], $test['Shortcut'], $test['Price'], $test['InputOutputLab'], $test['Id']));
-        if(isset($Cultures))
-            foreach ($Cultures as $key => $cultures)
-                array_push($this->arr3, $state ? array($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $SelectTestBox[$cultures['InputOutputLab']], $cultures['Id']) : new Cultures($cultures['Name'], $cultures['Shortcut'], $cultures['Price'], $cultures['InputOutputLab'], $cultures['Id']));
-        //init Packages
-        if(isset($Packages))
-            foreach ($Packages as $key => $packages)
-                array_push($this->arr4, $state ? array($packages['Name'], $packages['Shortcut'], $packages['Price'], $SelectTestBox[$packages['InputOutputLab']], $packages['Id']) : new Packages($packages['Name'], $packages['Shortcut'], $packages['Price'], $packages['InputOutputLab'], $packages['Id']));
-        if(isset($CurrentOffers))
-            foreach ($CurrentOffers as $key => $currentOffers)
-                array_push($this->arr5, $state ? array($currentOffers['Name'], $currentOffers['Shortcut'], $SelectOfferBox[$currentOffers['State']], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['Id']) : new MyCurrentOffers($currentOffers['Name'], $currentOffers['Shortcut'], $currentOffers['Price'], $currentOffers['DisplayPrice'], $currentOffers['State'], $currentOffers['Id']));    
     }
 }
