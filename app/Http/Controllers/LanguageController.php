@@ -54,7 +54,6 @@ class LanguageController extends Controller
             'word.min' => $lang->error2,
         ] : [
             'word.required' => $lang->error1,
-            'word.min' => $lang->error2,
             'word.in' => $lang->error2,  
         ];
         $request->validate($rules, $messages);
