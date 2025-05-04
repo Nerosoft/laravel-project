@@ -189,8 +189,17 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
         }else if($myState === 'ChangeLanguage'){
             $this->error5 = $this->error['ChangeLanguageUsed'];
             $this->language = $var1;
-        }else if($myState === 'AllLanguage')
-            $this->error3 = $this->error['Language'];//call this error in error 2
+        }else if($myState === 'AllLanguage'){
+            $this->error3 = $this->error['EditLanguageRequired'];
+            $this->error4 = $this->error['EditTableRequired'];
+            $this->error5 = $this->error['EditKeyRequired'];
+            $this->error7 = $this->error['EditLanguageInvalid'];
+            $this->error8 = $this->error['EditTableInvalid'];
+            $this->error9 = $this->error['EditKeyInvalid'];
+            $this->error10 = $this->error['EditKey2Invalid'];
+            $this->size2 = $var1;
+            $this->size3 = $var2;
+        }
         else{
             $this->error8 = $this->error['CurrentOffersPriceInvalid'];
             $this->error9 = $this->error['CurrentOffersDisplayPriceInvalid'];

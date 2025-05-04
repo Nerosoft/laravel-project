@@ -6,12 +6,13 @@ use App\language\admin\action\AppModel;
 use App\language\admin\ChangeLanguage;
 use App\Models\Rays;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 class LanguageController extends Controller
 {
-    public function setupLanguage($state, $ob = null){
+    public function setupLanguage($state, $ob = null, $key = null){
         switch ($state) {
             case 'edit':
-                return new AppModel('option1', $ob[$ob['Setting']['Language']]['Error'], 'AllLanguage', $ob[$ob['Setting']['Language']]['Message']['AllLanguageEdit'], null, null, null, null, $ob);
+                return isset($ob[$ob['Setting']['Language']][$key])?new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'AllLanguage', $ob[$ob['Setting']['Language']]['Message']['AllLanguageEdit'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['CutomLang']), $ob[$ob['Setting']['Language']][$key]):new AppModel('option2', $ob[$ob['Setting']['Language']]['Error'], 'AllLanguage', $ob[$ob['Setting']['Language']]['Message']['AllLanguageEdit'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']), array_keys($ob[$ob['Setting']['Language']]['CutomLang']));
             case 'ChangeLanguage':
                 return new ChangeLanguage($state);
             case 'ChangeLanguage_edit':
@@ -46,39 +47,52 @@ class LanguageController extends Controller
         else
             abort(404);
     }
-    public function editAllLanguage(Request $request, $myLang, $id, $name, $item = null){
-        $lang = $this->setupLanguage('edit', Rays::find(request()->session()->get('userId')));
-        $rules = ['word' => ['required', $id !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])]];        
+    public function editAllLanguage(Request $request, $myLang = null, $id = null, $name = null, $item = null){
+        $lang = $this->setupLanguage('edit', Rays::find(request()->session()->get('userId')), $id);
+        Validator::make([...request()->all(), 'myLang'=>$myLang, 'id'=>$id, 'name'=>$name, 'item'=>$item],
+        [
+            'word' => ['required', $id !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])],
+            'myLang'=>['required', Rule::in($lang->size1)],
+            'id'=>['required', Rule::in($lang->size2)],
+            'name'=>['required', function ($attribute, $value, $fail)use($lang, $name, $item) {
+                if(!isset($lang->size3[$name]['Item'][$item]) && $item !== null){
+                    $fail($lang->error9);
+                    $fail($lang->error10);
+                }else if(!isset($lang->size3[$name]))
+                    $fail($lang->error9);
+            }],
+        ],        
         $messages =  $id !== 'Html' ? [
             'word.required' => $lang->error1,
             'word.min' => $lang->error2,
+            'myLang.required'=>$lang->error3,
+            'id.required'=>$lang->error4,
+            'myLang.in'=>$lang->error7,
+            'id.in'=>$lang->error8,
+            'name.required'=>$lang->error5,
         ] : [
             'word.required' => $lang->error1,
-            'word.in' => $lang->error2,  
-        ];
-        $request->validate($rules, $messages);
+            'word.in' => $lang->error2,
+            'myLang.required'=>$lang->error3,
+            'id.required'=>$lang->error4,
+            'myLang.in'=>$lang->error7,
+            'id.in'=>$lang->error8,
+            'name.required'=>$lang->error5,
+        ])->validate();
         $model = Rays::find($request->session()->get('userId'));
-        //only menu item
-        if(isset($model[$myLang][$id][$name]['Item'][$item]) && $request->input('word') && strlen($request->input('word')) > 2
-        ||isset($model[$myLang][$id][$name]) && $item === null && $request->input('word') && strlen($request->input('word')) > 2
-        || isset($model[$myLang][$id][$name]) && $id !== 'Menu' && $item === null && $request->input('word') && strlen($request->input('word')) > 2){
-            $var1 = $model[$myLang];
-            //make array first order importaint
-            if($id === 'Menu' && $item === null && is_array($var1[$id][$name]))
-                $var1[$id][$name]['Name'] = $request->input('word');
-            else if($id === 'Menu' && $item !== null)
-                $var1[$id][$name]['Item'][$item] = $request->input('word');
-            else
-                $var1[$id === $myLang ? $myLang : $id][$name] = $request->input('word');
-            //my key of site aut and this key not like my key in database
-            //svae data using new object and send my data to constructor and call setValue to save new value and return object                
-            $model[$myLang] = $var1;
-            $model->save();
-            return back()->with('success', $lang->successfully1);             
-        }else
-            // show error 
-            return back()->withInput()->withErrors($lang->error3); 
-
+        $var1 = $model[$myLang];
+        //make array first order importaint
+        if($id === 'Menu' && $item === null && is_array($var1[$id][$name]))
+            $var1[$id][$name]['Name'] = $request->input('word');
+        else if($id === 'Menu' && $item !== null)
+            $var1[$id][$name]['Item'][$item] = $request->input('word');
+        else
+            $var1[$id === $myLang ? $myLang : $id][$name] = $request->input('word');
+        //my key of site aut and this key not like my key in database
+        //svae data using new object and send my data to constructor and call setValue to save new value and return object                
+        $model[$myLang] = $var1;
+        $model->save();
+        return back()->with('success', $lang->successfully1);
     }
 
     public function changeLanguage(){

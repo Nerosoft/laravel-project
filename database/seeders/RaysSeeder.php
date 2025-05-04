@@ -968,8 +968,15 @@ class RaysSeeder extends Seeder
                         'BranchInvalid'=>'invalid branch',
                         'PageError'=>'Error page',
                         'NewLangNameRequired'=>'required new language name',
-                        'NewLangNameInvalid'=>'invalid new language name'
+                        'NewLangNameInvalid'=>'invalid new language name',
 
+                        'EditLanguageRequired'=>'Language required',
+                        'EditTableRequired'=>'Table required',
+                        'EditKeyRequired'=>'Key required',
+                        'EditLanguageInvalid'=>'Language Invalid',
+                        'EditTableInvalid'=>'Table Invalid',
+                        'EditKeyInvalid'=>'Key Invalid',
+                        'EditKey2Invalid'=>'Key2 Invalid',
                     ],
                     'Message'=>[
                         'LoginPatentCode'=>'seccessfully login',
@@ -2064,7 +2071,15 @@ class RaysSeeder extends Seeder
                         'BranchInvalid'=>'الفرع غير صحيح',
                         'PageError'=>'لم يتم العثور علي الصفحة',
                         'NewLangNameRequired'=>'يرجي ادخال اسم اللغة',
-                        'NewLangNameInvalid'=>'اسم اللغة غير صحيح'
+                        'NewLangNameInvalid'=>'اسم اللغة غير صحيح',
+
+                        'EditLanguageRequired'=>'يرجي ادخال اللغة',
+                        'EditTableRequired'=>'يرجي ادخال الجدول',
+                        'EditKeyRequired'=>'يرجي ادخال المفتاج',
+                        'EditLanguageInvalid'=>'اللغة غير صحيحة',
+                        'EditTableInvalid'=>'الجدول فير صحيح',
+                        'EditKeyInvalid'=>'المفتاح غير صحيح',
+                        'EditKey2Invalid'=>'المفتاح الثاني غير صحيح',
                     ],
                     'Message'=>[
                         'LoginPatentCode'=>'تم التسجيل بنجاح',
