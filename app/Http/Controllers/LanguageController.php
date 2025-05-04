@@ -39,7 +39,7 @@ class LanguageController extends Controller
             $lang = $this->setupLanguage($nameLanguage);
             return view('admin.change_language',[
                 'lang'=>$lang,
-                'active'=>'ChangeLanguage',
+                'active'=>$nameLanguage,
                 'myRadios'=>$this->setupRadios($lang->myLanguage),
                 'logOut'=>route('admin.logout')
             ]);
