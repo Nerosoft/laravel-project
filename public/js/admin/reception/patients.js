@@ -120,8 +120,12 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
         date_birth.removeClass('error-message');
 
 
-      if(file && $.inArray(file.type, ['image/jpeg', 'image/png', 'image/gif']) === -1){
+      if(file && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif'){
         (new bootstrap.Toast($('#myToast23'), { delay: 10000 })).show();
+        preview.addClass('error-message');
+        isValid = false;
+      }else if(file && file.size > 1048576){
+        (new bootstrap.Toast($('#myToast24'), { delay: 10000 })).show();
         preview.addClass('error-message');
         isValid = false;
       }else
