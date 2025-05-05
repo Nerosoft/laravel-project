@@ -99,7 +99,7 @@ class ReceptionController extends Controller implements LangObject
     
     public function createPatientServices(Request $request){
         $lang = $this->initLanguage('patientRegisteration_create', Rays::find(request()->session()->get('userId')));
-        $validated = $request->validate([
+        $request->validate([
             'item' => ['required', 'array'],
             'item2' => ['array'],
             'item.*' => ['required',
@@ -164,7 +164,7 @@ class ReceptionController extends Controller implements LangObject
     }
     public function editPatientServices(Request $request){
         $lang = $this->initLanguage('patientRegisteration_edit', Rays::find(request()->session()->get('userId')));
-        $validated = $request->validate([
+        $request->validate([
             'id' => ['required', Rule::in($lang->size1)],
             'item' => ['required', 'array'],
             'item2' => ['array'],
