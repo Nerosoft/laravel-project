@@ -400,7 +400,7 @@ class ReceptionController extends Controller implements LangObject
     }
     public function editPatent(){
         $lang = $this->initLanguage('patients_edit', Rays::find(request()->session()->get('userId')));
-        request()->validate([
+        $validator = Validator::make(request()->all(), [
             'id' => ['required', Rule::in($lang->size1)],
             'avatar' => ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'],
             'patent-name' => ['required', 'min:3'],
@@ -459,6 +459,8 @@ class ReceptionController extends Controller implements LangObject
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
+        if ($validator->fails())
+            return back()->withErrors($validator);
         $this->getEditDataBase('Patent', $this, $lang->avatar);
         return back()->with('success', $lang->successfully1);
     }
