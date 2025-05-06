@@ -392,6 +392,7 @@ class ReceptionController extends Controller implements LangObject
             'avatar.image'=> $lang->error23,
             'avatar.mimes'=> $lang->error31,
             'avatar.max'=> $lang->error32,
+            'avatar.uploaded'=>$lang->error23,
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
@@ -456,6 +457,7 @@ class ReceptionController extends Controller implements LangObject
             'avatar.image'=> $lang->error23,
             'avatar.mimes'=> $lang->error31,
             'avatar.max'=> $lang->error32,
+            'avatar.uploaded'=>$lang->error23,
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
