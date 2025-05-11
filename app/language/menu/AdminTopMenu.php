@@ -20,6 +20,6 @@ class AdminTopMenu extends SetupMenu
             foreach ($branch as $key => $branch)
                 $this->MyBranch[$key] = new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
                 $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
-                $branch['Country'], $branch['Follow'], $branch['id']);
+                $branch['Country'], $branch['Follow']);
     }
 }

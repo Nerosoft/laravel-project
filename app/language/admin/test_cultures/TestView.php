@@ -22,7 +22,7 @@ class TestView extends Page{
 
         $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
         $ob[$ob['Setting']['Language']]['Html']['Direction'], 
-        $ob['Branch'], 
+$ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'], 
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'CreateTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'CreateCultures' : 'CreateCurrentOffers') : 'CreatePackages')],
         $ob[$ob['Setting']['Language']]['Title'][$state === 'AllTestCultures' ? 'EditTest' : ($state !== 'PackagesCultures' ? ($state !== 'CurrentOffers' ? 'EditCultures' : 'EditCurrentOffers') : 'EditPackages')],

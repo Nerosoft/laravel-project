@@ -15,9 +15,8 @@ class Branch extends SearchId
     private $Address;
     private $Country;
     private $Follow;
-    private $id;
     public function __construct($Name, $Phone, $Governments,
-    $City, $Street, $Building, $Address, $Country, $Follow, $id)
+    $City, $Street, $Building, $Address, $Country, $Follow)
     {
         $this->Name = $Name;
         $this->Phone = $Phone;
@@ -28,7 +27,6 @@ class Branch extends SearchId
         $this->Address = $Address;
         $this->Country = $Country;
         $this->Follow = $Follow;
-        $this->id = $id;
     }
     public function getName(){
         return $this->Name;
@@ -59,8 +57,5 @@ class Branch extends SearchId
     }
     public function getFollow(){
         return $this->getValue($this->Follow, 'SelectBranchBox');
-    }
-    public function getId(){
-        return $this->id;
     }
 }

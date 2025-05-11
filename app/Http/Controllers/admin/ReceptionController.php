@@ -156,7 +156,7 @@ class ReceptionController extends Controller implements LangObject
             'item.*.required'=>$lang->error13,
             'item2.*.required'=>$lang->error13
         ]);
-        $this->getCreateDataBase('Receipt', $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'Receipt', $this->generateUniqueIdentifier(), $this);
         return response()->json([
             'success' => true,
             'message'=>$lang->successfully1
@@ -224,7 +224,7 @@ class ReceptionController extends Controller implements LangObject
             'item.*.required'=>$lang->error13,
             'item2.*.required'=>$lang->error13
         ]);
-        $this->getEditDataBase('Receipt', $this);  
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), 'Receipt', $this);  
         return response()->json([
             'success' => true,
             'message'=>$lang->successfully1
@@ -249,9 +249,8 @@ class ReceptionController extends Controller implements LangObject
             'name.required' => $lang->error1,
             'name.min' => $lang->error2,
         ]);
-        $this->getCreateDataBase('Knows', $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'Knows', $this->generateUniqueIdentifier(), $this);
         return back()->with('success', $lang->successfully1);
-
     }
     public function editKnows(){
         $lang = $this->initLanguage('knows_edit', Rays::find(request()->session()->get('userId')));
@@ -263,14 +262,9 @@ class ReceptionController extends Controller implements LangObject
             'id.in' => $lang->error4,
             'name.required' => $lang->error1,
             'name.min' => $lang->error2,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase('Knows', $this);
-            return back()->with('success', $lang->successfully1);
-        }
-  
+        ])->validate();
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), 'Knows', $this);
+        return back()->with('success', $lang->successfully1);
     }
     public function deleteKnows(){
         $lang = $this->initLanguage('knows_delete', Rays::find(request()->session()->get('userId')));
@@ -396,7 +390,7 @@ class ReceptionController extends Controller implements LangObject
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
         ]);
-        $this->getCreateDataBase('Patent', $this, $lang->avatar);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'Patent', $this->generateUniqueIdentifier(), $this, $lang->avatar);
         return back()->with('success', $lang->successfully1);
     }
     public function editPatent(){
@@ -460,10 +454,8 @@ class ReceptionController extends Controller implements LangObject
             'avatar.uploaded'=>$lang->error23,
             'choices.required_without'=>$lang->error16,
             'patent-other.required_without'=>$lang->error16,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        $this->getEditDataBase('Patent', $this, $lang->avatar);
+        ])->validate();
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), 'Patent', $this, $lang->avatar);
         return back()->with('success', $lang->successfully1);
     }
     public function deletePatent(){
@@ -477,7 +469,7 @@ class ReceptionController extends Controller implements LangObject
         $this->getDeleteDatabade('Patent');
         return back()->with('success', $lang->successfully1);
     }
-    public function getMyObject($name, $image = null, $id = null){
+    public function getMyObject($name, $image, $id = null){
         if($name === 'Knows')
             return array('Name'=>request()->input('name'));
         else if($name === 'Receipt')

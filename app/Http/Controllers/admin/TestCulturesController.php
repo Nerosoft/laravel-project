@@ -94,7 +94,7 @@ class TestCulturesController extends Controller implements LangObject
             'input-output-lab.required' => $lang->error4,
             'input-output-lab.in' => $lang->error6,
         ]);
-        $this->getCreateDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), $myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this->generateUniqueIdentifier(), $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editTest($myId){
@@ -116,13 +116,9 @@ class TestCulturesController extends Controller implements LangObject
             'input-output-lab.in' => $lang->error6,
             'id.required'=>$lang->error7,
             'id.in'=>$lang->error8,
-        ]);
-        if($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase($myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this);
-            return back()->with('success', $lang->successfully1);
-        }
+        ])->validate();
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), $myId !== 'AllTestCultures' ? ($myId !== 'TheCultures' ? 'Packages' : 'Cultures') : 'Test', $this);
+        return back()->with('success', $lang->successfully1);    
     }
     public function deleteTest($myId){
         $lang = $this->initLanguage('Delete-Test', Rays::find(request()->session()->get('userId')), $myId);        
@@ -157,7 +153,7 @@ class TestCulturesController extends Controller implements LangObject
             'state.required' => $lang->error7,
             'state.in' => $lang->error10,
         ]);
-        $this->getCreateDataBase('CurrentOffers', $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'CurrentOffers', $this->generateUniqueIdentifier(), $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editCurrentOffers(){
@@ -182,13 +178,9 @@ class TestCulturesController extends Controller implements LangObject
             'state.in' => $lang->error10,
             'id.required'=>$lang->error11,
             'id.in'=>$lang->error12,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase('CurrentOffers', $this);
-            return back()->with('success', $lang->successfully1);
-        }
+        ])->validate();
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), 'CurrentOffers', $this);
+        return back()->with('success', $lang->successfully1);
     }
     public function deleteCurrentOffers(){
         $lang = $this->initLanguage('Delete-Offers', Rays::find(request()->session()->get('userId')));
@@ -238,7 +230,7 @@ class TestCulturesController extends Controller implements LangObject
                 return null;
         }
     }
-    public function getMyObject($name, $image = null, $id = null){
+    public function getMyObject($name, $image, $id = null){
         if($name === 'CurrentOffers')
             return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'DisplayPrice'=>request()->input('display-price'), 'State'=>request()->input('state'), 'Id'=>$id !== null ? $id : request()->input('id'));
         else

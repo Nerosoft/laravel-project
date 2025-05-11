@@ -118,7 +118,7 @@ class ContractsController extends Controller implements LangObject
             'area.required' => $lang->error5,
             'area.min' => $lang->error6,
         ]);
-        $this->getCreateDataBase('Contracts', $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'Contracts', $this->generateUniqueIdentifier(), $this);
         return back()->with('success', $lang->successfully1);
     }
     public function editContract(){
@@ -137,13 +137,9 @@ class ContractsController extends Controller implements LangObject
             'governorate.min' => $lang->error4,
             'area.required' => $lang->error5,
             'area.min' => $lang->error6,
-        ]);
-        if ($validator->fails())
-            return back()->withErrors($validator);
-        else{
-            $this->getEditDataBase('Contracts', $this);
-            return back()->with('success', $lang->successfully1);
-        }
+        ])->validate();
+        $this->getEditDataBase(Rays::find(request()->session()->get('userId')), 'Contracts', $this);
+        return back()->with('success', $lang->successfully1);  
     }
     public function deleteContract(){
         $lang = $this->initLanguage('Delete-Nero-Soft-Contracts', Rays::find(request()->session()->get('userId')));
@@ -157,7 +153,7 @@ class ContractsController extends Controller implements LangObject
         return back()->with('success', $lang->successfully1);
     }
 
-    public function getMyObject($name, $image = null, $id = null){
+    public function getMyObject($name, $image, $id = null){
         return array('Name'=>request()->input('name'), 'Governorate'=>request()->input('governorate'), 'Area'=>request()->input('area'));
     }
 }

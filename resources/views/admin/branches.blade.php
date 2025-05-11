@@ -39,7 +39,7 @@
                 <td>{{$branch->getCountry()}}</td>
                 <td>{{$branch->getFollow()}}</td>
                 <td>
-                    @include('layout.model_delete', ['name'=>$branch->getName(), 'index'=>$branch->getId()])
+                    @include('layout.model_delete', ['name'=>$branch->getName(), 'index'=>$index])
                     <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm($('#editForm{{$index}}').find('#brance-rays-name'), $('#editForm{{$index}}').find('#brance-rays-phone'), $('#editForm{{$index}}').find('#brance-rays-country'), $('#editForm{{$index}}').find('#brance-rays-governments'), $('#editForm{{$index}}').find('#brance-rays-city'), $('#editForm{{$index}}').find('#brance-rays-street'), $('#editForm{{$index}}').find('#brance-rays-building'), $('#editForm{{$index}}').find('#brance-rays-address'), $('#editForm{{$index}}').find('#brance-rays-follow option'), 'editModel{{$index}}', '{{$branch->getName()}}', '{{$branch->getPhone()}}', '{{$branch->getGovernments()}}', '{{$branch->getCity()}}', '{{$branch->getStreet()}}', '{{$branch->getBuilding()}}', '{{$branch->getAddress()}}', '{{$branch->getCountry()}}', '{{$branch->getFollowId()}}')"></i>
                     @include('layout.all_models.admin.branch')
                 </td>

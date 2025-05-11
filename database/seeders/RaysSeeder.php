@@ -13,7 +13,6 @@ class RaysSeeder extends Seeder
         for ($i=0; $i < 2; $i++) { 
             Rays::create([
                 '_id'=>$i !=0 ? 'test'.$i:'salamtak-care',
-                'AppId'=>$i !=0 ? 'test'.$i:'salamtak-care',
                 'Setting'=>[
                     'Language'=>'english',
                 ],
@@ -847,7 +846,7 @@ class RaysSeeder extends Seeder
                         'AuthLoginDoctor'=>'error login doctor your id not found',
                         'BranchRaysId'=>'branch id required',
                         'BranchRaysIndex'=>'branch index required',
-                        'BranchRaysLenght'=>'branch index not found',
+                        'BranchRaysLenght'=>'branch id invalid',
                         'BranchRaysIdExist'=>'branch id not exist',
                         'BranchRaysIdUser'=>'I cant delete branch',
                         'PatentNameRequired'=>'name required',
@@ -995,6 +994,7 @@ class RaysSeeder extends Seeder
                         'BranchesAdd'=>'Seccessfully add',
                         'BranchesEdit'=>'Seccessfully edit',
                         'BranchesDelete'=>'Seccessfully delete',
+                        'BranchesChange'=>'Seccessfully change branch',
                         'ContractsAdd'=>'Seccessfully add',
                         'ContractsEdit'=>'Seccessfully edit',
                         'ContractsDelete'=>'Seccessfully delete',
@@ -1948,9 +1948,9 @@ class RaysSeeder extends Seeder
                         'AuthLoginAdmin'=>'خطأ في تسجيل الدخول المدير لم يتم العثور على هويتك',
                         'AuthLoginPatent'=>'خطأ في تسجيل الدخول المريض لم يتم العثور على هويتك',
                         'AuthLoginDoctor'=>'خطأ في تسجيل الدخول الطبيب لم يعثر على هويتك',
-                        'BranchRaysId'=>'حدث خطأ في حذف الفرع',
+                        'BranchRaysId'=>'يرجي ادخال عنوان الفرع',
                         'BranchRaysIndex'=>'حدث خطأ في تعديل الفرع',
-                        'BranchRaysLenght'=>'الفرع غير موجود',
+                        'BranchRaysLenght'=>'الفرع غير صحيح',
                         'BranchRaysIdExist'=>'الفرع غير موجد تأكد من عنوان الفرع',
                         'BranchRaysIdUser'=>'لا يمكنني حذف هذا الفرع',
                         'PatentNameRequired'=>'يرجي ادخال اسم المريض',
@@ -2098,6 +2098,7 @@ class RaysSeeder extends Seeder
                         'BranchesAdd'=>'تمت الاضافة بنجاح',
                         'BranchesEdit'=>'تم التعديل بنجاح',
                         'BranchesDelete'=>'تم الحذف بنجاح',
+                        'BranchesChange'=>'تم تغير الفرع بنجاح',
                         'ContractsAdd'=>'تمت الاضافة بنجاح',
                         'ContractsEdit'=>'تم التعديل بنجاح',
                         'ContractsDelete'=>'تم الحذف بنجاح',
@@ -2238,10 +2239,7 @@ class RaysSeeder extends Seeder
                         'Title'=>'تعديل النص',
                         'TitleDirection'=>'تعديل اتجاه الصفحه'
                     ],
-                ],
-
-
-                 
+                ],         
             ]);
         }
     }

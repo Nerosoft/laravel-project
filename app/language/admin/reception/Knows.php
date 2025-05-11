@@ -27,7 +27,7 @@ class Knows extends Page
         $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
         $ob[$ob['Setting']['Language']]['Html']['Direction'],
 
-        $ob['Branch'],
+$ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
         $ob[$ob['Setting']['Language']]['Title']['KnowsCreate'],
         $ob[$ob['Setting']['Language']]['Title']['KnowsEdit'],

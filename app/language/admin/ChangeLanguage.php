@@ -47,7 +47,7 @@ class ChangeLanguage extends DeleteModel
             $ob[$ob['Setting']['Language']]['Title']['ChangeLanguage'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            $ob['Branch'],
+    $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
             $ob[$ob['Setting']['Language']]['AllNamesLanguage']));

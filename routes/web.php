@@ -201,6 +201,7 @@ Route::controller(WhatsappController::class)->group(function () {
 //Branches
 Route::controller(BranchesController::class)->group(function () {
     Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
+    Route::get('/{id}/branchMain', 'changeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
     Route::post('/addBranchRays', 'newBranchRays')->name('addBranchRays')->middleware(IsLogin::class.':admin');
     Route::post('/editBranchRays', 'editBranchRays')->name('editBranchRays')->middleware(IsLogin::class.':admin');
     Route::post('/deleteBranchRays', 'deleteBranchRays')->name('deleteBranchRays')->middleware(IsLogin::class.':admin');
@@ -235,17 +236,6 @@ Route::controller(LogoutController::class)->group(function () {
     Route::get('/doctor/logout', 'logoutDoctor')->name('logoutDoctor')->middleware(IsLogin::class.':doctor');
     Route::get('/admin/logout', 'logoutAdmin')->name('admin.logout')->middleware(IsLogin::class.':admin');
 });
-Route::get('/{id}/branchMain', function ($id) {
-    $model = Rays::find($id);
-    if($model && $model->_id === $id || $model && $model->AppId === request()->session()->get('userLogout') && $model->_id === $id){
-        request()->session()->put('userId', $id);
-        return back();  
-    }
-    else{
-        $model = Rays::find(request()->session()->get('userId'));
-        return back()->withErrors($model[$model['Setting']['Language']]['Error']['BranchInvalid']);
-    }
-})->name('branchMain')->middleware(IsLogin::class.':admin');
 
 Route::get('/test', function () {
     return view('test');

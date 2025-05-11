@@ -73,7 +73,8 @@ class UserController extends Controller implements LangObject
                 if($user->getEmail() === $request->input('email'))
                     // return error email exsist
                     return back()->withInput()->withErrors($lang->error10);
-            $this->getCreateDataBase('User', $this);     
+            $request->session()->put('userId', $request->input('userId'));
+            $this->getCreateDataBase(Rays::find(request()->session()->get('userId')), 'User', $this->generateUniqueIdentifier(), $this);     
             
            
             $request->session()->put('userId', $request->input('userId'));
@@ -257,7 +258,7 @@ class UserController extends Controller implements LangObject
         else //if($id === 'language_doctor')
             return back()->withInput()->withErrors($this->setupLanguage('id_not_found4', Rays::first())->error1);
     }
-    public function getMyObject($name, $image = null, $id = null){
+    public function getMyObject($name, $image, $id = null){
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }
 }

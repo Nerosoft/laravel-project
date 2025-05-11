@@ -15,7 +15,7 @@ class Retrieved extends AdminTopMenu
         parent::__construct($ob['Setting']['Language'],
        $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
         $ob[$ob['Setting']['Language']]['Html']['Direction'],
-        $ob['Branch'],
+$ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
         $ob[$ob['Setting']['Language']]['Title']['Retrieved'],
         
         new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'));

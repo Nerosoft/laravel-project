@@ -17,7 +17,7 @@ class CustodyReport extends AdminTopMenu
         $ob[$ob['Setting']['Language']]['Html']['Direction'],
 
        
-        $ob['Branch'],
+$ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
 
         $ob[$ob['Setting']['Language']]['Title']['CustodyReport'],
         

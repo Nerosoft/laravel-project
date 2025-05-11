@@ -24,7 +24,7 @@ class Branches extends Page
             $ob[$ob['Setting']['Language']]['Title']['Branches'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            $ob['Branch'],
+            $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
             $ob[$ob['Setting']['Language']]['Title']['BranchRays'],
             $ob[$ob['Setting']['Language']]['Title']['BranchRaysEdit'],
