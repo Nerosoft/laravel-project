@@ -136,8 +136,8 @@ class BranchesController extends Controller implements LangObject
         return back()->with('success', $lang->successfully1);
     }
     public function deleteBranchRays(){
-        $myDb = Rays::find(request()->session()->get(request()->input('id') === request()->session()->get('userId')?'userLogout':'userId'));
-        $lang = $this->setupLanguage('branch_delete', $myDb[$myDb['Setting']['Language']]['Error'], $myDb[$myDb['Setting']['Language']]['Message']['BranchesDelete'], request()->session()->get('userId') !== request()->session()->get('userLogout') && isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):(isset($myDb['Branch'])?array_keys($myDb['Branch']):array()));
+        $myDb = Rays::find(request()->session()->get('userId'));
+        $lang = $this->setupLanguage('branch_delete', $myDb[$myDb['Setting']['Language']]['Error'], request()->input('id') === request()->session()->get('userId')?Rays::find(request()->session()->get('userLogout'))[Rays::find(request()->session()->get('userLogout'))['Setting']['Language']]['Message']['BranchesDelete']:$myDb[$myDb['Setting']['Language']]['Message']['BranchesDelete'], request()->session()->get('userId') !== request()->session()->get('userLogout') && isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):(isset($myDb['Branch'])?array_keys($myDb['Branch']):array()));
         request()->validate([
             'id' => ['required', Rule::in($lang->size1)],
             ], [
