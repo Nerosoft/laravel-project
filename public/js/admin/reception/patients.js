@@ -189,10 +189,11 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
   else
     patent_other.val(myDisease);
 }
-function openImage(avatar, preview){
+function openImage(avatar){
   avatar.click();
-  avatar.on('change', function () {
-    const file = this.files[0];
+}
+function changeImage(el, preview){
+   const file = el.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -200,7 +201,6 @@ function openImage(avatar, preview){
       };
       reader.readAsDataURL(file);
     }
-  }); 
 }
 function displayImage(id){
   openForm(id);

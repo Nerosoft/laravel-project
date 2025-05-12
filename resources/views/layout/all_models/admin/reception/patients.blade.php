@@ -17,11 +17,11 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
-                            <input type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
+                            <input onchange="changeImage(this, $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
                             <div class="pt-2 form-group">
                             <h5>{{ $lang->label3 }}</h5>
                             <img id="preview" src="{{ isset($index) ? ($patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')) : asset('img/admin/avatar1.png')}}" alt="Avatar Preview" class="avatar preview">
-                            <button type="button" class="upload-btn" onclick="openImage($('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#avatar'), $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" id="uploadBtn">{{$lang->button1}}</button>
+                            <button type="button" class="upload-btn" onclick="openImage($('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#avatar'))" id="uploadBtn">{{$lang->button1}}</button>
                             </div>
                         </div>
                     </div>
