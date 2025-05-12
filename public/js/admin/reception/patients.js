@@ -192,8 +192,7 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
 function openImage(avatar){
   avatar.click();
 }
-function changeImage(el, preview){
-   const file = el.files[0];
+function changeImage(file, preview){
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {

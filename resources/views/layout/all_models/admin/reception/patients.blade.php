@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
-                            <input onchange="changeImage(this, $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
+                            <input onchange="changeImage(this.files[0], $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
                             <div class="pt-2 form-group">
                             <h5>{{ $lang->label3 }}</h5>
                             <img id="preview" src="{{ isset($index) ? ($patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')) : asset('img/admin/avatar1.png')}}" alt="Avatar Preview" class="avatar preview">
