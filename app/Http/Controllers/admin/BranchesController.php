@@ -13,16 +13,18 @@ use App\Http\interface\LangObject;
 
 class BranchesController extends Controller implements LangObject
 {
-    public function setupLanguage($init, $error = null, $message = null, $myBranch = null, $selectBranchBox = null){
+    public function setupLanguage($init, $myDb = null){
         switch ($init) {
             case 'Branch':
                 return new Branches($init);
             case 'branch_create':
-                return new AppModel('option1', $error, 'Branch', $message, $selectBranchBox);    
+                return new AppModel('option1', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Error'], 'Branch', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Message']['BranchesAdd'], array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']));    
             case 'branch_edit':
-                return new AppModel('option2', $error, 'Branch', $message, $myBranch, $selectBranchBox);    
+                return new AppModel('option2', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Error'], 'Branch', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Message']['BranchesEdit'], isset($myDb['Branch'])?array_keys($myDb['Branch']):array(), array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']));    
             case 'branch_delete':
-                return new AppModel('delete', $error, 'Branch', $message, $myBranch);
+                return new AppModel('delete', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Error'], 'Branch', (request()->session()->get('userLogout') === request()->session()->get('userId')||request()->input('id')===request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')||request()->input('id')===request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Message']['BranchesDelete'], isset($myDb['Branch'])?array_keys($myDb['Branch']):array());
+            case'change':
+                return new AppModel('delete', $myDb[$myDb['Setting']['Language']]['Error'], 'Branch', $myDb[$myDb['Setting']['Language']]['Message']['BranchesChange'], isset($myDb['Branch'])?array(request()->session()->get('userLogout')=>['Name'=>$myDb[$myDb['Setting']['Language']]['AppSettingAdmin']['BranchMain']]):(isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?Rays::find(request()->session()->get('userLogout'))['Branch']:array()));
         }
     }
     public function index(){
@@ -35,8 +37,7 @@ class BranchesController extends Controller implements LangObject
         ]);
     }
     public function changeBranch($id = null){
-        $myDb = Rays::find($id)?Rays::find($id):Rays::find(request()->session()->get('userId'));
-        $lang = $this->setupLanguage('branch_delete', $myDb[$myDb['Setting']['Language']]['Error'], $myDb[$myDb['Setting']['Language']]['Message']['BranchesChange'], !isset(Rays::find(request()->session()->get('userLogout'))['Branch'])||$id === request()->session()->get('userLogout')?[$id=>['Name'=>$myDb[$myDb['Setting']['Language']]['AppSettingAdmin']['BranchMain']]]:Rays::find(request()->session()->get('userLogout'))['Branch']);
+        $lang = $this->setupLanguage('change', Rays::find($id)?Rays::find($id):Rays::find(request()->session()->get('userId')));
         $validator = Validator::make(['id'=>$id], [
             'id'=>['required', Rule::in(array_keys($lang->size1))]
         ], [
@@ -47,8 +48,8 @@ class BranchesController extends Controller implements LangObject
         return back()->with('success', $lang->successfully1.' '.$lang->size1[$id]['Name']);
     }
     public function newBranchRays(Request $request){
-        $myDb = Rays::find(request()->session()->get('userId'));
-        $lang = $this->setupLanguage('branch_create', $myDb[$myDb['Setting']['Language']]['Error'], $myDb[$myDb['Setting']['Language']]['Message']['BranchesAdd'], null, array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']));
+        $myDb = Rays::find(request()->session()->get('userLogout'));
+        $lang = $this->setupLanguage('branch_create', $myDb);
         $request->validate([
             'brance_rays_name' => ['required', 'min:3'],
             'brance_rays_phone' => ['required', 'regex:/^[0-9]{11}$/'],
@@ -81,7 +82,6 @@ class BranchesController extends Controller implements LangObject
             'brance_rays_follow.in' => $lang->error19
         ]);
         $myId = Str::uuid()->toString();
-        $myDb = request()->session()->get('userLogout') !== request()->session()->get('userId')?Rays::find(request()->session()->get('userLogout')):$myDb;
         $this->getCreateDataBase($myDb, 'Branch', $myId, $this);
         //conver model database to array        
         $myBranch = $myDb->toArray();
@@ -95,8 +95,8 @@ class BranchesController extends Controller implements LangObject
         return back()->with('success', $lang->successfully1);
     }
     public function editBranchRays(){
-        $myDb = Rays::find(request()->session()->get('userId'));        
-        $lang = $this->setupLanguage('branch_edit', $myDb[$myDb['Setting']['Language']]['Error'], $myDb[$myDb['Setting']['Language']]['Message']['BranchesEdit'], request()->session()->get('userId') !== request()->session()->get('userLogout') && isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):(isset($myDb['Branch'])?array_keys($myDb['Branch']):array()), array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']));
+        $myDb = Rays::find(request()->session()->get('userLogout'));        
+        $lang = $this->setupLanguage('branch_edit', $myDb);
         $validator = Validator::make(request()->all(), [
             'id' => ['required', Rule::in($lang->size1)],
             'brance_rays_name' => ['required', 'min:3'],
@@ -132,12 +132,11 @@ class BranchesController extends Controller implements LangObject
             'brance_rays_follow.required' => $lang->error9,
             'brance_rays_follow.in' => $lang->error19
         ])->validate();
-        $this->getEditDataBase(request()->session()->get('userLogout') !== request()->session()->get('userId')?Rays::find(request()->session()->get('userLogout')):$myDb, 'Branch', $this);     
+        $this->getEditDataBase($myDb, 'Branch', $this);     
         return back()->with('success', $lang->successfully1);
     }
     public function deleteBranchRays(){
-        $myDb = Rays::find(request()->session()->get('userId'));
-        $lang = $this->setupLanguage('branch_delete', $myDb[$myDb['Setting']['Language']]['Error'], request()->input('id') === request()->session()->get('userId')?Rays::find(request()->session()->get('userLogout'))[Rays::find(request()->session()->get('userLogout'))['Setting']['Language']]['Message']['BranchesDelete']:$myDb[$myDb['Setting']['Language']]['Message']['BranchesDelete'], request()->session()->get('userId') !== request()->session()->get('userLogout') && isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):(isset($myDb['Branch'])?array_keys($myDb['Branch']):array()));
+        $lang = $this->setupLanguage('branch_delete', Rays::find(request()->session()->get('userLogout')));
         request()->validate([
             'id' => ['required', Rule::in($lang->size1)],
             ], [

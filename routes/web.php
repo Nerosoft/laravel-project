@@ -201,7 +201,7 @@ Route::controller(WhatsappController::class)->group(function () {
 //Branches
 Route::controller(BranchesController::class)->group(function () {
     Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
-    Route::get('/{id}/branchMain', 'changeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
+    Route::get('/branchMain/{id?}', 'changeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
     Route::post('/addBranchRays', 'newBranchRays')->name('addBranchRays')->middleware(IsLogin::class.':admin');
     Route::post('/editBranchRays', 'editBranchRays')->name('editBranchRays')->middleware(IsLogin::class.':admin');
     Route::post('/deleteBranchRays', 'deleteBranchRays')->name('deleteBranchRays')->middleware(IsLogin::class.':admin');
