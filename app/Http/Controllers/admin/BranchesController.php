@@ -25,8 +25,7 @@ class BranchesController extends Controller implements LangObject
                 return new AppModel('delete', (request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Error'], 'Branch', (request()->session()->get('userLogout') === request()->session()->get('userId')||request()->input('id')===request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))[(request()->session()->get('userLogout') === request()->session()->get('userId')||request()->input('id')===request()->session()->get('userId')?$myDb:Rays::find(request()->session()->get('userId')))['Setting']['Language']]['Message']['BranchesDelete'], isset($myDb['Branch'])?array_keys($myDb['Branch']):array());
             case'change':
                 return new AppModel('delete', $myDb[$myDb['Setting']['Language']]['Error'], 'Branch', $myDb[$myDb['Setting']['Language']]['Message']['BranchesChange'],
-                isset($myDb['Branch'])?array(request()->session()->get('userLogout')=>['Name'=>$myDb[$myDb['Setting']['Language']]['AppSettingAdmin']['BranchMain']]):
-                (isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?Rays::find(request()->session()->get('userLogout'))['Branch']:array(request()->session()->get('userLogout')=>['Name'=>$myDb[$myDb['Setting']['Language']]['AppSettingAdmin']['BranchMain']])));
+                $myDb['Branch']||!isset(Rays::find(request()->session()->get('userLogout'))['Branch'])?array(request()->session()->get('userLogout')=>['Name'=>$myDb[$myDb['Setting']['Language']]['AppSettingAdmin']['BranchMain']]):Rays::find(request()->session()->get('userLogout'))['Branch']);
         }
     }
     public function index(){
