@@ -350,7 +350,7 @@
                                 <div class="col-md-4">
                                 <!-- Date Input with Icon -->
                                 <label for="payment-date" class="form-label"><i class="bi bi-clipboard2-check"></i>{{$lang->label24}}</label>
-                                <input oninvalid="this.setCustomValidity('{{$lang->error6}}');this.classList.add('error-message');" oninput="this.setCustomValidity('');this.classList.remove('error-message');" title="{{$lang->label24}}" type="date" id="payment-date" value="{{isset($index) ? $receipt->getPaymentDate() : ''}}" class="form-control"/>
+                                <input onclick="openDatePicker(this)" oninvalid="this.setCustomValidity('{{$lang->error6}}');this.classList.add('error-message');" oninput="this.setCustomValidity('');this.classList.remove('error-message');" title="{{$lang->label24}}" type="date" id="payment-date" value="{{isset($index) ? $receipt->getPaymentDate() : ''}}" class="form-control"/>
                                 </div>
                                 <div class="col-md-4">
                                 <!-- Amount Paid Input with Icon -->

@@ -135,3 +135,8 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function openDatePicker(date) {
+  date.showPicker(); // Opens the date picker on click
+}
