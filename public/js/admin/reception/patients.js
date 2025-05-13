@@ -195,15 +195,16 @@ function changeImage(file, preview){
       const reader = new FileReader();
       reader.onload = function (e) {
         var img = new Image;
+        img.src = e.target.result; 
+        preview.attr('src', e.target.result);
         img.onload = function() {
-          if(img.width<=300 || img.height<=300){
+          if(this.width<=300 || this.height<=300){
             (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
             preview.addClass('error-message');  
           }else
             preview.removeClass('error-message');
         };
-        img.src = e.target.result; 
-        preview.attr('src', e.target.result);
+        
       };
       reader.readAsDataURL(file);
     }
