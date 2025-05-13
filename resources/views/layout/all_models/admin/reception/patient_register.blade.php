@@ -125,7 +125,7 @@
                                 <i class="bi bi-clock-history"></i>
                                 {{$lang->label10}}
                             </label>
-                            <input id="last-period-date" type="date" class="form-control" disabled value="{{isset($index) ? $receipt->getMyPatient()->getLastPeriodDate() : ''}}" placeholder="{{$lang->hint7}}">
+                            <input id="last-period-date" type="date" class="form-control" disabled value="{{isset($index) ? $receipt->getMyPatient()->getLastPeriodDate() : ''}}">
                         </div>
                     </div>
                     <div class="col-md-auto">
@@ -134,7 +134,7 @@
                                 <i class="bi bi-cake2"></i>
                                 {{$lang->label11}}
                             </label>
-                            <input id="date-birth" type="date" class="form-control" disabled value="{{isset($index) ? $receipt->getMyPatient()->getDateBirth() : ''}}" placeholder="{{$lang->hint8}}">
+                            <input id="date-birth" type="date" class="form-control" disabled value="{{isset($index) ? $receipt->getMyPatient()->getDateBirth() : ''}}">
                         </div>
                     </div>
                     <div class="col-md-auto">
@@ -350,7 +350,7 @@
                                 <div class="col-md-4">
                                 <!-- Date Input with Icon -->
                                 <label for="payment-date" class="form-label"><i class="bi bi-clipboard2-check"></i>{{$lang->label24}}</label>
-                                <input type="date" id="payment-date" value="{{isset($index) ? $receipt->getPaymentDate() : ''}}" class="form-control"/>
+                                <input oninvalid="this.setCustomValidity('{{$lang->error6}}');this.classList.add('error-message');" oninput="this.setCustomValidity('');this.classList.remove('error-message');" title="{{$lang->label24}}" type="date" id="payment-date" value="{{isset($index) ? $receipt->getPaymentDate() : ''}}" class="form-control"/>
                                 </div>
                                 <div class="col-md-4">
                                 <!-- Amount Paid Input with Icon -->

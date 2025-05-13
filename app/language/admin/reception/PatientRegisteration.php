@@ -154,8 +154,6 @@ class PatientRegisteration extends Page
             $this->hint4 = $ob[$this->language]['Hint']['PatentEmail'];
             $this->hint5 = $ob[$this->language]['Hint']['PatentPhone'];
             $this->hint6 = $ob[$this->language]['Hint']['PatentPhone2'];
-            $this->hint7 = $ob[$this->language]['Hint']['PatentLastPeriodDate'];
-            $this->hint8 = $ob[$this->language]['Hint']['PatentDateBirth'];
             $this->hint9 = $ob[$this->language]['Hint']['PatentAddress'];
             $this->hint10 = $ob[$this->language]['Hint']['PatentFastingGours'];
             $this->hint11 = $ob[$this->language]['Hint']['PatentOther'];

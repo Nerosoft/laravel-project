@@ -453,9 +453,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         (new bootstrap.Toast($('#myToast5'), { delay: 10000 })).show();
         isValid = true;
     }
-    
-
-    if(payment_date.val() === ''){
+    if(!(/^\d{4}-\d{2}-\d{2}$/).test(payment_date.val())){
         (new bootstrap.Toast($('#myToast6'), { delay: 10000 })).show();
         payment_date.addClass('error-message');
         isValid = true;

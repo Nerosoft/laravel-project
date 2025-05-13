@@ -114,7 +114,7 @@
                                     <i class="bi bi-clock-history"></i>
                                     {{$lang->label10}}
                                 </label>
-                                <input id="last-period-date" type="date" class="form-control" value="{{isset($index) ? $patent->getLastPeriodDate() : old('last-period-date')}}" name="last-period-date" placeholder="{{$lang->hint9}}">
+                                <input oninvalid="this.setCustomValidity('{{$lang->error19}}');this.classList.add('error-message');" oninput="this.setCustomValidity('');this.classList.remove('error-message');" id="last-period-date" type="date" title="{{$lang->hint9}}" class="form-control" value="{{isset($index) ? $patent->getLastPeriodDate() : old('last-period-date')}}" name="last-period-date">
                             </div>
                         </div>
                         <div class="col-md-auto">
@@ -123,7 +123,7 @@
                                     <i class="bi bi-cake2"></i>
                                     {{$lang->label11}}
                                 </label>
-                                <input id="date-birth" type="date" class="form-control" value="{{isset($index) ? $patent->getDateBirth() : old('date-birth')}}" name="date-birth" placeholder="{{$lang->hint10}}">
+                                <input oninvalid="this.setCustomValidity('{{$lang->error20}}');this.classList.add('error-message');" oninput="this.setCustomValidity('');this.classList.remove('error-message');" id="date-birth"  type="date" title="{{$lang->hint10}}" class="form-control" value="{{isset($index) ? $patent->getDateBirth() : old('date-birth')}}" name="date-birth">
                             </div>
                         </div>
                         <div class="col-md-auto">
