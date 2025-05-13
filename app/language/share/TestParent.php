@@ -101,6 +101,7 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error22 = $this->error['PatentDiseasOtherInvalid'];
             $this->error23 = $this->error['PatentAvatarImage'];
             $this->error32 = $this->error['PatentAvatarMax'];
+            $this->PatentAvatarDimensions = $this->error['PatentAvatarDimensions'];
         }else if($myState === 'PatientRegisteration'){
             $this->error2 = $this->error['PatientRegisterationPaymentMethodRequired'];
             $this->error3 = $this->error['PatientRegisterationPatentCodeRequired'];
@@ -159,7 +160,6 @@ class TestParent extends AdminTopMenu implements initError, initError2, initErro
             $this->error28 = $this->error['PatentDiseaseInvalid'];
             $this->error29 = $this->error['PatentDiseasOtherInvalid'];
             $this->error31 = $this->error['PatentAvatarMimes'];
-            $this->PatentAvatarDimensions = $this->error['PatentAvatarDimensions'];
             $this->error33 = $this->error['PatentNationalityInvalid'];
             $this->error34 = $this->error['PatentFastingHoursInvalid'];
             $this->nationalityKeys = $var1;

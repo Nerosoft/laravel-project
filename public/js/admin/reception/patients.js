@@ -118,8 +118,6 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
         isValid = false;
       }else
         date_birth.removeClass('error-message');
-
-
       if(file && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif'){
         (new bootstrap.Toast($('#myToast23'), { delay: 10000 })).show();
         preview.addClass('error-message');
@@ -196,6 +194,15 @@ function changeImage(file, preview){
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
+        var img = new Image;
+        img.onload = function() {
+          if(img.width<=300 || img.height<=300){
+            (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
+            preview.addClass('error-message');  
+          }else
+            preview.removeClass('error-message');
+        };
+        img.src = e.target.result; 
         preview.attr('src', e.target.result);
       };
       reader.readAsDataURL(file);
