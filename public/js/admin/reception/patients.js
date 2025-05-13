@@ -126,6 +126,10 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
         (new bootstrap.Toast($('#myToast24'), { delay: 10000 })).show();
         preview.addClass('error-message');
         isValid = false;
+      }else if(file && preview.data('height')<=300 && preview.data('width')<=300){
+        (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
+        preview.addClass('error-message');  
+        isValid = false;
       }else
         preview.removeClass('error-message');
 
@@ -198,13 +202,9 @@ function changeImage(file, preview){
         img.src = e.target.result; 
         preview.attr('src', e.target.result);
         img.onload = function() {
-          if(this.width<=300 || this.height<=300){
-            (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
-            preview.addClass('error-message');  
-          }else
-            preview.removeClass('error-message');
+          preview.data('height', this.height);
+          preview.data('width', this.width);
         };
-        
       };
       reader.readAsDataURL(file);
     }
