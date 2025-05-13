@@ -126,7 +126,7 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
         (new bootstrap.Toast($('#myToast24'), { delay: 10000 })).show();
         preview.addClass('error-message');
         isValid = false;
-      }else if(file && preview.data('height')<=300 && preview.data('width')<=300){
+      }else if(file && preview.data('height')<=300 || file && preview.data('width')<=300){
         (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
         preview.addClass('error-message');  
         isValid = false;
