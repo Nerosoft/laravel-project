@@ -67,28 +67,6 @@ h2 {
   .upload-btn:hover {
     background-color: #0056b3;
   }
-  .avatar{
-    max-width: 120px;
-    max-height: 120px;
-    display: block;
-  }
-  .avatar2{
-    max-width: 72px;
-    max-height: 72px;
-    display: block;
-  }
-
-  .avatar3{
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-  }
-  
-
-    /* Style to hide the default calendar icon */
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-  }
 
 
 /* Extra small devices (phones, 600px and down) */

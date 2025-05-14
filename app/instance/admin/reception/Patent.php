@@ -4,6 +4,7 @@ namespace App\instance\admin\reception;
 use App\instance\share\SearchId;
 use App\Models\Rays;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 class Patent extends SearchId
 {
     /**
@@ -24,7 +25,7 @@ class Patent extends SearchId
     private $Contracting;
     private $Hours;
     private $Disease;
-    private $PatentCode;
+    protected $PatentCode;
     
     public function __construct($PatentCode, $Avatar, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
     $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
@@ -98,6 +99,9 @@ class Patent extends SearchId
     }
     public function getDateBirth(){
         return $this->DateBirth;
+    }
+    public function getDateBirth2(){
+        return (int)Carbon::parse($this->getDateBirth())->diffInYears(Carbon::now());
     }
     public function getAddress(){
         return $this->Address;

@@ -1,6 +1,7 @@
 @extends('layout.app_table')
 @section('title') {{$lang->title1}} @endsection
 <link rel="stylesheet" href="{{asset('css/admin/reception/patients.css')}}">
+<link rel="stylesheet" href="{{asset('css/admin/reception/sharePatientReg.css')}}">
 @extends('layout.nav_admin')
 @section('branch')
 @include('layout.branch_button')
@@ -267,6 +268,26 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.myNewDatelast-period-date').on('input', function () {
+        this.setCustomValidity('');
+        this.classList.remove('error-message');
+      if (!this.checkValidity()) {
+        this.setCustomValidity(@json($lang->error19));
+        this.classList.add('error-message');
+      }
+    });
+    $('.myNewDate-birth').on('input', function () {
+        this.setCustomValidity('');
+        this.classList.remove('error-message');
+      if (!this.checkValidity()) {
+        this.setCustomValidity(@json($lang->error20));
+        this.classList.add('error-message');
+      }
+    });
+});
+</script>
 <script src="{{asset('js/admin/reception/patients.js')}}" type="text/javascript"></script>
 @extends('layout.table_setting')
 @endsection

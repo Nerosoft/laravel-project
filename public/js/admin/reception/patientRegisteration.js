@@ -44,6 +44,7 @@ function initPatient(el, form, url){
     clearValue(form, url);
     //Convert JSON string to a JavaScript object
     const jsonObject = JSON.parse(el.value);
+    console.log(jsonObject);
     $(form).find('#patent-code').val(jsonObject.PatentCode);
     $(form).find('#patent-name').val(jsonObject.Name);
     $(form).find('#patent-nationality').val(jsonObject.Nationality);
@@ -481,7 +482,6 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
     if(isValid)
         return false;
 
-    
    
     let data = state !== 'create' ? {
         item: keyValueMap.get(key).itemsTest,

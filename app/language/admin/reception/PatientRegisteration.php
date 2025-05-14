@@ -5,10 +5,10 @@ use App\instance\admin\test_cultures\MyCurrentOffers;
 use App\instance\admin\reception\Receipt;
 use App\instance\admin\reception\MyKnows;
 use App\instance\admin\reception\Patent;
-use App\language\share\Page;
+use App\language\share\PatientInfo;
 use App\Models\Rays;
 use App\Menu;
-class PatientRegisteration extends Page
+class PatientRegisteration extends PatientInfo
 {
     /**
      * Create a new class instance.
@@ -44,6 +44,35 @@ class PatientRegisteration extends Page
             $ob[$ob['Setting']['Language']]['Button']['EditReceipt'],
             $ob[$ob['Setting']['Language']]['Table']['ReceiptId'],
             $ob[$ob['Setting']['Language']]['Table']['ReceiptPatientEdit'],
+
+
+            $ob[$ob['Setting']['Language']]['Label']['PatentName'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentName'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentEmail'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentEmail'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPhone'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentAddress'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentAddress'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['CheckBox'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentOther'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentOther'],
+
+
+
+
             $ob['Test'],
             $ob['Cultures'],
             $ob['Packages'],
@@ -53,6 +82,16 @@ class PatientRegisteration extends Page
             $ob[$ob['Setting']['Language']]['SelectOfferBox']);
       
             $this->title5 = $ob[$this->language]['Title']['ReceiptPatient'];
+
+
+    
+            
+                
+            $this->myCodePatient = $ob[$this->language]['Label']['PatientCode'];
+                  
+                  
+
+
             //init table
             $this->table28 = $ob[$this->language]['Table']['PatientTestName'];
             $this->table8 = $ob[$this->language]['Table']['PatientTestShortcut'];
@@ -92,7 +131,6 @@ class PatientRegisteration extends Page
             $this->table43 = $ob[$this->language]['Table']['ReceiptPatientAmountPaid'];
             $this->table44 = $ob[$this->language]['Table']['ReceiptPatientPaymentMethod'];
             $this->error1 = $ob[$this->language]['Error']['PatientRegisterationTestRequired'];
-            // $this->initError($ob[$this->language]['Error']);
             $this->error8 = $ob[$this->language]['Error']['PatientRegisterationNameRequired'];
 
 
@@ -106,20 +144,12 @@ class PatientRegisteration extends Page
             $this->button4 = $ob[$this->language]['Button']['PatientDeleteTest'];
             //init label
             $this->label3 = $ob[$this->language]['Label']['PatentNationality'];
-            $this->label4 = $ob[$this->language]['Label']['PatentNationalId'];
-            $this->label5 = $ob[$this->language]['Label']['PatentPassportNo'];
-            $this->label6 = $ob[$this->language]['Label']['PatentEmail'];
-            $this->label7 = $ob[$this->language]['Label']['PatentPhone'];
-            $this->label8 = $ob[$this->language]['Label']['PatentPhone2'];
             $this->label9 = $ob[$this->language]['Label']['PatentGender'];
-            $this->label10 = $ob[$this->language]['Label']['PatentLastPeriodDate'];
-            $this->label11 = $ob[$this->language]['Label']['PatentDateBirth'];
-            $this->label12 = $ob[$this->language]['Label']['PatentAddress'];
             $this->label13 = $ob[$this->language]['Label']['PatentContracting'];
-            $this->label14 = $ob[$this->language]['Label']['PatentFastingGours'];
-            $this->label15 = $ob[$this->language]['Label']['PatentOther'];
-            $this->label16 = $ob[$this->language]['Label']['PatientCode'];
-            $this->label17 = $ob[$this->language]['Label']['PatientNameServices'];
+
+
+            $this->PatientNameServices = $ob[$this->language]['Label']['PatientNameServices'];
+
             $this->label18 = $ob[$this->language]['Label']['PatientReceipt'];
             $this->label19 = $ob[$this->language]['Label']['PatientKnow'];
             $this->label20 = $ob[$this->language]['Label']['PatientNewItem'];
@@ -145,25 +175,14 @@ class PatientRegisteration extends Page
             $this->label41 = $ob[$this->language]['Label']['ReceiptPatentDue'];
             $this->label42 = $ob[$this->language]['Label']['ReceiptPatentInfo'];
             $this->label43 = $ob[$this->language]['Label']['ReceiptPatientTitle'];
-            $this->label44 = $ob[$this->language]['Label']['PatentName'];
             $this->label45 = $ob[$this->language]['Label']['PatentAvatar'];
-            //make hint
-            $this->hint1 = $ob[$this->language]['Hint']['PatentName'];
-            $this->hint2 = $ob[$this->language]['Hint']['PatentNationalId'];
-            $this->hint3 = $ob[$this->language]['Hint']['PatentPassportNo'];
-            $this->hint4 = $ob[$this->language]['Hint']['PatentEmail'];
-            $this->hint5 = $ob[$this->language]['Hint']['PatentPhone'];
-            $this->hint6 = $ob[$this->language]['Hint']['PatentPhone2'];
-            $this->hint9 = $ob[$this->language]['Hint']['PatentAddress'];
-            $this->hint10 = $ob[$this->language]['Hint']['PatentFastingGours'];
-            $this->hint11 = $ob[$this->language]['Hint']['PatentOther'];
+
             $this->hint12 = $ob[$this->language]['Hint']['PatientCode'];
             $this->hint13 = $ob[$this->language]['Hint']['PatientNationality'];
             $this->hint14 = $ob[$this->language]['Hint']['PatientGender'];
             $this->hint15 = $ob[$this->language]['Hint']['PatientContracting'];
             $this->hint16 = $ob[$this->language]['Hint']['patientAmountPaid'];
             //init selectbox
-            // $this->selectBox6 = $ob[$this->language]['SelectBox']['PatientTestName'];
             $this->selectBox1 = $ob[$this->language]['SelectBox']['PatientPaymentMethod'];
             $this->selectBox2 = $ob[$this->language]['SelectBox']['PatientNameServices'];
             $this->selectBox5 = $ob[$this->language]['SelectBox']['Patientknow'];
@@ -175,14 +194,53 @@ class PatientRegisteration extends Page
             $this->allTests = $ob[$this->language]['OptionTestBox'];
 
             
-            $this->dis = $ob[$this->language]['CheckBox'];
             //---------------------------
             if(isset($ob['Patent']))
                 foreach ($ob['Patent'] as $key => $patent)
                     $this->myPatent[$key] = new Patent($key, $patent['Avatar'], $patent['Name'], $patent['Nationality'], $patent['NationalId'], $patent['PassportNo'], $patent['Email'], $patent['Phone'], $patent['Phone2'], $patent['Gender'], $patent['LastPeriodDate'], $patent['DateBirth'], $patent['Address'], $patent['Contracting'], $patent['Hours'], $patent['Disease']);
             if(isset($ob['Receipt']))
                 foreach ($ob['Receipt'] as $key => $receipt)
-                    $this->arr6[$key] = (new Receipt($receipt['PatientCode'], $receipt['Know'],  $receipt['CurrentOffers'] != null ? array_reduce($receipt['CurrentOffers'], function ($acc, $item) {return is_array($acc) ? [...$acc, new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id'])] : array(new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id']));}, 0) : null, array_reduce($receipt['Test'], function ($acc, $item){return is_array($acc) ? [...$acc, new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id'])] : array( new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id']));}, 0), $receipt['Discount'], $receipt['DelayedMoney'], $receipt['PaymentDate'], $receipt['AmountPaid'], $receipt['PaymentMethod']))->setPatient($this->myPatent);
+                    $this->arr6[$key] = isset($this->myPatent[$receipt['PatentCode']])?new Receipt(
+                $receipt['Know'],
+
+                $receipt['CurrentOffers'] != null ? array_reduce($receipt['CurrentOffers'], function ($acc, $item) {return is_array($acc) ? [...$acc, new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id'])] : array(new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id']));}, 0) : null,
+                array_reduce($receipt['Test'], function ($acc, $item){return is_array($acc) ? [...$acc, new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id'])] : array( new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id']));}, 0),
+                 
+                $receipt['Discount'],
+                $receipt['DelayedMoney'],
+                $receipt['PaymentDate'],
+                $receipt['AmountPaid'],
+                $receipt['PaymentMethod'],
+
+                $this->myPatent[$receipt['PatentCode']]->getPatentCode(),
+                $this->myPatent[$receipt['PatentCode']]->getAvatar(),
+                $this->myPatent[$receipt['PatentCode']]->getName(), 
+                $this->myPatent[$receipt['PatentCode']]->getNationalityId(),
+                $this->myPatent[$receipt['PatentCode']]->getNationalId(),
+                $this->myPatent[$receipt['PatentCode']]->getPassportNo(),
+                $this->myPatent[$receipt['PatentCode']]->getEmail(),
+                $this->myPatent[$receipt['PatentCode']]->getPhone(), 
+                $this->myPatent[$receipt['PatentCode']]->getPhone2(),
+                $this->myPatent[$receipt['PatentCode']]->getGenderId(),
+                $this->myPatent[$receipt['PatentCode']]->getLastPeriodDate(),
+                $this->myPatent[$receipt['PatentCode']]->getDateBirth(), 
+                $this->myPatent[$receipt['PatentCode']]->getAddress(),
+                $this->myPatent[$receipt['PatentCode']]->getContracting(),
+                $this->myPatent[$receipt['PatentCode']]->getHours(),
+                $this->myPatent[$receipt['PatentCode']]->getDiseaseId(),
+            
+            ):new Receipt(
+                $receipt['Know'],
+
+                $receipt['CurrentOffers'] != null ? array_reduce($receipt['CurrentOffers'], function ($acc, $item) {return is_array($acc) ? [...$acc, new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id'])] : array(new MyCurrentOffers($item['Name'], $item['Shortcut'], $item['Price'], $item['DisplayPrice'], $item['State'], $item['Id']));}, 0) : null,
+                array_reduce($receipt['Test'], function ($acc, $item){return is_array($acc) ? [...$acc, new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id'])] : array( new Test($item['Name'], $item['Shortcut'], $item['Price'], $item['InputOutputLab'], $item['Id']));}, 0),
+                 
+                $receipt['Discount'],
+                $receipt['DelayedMoney'],
+                $receipt['PaymentDate'],
+                $receipt['AmountPaid'],
+                $receipt['PaymentMethod']);
+            
             if(isset($ob['Knows']))
                 foreach ($ob['Knows'] as $key => $value)
                     $this->arr1[$key] = new MyKnows($value['Name']);

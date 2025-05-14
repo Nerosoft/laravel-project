@@ -2,14 +2,12 @@
 namespace App\instance\admin\reception;
 use App\instance\share\SearchId;
 use App\Models\Rays;
-use Carbon\Carbon;
 use App\instance\admin\reception\Patent;
-class Receipt extends SearchId
+class Receipt extends Patent
 {
     /**
      * Create a new class instance.
      */
-    private $PatientCode;
     private $Know;
     private $CurrentOffers;
     private $Test;
@@ -24,10 +22,18 @@ class Receipt extends SearchId
     private $Total;
     private $Due;
     private $DueUser;		
-    public function __construct($PatientCode, $Know, $CurrentOffers, $Test,
-    $Discount, $DelayedMoney, $PaymentDate, $AmountPaid, $PaymentMethod)
+    public function __construct($Know, $CurrentOffers, $Test,
+    $Discount, $DelayedMoney, $PaymentDate, $AmountPaid, $PaymentMethod, 
+    $PatentCode = null, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
+    $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
+    $DateBirth = null, $Address = null, $Contracting = null, $Hours = null,
+    $Disease = null)
     {
-        $this->PatientCode = $PatientCode;
+        parent::__construct($PatentCode, $Avatar, $Name, $Nationality, $NationalId, $PassportNo,
+    $Email, $Phone, $Phone2, $Gender, $LastPeriodDate,
+    $DateBirth, $Address, $Contracting, $Hours,
+    $Disease);
+        
         $this->Know = $Know;
         $this->CurrentOffers = $CurrentOffers;
         $this->Test = $Test;
@@ -45,6 +51,7 @@ class Receipt extends SearchId
         $this->Due = $this->AmountPaid < $this->Total ? $this->Total - $this->AmountPaid : 0;
         $this->DueUser = $this->AmountPaid > $this->Total ? $this->AmountPaid - $this->Total : 0;
     }
+
     //get all test for set all test when user close model and open once agen
     public function getTestObject(){
         foreach ($this->Test as $key => $value)
@@ -81,9 +88,6 @@ class Receipt extends SearchId
     public function getDueUser(){
         return $this->DueUser;
     }
-    public function getPatientCode(){
-        return $this->PatientCode;
-    }
     public function getKnowId(){
         return $this->Know;
     }
@@ -118,19 +122,5 @@ class Receipt extends SearchId
     }
     public function getPaymentMethod(){
         return $this->getValue($this->PaymentMethod, 'PaymentMethodBox');
-    }
-    public function setPatient($myPatient){
-        //if patient not exist return new patient
-        $this->myPatient = isset($myPatient[$this->PatientCode])?$myPatient[$this->PatientCode]:new Patent('', null);
-        return $this;
-    }
-    public function getMyPatient(){
-        return $this->myPatient;
-    }
-    public function getDateBirth(){
-        return (int)Carbon::parse($this->myPatient->getDateBirth())->diffInYears(Carbon::now());
-    }
-    public function getPhone(){
-        return $this->Phone;
     }
 }

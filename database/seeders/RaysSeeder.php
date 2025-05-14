@@ -322,7 +322,6 @@ class RaysSeeder extends Seeder
                         'Model'=>'Model',
                         'CheckBox'=>'Checkbox',
                         'CutomLang'=>'Cutom Lang',
-                        'TitleCustomLang'=>'Title Custom Lang',
                         'TableInfo'=>'Table info',
                         'AppSettingAdmin'=>'App Setting Admin',
                         'AppSettingPatient'=>'App Setting Patient',
@@ -333,35 +332,6 @@ class RaysSeeder extends Seeder
                         'SelectNationalityBox'=>'Select Nationality Box',
                         'SelectGenderBox'=>'Select Gender Box',
                         'PaymentMethodBox'=>'Select Payment Method Box',
-                    ],
-                    'TitleCustomLang'=>[
-                        'SelectBox'=>'SelectBox',
-                        'Direction'=>'Direction',
-                        'Label'=>'Label',
-                        'Title'=>'Title',
-                        'Hint'=>'Hint',
-                        'Button'=>'Button',
-                        'AllNamesLanguage'=>'Language',
-                        'Html'=>'Html',
-                        'Menu'=>'Menu',
-                        'Error'=>'Error',
-                        'Message'=>'Message',
-                        'Table'=>'Table',
-                        'Model'=>'Model',
-                        'CheckBox'=>'CheckBox',
-                        'CutomLang'=>'title Cutom Lang',
-                        'TitleCustomLang'=>'title page lang',
-                        'AllLanguage'=>'All language',
-                        'TableInfo'=>'title table info',
-                        'AppSettingAdmin'=>'title App Setting Admin',
-                        'AppSettingPatient'=>'title App Setting Patient',
-                        'AppSettingDoctor'=>'title App Setting Doctor',
-                        'SelectTestBox'=>'title Select Test Box',
-                        'SelectOfferBox'=>'title Select Offer Box',
-                        'SelectBranchBox'=>'title Select Branch Box',
-                        'SelectNationalityBox'=>'title Select Nationality Box',
-                        'SelectGenderBox'=>'title Select Gender Box',
-                        'PaymentMethodBox'=>'title Select Payment Method Box',
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'English language',
@@ -486,22 +456,45 @@ class RaysSeeder extends Seeder
                         'PatentCortisone'=>'cortisone',
                     ],
                     'Title'=>[
+
+
+
+                        'SelectBox'=>'SelectBox',
+                        'Direction'=>'Direction',
+                        'Label'=>'Label',
+                        'Title'=>'Title',
+                        'Hint'=>'Hint',
+                        'Button'=>'Button',
+                        'AllNamesLanguage'=>'Language',
+                        'Html'=>'Html',
+                        'Menu'=>'Menu',
+                        'Error'=>'Error',
+                        'Message'=>'Message',
+                        'Table'=>'Table',
+                        'Model'=>'Model',
+                        'CheckBox'=>'CheckBox',
+                        'CutomLang'=>'title Cutom Lang',
+                        'AllLanguage'=>'All language',
+                        'TableInfo'=>'title table info',
+                        'AppSettingAdmin'=>'title App Setting Admin',
+                        'AppSettingPatient'=>'title App Setting Patient',
+                        'AppSettingDoctor'=>'title App Setting Doctor',
+                        'SelectTestBox'=>'title Select Test Box',
+                        'SelectOfferBox'=>'title Select Offer Box',
+                        'SelectBranchBox'=>'title Select Branch Box',
+                        'SelectNationalityBox'=>'title Select Nationality Box',
+                        'SelectGenderBox'=>'title Select Gender Box',
+                        'PaymentMethodBox'=>'title Select Payment Method Box',
+
+
+
+
+
+
                         'LoginPatent'=>'Login Patent',
                         'RegisterUser'=>'Register user',
                         'AdminUser'=>'Admin user',
                         'LoginAdmin'=>'Login admin',                     
-                        
-                        
-                       
-                       
-                        
-                        
-                        
-                        
-                        
-                        
-                       
-                       
                         
                         'LoginDoctor'=>'Login doctor',
                         'Vault'=>'Vault',
@@ -1438,7 +1431,6 @@ class RaysSeeder extends Seeder
                         'CheckBox'=>'مربع اختيار',
                         'CutomLang'=>'تعديل ثائمة اللغة',
                         'SelectBox'=>'صندوق الاختيار',
-                        'TitleCustomLang'=>'تعديل عناوين الصفح',
                         'TableInfo'=>'تعديل الجدول',
                         'AppSettingAdmin'=>'تعديل بيانات الادمن',
                         'AppSettingPatient'=>'تعديل بيانات المريض',
@@ -1449,35 +1441,6 @@ class RaysSeeder extends Seeder
                         'SelectNationalityBox'=>'تعديل بيانات صندوق الجنسية',
                         'SelectGenderBox'=>'تعديل بيانات صندوق النوع',
                         'PaymentMethodBox'=>'تعديل بيانات صندوق الدفع'
-                    ],
-                    'TitleCustomLang'=>[
-                        'CutomLang'=>'عنوان محتويات الفائمة',
-                        'Direction'=>'الاتجاه',
-                        'Label'=>'العناوين',
-                        'Title'=>'العناوين',
-                        'Hint'=>'التلميحات',
-                        'Button'=>'اسماء الزراير',
-                        'AllNamesLanguage'=>'اللغات',
-                        'Html'=>'الصفحة',
-                        'Menu'=>'القائمة',
-                        'Error'=>'الاخطاء',
-                        'Message'=>'الرسايل',
-                        'Table'=>'الجدول',
-                        'Model'=>'النموزج',
-                        'CheckBox'=>'العلامات',
-                        'SelectBox'=>'صندوق الاختيار',
-                        'TitleCustomLang'=>'عناوين الصفح',
-                        'AllLanguage'=>'كل الغات',
-                        'TableInfo'=>'صفحة تعديل بيانات الجدول',
-                        'AppSettingAdmin'=>'صفحة تعديل بيانات الادمن',
-                        'AppSettingPatient'=>'صفحة تعديل بيانات المريض',
-                        'AppSettingDoctor'=>'صفحة تعديل بيانات الدكتور',
-                        'SelectTestBox'=>'عنوان صفحة صندوق الاختبار',
-                        'SelectOfferBox'=>'عنوان صفحة صندوق العروض',
-                        'SelectBranchBox'=>'عنوان صفحة صندوق الفروع',
-                        'SelectNationalityBox'=>'عنوان صفحة صندوق الجنسية',
-                        'SelectGenderBox'=>'عنوان صفحة صندوق النوع',
-                        'PaymentMethodBox'=>'عنوان صفحة صندوق الدفع'
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'اللغة الانجليزية',
@@ -1602,6 +1565,41 @@ class RaysSeeder extends Seeder
                         'PatentCortisone'=>'كورتيزون',
                     ],
                     'Title'=>[
+
+
+
+
+                        'CutomLang'=>'عنوان محتويات الفائمة',
+                        'Direction'=>'الاتجاه',
+                        'Label'=>'العناوين',
+                        'Title'=>'العناوين',
+                        'Hint'=>'التلميحات',
+                        'Button'=>'اسماء الزراير',
+                        'AllNamesLanguage'=>'اللغات',
+                        'Html'=>'الصفحة',
+                        'Menu'=>'القائمة',
+                        'Error'=>'الاخطاء',
+                        'Message'=>'الرسايل',
+                        'Table'=>'الجدول',
+                        'Model'=>'النموزج',
+                        'CheckBox'=>'العلامات',
+                        'SelectBox'=>'صندوق الاختيار',
+                        'AllLanguage'=>'كل الغات',
+                        'TableInfo'=>'صفحة تعديل بيانات الجدول',
+                        'AppSettingAdmin'=>'صفحة تعديل بيانات الادمن',
+                        'AppSettingPatient'=>'صفحة تعديل بيانات المريض',
+                        'AppSettingDoctor'=>'صفحة تعديل بيانات الدكتور',
+                        'SelectTestBox'=>'عنوان صفحة صندوق الاختبار',
+                        'SelectOfferBox'=>'عنوان صفحة صندوق العروض',
+                        'SelectBranchBox'=>'عنوان صفحة صندوق الفروع',
+                        'SelectNationalityBox'=>'عنوان صفحة صندوق الجنسية',
+                        'SelectGenderBox'=>'عنوان صفحة صندوق النوع',
+                        'PaymentMethodBox'=>'عنوان صفحة صندوق الدفع',
+
+
+
+
+
                         'LoginPatent'=>'تسجيل دخول المريض',
                         'RegisterUser'=>'أنشاء مستخدم',
                         'AdminUser'=>'المدير',

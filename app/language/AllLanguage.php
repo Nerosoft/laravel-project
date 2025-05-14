@@ -20,9 +20,9 @@ class AllLanguage extends TableSetting
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
 
-    $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
+            $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
 
-            $ob[$ob['Setting']['Language']]['TitleCustomLang'][$title],
+            isset($ob[$ob['Setting']['Language']]['Title'][$title])?$ob[$ob['Setting']['Language']]['Title'][$title]:$ob[$ob['Setting']['Language']]['CutomLang'][$title],
             $ob[$ob['Setting']['Language']]['TableInfo'],
 
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',

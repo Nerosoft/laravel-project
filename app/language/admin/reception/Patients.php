@@ -3,9 +3,9 @@ namespace App\language\admin\reception;
 use App\instance\admin\contracts\Contracts;
 use App\Models\Rays;
 use App\instance\admin\reception\Patent;
-use App\language\share\Page;
+use App\language\share\PatientInfo;
 use App\Menu;
-class Patients extends Page
+class Patients extends PatientInfo
 {
     /**
      * Create a new class instance.
@@ -37,7 +37,31 @@ class Patients extends Page
             $ob[$ob['Setting']['Language']]['Button']['AddPatent'],
             $ob[$ob['Setting']['Language']]['Button']['CreatePatent'],
             $ob[$ob['Setting']['Language']]['Table']['PatentEdit'],
-            $ob[$ob['Setting']['Language']]['Table']['PatentId']);
+            $ob[$ob['Setting']['Language']]['Table']['PatentId'],
+
+            $ob[$ob['Setting']['Language']]['Label']['PatentName'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentName'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentEmail'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentEmail'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPhone'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentAddress'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentAddress'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['CheckBox'],
+            $ob[$ob['Setting']['Language']]['Label']['PatentOther'],
+            $ob[$ob['Setting']['Language']]['Hint']['PatentOther']);
 
             $this->title5 = $ob[$this->language]['Title']['PatentIamge'];
             //init table
@@ -60,42 +84,15 @@ class Patients extends Page
             //init label
             $this->label3 = $ob[$this->language]['Label']['PatentAvatar'];
             $this->label4 = $ob[$this->language]['Label']['PatentNationality'];
-            $this->label5 = $ob[$this->language]['Label']['PatentNationalId'];
-            $this->label6 = $ob[$this->language]['Label']['PatentPassportNo'];
-            $this->label7 = $ob[$this->language]['Label']['PatentPhone'];
-            $this->label8 = $ob[$this->language]['Label']['PatentPhone2'];
             $this->label9 = $ob[$this->language]['Label']['PatentGender'];
-            $this->label10 = $ob[$this->language]['Label']['PatentLastPeriodDate'];
-            $this->label11 = $ob[$this->language]['Label']['PatentDateBirth'];
-            $this->label12 = $ob[$this->language]['Label']['PatentAddress'];
             $this->label13 = $ob[$this->language]['Label']['PatentContracting'];
-            $this->label14 = $ob[$this->language]['Label']['PatentFastingGours'];
-            $this->label15 = $ob[$this->language]['Label']['PatentOther'];
-            $this->label16 = $ob[$this->language]['Label']['PatentName'];
-            $this->label17 = $ob[$this->language]['Label']['PatentEmail'];
-
             $this->nationality = $ob[$this->language]['SelectNationalityBox'];
             $this->gender = $ob[$this->language]['SelectGenderBox'];
-            $this->dis = $ob[$this->language]['CheckBox'];
-
             $this->selectBox1 = $ob[$this->language]['SelectBox']['PatentNationality'];
             $this->selectBox2 = $ob[$this->language]['SelectBox']['PatentGender'];
             $this->selectBox5 = $ob[$this->language]['SelectBox']['PatentContracting'];
             //make button
-           
             $this->button4 = $ob[$this->language]['Button']['PatentEdit'];
-            //make hint
-            $this->hint1 = $ob[$this->language]['Hint']['PatentName'];
-            $this->hint2 = $ob[$this->language]['Hint']['PatentEmail'];
-            $this->hint4 = $ob[$this->language]['Hint']['PatentNationalId'];
-            $this->hint5 = $ob[$this->language]['Hint']['PatentPassportNo'];
-            $this->hint6 = $ob[$this->language]['Hint']['PatentPhone'];
-            $this->hint7 = $ob[$this->language]['Hint']['PatentPhone2'];
-            $this->hint9 = $ob[$this->language]['Hint']['PatentLastPeriodDate'];
-            $this->hint10 = $ob[$this->language]['Hint']['PatentDateBirth'];
-            $this->hint11 = $ob[$this->language]['Hint']['PatentAddress'];
-            $this->hint3 = $ob[$this->language]['Hint']['PatentFastingGours'];
-            $this->hint8 = $ob[$this->language]['Hint']['PatentOther'];
             //make patent
             if(isset($ob['Patent']))
                 foreach ($ob['Patent'] as $key => $patent)
