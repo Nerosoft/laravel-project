@@ -40,7 +40,7 @@
                 <th>{{$loop->index + 1}}</th>
                 <th>{{$patent->getPatentCode()}}</th>
                 <th>{{$patent->getName()}}</th>
-                <th>year {{$patent->getDateBirth2()}}</th>
+                <th>{{$patent->getDateBirth2()}}</th>
                 <th>{{$patent->getPhone()}}</th>
                 <th>
                     @foreach(array_merge($patent->getTest(), $patent->getCurrentOffers()) as $test)
