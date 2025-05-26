@@ -92,18 +92,4 @@ class LoginAdminController extends EmailPassInformaion
     public function action(){
         return isset($this->successfully1)?redirect()->route('Home')->with('success', $this->successfully1):back()->withInput()->withErrors($this->errorMessage);
     }
-    // public function changeLanguage(){
-    //     if(Rays::find(request()->input('userId'))){
-    //         $ob = Rays::find(request()->input('userId'));
-    //         request()->validate([
-    //             'mylanguage' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
-    //         ], [
-    //             'mylanguage.required' => $ob[$ob['Setting']['Language']]['Error']['UserLanguageRequired'], 
-    //             'mylanguage.in' =>$ob[$ob['Setting']['Language']]['Error']['UserLanguageInvalid']
-    //         ]);
-    //         Cookie::queue(request()->input('userId'), serialize(request()->input('mylanguage')),2628000);
-    //         return back()->with('success', $ob[request()->input('mylanguage')]['Message']['UserLanguage'].$ob[request()->input('mylanguage')]['AllNamesLanguage'][request()->input('mylanguage')]);
-    //     }else
-    //         return back()->withInput()->withErrors(Rays::first()[Rays::first()['Setting']['Language']]['Error']['Language']);
-    // }
 }
