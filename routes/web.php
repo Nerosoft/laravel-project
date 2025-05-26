@@ -20,7 +20,7 @@ use App\Http\Middleware\Auth;
 use Illuminate\Http\Request;
 
 Route::controller(ChangeLanguageController::class)->group(function () {
-    Route::post('/language', 'changeLanguage')->name('language.changeLanguage');
+    Route::post('/language', 'changeLanguage')->name('language.changeLanguage')->middleware(Auth::class.':admin');
 });
 Route::controller(LoginAdminController::class)->group(function () {
     Route::get('/admin/login', 'index')->middleware(Auth::class.':admin');
