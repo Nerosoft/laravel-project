@@ -41,30 +41,31 @@
               <td>{{$index}}</td>
               <td><img id="preview" src="{{$patent->getAvatar() != null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}" alt="Avatar Preview" class="avatar2 preview"></td>
               <td>{{$patent->getName()}}</td>
-              <td>{{$patent->getNationality()}}</td>
+              <td>{{$patent->getNationalityId()}}</td>
               <td>{{$patent->getNationalId()}}</td>
               <td>{{$patent->getPassportNo()}}</td>
               <td>{{$patent->getEmail()}}</td>
               <td>{{$patent->getPhone()}}</td>
               <td>{{$patent->getPhone2()}}</td>
-              <td>{{$patent->getGender()}}</td>
+              <td>{{$patent->getGenderId()}}</td>
               <td>{{$patent->getLastPeriodDate()}}</td>
               <td>{{$patent->getDateBirth()}}</td>
               <td>{{$patent->getAddress()}}</td>
-              <td>{{$patent->getContracting()}}</td>
+              <td>{{$patent->getContractingId()}}</td>
               <td>{{$patent->getHours()}}</td>
               <td>
-                @if(is_array($patent->getDisease()))
-                @foreach($patent->getDisease() as $dis)
+                @if(is_array($patent->getDiseaseId()))
+                @foreach($patent->getDiseaseId() as $dis)
                 <spam>{{$dis}}</spam>
                 @endforeach
                 @else
-                {{$patent->getDisease()}}
+                {{$patent->getDiseaseId()}}
                 @endif
               </td>
               <td>
                 @include('layout.model_delete', ['name'=>$patent->getName()])
                 @include('layout.all_models.admin.reception.patients')
+                <!-- <i class="bi bi-wrench-adjustable edit" onclick="openForm('editModel{{$index}}')"></i> -->
                 <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm($('#editForm{{$index}}').find('#patent-name'), $('#editForm{{$index}}').find('#patent-nationality'), $('#editForm{{$index}}').find('#patent-gender'), $('#editForm{{$index}}').find('#patent-contracting'), $('#editForm{{$index}}').find('#patent-national-id'), $('#editForm{{$index}}').find('#patent-passport-no'), $('#editForm{{$index}}').find('#patent-email'), $('#editForm{{$index}}').find('#patent-phone'), $('#editForm{{$index}}').find('#patent-phone2'), $('#editForm{{$index}}').find('#patent-address'), $('#editForm{{$index}}').find('#patent-hours'), $('#editForm{{$index}}').find('#patent-other'), $('#editForm{{$index}}').find('#last-period-date'), $('#editForm{{$index}}').find('#date-birth'), $('#editForm{{$index}}').find('#preview'), $('#editForm{{$index}}').find('.form-check-input'), $('#editForm{{$index}}').find('#avatar'), 'editModel{{$index}}', {{json_encode($patent->getDiseaseId())}}, '{{$patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}', '{{$patent->getName()}}', '{{$patent->getNationalityId()}}', '{{$patent->getNationalId()}}', '{{$patent->getPassportNo()}}', '{{$patent->getEmail()}}', '{{$patent->getPhone()}}', '{{$patent->getPhone2()}}', '{{$patent->getGenderId()}}', '{{$patent->getLastPeriodDate()}}', '{{$patent->getDateBirth()}}', '{{$patent->getAddress()}}', '{{$patent->getContractingId()}}', '{{$patent->getHours()}}')"></i>
                 @if($patent->getAvatar() != null)
                     <div class="modal" id="imageModel{{$index}}" tabindex="-1" role="dialog">

@@ -44,7 +44,6 @@ function initPatient(el, form, url){
     clearValue(form, url);
     //Convert JSON string to a JavaScript object
     const jsonObject = JSON.parse(el.value);
-    console.log(jsonObject);
     $(form).find('#patent-code').val(jsonObject.PatentCode);
     $(form).find('#patent-name').val(jsonObject.Name);
     $(form).find('#patent-nationality').val(jsonObject.Nationality);
@@ -63,26 +62,17 @@ function initPatient(el, form, url){
     if(jsonObject.Avatar != null)
         $(form).find('#preview').attr("src", jsonObject.Avatar);
     
-    if(Array.isArray(jsonObject.Disease))
-        // Get all checkboxes
-        $(form).find('input[type="checkbox"]').each(function () {
-            if(jsonObject.Disease.includes($(this).val()))
-                this.checked = true;
+    if(typeof jsonObject.Disease === 'object'){
+        let myKeys = Object.keys(jsonObject.Disease);
+        $(form).find('input[type="checkbox"]').each(function(idx, el){
+            el.checked = myKeys[idx] === el.value ? true : false;
         });
+    }
     else
         $(form).find('#patent-other').val(jsonObject.Disease);
+
 }
 
-function initAllTests(test, idHeddinSelectBox){
-    test.forEach(element => {
-        idHeddinSelectBox.append('<option value="'+element+'">'+element[0]+'</option>');
-    });
-}
-function initCurrentOffers(currentOffers, idHeddinSelectBox){
-    currentOffers.forEach(element => {
-        idHeddinSelectBox.append('<option value="'+element+'">'+element[0]+'</option>');
-    });
-}
 
 async function openPDF(url, titleReceipt, label29, label30, label31, label32, label33, label34, label35, label36, label37, label38, label39, label40, label41, label42, label43, numberReceipt, dateReceipt, namePatient, codePatient, allTests, egp, Subtotal, TotalDiscount, Total, PaymentDate, AmountPaid, PaymentMethod, Due) {
     const { jsPDF } = window.jspdf;
@@ -223,7 +213,7 @@ $(document).ready(function() {
             $(this).val(0); // Set value to 100 if it exceeds 100
     });
 });
-function displayEditForm(test_select, payment_date, payment_amount, form_check_input, patent_other, preview, selectPatient, patent_code, patent_name, patent_nationality, patent_national_id, patent_passport_no, patent_email, patent_phone, patent_phone2, patent_gender, last_period_date, date_birth, patent_address, patent_contracting, patent_hours, know_option, subtotalELement, discountElement, totalDiscountElement, totalElement, paidElement, dueElement, delayedMoneyElement, dueUserElement, payment_method_option, items_table2_tbody, items_table_tbody, id, key, button1, egp, myAvatar, myPatientName, myPatentCode, myNationality, myNationalId, myPassportNo, myEmail, myPhone, myPhone2, myGender, myLastPeriodDate, myDateBirth, myAddress, myContracting, myHours, myDisease, myKnow, myCurrentOffers, myTest, Subtotal, Discount, TotalDiscount, Total, AmountPaid, Due, DelayedMoney, DueUser, PaymentDate, PaymentMethod){
+function displayEditForm(test_select, payment_date, payment_amount, form_check_input, patent_other, preview, selectPatient, patent_code, patent_name, patent_nationality, patent_national_id, patent_passport_no, patent_email, patent_phone, patent_phone2, patent_gender, last_period_date, date_birth, patent_address, patent_contracting, patent_hours, know_option, subtotalELement, discountElement, totalDiscountElement, totalElement, paidElement, dueElement, delayedMoneyElement, dueUserElement, payment_method_option, items_table_tbody, id, key, button1, egp, myAvatar, myPatientName, myPatentCode, myNationality, myNationalId, myPassportNo, myEmail, myPhone, myPhone2, myGender, myLastPeriodDate, myDateBirth, myAddress, myContracting, myHours, myDisease, myKnow, myTest, Subtotal, Discount, TotalDiscount, Total, AmountPaid, Due, DelayedMoney, DueUser, PaymentDate, PaymentMethod){
     openForm(id);
     test_select.removeClass('error-message');
     payment_date.removeClass('error-message');
@@ -253,14 +243,16 @@ function displayEditForm(test_select, payment_date, payment_amount, form_check_i
     patent_address.val(myAddress);
     patent_contracting.val(myContracting);
     patent_hours.val(myHours);
-    if(Array.isArray(myDisease))
+    if(typeof myDisease === 'object'){
+        let myKeys = Object.keys(myDisease);
         form_check_input.each(function(idx, el){
-            el.checked = myDisease.includes(el.value) ? true:false;
+        el.checked = myKeys[idx] === el.value ? true : false;
         });
+    }
     else
         patent_other.val(myDisease);
     know_option.each(function(idx, el){
-        if($(this).val() === myKnow)
+        if($(this).html() === myKnow)
             $(this).prop('selected', true);
     });
     subtotalELement.text(egp + " " + Subtotal);
@@ -275,19 +267,17 @@ function displayEditForm(test_select, payment_date, payment_amount, form_check_i
     payment_date.val(PaymentDate);
     payment_amount.val(AmountPaid);
     payment_method_option.each(function(idx, el){
-        if($(this).val() === PaymentMethod)
+        if($(this).html() === PaymentMethod)
           $(this).prop('selected', true);
     });
-    Object.keys(keyValueMap.get(key)).forEach(function(value) {
-        keyValueMap.get(key)[value] = value !== 'itemsTest' ? myCurrentOffers : myTest; 
-        writeTable(egp, button1, key, value !== 'itemsTest' ? items_table2_tbody : items_table_tbody, subtotalELement, totalDiscountElement, discountElement.val(), totalElement, dueElement, payment_amount.val(), dueUserElement, value);    
-    });
+    keyValueMap.set(key, myTest);
+    writeTable(egp, button1, key, items_table_tbody, subtotalELement, totalDiscountElement, discountElement.val(), totalElement, dueElement, payment_amount.val(), dueUserElement);    
 }
 
-function writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, id){
+function writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser){
     table.empty();
-    keyValueMap.get(key)[id].forEach((item, index) => {
-    table.append($(id !== 'itemsOffers' ? `
+    keyValueMap.get(key).forEach((item, index) => {
+    table.append($(`
             <tr>
                 <td>${item.Name}</td>
                 <td>${item.Shortcut}</td>
@@ -299,22 +289,9 @@ function writeTable(egp, button1, key, table, subtotal, totalDiscount, discount,
                     </button>
                 </td>
             </tr>
-        ` : `
-            <tr>
-                <td>${item.Name}</td>
-                <td>${item.Shortcut}</td>
-                <td>${item.State}</td>
-                <td>${item.Price}</td>
-                <td>${item.DisplayPrice}</td>
-                <td>
-                    <button id="${index}"class="btn btn-danger btn-sm delete-item" type="button">
-                        <i class="bi bi-trash"></i> ${button1}
-                    </button>
-                </td>
-            </tr>
         `)).find('#'+index).on('click', function () {
             //call method delete row inside table
-            deleteRowTable(key, id, index, egp, button1, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser);
+            deleteRowTable(key, index, egp, button1, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser);
         });
     });
 }
@@ -348,7 +325,7 @@ function myUpdatePrice(value, egp, paid, discount, due, dueUser, combinedArray){
     }
 }
 
-function addItem3(test_select, tests_name, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, id, key, egp, button1){
+function addItem3(test_select, tests_name, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, key, egp, button1){
     if(test_select.val() === null){
         (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
         (new bootstrap.Toast($('#myToast2'), { delay: 10000 })).show();
@@ -363,63 +340,40 @@ function addItem3(test_select, tests_name, table, subtotal, totalDiscount, disco
         //check if has class test-select and tests-name
         test_select.removeClass('error-message');
         tests_name.removeClass('error-message');
-
-        let arr = tests_name.val().split(',');
-        keyValueMap.get(key)[id].push(id !== 'itemsTest' ? {
-            Name: arr[0],
-            Shortcut: arr[1],
-            State: arr[2],
-            Price: arr[3],
-            DisplayPrice: arr[4],
-            Id:arr[5]
-        } : {
-            Name: arr[0],
-            Shortcut: arr[1],
-            Price: arr[2],
-            InputOutputLab: arr[3],
-            Id:arr[4]
+        let obj = JSON.parse(tests_name.val());
+        keyValueMap.get(key).push({
+            Name:obj.Name,
+            Shortcut: obj.Shortcut,
+            Price: obj.Price,
+            InputOutputLab: obj.InputOutputLab,
+            Id:obj.Id
         });
-        writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, id);
-        myUpdateReceipt(subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, egp, keyValueMap.get(key).itemsTest.concat(keyValueMap.get(key).itemsOffers));
+        writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser);
+        myUpdateReceipt(subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, egp, keyValueMap.get(key));
     }
 }
 
-function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, packageCultures, CurrentOffers){
+function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, packageCultures){
     idHeddinSelectBox.empty(); // Clear all existing options
-    if(event.target.value === 'Test' && test.length >= 1 && idSelectBox.hasClass('d-none')){
-        idSelectBox.removeClass('d-none');
-        initAllTests(test, idHeddinSelectBox);
-    }
-    else if(event.target.value === 'Test' && test.length >= 1)
-        initAllTests(test, idHeddinSelectBox);
+    idSelectBox.removeClass('d-none');
+    if(event.target.value === 'Test' && test !== null)
+        for (let key in test)
+            idHeddinSelectBox.append(`<option value='${JSON.stringify(test[key])}'>${test[key].Name}</option>`);
     //package
-    else if(event.target.value === 'Packages' && packageCultures.length >= 1 && idSelectBox.hasClass('d-none')){
-        idSelectBox.removeClass('d-none');
-        initAllTests(packageCultures, idHeddinSelectBox);
-    }
-    else if(event.target.value === 'Packages' && packageCultures.length >= 1)
-        initAllTests(packageCultures, idHeddinSelectBox);
+    else if(event.target.value === 'Packages' && packageCultures !== null)
+        for (let key in packageCultures)
+            idHeddinSelectBox.append(`<option value='${JSON.stringify(packageCultures[key])}'>${packageCultures[key].Name}</option>`);
     //Cultures
-    else if(event.target.value === 'Cultures' && Cultures.length >= 1 && idSelectBox.hasClass('d-none')){
-        idSelectBox.removeClass('d-none');
-        initAllTests(Cultures, idHeddinSelectBox);
-    }
-    else if(event.target.value === 'Cultures' && Cultures.length >= 1)
-        initAllTests(Cultures, idHeddinSelectBox);
-    //CurrentOffers
-    else if(event.target.value === 'CurrentOffers' && CurrentOffers.length >= 1 && idSelectBox.hasClass('d-none')){
-        idSelectBox.removeClass('d-none');
-        initCurrentOffers(CurrentOffers, idHeddinSelectBox);
-    }
-    else if(event.target.value === 'CurrentOffers' && CurrentOffers.length >= 1)
-        initCurrentOffers(CurrentOffers, idHeddinSelectBox);
+    else if(event.target.value === 'Cultures' && Cultures !== null)
+        for (let key in Cultures)
+            idHeddinSelectBox.append(`<option value='${JSON.stringify(Cultures[key])}'>${Cultures[key].Name}</option>`);
     else 
         idSelectBox.attr("class", "d-none");
 }
 
 function validateT2(test_select, tests_name, selectPatient, know, payment_date, payment_amount, payment_method, patent_code, discount, delayedMoney, key, url, message, state){
     let isValid = false;
-    if(test_select.val() === null && keyValueMap.get(key).itemsTest.length === 0){
+    if(test_select.val() === null && keyValueMap.get(key).length === 0){
         (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
         test_select.addClass('error-message');
         isValid = true;
@@ -427,7 +381,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
     else
         test_select.removeClass('error-message');
 
-    if(tests_name === null && keyValueMap.get(key).itemsTest.length === 0){
+    if(tests_name === null && keyValueMap.get(key).length === 0){
         (new bootstrap.Toast($('#myToast2'), { delay: 10000 })).show();
         test_select.addClass('error-message');
         isValid = true;
@@ -450,7 +404,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
     else
         know.removeClass('error-message');
 
-    if(keyValueMap.get(key).itemsTest.length === 0){
+    if(keyValueMap.get(key).length === 0){
         (new bootstrap.Toast($('#myToast5'), { delay: 10000 })).show();
         isValid = true;
     }
@@ -483,9 +437,9 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         return false;
 
    
+   
     let data = state !== 'create' ? {
-        item: keyValueMap.get(key).itemsTest,
-        item2: keyValueMap.get(key).itemsOffers,
+        item: keyValueMap.get(key).map(test => test.Id),
         patentCode: patent_code,
         know: know.val(),
         discount: discount,
@@ -496,8 +450,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         id: key,
         _token: $('meta[name="csrf-token"]').attr('content') // CSRF token for security
     } : {
-        item: keyValueMap.get(key).itemsTest,
-        item2: keyValueMap.get(key).itemsOffers,
+        item: keyValueMap.get(key).map(test => test.Id),
         patentCode: patent_code,
         know: know.val(),
         discount: discount,
@@ -522,7 +475,6 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         },
         error: function (xhr) {
             const errors = xhr.responseJSON.errors;
-            console.log(errors);
             for (const key in errors) 
                 createToast(errors[key][0], 'danger');
         }
@@ -530,8 +482,8 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
     return false;
 }
 
-function deleteRowTable(key, id, index, egp, button1, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser){
-    keyValueMap.get(key)[id].splice(index, 1); // Remove the item from the items array
-    writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, id);
-    myUpdateReceipt(subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, egp, keyValueMap.get(key).itemsTest.concat(keyValueMap.get(key).itemsOffers));  
+function deleteRowTable(key, index, egp, button1, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser){
+    keyValueMap.get(key).splice(index, 1); // Remove the item from the items array
+    writeTable(egp, button1, key, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser);
+    myUpdateReceipt(subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, egp, keyValueMap.get(key));  
 }

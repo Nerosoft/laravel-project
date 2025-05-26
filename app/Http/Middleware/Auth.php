@@ -14,10 +14,6 @@ class Auth
     {
         if($request->session()->exists('userId') && $state === 'admin')
             return redirect()->route('Home');
-        else if($request->session()->exists('patentId') && $state === 'patent')
-            return redirect()->route('PatentDashboard');
-        else if($request->session()->exists('doctorId') && $state === 'doctor')
-            return redirect()->route('DoctorDashboard');
         else
             return $next($request);
     }

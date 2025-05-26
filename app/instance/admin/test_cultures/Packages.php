@@ -1,7 +1,6 @@
 <?php
 namespace App\instance\admin\test_cultures;
-use App\instance\share\SearchId;
-class Packages extends SearchId
+class Packages
 {
     //order var important
     private $Name;
@@ -33,15 +32,10 @@ class Packages extends SearchId
     public function getInputOutputLabId(){
         return $this->InputOutputLab;
     }
-    public function getInputOutputLab(){
-        return $this->getValue($this->InputOutputLab, 'SelectTestBox');
-    }
-    public function getObject(){
-        return get_object_vars($this);
-    }
-    public function getObject2(){
-        $arr = get_object_vars($this);
-        $arr['InputOutputLab'] = $this->getInputOutputLab();
-        return $arr;
+     public static function fromArray(array $data, $inputOutput): array {
+        $packages = array();
+        foreach ($data as $key=>$data) 
+            $packages[$key] = new Packages($data['Name'], $data['Shortcut'], $data['Price'], $inputOutput[$data['InputOutputLab']]);
+        return $packages;
     }
 }

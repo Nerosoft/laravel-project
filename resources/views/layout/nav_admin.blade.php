@@ -22,25 +22,25 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             @foreach ($lang->myMenuApp->getMenu() as $key=>$item)
-              @if($key === 'CustomMenu' && $active === 'ChangeLanguage')
+            @if($key === 'CustomMenu' && isset($active) && isset($activeItem))
                 @foreach(array_reverse($item) as $key2 => $myValue)
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-spellcheck" style="font-size: 1.3rem; color: cornflowerblue;"></i>
+                    <a class="nav-link dropdown-toggle {{$key2 === $active?'my_active':''}}"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-spellcheck {{$key2 === $active?'my_active':''}}" style="font-size: 1.3rem; color: cornflowerblue;"></i>
                     {{$myValue->Name}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
                     @foreach($myValue->Item as $keyItem=>$customItem)
                     <li>
-                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem, 'lang'=>$key2])}}">
-                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}}" style="font-size: 1rem; color: cornflowerblue;"></i>
-                        {{$customItem}}
+                      <a class="dropdown-item" href="{{route('SystemLang', ['id'=>$keyItem, 'lang'=>$key2])}}">
+                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}} {{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}" style="font-size: 1rem; color: cornflowerblue;"></i>
+                        <test class="{{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}">{{$customItem}}</test>
                       </a>
                     </li>
                     @endforeach
                     </ul>
                   </li>
-                  @endforeach
+                @endforeach
               @elseif($key === 'CustomMenu')
                 @foreach(array_reverse($item) as $key2 => $myValue)
                   <li class="nav-item dropdown">
@@ -51,9 +51,9 @@
                     <ul class="dropdown-menu dropdown-menu-dark">
                     @foreach($myValue->Item as $keyItem=>$customItem)
                     <li>
-                      <a class="dropdown-item" href="{{route('Setting', ['id'=>$keyItem, 'lang'=>$key2])}}">
-                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}} {{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}" style="font-size: 1rem; color: cornflowerblue;"></i>
-                        <test class="{{$keyItem === $activeItem && $key2 === $active ? 'my_active':''}}">{{$customItem}}</test>
+                      <a class="dropdown-item" href="{{route('SystemLang', ['id'=>$keyItem, 'lang'=>$key2])}}">
+                        <i class="{{$lang->myMenuApp->getIconByKey($keyItem)}}" style="font-size: 1rem; color: cornflowerblue;"></i>
+                        <test>{{$customItem}}</test>
                       </a>
                     </li>
                     @endforeach
@@ -96,7 +96,7 @@
                 </li>
               @else
                 <li class="nav-item">
-                  <a class="nav-link {{$key === $active?'my_active':''}}" aria-current="page" href="{{$key === 'AllLanguage' || $key === 'ChangeLanguage' ? route('Setting', $key) : route($key)}}">
+                  <a class="nav-link {{$key === $active?'my_active':''}}" aria-current="page" href="{{route($key)}}">
                   <i class="{{$lang->myMenuApp->getIconByKey($key)}} {{$key === $active?'my_active':''}}" style="font-size: 1.3rem; color: cornflowerblue;"></i>
                   {{$item}}
                   </a>

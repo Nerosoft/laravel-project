@@ -1,7 +1,6 @@
 <?php
 namespace App\instance\admin\test_cultures;
-use App\instance\share\SearchId;
-class Cultures extends SearchId
+class Cultures
 {
      /**
      * Create a new class instance.
@@ -36,15 +35,10 @@ class Cultures extends SearchId
     public function getInputOutputLabId(){
         return $this->InputOutputLab;
     }
-    public function getInputOutputLab(){
-        return $this->getValue($this->InputOutputLab, 'SelectTestBox');
-    }
-    public function getObject(){
-        return get_object_vars($this);
-    }
-    public function getObject2(){
-        $arr = get_object_vars($this);
-        $arr['InputOutputLab'] = $this->getInputOutputLab();
-        return $arr;
+    public static function fromArray(array $data, $inputOutput): array {
+        $cultures = array();
+        foreach ($data as $key=>$data) 
+            $cultures[$key] = new Cultures($data['Name'], $data['Shortcut'], $data['Price'], $inputOutput[$data['InputOutputLab']]);
+        return $cultures;
     }
 }

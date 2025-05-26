@@ -1,11 +1,10 @@
 <?php
 
 namespace App\instance\admin\reception;
-use App\instance\share\SearchId;
 use App\Models\Rays;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-class Patent extends SearchId
+class Patent
 {
     /**
      * Create a new class instance.
@@ -49,12 +48,8 @@ class Patent extends SearchId
         $this->Avatar = $Avatar;
         $this->PatentCode = $PatentCode;
     }
-    public function getObject2(){
-        $pat = get_object_vars($this);
-        $pat['Nationality'] = $this->getNationality();
-        $pat['Gender'] = $this->getGender();
-        $pat['Contracting'] = $this->getContracting();
-        return $pat;
+    public function getObjectPateint(){
+        return get_object_vars($this);
     }
     public function getPatentCode(){
         return $this->PatentCode;
@@ -67,10 +62,6 @@ class Patent extends SearchId
     }
     public function getNationalityId(){
         return $this->Nationality;
-    }
-    public function getNationality(){
-        //if pateint not exsist vaue is empty like '' inside receipt
-        return $this->getValue($this->Nationality, 'SelectNationalityBox');
     }
     public function getNationalId(){
         return $this->NationalId;
@@ -90,10 +81,6 @@ class Patent extends SearchId
     public function getGenderId(){
         return $this->Gender;
     }
-    public function getGender(){
-        //if pateint not exsist vaue is empty like '' inside receipt
-        return $this->getValue($this->Gender, 'SelectGenderBox');
-    }
     public function getLastPeriodDate(){
         return $this->LastPeriodDate;
     }
@@ -109,23 +96,28 @@ class Patent extends SearchId
     public function getContractingId(){
         return $this->Contracting;
     }
-    public function getContracting(){
-        return $this->getValue('Name', $this->Contracting, 'Contracts');
-    }
     public function getHours(){
         return $this->Hours;
     }
     public function getDiseaseId(){
         return $this->Disease;
     }
-    public function getDisease(){
-        if(is_array($this->Disease)){
-            $ob = Rays::find(request()->session()->get('userId'));
-            $arr = array();
-            foreach ($this->Disease as $value)
-                array_push($arr, $this->getValue($value, 'CheckBox'));
-            return $arr;
-        }else
-            return $this->Disease;
+    public static function fromArray(array $data, $contract, $gender, $nationality, $dis): array {
+        $patent = array();
+        foreach ($data as $key=>$data){
+            $myDis = array();
+            foreach ($data['Disease'] as $value)
+                $myDis[$value] = $dis[$value];
+            $patent[$key] = new Patent($key, $data['Avatar'], $data['Name'], 
+            $nationality[$data['Nationality']],
+            $data['NationalId'], $data['PassportNo'], $data['Email'], $data['Phone'],
+            $data['Phone2'],
+            $gender[$data['Gender']], $data['LastPeriodDate'], $data['DateBirth'],
+            $data['Address'],
+            isset($contract[$data['Contracting']])?$contract[$data['Contracting']]->getName():null,
+            $data['Hours'],
+            $myDis);
+        }
+        return $patent;
     }
 }

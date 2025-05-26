@@ -12,12 +12,4 @@ class MenuItem
         $this->Name = $name;
         $this->Item = $item;
     }
-    public function setName($value){
-        $this->Name = $value;
-        return $this;
-    }
-    public function setItem($id, $value){
-        $this->Item[$id] = $value;
-        return $this;
-    }
 }

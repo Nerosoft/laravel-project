@@ -32,7 +32,7 @@
                             <select class="form-select" onchange="initPatient(this, $('{{isset($index) ? "#editForm".$index : "#createForm"}}'), '{{asset("img/admin/avatar1.png")}}')" id="selectPatient">
                                 <option selected disabled>{{$lang->selectBox2}}</option>
                                 @foreach($lang->myPatent as $key=>$patientInfo)
-                                <option {{isset($index) ? ($patent->getPatentCode() === $key ? 'selected' : '') : ''}} value="{{json_encode($lang->myPatent[$key]->getObject2())}}">{{$patientInfo->getName()}}</option>
+                                <option {{isset($index) ? ($patent->getPatentCode() === $key ? 'selected' : '') : ''}} value="{{json_encode($lang->myPatent[$key]->getObjectPateint())}}">{{$patientInfo->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,7 +52,7 @@
                                 <i class="bi bi-globe2"></i>
                                 {{$lang->label3}}
                             </label>
-                            <input id="patent-nationality" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getNationality() : ''}}" placeholder="{{$lang->hint13}}">
+                            <input id="patent-nationality" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getNationalityId() : ''}}" placeholder="{{$lang->hint13}}">
                             
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                 <i class="bi bi-gender-trans"></i>
                                 {{$lang->label9}}
                             </label>
-                            <input id="patent-gender" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getGender() : ''}}" placeholder="{{$lang->hint14}}">
+                            <input id="patent-gender" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getGenderId() : ''}}" placeholder="{{$lang->hint14}}">
                         </div>
                     </div>
                     <div class="col-md-auto">
@@ -71,7 +71,7 @@
                                 <i class="bi bi-pencil-square"></i>
                                 {{$lang->label13}}
                             </label>
-                            <input id="patent-contracting" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getContracting() : ''}}" placeholder="{{$lang->hint15}}">
+                            <input id="patent-contracting" type="text" class="form-control" disabled value="{{isset($index) ? $patent->getContractingId() : ''}}" placeholder="{{$lang->hint15}}">
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                                         <div class="col-md-4">
                                         <!-- Item Name with Icon -->
                                         <label for="item-name" class="form-label"><i class="bi bi-clipboard2-check"></i>{{$lang->label21}}</label>
-                                        <select onchange="handleChange2($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#allName'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#tests-name'), event, {{json_encode($lang->arr2)}}, {{json_encode($lang->arr3)}}, {{json_encode($lang->arr4)}}, {{json_encode($lang->arr5)}})" class="form-select" id="test-select">
+                                        <select onchange="handleChange2($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#allName'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#tests-name'), event, {{json_encode($lang->arr2)}}, {{json_encode($lang->arr3)}}, {{json_encode($lang->arr4)}})" class="form-select" id="test-select">
                                         <option selected disabled>{{$lang->selectBox6}}</option>
                                         @foreach($lang->allTests as $key=>$test)
                                         <option value="{{$key}}">{{$test}}</option>
@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="col-md-4">
                                         <!-- Add Item Button -->
-                                        <button type="button" class="btn btn-primary btn-sm mt-4" onclick="addItem3($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#test-select'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#tests-name'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#test-select').val() === '{{$lang->name1}}' ? $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#items-table2 tbody'):$('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#items-table tbody'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#subtotal'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#totalDiscount'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#total'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#payment-amount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#test-select').val() === '{{$lang->name1}}' ? 'itemsOffers': 'itemsTest', '{{isset($index) ? $index : "myArray"}}', '{{$lang->table26}}', '{{$lang->button4}}')">
+                                        <button type="button" class="btn btn-primary btn-sm mt-4" onclick="addItem3($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#test-select'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#tests-name'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#items-table tbody'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#subtotal'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#totalDiscount'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#total'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#payment-amount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), '{{isset($index) ? $index : "myArray"}}', '{{$lang->table26}}', '{{$lang->button4}}')">
                                             <i class="bi bi-clipboard2-check"></i> {{$lang->button5}}
                                         </button>
                                         </div>
@@ -120,39 +120,6 @@
 
                                 </div>
 
-                                <div class="table-responsive">
-                                <!-- table2 -->
-                                <table class="table table-bordered custom" id="items-table2">
-                                    <thead class="table-light">
-                                        <tr>
-                                        <th scope="col">{{$lang->table28}}</th>
-                                        <th scope="col">{{$lang->table8}}</th>
-                                        <th scope="col">{{$lang->table9}}</th>
-                                        <th scope="col">{{$lang->table10}}</th>
-                                        <th scope="col">{{$lang->table45}}</th>
-                                        <th scope="col">{{$lang->table12}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @isset($index)
-                                        @foreach($patent->getCurrentOffers() as $currentOffers)
-                                            <tr>
-                                                <td>{{$currentOffers->getName()}}</td>
-                                                <td>{{$currentOffers->getShortcut()}}</td>
-                                                <td>{{$currentOffers->getState()}}</td>
-                                                <td>{{$currentOffers->getPrice()}}</td>
-                                                <td>{{$currentOffers->getDisplayPrice()}}</td>
-                                                <td>
-                                                    <button class="btn btn-danger btn-sm delete-item" type="button" onclick="deleteRowTable('{{$index}}', 'itemsOffers', '{{$loop->index}}', '{{$lang->table26}}', '{{$lang->button4}}', $('#editForm{{$index}}').find('#items-table2 tbody'), $('#editForm{{$index}}').find('#subtotal'), $('#editForm{{$index}}').find('#totalDiscount'), $('#editForm{{$index}}').find('#discount').val(), $('#editForm{{$index}}').find('#total'), $('#editForm{{$index}}').find('#due'), $('#editForm{{$index}}').find('#payment-amount').val(), $('#editForm{{$index}}').find('#dueUser'))">
-                                                        <i class="bi bi-trash"></i> {{$lang->button4}}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        @endisset
-                                    </tbody>
-                                </table>
-                                </div>
                                 <!-- Table of Items -->
                                 <div class="table-responsive">
                                 <table class="table table-bordered custom" id="items-table">
@@ -172,9 +139,9 @@
                                                 <td>{{$test->getName()}}</td>
                                                 <td>{{$test->getShortcut()}}</td>
                                                 <td>{{$test->getPrice()}}</td>
-                                                <td>{{$test->getInputOutputLab()}}</td>
+                                                <td>{{$test->getInputOutputLabId()}}</td>
                                                 <td>
-                                                    <button class="btn btn-danger btn-sm delete-item" type="button" onclick="deleteRowTable('{{$index}}', 'itemsTest', '{{$loop->index}}', '{{$lang->table26}}', '{{$lang->button4}}', $('#editForm{{$index}}').find('#items-table tbody'), $('#editForm{{$index}}').find('#subtotal'), $('#editForm{{$index}}').find('#totalDiscount'), $('#editForm{{$index}}').find('#discount').val(), $('#editForm{{$index}}').find('#total'), $('#editForm{{$index}}').find('#due'), $('#editForm{{$index}}').find('#payment-amount').val(), $('#editForm{{$index}}').find('#dueUser'))">
+                                                    <button class="btn btn-danger btn-sm delete-item" type="button" onclick="deleteRowTable('{{$index}}', '{{$loop->index}}', '{{$lang->table26}}', '{{$lang->button4}}', $('#editForm{{$index}}').find('#items-table tbody'), $('#editForm{{$index}}').find('#subtotal'), $('#editForm{{$index}}').find('#totalDiscount'), $('#editForm{{$index}}').find('#discount').val(), $('#editForm{{$index}}').find('#total'), $('#editForm{{$index}}').find('#due'), $('#editForm{{$index}}').find('#payment-amount').val(), $('#editForm{{$index}}').find('#dueUser'))">
                                                         <i class="bi bi-trash"></i> {{$lang->button4}}
                                                     </button>
                                                 </td>
@@ -192,7 +159,7 @@
                                         <td>
                                         <div class="input-group">
                                         <span class="input-group-text discount-size" id="basic-addon1">{{$lang->table27}}</span>
-                                        <input type="number" id="discount" min="0" max="100" value="{{isset($index) ? $patent->getDiscount() : 0}}" class="form-control form-control-sm" onchange="myUpdateReceipt($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#subtotal'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#totalDiscount'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#total'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#payment-amount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), '{{$lang->table26}}', keyValueMap.get('{{isset($index) ? $index : "myArray"}}').itemsTest.concat(keyValueMap.get('{{isset($index) ? $index : "myArray"}}').itemsOffers))" />
+                                        <input type="number" id="discount" min="0" max="100" value="{{isset($index) ? $patent->getDiscount() : 0}}" class="form-control form-control-sm" onchange="myUpdateReceipt($('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#subtotal'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#totalDiscount'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#total'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#payment-amount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), '{{$lang->table26}}', keyValueMap.get('{{isset($index) ? $index : "myArray"}}'))" />
                                         </div>
                                         </td>
                                     </tr>
@@ -241,7 +208,7 @@
                                 <div class="col-md-4">
                                 <!-- Amount Paid Input with Icon -->
                                 <label for="payment-amount" class="form-label"><i class="bi bi-clipboard2-check"></i>{{$lang->label25}}</label>
-                                <input type="number" id="payment-amount" min="0" value="{{isset($index) ? $patent->getAmountPaid() : ''}}" class="form-control" placeholder="{{$lang->hint16}}" onchange="myUpdatePrice(this.value, '{{$lang->table26}}', $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#paid'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), keyValueMap.get('{{isset($index) ? $index : "myArray"}}').itemsTest.concat(keyValueMap.get('{{isset($index) ? $index : "myArray"}}').itemsOffers))" />
+                                <input type="number" id="payment-amount" min="0" value="{{isset($index) ? $patent->getAmountPaid() : ''}}" class="form-control" placeholder="{{$lang->hint16}}" onchange="myUpdatePrice(this.value, '{{$lang->table26}}', $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#paid'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#discount').val(), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#due'), $('{{isset($index) ? "#editForm".$index : "#createForm"}}').find('#dueUser'), keyValueMap.get('{{isset($index) ? $index : "myArray"}}'))" />
                                 </div>
                                 <div class="col-md-4">
                                 <!-- Payment Method Select with Icon -->

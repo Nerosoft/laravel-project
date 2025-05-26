@@ -8,9 +8,6 @@ function getLanguage(){
     });
     return item;
 }
-function validateLanguage(lang){
-    return lang != getLanguage();
-}
 function closeModel(lang, id){
         closeForm(id);
         if(lang != getLanguage())

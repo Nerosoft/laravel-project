@@ -1,10 +1,10 @@
 <?php
-
 namespace App\language\share;
-class TableSetting extends TestParent
+use App\language\menu\AdminTopMenu;
+class TableSetting extends AdminTopMenu
 {
-    protected function __construct($error, $myState, $Language, $AppSettingAdmin, $Direction, $Branch, $Title, $TableInfo, $Menu, $ob = null, $var1 = null, $var2 = null, $var3 = null, $var4 = null, $var5 = null, $var6 = null){
-        parent::__construct($error, $myState, $Language, $AppSettingAdmin, $Direction, $Branch, $Title, $Menu, $ob, $var1, $var2, $var3, $var4, $var5, $var6);
+    protected function __construct($Language, $AppSettingAdmin, $Direction, $Branch, $Title, $TableInfo, $Menu){
+        parent::__construct($Language, $AppSettingAdmin, $Direction, $Branch, $Title, $Menu);
         $this->table1 = $TableInfo['Ssearch'];
         $this->table2 = $TableInfo['InfoEmpty'];
         $this->table3 = $TableInfo['ZeroRecords'];

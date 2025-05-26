@@ -4,102 +4,33 @@ namespace App;
 use App\MenuItem;
 class Menu
 {
-    //patient
-    private $PatentDashboard;
-    private $PatentReports;
-    private $TestsLibrary;
-    private $PatentHomeVisit;
-    private $PatentOurBranches;
-    //doctor
-    private $DoctorDashboard;
-    private $DoctorInvoices;
-    private $DoctorMedicalReports;
-    private $TheDoctorReport;
-    private $TheClearCache;
-    private $TechnicalSupports;
-    //admin
     private $Home;
-    private $Setting;
-    private $Reception;
-    private $MedicalReports;
-    private $TestCultures;
-    private $PriceList;
-    private $Contracts;
-    private $UserRoles;
-    private $HREmployees;
-    private $SalaryDetails;
-    private $Inventory;
-    private $Accounting;
-    private $Reporting;
-    private $SafeTransfers;
-    private $MobileApplication;
-    private $Notifications;
-    private $Whatsapp;
-    private $HomeVisits;
-    private $Branches;
-    private $BranchesCustody;
-    private $SettingApp;
-    private $Chat;
-    private $Translations;
-    private $ActivityLogs;
-    private $ClearCache;
-    //language
-    // private $CustomMenu;
-    private $AllLanguage;
+    private $SystemLang;
     private $ChangeLanguage;
-    // private $Home;
+    private $Reception;
+    private $TestCultures;
+    private $Contracts;
+    private $Branches;
     /**
      * Create a new class instance.
      */
     public function __construct($menu, $state = null, $CutomLang = null, $MyLanguage = null)
     {
-        if($state === 'Patient'){
-            $this->PatentDashboard = $menu['PatentDashboard'];
-            $this->PatentReports = $menu['PatentReports'];
-            $this->TestsLibrary = $menu['TestsLibrary'];
-            $this->PatentHomeVisit = $menu['PatentHomeVisit'];
-            $this->PatentOurBranches = $menu['PatentOurBranches'];
-        }else if($state === 'Language'){
+        if($state === 'Language'){
             $this->Home = $menu['Home'];
-            $this->AllLanguage = $menu['AllLanguage'];
-            $this->ChangeLanguage = $menu['ChangeLanguage'];
+            $this->SystemLang = $menu['SystemLang'];
             foreach ($MyLanguage as $key => $value)
                 $this->CustomMenu[$key] = new MenuItem($value, $CutomLang);
         }
-        else if($state === 'Admin'){
-            $this->Setting = new MenuItem($menu['Setting']['Name'],  $menu['Setting']['Item']);
+        else{
+            // $this->Setting = new MenuItem($menu['Setting']['Name'],  $menu['Setting']['Item']);
+            $this->ChangeLanguage = $menu['ChangeLanguage'];
+            $this->SystemLang = $menu['SystemLang'];
             $this->Home = $menu['Home'];
             $this->Reception = new MenuItem($menu['Reception']['Name'], $menu['Reception']['Item']);
-            $this->MedicalReports = new MenuItem($menu['MedicalReports']['Name'], $menu['MedicalReports']['Item']);
             $this->TestCultures = new MenuItem($menu['TestCultures']['Name'], $menu['TestCultures']['Item']);
-            $this->PriceList = new MenuItem($menu['PriceList']['Name'], $menu['PriceList']['Item']);
             $this->Contracts = new MenuItem($menu['Contracts']['Name'], $menu['Contracts']['Item']);
-            $this->UserRoles = new MenuItem($menu['UserRoles']['Name'], $menu['UserRoles']['Item']);
-            $this->HREmployees = new MenuItem($menu['HREmployees']['Name'], $menu['HREmployees']['Item']);
-            $this->SalaryDetails = new MenuItem($menu['SalaryDetails']['Name'], $menu['SalaryDetails']['Item']);
-            $this->Inventory = new MenuItem($menu['Inventory']['Name'], $menu['Inventory']['Item']);
-            $this->Accounting = new MenuItem($menu['Accounting']['Name'], $menu['Accounting']['Item']);
-            $this->Reporting = new MenuItem($menu['Reporting']['Name'], $menu['Reporting']['Item']);
-            $this->SafeTransfers = new MenuItem($menu['SafeTransfers']['Name'], $menu['SafeTransfers']['Item']);
-            $this->MobileApplication = new MenuItem($menu['MobileApplication']['Name'], $menu['MobileApplication']['Item']);
-            $this->Notifications = new MenuItem($menu['Notifications']['Name'], $menu['Notifications']['Item']);
-            $this->Whatsapp = $menu['Whatsapp'];
-            $this->HomeVisits = new MenuItem($menu['HomeVisits']['Name'], $menu['HomeVisits']['Item']);
             $this->Branches = $menu['Branches'];
-            $this->BranchesCustody = $menu['BranchesCustody'];
-            $this->SettingApp = $menu['SettingApp'];
-            $this->Chat = $menu['Chat'];
-            $this->Translations = $menu['Translations'];
-            $this->ActivityLogs = $menu['ActivityLogs'];
-            $this->ClearCache = $menu['ClearCache'];
-        }
-        else{
-            $this->DoctorDashboard = $menu['DoctorDashboard'];
-            $this->DoctorInvoices = $menu['DoctorInvoices'];
-            $this->DoctorMedicalReports = new MenuItem($menu['DoctorMedicalReports']['Name'], $menu['DoctorMedicalReports']['Item']);
-            $this->TheDoctorReport = $menu['TheDoctorReport'];
-            $this->TheClearCache = $menu['TheClearCache'];
-            $this->TechnicalSupports = $menu['TechnicalSupports'];
         }
     }
     public function getMenu(){

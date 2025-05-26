@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(array_reverse($lang->MyBranch) as $index=>$branch)
+            @foreach(array_reverse($lang->allBranch) as $index=>$branch)
             <tr>
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$branch->getName()}}</td>
@@ -37,7 +37,7 @@
                 <td>{{$branch->getBuilding()}}</td>
                 <td>{{$branch->getAddress()}}</td>
                 <td>{{$branch->getCountry()}}</td>
-                <td>{{$branch->getFollow()}}</td>
+                <td>{{$branch->getFollowId()}}</td>
                 <td>
                     @include('layout.model_delete', ['name'=>$branch->getName(), 'index'=>$index])
                     <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm($('#editForm{{$index}}').find('#brance-rays-name'), $('#editForm{{$index}}').find('#brance-rays-phone'), $('#editForm{{$index}}').find('#brance-rays-country'), $('#editForm{{$index}}').find('#brance-rays-governments'), $('#editForm{{$index}}').find('#brance-rays-city'), $('#editForm{{$index}}').find('#brance-rays-street'), $('#editForm{{$index}}').find('#brance-rays-building'), $('#editForm{{$index}}').find('#brance-rays-address'), $('#editForm{{$index}}').find('#brance-rays-follow option'), 'editModel{{$index}}', '{{$branch->getName()}}', '{{$branch->getPhone()}}', '{{$branch->getGovernments()}}', '{{$branch->getCity()}}', '{{$branch->getStreet()}}', '{{$branch->getBuilding()}}', '{{$branch->getAddress()}}', '{{$branch->getCountry()}}', '{{$branch->getFollowId()}}')"></i>

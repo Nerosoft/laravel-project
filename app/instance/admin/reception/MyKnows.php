@@ -14,4 +14,10 @@ class MyKnows
     public function getName(){
         return $this->Name;
     }
+    public static function fromArray(array $data): array {
+        $myKnows = array();
+        foreach ($data as $key=>$data) 
+            $myKnows[$key] = new MyKnows($data['Name']);
+        return $myKnows;
+    }
 }

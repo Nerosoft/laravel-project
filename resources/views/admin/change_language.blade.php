@@ -18,13 +18,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(array_reverse($myRadios) as $index=>$myLang)
+                @foreach(array_reverse($lang->myRadios) as $index=>$myLang)
                 <tr>
                     <th>{{$loop->index+1}}</th>
-                    <th>{{$myLang->Name}}</th>
+                    <th>{{$myLang->getName()}}</th>
                     <th>
-                    @if($loop->index < (count($myRadios) - 2))
-                    @include('layout.model_delete', ['name'=>$myLang->Name])
+                    @if($loop->index < (count($lang->myRadios) - 2))
+                    @include('layout.model_delete', ['name'=>$myLang->getName()])
                     <i class="bi bi-copy edit" onclick="openForm('LangModel0{{$index}}')"></i>
                     <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('LangModel1{{$index}}')"></i>
                     @for ($i = 0; $i < 2; $i++)
@@ -50,7 +50,7 @@
                                             </div>
                                             @endif
                                         </form>
-                                        {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->Name}}</spam>
+                                        {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->getName()}}</spam>
                                     </div>
                                     <div class="modal-footer">
                                         <button form="LangForm{{$i.$index}}" class="btn btn-danger">{{$i !== 0 ? $lang->button4 : $lang->button5}}</button>
@@ -85,7 +85,7 @@
                                             </div>
                                             @endif
                                         </form>
-                                        {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->Name}}</spam>
+                                        {{$i !== 0 ? $lang->label5 : $lang->label6}}<spam>-{{$myLang->getName()}}</spam>
                                     </div>
                                     <div class="modal-footer">
                                         <button form="LangForm{{$i.$index}}" class="btn btn-danger">{{$i !== 0 ? $lang->button4 : $lang->button5}}</button>

@@ -25,211 +25,32 @@ class RaysSeeder extends Seeder
                 ],
                 'english'=>[
                     'Menu'=>[
-                            'ChangeLanguage'=>'Change language',        
-                            'AllLanguage'=>'All language',
-
-                            'PatentDashboard'=>'Dashboard',
-                            'PatentReports'=>'Reports',
-                            'TestsLibrary'=>'Tests Library',
-                            'PatentHomeVisit'=>'Home Visit',
-                            'PatentOurBranches'=>'Our Branches',
-
-                            'DoctorDashboard'=>'Dashboard',
-                            'DoctorInvoices'=>'Invoices',
-                            'DoctorMedicalReports'=>[
-                                'Name'=>'Medical reports',
-                                'Item'=>[
-                                    'TheAllMedicalReports'=>'All Medical reports',
-                                    'TheDoneReports'=>'Done reports',
-                                    'ThePendingReports'=>'Pending reports',
-                                    'TheUnsignedReports'=>'Unsigned reports'
-                                ]
-                            ],
-                            'TheDoctorReport'=>'Doctor report',
-                            'TheClearCache'=>'Clear Cache',
-                            'TechnicalSupports'=>'Technical Supports',
-                            
+                        'ChangeLanguage'=>'Change language',        
+                        'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
-                        'Setting'=>[
-                            'Name'=>'Setting',
-                            'Item'=>[
-                                'AllLanguage'=>'Change language'
-                            ]
-                        ],
                         'Reception'=>[
                             'Name'=>'Reception',
                             'Item'=>[
-                                'Vault'=>'Vault',
-                                'Invoices'=>'Invoices',
                                 'PatientRegisteration'=>'Patient registeration',
-                                'Retrieved'=>'Retrieved',
                                 'Patients'=>'Patients',
-                                'Prefix'=>'Prefix',
-                                'Knows'=>'Knows',
-                            ]
-                        ],
-                        'MedicalReports'=>[
-                            'Name'=>'Medical reports',
-                            'Item'=>[
-                                'AllMedicalReports'=>'All medical reports',
-                                'DoneReports'=>'Done reports',
-                                'PendingReports'=>'Pending Reports',
-                                'UnsigendReports'=>'Unsigend Reports',
-                                'SendToLab'=>'Send to lab',
-                                'SampleStatus'=>'Sample Status',
                             ]
                         ],
                         'TestCultures'=>[
                             'Name'=>'Test cultures',
                             'Item'=>[
-                                'Categories'=>'categories',
                                 'AllTestCultures'=>'Test',
-                                'SampleTypes'=>'Sample types',
                                 'TheCultures'=>'Cultures',
-                                'CultureOptions'=>'Culture options',
-                                'Antibiotics'=>'Antibiotics',
                                 'PackagesCultures'=>'Packages',
-                                'ExtraService'=>'Extra service',
-                                'CurrentOffers'=>'Current offers',
                             ]
                         ],  
-                        'PriceList'=>[
-                            'Name'=>'Price List',
-                            'Item'=>[
-                                'Test'=>'Test',
-                                'CulturesPrice'=>'Cultures',
-                                'Packages'=>'Packages',
-                                'PricesList'=>'Prices list',
-                            ],
-                        ],
                         'Contracts'=>[
                             'Name'=>'Contracts',
                             'Item'=>[
-                                'Governments'=>'Governments',
-                                'TheContracts'=>'Packages',
                                 'PackagesContracts'=>'Contracts',
-                                'PricesListContracts'=>'Prices list',
-                                'Labs'=>'Labs',
-                                'LabsOut'=>'Labs out',
-                                'Doctors'=>'Doctors',
-                            ]
-                        ],
-                        'UserRoles'=>[
-                            'Name'=>'User roles',
-                            'Item'=>[
-                                'Roles'=>'Roles',
-                                'User'=>'User',
-                            ]
-                        ],
-                        'HREmployees'=>[
-                            'Name'=>'HR & Employees',
-                            'Item'=>[
-                                'Employees'=>'Employees',
-                                'Violations'=>'Violations',
-                                'Vocations'=>'Violations request',
-                                'Incentives'=>'Incentives',
-                                'Deductions'=>'Deductions',
-                                'Attendance'=>'Attendance',
-                                'Shifts'=>'Shifts',
-                            ]
-                        ],
-                        'SalaryDetails'=>[
-                            'Name'=>'Salary Details',
-                            'Item'=>[
-                                'Salary'=>'Salary',
-                                'ThInventory'=>'Inventory',
-                                'ThSuppliers'=>'Suppliers',
-                                'ThProducts'=>'Products',
-                                'ThFixedAssets'=>'Fixed assets',
-                                'ThPurchases'=>'Purchases',
-                                'ThAdjustments'=>'Adjustments',
-                                'ThTransfers'=>'Transfers'
-                            ]
-                        ],
-                        'Inventory'=>[
-                            'Name'=>'Inventory',
-                            'Item'=>[
-                                'Suppliers'=>'Suppliers',
-                                'Products'=>'Products',
-                                'FixedAssets'=>'Fixed Assets',
-                                'Purchases'=>'Purchases',
-                                'Adjustments'=>'Adjustments',
-                                'Transfers'=>'Transfers'
-                            ]
-                        ],
-                        'Accounting'=>[
-                            'Name'=>'Accounting',
-                            'Item'=>[
-                                'PaymentMethods'=>'Payment methods',
-                                'ExpenseCategories'=>'Expense categories',
-                                'ViewExpenses'=>'View expenses',
-                                'Expenses'=>'Expenses'
-                            ]
-                        ],
-                        'Reporting'=>[
-                            'Name'=>'Reporting',
-                            'Item'=>[
-                                'ContractsReports'=>'Contracts reports',
-                                'DelayedMoney'=>'Delayed money',
-                                'AccountingReport'=>'Accounting report',
-                                'NormalDoctorReport'=>'Normal Doctor report',
-                                'AllDoctorReport'=>'All Doctor report',
-                                'DoctorReport'=>'Doctor report',
-                                'SupplierReport'=>'Supplier report',
-                                'PurchasesReport'=>'Purchases report',
-                                'InventoryReport'=>'Inventory report',
-                                'ProductsReport'=>'Products report',
-                                'WorkloadMonthly'=>'Workload Monthly',
-                                'WorkloadDaily'=>'Workload Daily',
-                                'TestesBranchReport'=>'Testes Branch Report',
-                                'ExpensesReport'=>'Expenses Report',
-                                'CustodyReport'=>'Custody report',
-                                'ContractReport'=>'Contract Report',
-                                'EmployeesReport'=>'Employees report',
-                                'RaysReport'=>'rays report',
-                                'RaysCategoriesReport'=>'Rays Categories report',
-                                'SafeTransferReport'=>'Safe Transfer Report'
-                            ]
-                        ],
-                        'SafeTransfers'=>[
-                            'Name'=>'Safe Transfers',
-                            'Item'=>[
-                                'RejectedTransfers'=>'Rejected Transfers',
-                                'TransferToOwner'=>'Transfer to Owner',
-                                'AllTransfers'=>'All Transfers'
-                            ]
-                        ],
-                        'MobileApplication'=>[
-                            'Name'=>'Mobile Application',
-                            'Item'=>[
-                                'TipsAndOffer'=>'Tips And Offer',
-                                'StaticPage'=>'Static Page',
-                                'Sliders'=>'Sliders'
-                            ]
-                        ],
-                        'Notifications'=>[
-                            'Name'=>'Notifications',
-                            'Item'=>[
-                                'Notification'=>'Notifications',
-                                'CreateNotifications'=>'Create Notifications'
-                            ]
-                        ],
-                        'Whatsapp'=>'Whatsapp',
-                        'HomeVisits'=>[
-                            'Name'=>'Home visits',
-                            'Item'=>[
-                                'HomeVisit'=>'Home visits',
-                                'Bookings'=>'Bookings',
-                                'Prescriptions'=>'Prescriptions',
+                                'Knows'=>'Knows',
                             ]
                         ],
                         'Branches'=>'Branches',
-                        'BranchesCustody'=>'Branches Custody',
-                        'SettingApp'=>'Settings',
-                        'Chat'=>'Chat',
-                        'Translations'=>'Translations',
-                        'ActivityLogs'=>'Activity Logs',
-                        'ClearCache'=>'Clear Cache'
                     ],
                     'TableInfo'=>[
                         'Ssearch'=>'Quick Search:',
@@ -304,7 +125,6 @@ class RaysSeeder extends Seeder
                         'Test'=>'Test',
                         'Packages'=>'Package',
                         'Cultures'=>'Cultures',
-                        'CurrentOffers'=>'Current Offers',
                     ],
                     'CutomLang'=>[
                         'SelectBox'=>'Select box',
@@ -474,7 +294,7 @@ class RaysSeeder extends Seeder
                         'Model'=>'Model',
                         'CheckBox'=>'CheckBox',
                         'CutomLang'=>'title Cutom Lang',
-                        'AllLanguage'=>'All language',
+                        'SystemLang'=>'All language',
                         'TableInfo'=>'title table info',
                         'AppSettingAdmin'=>'title App Setting Admin',
                         'AppSettingPatient'=>'title App Setting Patient',
@@ -800,7 +620,8 @@ class RaysSeeder extends Seeder
                         'LoginPatentCode'=>'error in search code',
                         'LoginPatentLength'=>'error in length code',
                         'LoginPatentCodeRequired'=>'error required code',
-                        'LoginPatentLanguageRequired'=>'error required language',
+                        'UserLanguageRequired'=>'error required language',
+                        'UserLanguageInvalid'=>'error invalid language',
                         'TextRequired'=>'text required',
                         'TextLenght'=>'invalid value',
                         'UserEmail'=>'error email',
@@ -971,6 +792,8 @@ class RaysSeeder extends Seeder
                         'EditKey2Invalid'=>'Key2 Invalid',
                     ],
                     'Message'=>[
+                        'AdminLogin'=>'seccessfully login admin',
+                        'UserLanguage'=>'seccessfully change language program to ',
                         'LoginPatentCode'=>'seccessfully login',
                         'TestAdd'=>'Seccessfully add',
                         'TestEdit'=>'Seccessfully edit',
@@ -1133,6 +956,7 @@ class RaysSeeder extends Seeder
                 'arabic'=>[
                     'Menu'=>[
                             'ChangeLanguage'=>'تغير اللغة',
+                            'SystemLang'=>'تعديل لغة البرنامج',        
                             'AllLanguage'=>'كل اللغات',
 
                             'PatentDashboard'=>'لوحة التحكم',
@@ -1215,6 +1039,7 @@ class RaysSeeder extends Seeder
                                 'Governments'=>'الحكومات',       
                                 'TheContracts'=>'الحزم',     
                                 'PackagesContracts'=>'العقود',    
+                                'Knows'=>'المعارف',
                                 'PricesListContracts'=>'قائمة الأسعار',       
                                 'Labs'=>'المختبرات',
                                 'LabsOut'=>'المختبرات خارج المختبرات',    
@@ -1413,7 +1238,6 @@ class RaysSeeder extends Seeder
                         'OptionTest'=>'الاختبار',
                         'OptionPackageCultures'=>'الحزم',
                         'OptionCultures'=>'المزارع',
-                        'OptionCurrentOffers'=>'العروض الحالية',
                     ],
                     'CutomLang'=>[
                         'Direction'=>'الاتجاه',
@@ -1584,7 +1408,7 @@ class RaysSeeder extends Seeder
                         'Model'=>'النموزج',
                         'CheckBox'=>'العلامات',
                         'SelectBox'=>'صندوق الاختيار',
-                        'AllLanguage'=>'كل الغات',
+                        'SystemLang'=>'كل الغات',
                         'TableInfo'=>'صفحة تعديل بيانات الجدول',
                         'AppSettingAdmin'=>'صفحة تعديل بيانات الادمن',
                         'AppSettingPatient'=>'صفحة تعديل بيانات المريض',
@@ -1909,7 +1733,8 @@ class RaysSeeder extends Seeder
                         'LoginPatentCode'=>'لم يتم التعرف علي الكود',
                         'LoginPatentLength'=>'يرجي كتابة الكود بشكل صحيح',
                         'LoginPatentCodeRequired'=>'يرجي ادخال الكود',
-                        'LoginPatentLanguageRequired'=>'يرجي ادخال اللغة',
+                        'UserLanguageRequired'=>'يرجي ادخال الغة',
+                        'UserLanguageInvalid'=>'اللغه غير صحيحة',
                         'TextRequired'=>'يرجي ادخال النص',
                         'TextLenght'=>'القيمة غير صحيحة',
                         'UserEmail'=>'خطأ في الحساب',
@@ -2080,6 +1905,8 @@ class RaysSeeder extends Seeder
                         'EditKey2Invalid'=>'المفتاح الثاني غير صحيح',
                     ],
                     'Message'=>[
+                        'AdminLogin'=>'تم تسجيل الدخول بنجاح في شاشة المدير',
+                        'UserLanguage'=>'تم تغير لغة البرنامج بنجاح الي ',
                         'LoginPatentCode'=>'تم التسجيل بنجاح',
                         'TestAdd'=>'تمت الاضافة بنجاح',
                         'TestEdit'=>'تم التعديل بنجاح',

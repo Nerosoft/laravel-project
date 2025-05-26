@@ -43,7 +43,7 @@
                 <th>{{$patent->getDateBirth2()}}</th>
                 <th>{{$patent->getPhone()}}</th>
                 <th>
-                    @foreach(array_merge($patent->getTest(), $patent->getCurrentOffers()) as $test)
+                    @foreach($patent->getTest() as $test)
                     <h6>{{$test->getShortcut()}}</h6>
                     @endforeach
                 </th>
@@ -57,17 +57,80 @@
                 <th>{{$patent->getDueUser()}}</th>
                 <th>{{$patent->getPaymentDate()}}</th>
                 <th>{{$patent->getAmountPaid()}}</th>
-                <th>{{$patent->getPaymentMethod()}}</th>
+                <th>{{$patent->getPaymentMethodId()}}</th>
                 <th>
                     @include('layout.model_delete', ['name'=>$patent->getName()])
                     @include('layout.all_models.admin.reception.patient_register')
-                    <div class="dropdown">
+                    <!-- <i class="bi bi-wrench-adjustable edit" onclick="openForm('editModel{{$index}}')"></i> -->
+                     <div class="dropdown">
                         <i class="bi bi-gear edit" id="dropdownMenuButton" data-bs-toggle="dropdown"></i> <!-- Re icon as needed -->
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" onclick="openPDF('{{asset("files/salamtak-care/img/logo.png")}}', '{{$lang->title5}}', '{{$lang->label29}}', '{{$lang->label30}}', '{{$lang->label31}}', '{{$lang->label32}}', '{{$lang->label33}}', '{{$lang->label34}}', '{{$lang->label35}}', '{{$lang->label36}}', '{{$lang->label37}}', '{{$lang->label38}}', '{{$lang->label39}}', '{{$lang->label40}}', '{{$lang->label41}}', '{{$lang->label42}}', '{{$lang->label43}}', '{{$loop->index+1}}', '{{$patent->getPaymentDate()}}', '{{$patent->getName()}}', '{{$patent->getPatentCode()}}', {{json_encode($patent->getTestPdf())}}, '{{$lang->table26}}', '{{$patent->getSubtotal()}}', '{{$patent->getTotalDiscount()}}', '{{$patent->getTotal()}}', '{{$patent->getPaymentDate()}}', '{{$patent->getAmountPaid()}}', '{{$patent->getPaymentMethod()}}', '{{$patent->getDue()}}')">{{$lang->selectBox7}}</a></li>
+                            <li><a class="dropdown-item" onclick="openPDF('{{asset("files/salamtak-care/img/logo.png")}}', '{{$lang->title5}}', '{{$lang->label29}}', '{{$lang->label30}}', '{{$lang->label31}}', '{{$lang->label32}}', '{{$lang->label33}}', '{{$lang->label34}}', '{{$lang->label35}}', '{{$lang->label36}}', '{{$lang->label37}}', '{{$lang->label38}}', '{{$lang->label39}}', '{{$lang->label40}}', '{{$lang->label41}}', '{{$lang->label42}}', '{{$lang->label43}}', '{{$loop->index+1}}', '{{$patent->getPaymentDate()}}', '{{$patent->getName()}}', '{{$patent->getPatentCode()}}', {{json_encode($patent->getTestObject())}}, '{{$lang->table26}}', '{{$patent->getSubtotal()}}', '{{$patent->getTotalDiscount()}}', '{{$patent->getTotal()}}', '{{$patent->getPaymentDate()}}', '{{$patent->getAmountPaid()}}', '{{$patent->getPaymentMethodId()}}', '{{$patent->getDue()}}')">{{$lang->selectBox7}}</a></li>
                         </ul>
                     </div>
-                    <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm($('#editForm{{$index}}').find('#test-select'), $('#editForm{{$index}}').find('#payment-date'), $('#editForm{{$index}}').find('#payment-amount'), $('#editForm{{$index}}').find('.form-check-input'), $('#editForm{{$index}}').find('#patent-other'), $('#editForm{{$index}}').find('#preview'), $('#editForm{{$index}}').find('#selectPatient option'), $('#editForm{{$index}}').find('#patent-code'), $('#editForm{{$index}}').find('#patent-name'), $('#editForm{{$index}}').find('#patent-nationality'), $('#editForm{{$index}}').find('#patent-national-id'), $('#editForm{{$index}}').find('#patent-passport-no'), $('#editForm{{$index}}').find('#patent-email'), $('#editForm{{$index}}').find('#patent-phone'), $('#editForm{{$index}}').find('#patent-phone2'), $('#editForm{{$index}}').find('#patent-gender'), $('#editForm{{$index}}').find('#last-period-date'), $('#editForm{{$index}}').find('#date-birth'), $('#editForm{{$index}}').find('#patent-address'), $('#editForm{{$index}}').find('#patent-contracting'), $('#editForm{{$index}}').find('#patent-hours'), $('#editForm{{$index}}').find('#know option'), $('#editForm{{$index}}').find('#subtotal'), $('#editForm{{$index}}').find('#discount'), $('#editForm{{$index}}').find('#totalDiscount'), $('#editForm{{$index}}').find('#total'), $('#editForm{{$index}}').find('#paid'), $('#editForm{{$index}}').find('#due'), $('#editForm{{$index}}').find('#delayedMoney'), $('#editForm{{$index}}').find('#dueUser'), $('#editForm{{$index}}').find('#payment-method option'), $('#editForm{{$index}}').find('#items-table2 tbody'), $('#editForm{{$index}}').find('#items-table tbody'),'editModel{{$index}}', '{{$index}}', '{{$lang->button4}}', '{{$lang->table26}}', '{{$patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}', '{{$patent->getName()}}', '{{$patent->getPatentCode()}}', '{{$patent->getNationality()}}', '{{$patent->getNationalId()}}', '{{$patent->getPassportNo()}}', '{{$patent->getEmail()}}', '{{$patent->getPhone()}}', '{{$patent->getPhone2()}}', '{{$patent->getGender()}}', '{{$patent->getLastPeriodDate()}}', '{{$patent->getDateBirth()}}', '{{$patent->getAddress()}}', '{{$patent->getContracting()}}', '{{$patent->getHours()}}', {{json_encode($patent->getDiseaseId())}}, '{{$patent->getKnowId()}}', {{json_encode($patent->getOfferObject())}}, {{json_encode($patent->getTestObject())}}, '{{$patent->getSubtotal()}}', '{{$patent->getDiscount()}}', '{{$patent->getTotalDiscount()}}', '{{$patent->getTotal()}}', '{{$patent->getAmountPaid()}}', '{{$patent->getDue()}}','{{$patent->getDelayedMoney()}}', '{{$patent->getDueUser()}}', '{{$patent->getPaymentDate()}}', '{{$patent->getPaymentMethodId()}}')"></i>  
+                    <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm($('#editForm{{$index}}').find('#test-select'), 
+                    $('#editForm{{$index}}').find('#payment-date'), 
+                    $('#editForm{{$index}}').find('#payment-amount'), 
+                    $('#editForm{{$index}}').find('.form-check-input'), 
+                    $('#editForm{{$index}}').find('#patent-other'), 
+                    $('#editForm{{$index}}').find('#preview'), 
+                    $('#editForm{{$index}}').find('#selectPatient option'), 
+                    $('#editForm{{$index}}').find('#patent-code'), 
+                    $('#editForm{{$index}}').find('#patent-name'), 
+                    $('#editForm{{$index}}').find('#patent-nationality'), 
+                    $('#editForm{{$index}}').find('#patent-national-id'), 
+                    $('#editForm{{$index}}').find('#patent-passport-no'), 
+                    $('#editForm{{$index}}').find('#patent-email'), 
+                    $('#editForm{{$index}}').find('#patent-phone'), 
+                    $('#editForm{{$index}}').find('#patent-phone2'), 
+                    $('#editForm{{$index}}').find('#patent-gender'), 
+                    $('#editForm{{$index}}').find('#last-period-date'), 
+                    $('#editForm{{$index}}').find('#date-birth'), 
+                    $('#editForm{{$index}}').find('#patent-address'), 
+                    $('#editForm{{$index}}').find('#patent-contracting'), 
+                    $('#editForm{{$index}}').find('#patent-hours'), 
+                    $('#editForm{{$index}}').find('#know option'), 
+                    $('#editForm{{$index}}').find('#subtotal'), 
+                    $('#editForm{{$index}}').find('#discount'), 
+                    $('#editForm{{$index}}').find('#totalDiscount'), 
+                    $('#editForm{{$index}}').find('#total'), 
+                    $('#editForm{{$index}}').find('#paid'), 
+                    $('#editForm{{$index}}').find('#due'), 
+                    $('#editForm{{$index}}').find('#delayedMoney'), 
+                    $('#editForm{{$index}}').find('#dueUser'), 
+                    $('#editForm{{$index}}').find('#payment-method option'), 
+                    $('#editForm{{$index}}').find('#items-table tbody'), 
+                    'editModel{{$index}}', 
+                    '{{$index}}', 
+                    '{{$lang->button4}}', 
+                    '{{$lang->table26}}', 
+                    '{{$patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}', 
+                    '{{$patent->getName()}}', '{{$patent->getPatentCode()}}', 
+                    '{{$patent->getNationalityId()}}', 
+                    '{{$patent->getNationalId()}}', 
+                    '{{$patent->getPassportNo()}}', 
+                    '{{$patent->getEmail()}}', 
+                    '{{$patent->getPhone()}}', 
+                    '{{$patent->getPhone2()}}', 
+                    '{{$patent->getGenderId()}}', 
+                    '{{$patent->getLastPeriodDate()}}', 
+                    '{{$patent->getDateBirth()}}', 
+                    '{{$patent->getAddress()}}', 
+                    '{{$patent->getContractingId()}}', 
+                    '{{$patent->getHours()}}', 
+                    {{json_encode($patent->getDiseaseId())}}, 
+                    '{{$patent->getKnowId()}}', 
+                    {{json_encode($patent->getTestObject())}}, 
+                    '{{$patent->getSubtotal()}}', 
+                    '{{$patent->getDiscount()}}', 
+                    '{{$patent->getTotalDiscount()}}', 
+                    '{{$patent->getTotal()}}', 
+                    '{{$patent->getAmountPaid()}}', 
+                    '{{$patent->getDue()}}', 
+                    '{{$patent->getDelayedMoney()}}', 
+                    '{{$patent->getDueUser()}}', 
+                    '{{$patent->getPaymentDate()}}', 
+                    '{{$patent->getPaymentMethodId()}}')"></i>
                 </th>
             </tr>
             @endforeach
@@ -98,20 +161,13 @@
 </table>
 </div>
 <script type="text/javascript">
-    const keyValueMap = new Map();
-    keyValueMap.set("myArray", {
-        itemsTest:[],
-        itemsOffers:[]
-    });
-    let allRes = @json($allRes);
-    allRes.forEach((element, index) => {
-        keyValueMap.set(element[2], {
-        itemsOffers:element[0],
-        itemsTest:element[1]
-        });
-    });
-
-
+const keyValueMap = new Map();
+let res = @json(array_map(function($res) {
+return $res->getTestObject();
+}, $lang->arr6));
+keyValueMap.set("myArray", []);
+for(let key in res)
+    keyValueMap.set(key, res[key]);
 $(document).ready(function () {
     $('.myDatePayment-date').on('input', function () {
         this.setCustomValidity('');
@@ -122,8 +178,6 @@ $(document).ready(function () {
       }
     });
 });
-
-
 
 </script>
 <!-- Toast Container -->

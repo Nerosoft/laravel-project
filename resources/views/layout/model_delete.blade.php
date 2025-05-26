@@ -11,7 +11,7 @@
                             </div>
                             <div class="modal-body">
                                 <form id="deleteForm{{$index}}" action="{{ $lang->actionDelete }}" method="POST">
-                                {{ $lang->messageModelDelete }}<spam>-{{ $name }}</spam>
+                                    {{ $lang->messageModelDelete }}<spam>-{{ $name }}</spam>
                                     @csrf
                                     <input type="hidden" value="{{$index}}" name="id">  
                                 </form>

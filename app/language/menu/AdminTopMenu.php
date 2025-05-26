@@ -18,8 +18,6 @@ class AdminTopMenu extends SetupMenu
         // make object branch
         if(isset($branch))
             foreach ($branch as $key => $branch)
-                $this->MyBranch[$key] = new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
-                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
-                $branch['Country'], $branch['Follow']);
+                $this->MyBranch[$key] = new Branch($branch['Name']);
     }
 }

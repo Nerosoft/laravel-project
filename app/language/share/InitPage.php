@@ -1,7 +1,8 @@
 <?php
 
 namespace App\language\share;
-class InitPage
+use App\Http\Controllers\Controller;
+class InitPage extends Controller
 {
     protected function __construct($language, $title, $direction)
     {

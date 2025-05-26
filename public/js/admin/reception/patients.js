@@ -184,10 +184,14 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
       $(this).prop('selected', true);
   });
   patent_hours.val(myHours);
-  if(Array.isArray(myDisease))
+
+  
+  if(typeof myDisease === 'object'){
+    let myKeys = Object.keys(myDisease);
     form_check_input.each(function(idx, el){
-      el.checked = myDisease.includes(el.value) ? true : false;
+      el.checked = myKeys[idx] === el.value ? true : false;
     });
+  }
   else
     patent_other.val(myDisease);
 }

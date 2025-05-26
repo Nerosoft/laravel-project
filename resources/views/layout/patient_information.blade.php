@@ -92,14 +92,13 @@
         </div>
     </div>
 </div> 
-
 <div class="row pt-2">
     @foreach($lang->dis as $key=>$option)
         <div class="col-md-auto">
             <div class="form-group">
                 <div class="form-check">
                     <input {{isset($myState)?'disabled':''}} type="checkbox" id="choices[]" class="form-check-input" name="choices[]" value="{{$key}}"
-                    {{isset($index) ? (is_array($patent->getDiseaseId()) ? (in_array($key, $patent->getDiseaseId()) ? 'checked' : '') : '') : (in_array($key, old('choices', [])) ? 'checked' : '')}}>
+                    {{isset($index) && isset($patent->getDiseaseId()[$key]) ? 'checked' : (in_array($key, old('choices', []))?'checked':'') }}>
                     <label class="form-check-label" for="choices[]">
                     {{ $option }}
                     </label>
@@ -107,13 +106,14 @@
             </div>
         </div>
     @endforeach
+
     <div class="col-md-auto">
         <div class="pt-2 form-group">
             <label for="patent-other">
                 <i class="bi bi-list-ul"></i>
                 {{$lang->label15}}
             </label>
-            <input {{isset($myState)?'disabled':''}}  id="patent-other" type="text" class="form-control" value="{{isset($index) ? ( is_array($patent->getDiseaseId()) ? '' : $patent->getDisease() ) : old('patent-other')}}" name="patent-other" placeholder="{{$lang->hint8}}">
+            <input {{isset($myState)?'disabled':''}}  id="patent-other" type="text" class="form-control" value="{{isset($index) ? ( is_array($patent->getDiseaseId()) ? '' : $patent->getDiseaseId() ) : old('patent-other')}}" name="patent-other" placeholder="{{$lang->hint8}}">
         </div>
     </div>
 </div>

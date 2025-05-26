@@ -1,15 +1,15 @@
 <?php
 namespace App\instance\admin\reception;
-use App\instance\share\SearchId;
 use App\Models\Rays;
 use App\instance\admin\reception\Patent;
+use App\instance\admin\test_cultures\Test;
+
 class Receipt extends Patent
 {
     /**
      * Create a new class instance.
      */
     private $Know;
-    private $CurrentOffers;
     private $Test;
     private $Discount;
     private $DelayedMoney;
@@ -22,7 +22,7 @@ class Receipt extends Patent
     private $Total;
     private $Due;
     private $DueUser;		
-    public function __construct($Know, $CurrentOffers, $Test,
+    public function __construct($Know, $Test,
     $Discount, $DelayedMoney, $PaymentDate, $AmountPaid, $PaymentMethod, 
     $PatentCode = null, $Avatar = null, $Name = null, $Nationality = null, $NationalId = null, $PassportNo = null,
     $Email = null, $Phone = null, $Phone2 = null, $Gender = null, $LastPeriodDate = null,
@@ -30,12 +30,11 @@ class Receipt extends Patent
     $Disease = null)
     {
         parent::__construct($PatentCode, $Avatar, $Name, $Nationality, $NationalId, $PassportNo,
-    $Email, $Phone, $Phone2, $Gender, $LastPeriodDate,
-    $DateBirth, $Address, $Contracting, $Hours,
-    $Disease);
+        $Email, $Phone, $Phone2, $Gender, $LastPeriodDate,
+        $DateBirth, $Address, $Contracting, $Hours,
+        $Disease);
         
         $this->Know = $Know;
-        $this->CurrentOffers = $CurrentOffers;
         $this->Test = $Test;
         $this->Discount = $Discount;
         $this->DelayedMoney = $DelayedMoney;
@@ -43,7 +42,7 @@ class Receipt extends Patent
         $this->AmountPaid = $AmountPaid;
         $this->PaymentMethod = $PaymentMethod;
         
-        $this->Subtotal = array_reduce($this->CurrentOffers != null ? array_merge($this->Test , $this->CurrentOffers) : $this->Test, function ($acc, $item) {
+        $this->Subtotal = array_reduce($this->Test, function ($acc, $item) {
             return $acc + $item->getPrice() ;
         }, 0);
         $this->TotalDiscount = intval($this->Subtotal * ($this->Discount / 100));
@@ -54,23 +53,14 @@ class Receipt extends Patent
 
     //get all test for set all test when user close model and open once agen
     public function getTestObject(){
+        $myTests = array();
         foreach ($this->Test as $key => $value)
-        $this->Test[$key] = $value->getObject2();
-        return $this->Test;
-    }
-    //get all offer for set all test when user close model and open once agen
-    public function getOfferObject(){
-        if($this->CurrentOffers != null)
-            foreach ($this->CurrentOffers as $key => $value)
-            $this->CurrentOffers[$key] = $value->getObject2();
-        return $this->CurrentOffers != null ? $this->CurrentOffers : array();
+            $myTests[$key] = $value->getObject();
+        return $myTests;
     }
     public function getObject(){
         foreach ($this->Test as $key => $value)
             $this->Test[$key] = $value->getObject();
-        if($this->CurrentOffers != null)
-            foreach ($this->CurrentOffers as $key => $value)
-                $this->CurrentOffers[$key] = $value->getObject();
         return get_object_vars($this);
     }
     public function getSubtotal(){
@@ -91,19 +81,8 @@ class Receipt extends Patent
     public function getKnowId(){
         return $this->Know;
     }
-    public function getKnow(){
-        return $this->getValue('Name', $this->Know, 'Knows');
-    }
-    public function getCurrentOffers(){
-        return $this->CurrentOffers != null ? $this->CurrentOffers : array();
-    }
     public function getTest(){
         return $this->Test;
-    }
-    public function getTestPdf(){
-        return array_reduce($this->CurrentOffers != null ? array_merge($this->Test , $this->CurrentOffers) : $this->Test, function ($acc, $item) {
-            return is_array($acc) ? [...$acc, $item->getObject()] : array($item->getObject());
-        }, 0);
     }
     public function getDiscount(){
         return $this->Discount;
@@ -120,7 +99,43 @@ class Receipt extends Patent
     public function getPaymentMethodId(){
         return $this->PaymentMethod;
     }
-    public function getPaymentMethod(){
-        return $this->getValue($this->PaymentMethod, 'PaymentMethodBox');
+    public static function fromArray2($receipt, $patient, $MyKnows, $TestBox, $paymentMethod): array {
+        $MyReceipt = array();
+        foreach ($receipt as $key => $value)
+            $MyReceipt[$key] = isset($patient[$value['PatentCode']]) ? new Receipt(
+            isset($MyKnows[$value['Know']]) ? $MyKnows[$value['Know']]->getName():null,
+            Test::fromArray($value['Test'], $TestBox),
+            $value['Discount'],
+            $value['DelayedMoney'],
+            $value['PaymentDate'],
+            $value['AmountPaid'],
+            $paymentMethod[$value['PaymentMethod']],
+            $patient[$value['PatentCode']]->getPatentCode(),
+            $patient[$value['PatentCode']]->getAvatar(),
+            $patient[$value['PatentCode']]->getName(), 
+            $patient[$value['PatentCode']]->getNationalityId(),
+            $patient[$value['PatentCode']]->getNationalId(),
+            $patient[$value['PatentCode']]->getPassportNo(),
+            $patient[$value['PatentCode']]->getEmail(),
+            $patient[$value['PatentCode']]->getPhone(), 
+            $patient[$value['PatentCode']]->getPhone2(),
+            $patient[$value['PatentCode']]->getGenderId(),
+            $patient[$value['PatentCode']]->getLastPeriodDate(),
+            $patient[$value['PatentCode']]->getDateBirth(), 
+            $patient[$value['PatentCode']]->getAddress(),
+            $patient[$value['PatentCode']]->getContractingId(),
+            $patient[$value['PatentCode']]->getHours(),
+            $patient[$value['PatentCode']]->getDiseaseId()): new Receipt(
+            isset($MyKnows[$value['Know']]) ? $MyKnows[$value['Know']]->getName():null,
+            Test::fromArray($value['Test'], $TestBox),
+            $value['Discount'],
+            $value['DelayedMoney'],
+            $value['PaymentDate'],
+            $value['AmountPaid'],
+            $paymentMethod[$value['PaymentMethod']],);
+
+        return $MyReceipt;
     }
+
+    
 }

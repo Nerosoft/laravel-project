@@ -35,7 +35,7 @@
                                 <select class="form-select" id="patent-nationality" name="patent-nationality" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox1}}</option>
                                     @foreach($lang->nationality as $key=>$nat)
-                                    <option {{ isset($index) ? ($patent->getNationalityId() === $key ? 'selected' : '') : (old('patent-nationality') === $key ? 'selected' : '')  }} value="{{$key}}">{{$nat}}</option>
+                                    <option {{ isset($index) ? ($patent->getNationalityId() === $nat ? 'selected' : '') : (old('patent-nationality') === $key ? 'selected' : '')  }} value="{{$key}}">{{$nat}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -49,7 +49,7 @@
                                 <select class="form-select" id="patent-gender" name="patent-gender" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox2}}</option>
                                     @foreach($lang->gender as $key=>$gender)
-                                    <option {{isset($index) ? ($patent->getGenderId() === $key ? 'selected' : '') : (old('patent-gender') === $key ? 'selected' : '')}} value="{{$key}}">{{$gender}}</option>            
+                                    <option {{isset($index) ? ($patent->getGenderId() === $gender ? 'selected' : '') : (old('patent-gender') === $key ? 'selected' : '')}} value="{{$key}}">{{$gender}}</option>            
                                     @endforeach
                                 </select>
                             </div>
@@ -62,8 +62,8 @@
                                 </label>
                                 <select class="form-select" id="patent-contracting" name="patent-contracting" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox5}}</option>
-                                    @foreach($lang->arr1 as $key=>$contract)
-                                    <option {{isset($index) ? ($patent->getContractingId() === $key ? 'selected' : '') : (old('patent-contracting') === $key ? 'selected' : '')}} value="{{$key}}">{{$contract->getName()}}</option>
+                                    @foreach($lang->myContract as $key=>$contract)
+                                    <option {{isset($index) ? ($patent->getContractingId() === $contract->getName() ? 'selected' : '') : (old('patent-contracting') === $key ? 'selected' : '')}} value="{{$key}}">{{$contract->getName()}}</option>
                                     @endforeach 
                                 </select>
                             </div>

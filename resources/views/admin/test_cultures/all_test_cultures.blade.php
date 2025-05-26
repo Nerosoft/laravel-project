@@ -8,7 +8,7 @@
 @section('containt')
 <div class="space-page container">
 <button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button1}}</button>
-@include('layout.all_tests.create_edit_tests')
+@include('layout.all_models.all_tests.create_edit_tests')
 <table id="example" class="table table-striped">
     <thead>
             <tr>
@@ -27,11 +27,11 @@
                 <th>{{$test->getName()}}</th>
                 <th>{{$test->getShortcut()}}</th>
                 <th>{{$test->getPrice()}}</th>
-                <th>{{$test->getInputOutputLab()}}</th>
+                <th>{{$test->getInputOutputLabId()}}</th>
                 <th>
                 @include('layout.model_delete', ['name'=>$test->getName()])
                 <i class="bi bi-wrench-adjustable edit" onclick="displayEditForm('editModel{{$index}}', $('#editForm{{$index}}').find('#name'), $('#editForm{{$index}}').find('#shortcut'), $('#editForm{{$index}}').find('#price'), $('#editForm{{$index}}').find('#input-output-lab option'), '{{$test->getName()}}', '{{$test->getShortcut()}}', '{{$test->getPrice()}}', '{{$test->getInputOutputLabId()}}')"></i>
-                @include('layout.all_tests.create_edit_tests')
+                @include('layout.all_models.all_tests.create_edit_tests')
                 </th>
             </tr>
             @endforeach
@@ -88,7 +88,6 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/admin/test_cultures/table_setting.js')}}" type="text/javascript"></script>
-@extends('layout.table_setting')
 <script src="{{asset('js/admin/test_cultures/all_test_cultures.js')}}" type="text/javascript"></script>
+@extends('layout.table_setting')
 @endsection

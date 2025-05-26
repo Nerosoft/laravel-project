@@ -1,7 +1,6 @@
 <?php
 namespace App\instance\admin;
-use App\instance\share\SearchId;
-class Branch extends SearchId
+class Branch
 {
     /**
      * Create a new class instance.
@@ -15,8 +14,8 @@ class Branch extends SearchId
     private $Address;
     private $Country;
     private $Follow;
-    public function __construct($Name, $Phone, $Governments,
-    $City, $Street, $Building, $Address, $Country, $Follow)
+    public function __construct($Name, $Phone = null, $Governments = null,
+    $City = null, $Street = null, $Building = null, $Address = null, $Country = null, $Follow = null)
     {
         $this->Name = $Name;
         $this->Phone = $Phone;
@@ -55,7 +54,12 @@ class Branch extends SearchId
     public function getFollowId(){
         return $this->Follow;
     }
-    public function getFollow(){
-        return $this->getValue($this->Follow, 'SelectBranchBox');
+    public static function fromArray($branch, $inout){
+        $allBranch = array();
+        foreach ($branch as $key => $branch)
+            $allBranch[$key] = new Branch($branch['Name'], $branch['Phone'], $branch['Governments'],
+                $branch['City'], $branch['Street'], $branch['Building'], $branch['Address'],
+                $branch['Country'], $inout[$branch['Follow']]);        
+        return $allBranch;
     }
 }

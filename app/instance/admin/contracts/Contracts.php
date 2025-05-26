@@ -23,4 +23,10 @@ class Contracts
     public function getArea(){
         return $this->Area;
     }
+    public static function fromArray(array $data): array {
+        $contracts = array();
+        foreach ($data as $key=>$data) 
+            $contracts[$key] = new Contracts($data['Name'], $data['Governorate'], $data['Area']);
+        return $contracts;
+    }
 }
