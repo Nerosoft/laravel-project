@@ -67,23 +67,9 @@ class RaysSeeder extends Seeder
                         'BranchesCompany'=>'Select branches',
                         'BranchMain'=>'Branch main',
                     ],
-                    'AppSettingPatient'=>[
-                        'Offcanvas'=>'Dark offcanvas',
-                        'Logout'=>'Logout',
-                        'AdminDashboard'=>'Salamatak for medical analysis and radiology',
-                    ],
-                    'AppSettingDoctor'=>[
-                        'Offcanvas'=>'Dark offcanvas',
-                        'Logout'=>'Logout',
-                        'AdminDashboard'=>'Salamatak for medical analysis and radiology',
-                    ],
                     'SelectTestBox'=>[
                         'TestInput'=>'Input',
                         'TestOutput'=>'Output',
-                    ],
-                    'SelectOfferBox'=>[
-                        'CurrentOffersStateActive'=>'Active',
-                        'CurrentOffersStateNotAction'=>'not active',
                     ],
                     'SelectBranchBox'=>[
                         'WithoutRays'=>'Without rays',
@@ -122,9 +108,9 @@ class RaysSeeder extends Seeder
                         'PaymentMethodPayPal'=>'PayPal',
                     ],
                     'OptionTestBox'=>[
-                        'Test'=>'Test',
-                        'Packages'=>'Package',
-                        'Cultures'=>'Cultures',
+                        'OptionTest'=>'Test',
+                        'OptionPackageCultures'=>'Package',
+                        'OptionCultures'=>'Cultures',
                     ],
                     'CutomLang'=>[
                         'SelectBox'=>'Select box',
@@ -144,10 +130,7 @@ class RaysSeeder extends Seeder
                         'CutomLang'=>'Cutom Lang',
                         'TableInfo'=>'Table info',
                         'AppSettingAdmin'=>'App Setting Admin',
-                        'AppSettingPatient'=>'App Setting Patient',
-                        'AppSettingDoctor'=>'App Setting Doctor',
                         'SelectTestBox'=>'Select Test Box',
-                        'SelectOfferBox'=>'Select Offer Box',
                         'SelectBranchBox'=>'Select Branch Box',
                         'SelectNationalityBox'=>'Select Nationality Box',
                         'SelectGenderBox'=>'Select Gender Box',
@@ -955,215 +938,32 @@ class RaysSeeder extends Seeder
                 ],
                 'arabic'=>[
                     'Menu'=>[
-                            'ChangeLanguage'=>'تغير اللغة',
-                            'SystemLang'=>'تعديل لغة البرنامج',        
-                            'AllLanguage'=>'كل اللغات',
-
-                            'PatentDashboard'=>'لوحة التحكم',
-                            'PatentReports'=>'تقرير',
-                            'TestsLibrary'=>'مكتبة الاختبارات',
-                            'PatentHomeVisit'=>'زيارة منزلية',
-                            'PatentOurBranches'=>'فروعنا',
-
-                            'DoctorDashboard'=>'لوحة التحكم',
-                            'DoctorInvoices'=>'فاتورة',
-                            'DoctorMedicalReports'=>[
-                                'Name'=>'تقرير طبي',
-                                'Item'=>[
-                                    'TheAllMedicalReports'=>'جميع التقارير الطبية',
-                                    'TheDoneReports'=>'التقارير المنتهية',
-                                    'ThePendingReports'=>'التقارير المعلقة',
-                                    'TheUnsignedReports'=>'التقارير غير الموقعة'
-                                ]
-                            ],
-                            'TheDoctorReport'=>'تقرير الطبيب',
-                            'TheClearCache'=>'مسح ذاكرة التخزين المؤقت',
-                            'TechnicalSupports'=>'الدعم الفني',
-
-                            'Home'=>'الشاشة الرئيسية',
-                        'Setting'=>[
-                            'Name'=>'الاعدادات',
-                            'Item'=>[
-                                'AllLanguage'=>'اللغه'
-                            ]
-                        ],
+                        'ChangeLanguage'=>'تغير اللغه',        
+                        'SystemLang'=>'نظام البرنامج',          
+                        'Home'=>'الشاشة الرئيسيه',
                         'Reception'=>[
                             'Name'=>'الاستقبال',
                             'Item'=>[
-                                'Vault'=>'الخزنة', 
-                                'Invoices'=>'الفواتير',    
-                                'PatientRegisteration'=>'تسجيل المريض',                    
-                                'Retrieved'=>'المسترد',     
-                                'Patients'=>'المرضى',    
-                                'Prefix'=>'البادئة',  
-                                'Knows'=>'يعرف'
-                            ]
-                        ], 
-                        'MedicalReports'=>[
-                            'Name'=>'التقارير الطبية',
-                            'Item'=>[
-                                'AllMedicalReports'=>'جميع التقارير الطبية',               
-                                'DoneReports'=>'التقارير المنجزة',        
-                                'PendingReports'=>'التقارير المعلقة',           
-                                'UnsigendReports'=>'التقارير غير الموقعة',            
-                                'SendToLab'=>'إرسال إلى المختبر',       
-                                'SampleStatus'=>'حالة العينة',
+                                'PatientRegisteration'=>'الفواتير',
+                                'Patients'=>'المرضي',
                             ]
                         ],
                         'TestCultures'=>[
-                            'Name'=>'اختبار الثقافات',
+                            'Name'=>'الاختبارات',
                             'Item'=>[
-                                'Categories'=>'الفئات',      
-                                'AllTestCultures'=>'الاختبار',
-                                'SampleTypes'=>'أنواع العينات',        
-                                'TheCultures'=>'الثقافات',    
-                                'CultureOptions'=>'خيارات الثقافة',           
-                                'Antibiotics'=>'المضادات الحيوية',       
-                                'PackagesCultures'=>'الحزم',    
-                                'ExtraService'=>'الخدمة الإضافية',         
-                                'CurrentOffers'=>'العروض الحالية',
+                                'AllTestCultures'=>'الاشعه',
+                                'TheCultures'=>'المزارع',
+                                'PackagesCultures'=>'الحزم',
                             ]
-                        ],    
-                        'PriceList'=>[
-                            'Name'=>'قائمة الأسعار',
-                            'Item'=>[
-                                'Test'=>'الاختبار',
-                                'CulturesPrice'=>'الثقافات',    
-                                'Packages'=>'الحزم',    
-                                'PricesList'=>'قائمة الأسعار',
-                            ]
-                        ], 
+                        ],  
                         'Contracts'=>[
-                            'Name'=>'العقود',
+                            'Name'=>'التعاقدات',
                             'Item'=>[
-                                'Governments'=>'الحكومات',       
-                                'TheContracts'=>'الحزم',     
-                                'PackagesContracts'=>'العقود',    
-                                'Knows'=>'المعارف',
-                                'PricesListContracts'=>'قائمة الأسعار',       
-                                'Labs'=>'المختبرات',
-                                'LabsOut'=>'المختبرات خارج المختبرات',    
-                                'Doctors'=>'الأطباء',   
-                            ]
-                        ], 
-                        'UserRoles'=>[
-                            'Name'=>'أدوار المستخدم', 
-                            'Item'=>[
-                                'Roles'=>'الأدوار', 
-                                'User'=>'المستخدم',
-                            ]
-                        ], 
-                        'HREmployees'=>[
-                            'Name'=>'الموارد البشرية والموظفين',
-                            'Item'=>[
-                                'Employees'=>'الموظفون',     
-                                'Violations'=>'الانتهاكات',      
-                                'Vocations'=>'طلب الانتهاكات',              
-                                'Incentives'=>'الحوافز',      
-                                'Deductions'=>'الخصومات',      
-                                'Attendance'=>'الحضور',      
-                                'Shifts'=>'الورديات',  
+                                'PackagesContracts'=>'التعاقد',
+                                'Knows'=>'وسائل التواصل الاجتماعي',
                             ]
                         ],
-                        'SalaryDetails'=>[
-                            'Name'=>'تفاصيل الراتب',
-                            'Item'=>[
-                                'Salary'=>'راتب',
-                                'ThInventory'=>'مخزون',
-                                'ThSuppliers'=>'الموردين',
-                                'ThProducts'=>'منتجات',
-                                'ThFixedAssets'=>'الأصول الثابتة',
-                                'ThPurchases'=>'مشتريات',
-                                'ThAdjustments'=>'تعديلات',
-                                'ThTransfers'=>'تحويلات'
-                            ]
-                        ],
-                        'Inventory'=>[
-                            'Name'=>'مخزون',
-                            'Item'=>[
-                                'Suppliers'=>'الموردين',
-                                'Products'=>'منتجات',
-                                'FixedAssets'=>'الأصول الثابتة',
-                                'Purchases'=>'مشتريات',
-                                'Adjustments'=>'تسويات',
-                                'Transfers'=>'تحويلات'
-                            ]
-                        ],
-                        'Accounting'=>[
-                            'Name'=>'محاسبة',
-                            'Item'=>[
-                                'PaymentMethods'=>'طرق الدفع',
-                                'ExpenseCategories'=>'فئات المصروفات',
-                                'ViewExpenses'=>'عرض النفقات',
-                                'Expenses'=>'نفقات'
-                            ]
-                        ],
-                        'Reporting'=>[
-                            'Name'=>'إبلاغ',
-                            'Item'=>[
-                                'ContractsReports'=>'تقارير العقود',
-                                'DelayedMoney'=>'المال المتأخر',
-                                'AccountingReport'=>'تقرير المحاسبة',
-                                'NormalDoctorReport'=>'تقرير الطبيب الطبيعي',
-                                'AllDoctorReport'=>'تقرير كل دكتور',
-                                'DoctorReport'=>'تقرير الطبيب',
-                                'SupplierReport'=>'تقرير الموردين',
-                                'PurchasesReport'=>'تقرير المشتريات',
-                                'InventoryReport'=>'تقرير المخزون',
-                                'ProductsReport'=>'تقرير المنتجات',
-                                'WorkloadMonthly'=>'عبء العمل',
-                                'WorkloadDaily'=>'عبء العمل يوميا',
-                                'TestesBranchReport'=>'تقرير فرع Testes',
-                                'ExpensesReport'=>'تقرير المصروفات',
-                                'CustodyReport'=>'تقرير الحضانة',
-                                'ContractReport'=>'تقرير العقد',
-                                'EmployeesReport'=>'إبلاغ العامل',
-                                'RaysReport'=>'تقرير الأشعة',
-                                'RaysCategoriesReport'=>'تقرير فئات الأشعة',
-                                'SafeTransferReport'=>'تقرير النقل الآمن'
-                            ]
-                        ],
-                        'SafeTransfers'=>[
-                            'Name'=>'عمليات النقل الآمنة',
-                            'Item'=>[
-                                'RejectedTransfers'=>'التحويلات المرفوضة',
-                                'TransferToOwner'=>'نقل إلى المالك',
-                                'AllTransfers'=>'جميع التحويلات'
-                            ]
-                        ],
-                        'MobileApplication'=>[
-                            'Name'=>'تطبيقات الهاتف المتحرك',
-                            'Item'=>[
-                                'TipsAndOffer'=>'نصائح وعرض',
-                                'StaticPage'=>'صفحة ثابتة',
-                                'Sliders'=>'السلايدر'
-                            ]
-                        ],
-                        'Notifications'=>[
-                            'Name'=>'تنبيهات',
-                            'Item'=>[
-                                'Notification'=>'تنبيهات',
-                                'CreateNotifications'=>'أنشئ إشعارات'
-                            ]
-                        ],
-
-                        'Whatsapp'=>'واتساب',
-                        'HomeVisits'=>[
-                            'Name'=>'زيارات منزلية',
-                            'Item'=>[
-                                'HomeVisit'=>'زيارات منزلية',
-                                'Bookings'=>'حجز',
-                                'Prescriptions'=>'الوصفات الطبية',
-                            ]
-                        ],
-                        'Branches'=>'أفرع',
-                        'BranchesCustody'=>'حضانة الفروع',
-                        'SettingApp'=>'إعدادات',
-                        'Chat'=>'محادثة',
-                        'Translations'=>'ترجمة',
-                        'ActivityLogs'=>'سجلات الأنشطة',
-                        'ClearCache'=>'مسح ذاكرة التخزين المؤقت',
-                                             
+                        'Branches'=>'الافرع',
                     ],
                     'TableInfo'=>[
                         'Ssearch'=>'بحث سريع:',
@@ -1180,23 +980,9 @@ class RaysSeeder extends Seeder
                         'BranchesCompany'=>'حدد الفروع',
                         'BranchMain'=>'الفرع الرئيسي',
                     ],
-                    'AppSettingPatient'=>[
-                        'Offcanvas'=>'شاشة المنيو',
-                        'Logout'=>'تسجيل خروج',
-                        'AdminDashboard'=>'سلامتك للتحاليل الطبية والأشعة',
-                    ],
-                    'AppSettingDoctor'=>[
-                        'Offcanvas'=>'شاشة المنيو',
-                        'Logout'=>'تسجيل خروج',
-                        'AdminDashboard'=>'سلامتك للتحاليل الطبية والأشعة',
-                    ],
                     'SelectTestBox'=>[
                         'TestInput'=>'داخل',
                         'TestOutput'=>'خارج',
-                    ],
-                    'SelectOfferBox'=>[
-                        'CurrentOffersStateActive'=>'يعمل',
-                        'CurrentOffersStateNotAction'=>'لا يعمل',
                     ],
                     'SelectBranchBox'=>[
                         'WithoutRays'=>'بدون أشعة',
@@ -1257,10 +1043,7 @@ class RaysSeeder extends Seeder
                         'SelectBox'=>'صندوق الاختيار',
                         'TableInfo'=>'تعديل الجدول',
                         'AppSettingAdmin'=>'تعديل بيانات الادمن',
-                        'AppSettingPatient'=>'تعديل بيانات المريض',
-                        'AppSettingDoctor'=>'تعديل بيانات الدكتور',
                         'SelectTestBox'=>'تعديل بيانات صندوق الاختبار',
-                        'SelectOfferBox'=>'تعديل بيانات صندوق العروض',
                         'SelectBranchBox'=>'تعديل بيانات صندوق الفروع',
                         'SelectNationalityBox'=>'تعديل بيانات صندوق الجنسية',
                         'SelectGenderBox'=>'تعديل بيانات صندوق النوع',

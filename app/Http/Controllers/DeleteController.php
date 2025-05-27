@@ -36,7 +36,6 @@ class DeleteController extends Controller
         return back()->with('success', $this->successfully1);
     }
     private function getDeleteDatabade($model, $item){
-        //$model = Rays::find(request()->session()->get($name!==null?$name:'userId'));
         if(count($model[$item]) === 1)
             unset($model[$item]);
         else{
