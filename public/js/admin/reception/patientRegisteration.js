@@ -355,7 +355,6 @@ function addItem3(test_select, tests_name, table, subtotal, totalDiscount, disco
 
 function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, packageCultures){
     idHeddinSelectBox.empty(); // Clear all existing options
-    alert(event.target.value);
     idSelectBox.removeClass('d-none');
     if(event.target.value === 'Test' && test !== null)
         for (let key in test)
