@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\language\share\EmailPassInformaion;
 use App\Models\Rays;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\Rule;
 
@@ -85,9 +84,9 @@ class LoginAdminController extends EmailPassInformaion
         }
     }
     public function index(){
-        return (new Response(view('login.user',[
-        'lang'=>$this
-        ])));
+        return view('login.user',[
+            'lang'=>$this
+        ]);
     }
     public function action(){
         return isset($this->successfully1)?redirect()->route('Home')->with('success', $this->successfully1):back()->withInput()->withErrors($this->errorMessage);

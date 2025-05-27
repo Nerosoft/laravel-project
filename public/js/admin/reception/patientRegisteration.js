@@ -65,7 +65,7 @@ function initPatient(el, form, url){
     if(typeof jsonObject.Disease === 'object'){
         let myKeys = Object.keys(jsonObject.Disease);
         $(form).find('input[type="checkbox"]').each(function(idx, el){
-            el.checked = myKeys[idx] === el.value ? true : false;
+            el.checked = myKeys.includes(el.value) ? true : false;
         });
     }
     else
@@ -246,7 +246,7 @@ function displayEditForm(test_select, payment_date, payment_amount, form_check_i
     if(typeof myDisease === 'object'){
         let myKeys = Object.keys(myDisease);
         form_check_input.each(function(idx, el){
-        el.checked = myKeys[idx] === el.value ? true : false;
+            el.checked = myKeys.includes(el.value) ? true : false;
         });
     }
     else

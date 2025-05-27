@@ -61,7 +61,6 @@
                 <th>
                     @include('layout.model_delete', ['name'=>$patent->getName()])
                     @include('layout.all_models.admin.reception.patient_register')
-                    <!-- <i class="bi bi-wrench-adjustable edit" onclick="openForm('editModel{{$index}}')"></i> -->
                      <div class="dropdown">
                         <i class="bi bi-gear edit" id="dropdownMenuButton" data-bs-toggle="dropdown"></i> <!-- Re icon as needed -->
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

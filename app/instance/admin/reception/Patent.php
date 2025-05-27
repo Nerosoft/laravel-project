@@ -105,18 +105,30 @@ class Patent
     public static function fromArray(array $data, $contract, $gender, $nationality, $dis): array {
         $patent = array();
         foreach ($data as $key=>$data){
-            $myDis = array();
-            foreach ($data['Disease'] as $value)
-                $myDis[$value] = $dis[$value];
-            $patent[$key] = new Patent($key, $data['Avatar'], $data['Name'], 
-            $nationality[$data['Nationality']],
-            $data['NationalId'], $data['PassportNo'], $data['Email'], $data['Phone'],
-            $data['Phone2'],
-            $gender[$data['Gender']], $data['LastPeriodDate'], $data['DateBirth'],
-            $data['Address'],
-            isset($contract[$data['Contracting']])?$contract[$data['Contracting']]->getName():null,
-            $data['Hours'],
-            $myDis);
+            if(is_string($data['Disease']))
+                $patent[$key] = new Patent($key, $data['Avatar'], $data['Name'], 
+                $nationality[$data['Nationality']],
+                $data['NationalId'], $data['PassportNo'], $data['Email'], $data['Phone'],
+                $data['Phone2'],
+                $gender[$data['Gender']], $data['LastPeriodDate'], $data['DateBirth'],
+                $data['Address'],
+                isset($contract[$data['Contracting']])?$contract[$data['Contracting']]->getName():null,
+                $data['Hours'],
+                $data['Disease']);
+            else{
+                $myDis = array();
+                foreach ($data['Disease'] as $value)
+                    $myDis[$value] = $dis[$value];
+                $patent[$key] = new Patent($key, $data['Avatar'], $data['Name'], 
+                $nationality[$data['Nationality']],
+                $data['NationalId'], $data['PassportNo'], $data['Email'], $data['Phone'],
+                $data['Phone2'],
+                $gender[$data['Gender']], $data['LastPeriodDate'], $data['DateBirth'],
+                $data['Address'],
+                isset($contract[$data['Contracting']])?$contract[$data['Contracting']]->getName():null,
+                $data['Hours'],
+                $myDis);
+            }
         }
         return $patent;
     }

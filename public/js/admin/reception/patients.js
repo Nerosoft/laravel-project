@@ -189,7 +189,7 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
   if(typeof myDisease === 'object'){
     let myKeys = Object.keys(myDisease);
     form_check_input.each(function(idx, el){
-      el.checked = myKeys[idx] === el.value ? true : false;
+      el.checked = myKeys.includes(el.value) ? true : false;
     });
   }
   else

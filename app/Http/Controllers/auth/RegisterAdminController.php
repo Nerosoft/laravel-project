@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\language\share\EmailPassInformaion;
 use App\Models\Rays;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\Rule;
 use App\Http\interface\LangObject;
@@ -102,9 +101,9 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         }
     }
     public function index(){
-        return (new Response(view('login.register',[
-        'lang'=>$this
-        ])));
+        return view('login.register',[
+            'lang'=>$this
+        ]);
     }
     public function action(){
         return redirect()->route('Home')->with('success', $this->successfully1); 
