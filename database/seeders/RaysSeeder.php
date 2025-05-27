@@ -108,9 +108,9 @@ class RaysSeeder extends Seeder
                         'PaymentMethodPayPal'=>'PayPal',
                     ],
                     'OptionTestBox'=>[
-                        'OptionTest'=>'Test',
-                        'OptionPackageCultures'=>'Package',
-                        'OptionCultures'=>'Cultures',
+                        'Test'=>'Test',
+                        'Packages'=>'Package',
+                        'Cultures'=>'Cultures',
                     ],
                     'CutomLang'=>[
                         'SelectBox'=>'Select box',
@@ -1021,9 +1021,9 @@ class RaysSeeder extends Seeder
                         'PaymentMethodPayPal'=>'فودافون كاش',
                     ],
                     'OptionTestBox'=>[
-                        'OptionTest'=>'الاختبار',
-                        'OptionPackageCultures'=>'الحزم',
-                        'OptionCultures'=>'المزارع',
+                        'Test'=>'الاختبار',
+                        'Packages'=>'الحزم',
+                        'Cultures'=>'المزارع',
                     ],
                     'CutomLang'=>[
                         'Direction'=>'الاتجاه',
