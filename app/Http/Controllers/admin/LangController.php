@@ -74,7 +74,7 @@ class LangController extends DeleteModel
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'));
+            new Menu($ob[$ob['Setting']['Language']]['Menu']));
             $this->error1 = $ob[$this->language]['Error']['NewLangNameRequired'];
             $this->error2 = $ob[$this->language]['Error']['NewLangNameInvalid'];
             //init table

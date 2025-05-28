@@ -147,7 +147,7 @@ class BranchesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Admin'),
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
             $ob[$ob['Setting']['Language']]['Title']['BranchRays'],
             $ob[$ob['Setting']['Language']]['Title']['BranchRaysEdit'],
             $ob[$ob['Setting']['Language']]['Button']['CreateBranche'],
