@@ -60,9 +60,9 @@ function displayEditForm(id, name, shortcut, price, input_output_lab, nameTset, 
             $(this).prop('selected', true);
     });
 }
-function validateForm2(name, shortcut, price){
+function validateForm(name, shortcut, price, inputOutputLab){
     isValid = true;
-    if(name.val() === '' || name.val().length < 3){
+     if(name.val() === '' || name.val().length < 3){
         (new bootstrap.Toast($(name.val() === '' ? '#myToast1' : '#myToast2'), { delay: 10000 })).show();
         name.addClass('error-message');
         isValid = false;
@@ -80,10 +80,6 @@ function validateForm2(name, shortcut, price){
         isValid = false;
     }else
         price.removeClass('error-message');
-    return isValid;
-}
-function validateForm(name, shortcut, price, inputOutputLab){
-    isValid = validateForm2(name, shortcut, price);
     if(inputOutputLab.val() === null){
         (new bootstrap.Toast($('#myToast6'), { delay: 10000 })).show();
         inputOutputLab.addClass('error-message');
@@ -123,7 +119,6 @@ function createToast(message, type){
     $(this).remove();
     });
 };
-
 $(document).ready(function () {
     $('input[type="number"]').on('keydown', function (event) {
         // Prevent 'e', 'E', '-', '+'
@@ -132,8 +127,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 function openDatePicker(date) {
   date.showPicker(); // Opens the date picker on click
 }
