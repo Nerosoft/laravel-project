@@ -142,7 +142,6 @@ class ContractsController extends Page implements LangObject
     public function index($id){
         return view($id!=='Knows'?'admin.contracts.packages_contracts':'admin.contracts.knows',[
             'lang'=> $this,
-            'logOut'=>route('admin.logout'),
             'active'=>'Contracts',
             'activeItem'=>$id
         ]);

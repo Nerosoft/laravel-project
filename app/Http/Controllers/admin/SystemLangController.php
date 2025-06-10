@@ -121,12 +121,10 @@ class SystemLangController extends TableSetting
         return view('admin.all_language', $nameLanguage === null?[
             'lang'=> $this,
             'active'=>$id,
-            'logOut'=>route('admin.logout')
         ]:[
             'lang'=> $this,
             'active'=>$nameLanguage,
             'activeItem'=>$id,
-            'logOut'=>route('admin.logout')
         ]);
     }
     public function action(){

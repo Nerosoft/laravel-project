@@ -497,7 +497,6 @@ class ReceptionController extends PatientInfo implements LangObject
     public function index($id){
         return view($id !== 'Patients'? 'admin.reception.patientRegisteration':'admin.reception.patients', [
             'lang'=> $this,
-            'logOut'=>route('admin.logout'),
             'active'=>'Reception',
             'activeItem'=>$id,
         ]);

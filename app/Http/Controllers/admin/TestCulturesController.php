@@ -248,7 +248,6 @@ class TestCulturesController extends Page implements LangObject
     public function index($id){
         return view('admin.test_cultures.all_test_cultures',[
                 'lang'=> $this,
-                'logOut'=>route('admin.logout'),
                 'active'=>'TestCultures',
                 'activeItem'=>$id,        
         ]);

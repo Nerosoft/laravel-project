@@ -104,7 +104,6 @@ class LangController extends DeleteModel
         return view('admin.change_language',[
                 'lang'=>$this,
                 'active'=>'ChangeLanguage',
-                'logOut'=>route('admin.logout')
         ]);
     }
     public function action(){

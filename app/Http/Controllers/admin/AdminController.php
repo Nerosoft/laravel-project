@@ -37,7 +37,6 @@ class AdminController extends AdminTopMenu
         return view('admin.user', [
             'lang'=> $this,
             'active'=>'Home',
-            'logOut'=>route('admin.logout')
         ]);
     }
 }

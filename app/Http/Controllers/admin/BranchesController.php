@@ -188,7 +188,6 @@ class BranchesController extends Page implements LangObject
             'lang'=> $this,
             'newBranchRays'=>route('addBranchRays'),
             'active'=>'Branches',
-            'logOut'=>route('admin.logout')
         ]);
     }
     public function getMyObject(){
