@@ -2,9 +2,6 @@
 @section('title') {{$lang->title1}} @endsection
 <link rel="stylesheet" href="{{asset('css/admin/change_language.css')}}">
 @extends('layout.nav_admin')
-@section('branch')
-@include('layout.branch_button')
-@endsection
 @section('containt')
     <div class="space-page container text-center">           
         <h1 id="greeting">{{$lang->label3}}</h1>

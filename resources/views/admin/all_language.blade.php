@@ -1,10 +1,7 @@
 @extends('layout.app_table')
 @section('title') {{$lang->title1}} @endsection
 <link rel="stylesheet" href="{{asset('css/admin/all_language.css')}}">
-@extends('layout.nav_admin')
-@section('branch')
-@include('layout.branch_button')
-@endsection  
+@extends('layout.nav_admin')  
 @section('containt')
 <div class="start_page container">
 

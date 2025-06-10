@@ -2,9 +2,6 @@
 @section('title') {{$lang->title1}} @endsection
 <link rel="stylesheet" href="{{asset('css/admin/user-home.css')}}">
 @extends('layout.nav_admin')
-@section('branch')
-@include('layout.branch_button')
-@endsection
 @section('containt')
 <div class="home">   
 <!-- Header -->
