@@ -7,7 +7,6 @@
 <div class="user-register">
         <form id="form_data" action="{{route('register.registerUser')}}" method="POST" onsubmit="return validateFormRegisterAdmin()">
         @csrf
-            <input type="hidden" name="userId" value="{{$lang->RaysId}}">
             @include('layout.email_password')
             <div class="form-group">
                 <label for="password_confirmation">{{$lang->labelUserRepeatPassword}}</label>

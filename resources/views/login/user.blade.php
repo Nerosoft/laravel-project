@@ -6,7 +6,6 @@
 <div class="user-login">
         <form id="form_data" action="{{route('loginUser.loginUser')}}" method="POST" onsubmit="return validateFormLoginAdmin()">
         @csrf
-            <input type="hidden" name="userId" value = "{{$lang->RaysId}}">
             @include('layout.email_password')
         </form>
         @include('layout.all_models.auth.language')

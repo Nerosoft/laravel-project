@@ -23,7 +23,6 @@ class Menu
                 $this->CustomMenu[$key] = new MenuItem($value, $CutomLang);
         }
         else{
-            // $this->Setting = new MenuItem($menu['Setting']['Name'],  $menu['Setting']['Item']);
             $this->ChangeLanguage = $menu['ChangeLanguage'];
             $this->SystemLang = $menu['SystemLang'];
             $this->Home = $menu['Home'];

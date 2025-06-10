@@ -110,6 +110,6 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
     }
     public function getMyObject(){
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
-    } 
+    }
 }
 
