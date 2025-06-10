@@ -17,25 +17,25 @@ class LangController extends DeleteModel
         $ob = Rays::find(request()->session()->get('userId'));
         if(Route::currentRouteName() === 'language.change'){
             request()->validate([
-            'language-select' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
+            'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
             ], [
-                'language-select.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
-                'language-select.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
+                'id.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
             ]);
             $setting = $ob['Setting'];
-            $setting['Language'] = request()->input('language-select');
+            $setting['Language'] = request()->input('id');
             $ob['Setting'] = $setting;
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'];
         }else if(Route::currentRouteName() === 'language.copy'){
             request()->validate([
-            'language-select' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))],
+            'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))],
             'lang_name' =>['required', 'min:3']
             ], [
                 'lang_name.required' => $ob[$ob['Setting']['Language']]['Error']['NewLangNameRequired'],
                 'lang_name.min' => $ob[$ob['Setting']['Language']]['Error']['NewLangNameInvalid'],
-                'language-select.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
-                'language-select.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
+                'id.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
             ]);
             $newKey = $this->generateUniqueIdentifier();
             foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
@@ -44,7 +44,7 @@ class LangController extends DeleteModel
                 $ob[$key] = $myLang;
             }
             //after add new language name
-            $ob[$newKey] = $ob[request()->input('language-select')];
+            $ob[$newKey] = $ob[request()->input('id')];
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'];
         }else if(Route::currentRouteName() === 'language.delete'){

@@ -1,4 +1,4 @@
-@include('layout.all_models.auth.rays_id')
+@include('layout.rays_id')
 <h4>{{$lang->help}}</h4>
 <div class="form-group">
     <label for="email">{{$lang->label1}}</label>

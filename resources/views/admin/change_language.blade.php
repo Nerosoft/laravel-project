@@ -40,7 +40,7 @@
                                     <div class="modal-body">
                                         <form id="LangForm{{$i.$index}}" action="{{$i !== 0 ? route('language.change') : route('language.copy')}}" method="POST" onsubmit="return @json($i) !== 0 ? true : validName($(this).find('#lang_name'))">
                                             @csrf
-                                            <input type="hidden" id="language-select" name="language-select" value="{{$index}}">
+                                            @include('layout.my_id')
                                             @if($i === 0)
                                             <div class="input-group input-group-lg mt-2">
                                             <div class="input-group-prepend">
@@ -75,7 +75,7 @@
                                     <div class="modal-body">
                                         <form id="LangForm{{$i.$index}}" action="{{$i !== 0 ? route('language.change') : route('language.copy')}}" method="POST" onsubmit="return @json($i) !== 0 ? true : validName($(this).find('#lang_name'))">
                                             @csrf
-                                            <input type="hidden" id="language-select" name="language-select" value="{{$index}}">
+                                            @include('layout.my_id')
                                             @if($i === 0)
                                             <div class="input-group input-group-lg mt-2">
                                             <div class="input-group-prepend">

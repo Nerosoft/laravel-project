@@ -13,7 +13,7 @@
                                 <form id="deleteForm{{$index}}" action="{{ $lang->actionDelete }}" method="POST">
                                     {{ $lang->messageModelDelete }}<spam>-{{ $name }}</spam>
                                     @csrf
-                                    <input type="hidden" value="{{$index}}" name="id">  
+                                    @include('layout.my_id')  
                                 </form>
                             </div>
                             <div class="modal-footer">

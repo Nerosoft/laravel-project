@@ -135,6 +135,7 @@ class RaysSeeder extends Seeder
                         'SelectNationalityBox'=>'Select Nationality Box',
                         'SelectGenderBox'=>'Select Gender Box',
                         'PaymentMethodBox'=>'Select Payment Method Box',
+                        'OptionTestBox'=>'Option Test Box'
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'English language',
@@ -1047,7 +1048,8 @@ class RaysSeeder extends Seeder
                         'SelectBranchBox'=>'تعديل بيانات صندوق الفروع',
                         'SelectNationalityBox'=>'تعديل بيانات صندوق الجنسية',
                         'SelectGenderBox'=>'تعديل بيانات صندوق النوع',
-                        'PaymentMethodBox'=>'تعديل بيانات صندوق الدفع'
+                        'PaymentMethodBox'=>'تعديل بيانات صندوق الدفع',
+                        'OptionTestBox'=>'الاختبارات'
                     ],
                     'AllNamesLanguage'=>[
                         'english'=>'اللغة الانجليزية',

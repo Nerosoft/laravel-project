@@ -12,7 +12,7 @@
         <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{isset($index) ? route('editContract') : route('createContract')}}" method="POST" onsubmit="return validateContract($(this).find('#name'), $(this).find('#governorate'), $(this).find('#area'))">
             @csrf
                 @isset($index)
-                    <input type="hidden" value="{{$index}}" name="id">
+                  @include('layout.my_id')
                 @endisset   
                 <div class="mb-3">
                     <label for="name" class="form-label">{{$lang->label3}}</label>
