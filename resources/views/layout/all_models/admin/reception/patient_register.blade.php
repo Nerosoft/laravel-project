@@ -11,7 +11,7 @@
       <div class="modal-body">
         <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" onsubmit="return validateT2($(this).find('#test-select'), $(this).find('#tests-name').val(), $(this).find('#selectPatient'), $(this).find('#know'), $(this).find('#payment-date'), $(this).find('#payment-amount'), $(this).find('#payment-method'), $(this).find('#patent-code').val(), $(this).find('#discount').val(), $(this).find('#delayedMoney').val(), '{{isset($index) ? $index : "myArray"}}', '{{ isset($index) ? route('editPatientServices') : route('createPatientServices')}}', '{{ route('Reception', 'PatientRegisteration') }}', '{{isset($index) ? "edit" : "create"}}')">
             @isset($index)
-                @include('layout.my_id')
+                @include('layout.my_id', ['myId'=>$index])
             @endisset   
             <div class="container">
                 <div class="row justify-content-md-center">

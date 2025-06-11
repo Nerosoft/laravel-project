@@ -12,7 +12,7 @@
         <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{isset($index) ? route('editBranchRays') : route('addBranchRays')}}" method="POST" onsubmit="return validateBranche($(this).find('#brance-rays-name'), $(this).find('#brance-rays-phone'), $(this).find('#brance-rays-country'), $(this).find('#brance-rays-governments'), $(this).find('#brance-rays-city'), $(this).find('#brance-rays-street'), $(this).find('#brance-rays-building'), $(this).find('#brance-rays-address'), $(this).find('#brance-rays-follow'))">
             @csrf
             @isset($index)
-                @include('layout.my_id')
+                @include('layout.my_id', ['myId'=>$index])
             @endisset
                 <div class="container">
                     <div class="row">

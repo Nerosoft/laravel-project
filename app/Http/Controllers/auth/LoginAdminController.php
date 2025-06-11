@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 class LoginAdminController extends EmailPassInformaion
 {
     public function __construct(){
-        $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('userId'))?Rays::find(request()->input('userId')):Rays::first());
+        $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
         $this->error1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserEmail'];
         $this->error2 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserEmailRequired'];
         $this->error3 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserPassword'];
@@ -32,9 +32,9 @@ class LoginAdminController extends EmailPassInformaion
             foreach ($ob['User'] as $key => $user)
                 if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
                     //save user session
-                    request()->session()->put('userId', request()->input('userId'));
+                    request()->session()->put('userId', request()->input('id'));
                     //save user session logout
-                    request()->session()->put('userLogout', request()->input('userId'));
+                    request()->session()->put('userLogout', request()->input('id'));
                     $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['AdminLogin'];
                 }         
             // return error email exsist

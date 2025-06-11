@@ -11,7 +11,7 @@
         <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{isset($index) ? route('editKnows') : route('createKnows')}}" method="POST" onsubmit="return validateKnows($(this).find('#name'))">
             @csrf
             @isset($index)
-              @include('layout.my_id')
+              @include('layout.my_id', ['myId'=>$index])
             @endisset   
             <div class="mb-3">
               <label for="name" class="form-label">{{$lang->label3}}</label>

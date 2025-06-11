@@ -12,7 +12,7 @@
         <form id="{{ isset($index) ? 'editForm'.$index : 'createForm' }}" action="{{ isset($index) ? route('editPatent') : route('createPatent') }}" method="POST" onsubmit="return validatePatent($(this).find('#patent-name'), $(this).find('#patent-nationality'), $(this).find('#patent-gender'), $(this).find('#patent-contracting'), $(this).find('#patent-national-id'), $(this).find('#patent-passport-no'), $(this).find('#patent-email'), $(this).find('#patent-phone'), $(this).find('#patent-phone2'), $(this).find('#patent-address'), $(this).find('#patent-hours'), $(this).find('#patent-other'), $(this).find('input[type=checkbox]').filter(':checked').length, $(this).find('#last-period-date'), $(this).find('#date-birth'), $(this).find('#avatar')[0].files[0], $(this).find('#preview'))" enctype="multipart/form-data">
             @csrf
             @isset($index)
-                @include('layout.my_id')
+                @include('layout.my_id', ['myId'=>$index])
             @endisset   
                 <div class="container">
                     <div class="row justify-content-md-center">

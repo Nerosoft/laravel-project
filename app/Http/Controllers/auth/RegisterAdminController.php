@@ -14,7 +14,7 @@ use App\Http\interface\LangObject;
 class RegisterAdminController extends EmailPassInformaion implements LangObject
 {   
     public function __construct(){
-        $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('userId'))?Rays::find(request()->input('userId')):Rays::first());
+        $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
         $this->error2 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserEmail'];
         $this->error3 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserEmailRequired'];
         $this->error5 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Error']['UserPassword'];//len
@@ -46,8 +46,8 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
                 'password.confirmed'=>$this->error7
             ]);       
             $this->getCreateDataBase($ob, 'User', $this->generateUniqueIdentifier(), $this);     
-            request()->session()->put('userId', request()->input('userId'));
-            request()->session()->put('userLogout', request()->input('userId'));
+            request()->session()->put('userId', request()->input('id'));
+            request()->session()->put('userLogout', request()->input('id'));
             $this->successfully1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Message']['AdminLogin'];       
         }else if(isset($ob[unserialize(request()->cookie($ob['_id']))])){
             parent::__construct(

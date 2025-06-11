@@ -12,7 +12,7 @@
         <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{ isset($index) ? route('editTest', $activeItem) : route('createTest', $activeItem) }}" method="POST" onsubmit="return validateForm($(this).find('#name'), $(this).find('#shortcut'), $(this).find('#price'), $(this).find('#input-output-lab'))">
             @csrf
                 @isset($index)
-                  @include('layout.my_id')
+                  @include('layout.my_id', ['myId'=>$index])
                 @endisset   
                 <div class="mb-3">
                     <label for="name" class="form-label">{{$lang->label3}}</label>

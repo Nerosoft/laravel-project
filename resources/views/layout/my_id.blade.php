@@ -1,1 +1,1 @@
-<input type="hidden" value="{{$index}}" name="id">
+<input type="hidden" value="{{$myId}}" name="id">

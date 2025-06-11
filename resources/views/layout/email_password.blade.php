@@ -1,4 +1,4 @@
-@include('layout.rays_id')
+@include('layout.my_id', ['myId'=>$lang->RaysId])
 <h4>{{$lang->help}}</h4>
 <div class="form-group">
     <label for="email">{{$lang->label1}}</label>
