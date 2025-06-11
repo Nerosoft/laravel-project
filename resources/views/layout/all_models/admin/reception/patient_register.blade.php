@@ -87,7 +87,7 @@
                                 <select class="form-select" aria-label="Knowed Us By" id="know">
                                 <option selected disabled>{{$lang->selectBox5}}</option>
                                 @foreach($lang->arr1 as $key=>$know)
-                                <option {{isset($index) ? ($patent->getKnowId() === $key ? 'selected' : '') : ''}} value="{{$key}}">{{$know->getName()}}</option>
+                                <option {{isset($index) ? ($patent->getKnowId() === $know->getName() ? 'selected' : '') : ''}} value="{{$key}}">{{$know->getName()}}</option>
                                 @endforeach
                                 </select>
                                 <!-- Add New Item Form -->
@@ -216,7 +216,7 @@
                                 <select id="payment-method" class="form-select">
                                     <option selected disabled>{{$lang->selectBox1}}</option>
                                     @foreach($lang->payment as $key=>$pay)
-                                    <option {{isset($index) ? ($patent->getPaymentMethodId() === $key ? 'selected' : '') : ''}} value="{{$key}}">{{$pay}}</option>
+                                    <option {{isset($index) ? ($patent->getPaymentMethodId() === $pay ? 'selected' : '') : ''}} value="{{$key}}">{{$pay}}</option>
                                     @endforeach
                                 </select>
                                 </div>
