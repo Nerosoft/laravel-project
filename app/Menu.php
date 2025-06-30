@@ -70,13 +70,13 @@ class Menu
             return 'bi bi-cart4';
         else if($key === 'Direction')
             return 'bi bi-arrow-left-right';
-        else if($key === 'Label')
+        else if($key === 'Admin')
             return 'bi bi-file-richtext';
-        else if($key === 'Title')
+        else if($key === 'Branch')
             return 'bi bi-globe-asia-australia';
-        else if($key === 'Hint')
+        else if($key === 'Contracts')
             return 'bi bi-lightbulb-fill';
-        else if($key === 'Button')
+        else if($key === 'Patent')
             return 'bi bi-fonts';
         else if($key === 'AllNamesLanguage')
             return 'bi bi-globe-europe-africa';
@@ -84,38 +84,36 @@ class Menu
             return 'bi bi-table';
         else if($key === 'Menu')
             return 'bi bi-menu-button-fill';
-        else if($key === 'Error')
+        else if($key === 'Receipt')
             return 'bi bi-clipboard2-x-fill';
-        else if($key === 'Message')
+        else if($key === 'Test')
             return 'bi bi-clipboard2-check-fill';
-        else if($key === 'Table')
+        else if($key === 'Cultures')
             return 'bi bi-table';
-        else if($key === 'Model')
+        else if($key === 'Packages')
             return 'bi bi-layout-text-sidebar'; 
         else if($key === 'CheckBox')
-            return 'bi bi-clipboard2-check'; 
+            return 'bi bi-layout-text-sidebar'; 
         else if($key === 'CutomLang')
-            return 'bi bi-clipboard2-check';
-        else if($key === 'AllLanguage')
+            return 'bi bi-menu-button-fill';
+        else if($key === 'LoginAdmin')
             return 'bi bi-globe-americas';
         else if($key === 'TableInfo')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-person-add';
         else if($key === 'AppSettingAdmin')
-            return 'bi bi-clipboard2-check';   
-        else if($key === 'MenuAdmin')
-            return 'bi bi-clipboard2-check';    
-        else if($key === 'TitleCustomLang')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-box';   
          else if($key === 'SelectTestBox')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-hospital';
         else if($key === 'SelectBranchBox')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-gear';
         else if($key === 'SelectNationalityBox')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-clipboard2-x-fill';
         else if($key === 'SelectGenderBox')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-arrow-left-right';
         else if($key === 'PaymentMethodBox')
-            return 'bi bi-clipboard2-check';
+            return 'bi bi-globe-americas';
+        else if($key === 'Register')
+            return 'bi bi-pencil';
         else
             return 'bi bi-clipboard2-check'; 
     }
