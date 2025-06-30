@@ -19,23 +19,23 @@ class LangController extends DeleteModel
             request()->validate([
             'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
+                'id.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageInvalid']
             ]);
             $setting = $ob['Setting'];
             $setting['Language'] = request()->input('id');
             $ob['Setting'] = $setting;
             $ob->save();
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['ChangeLanguage'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
         }else if(Route::currentRouteName() === 'language.copy'){
             request()->validate([
             'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))],
             'lang_name' =>['required', 'min:3']
             ], [
-                'lang_name.required' => $ob[$ob['Setting']['Language']]['Error']['NewLangNameRequired'],
-                'lang_name.min' => $ob[$ob['Setting']['Language']]['Error']['NewLangNameInvalid'],
-                'id.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid']
+                'lang_name.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLangNameRequired'],
+                'lang_name.min' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLangNameInvalid'],
+                'id.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageInvalid']
             ]);
             $newKey = $this->generateUniqueIdentifier();
             foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
@@ -46,15 +46,16 @@ class LangController extends DeleteModel
             //after add new language name
             $ob[$newKey] = $ob[request()->input('id')];
             $ob->save();
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['CopyLanguage'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['CopyLanguage'].$ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];;
         }else if(Route::currentRouteName() === 'language.delete'){
             request()->validate([
                 'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])), Rule::notIn([$ob['Setting']['Language'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[0], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[1]])]
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageRequired'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageInvalid'],
-                'id.not_in' => $ob[$ob['Setting']['Language']]['Error']['ChangeLanguageUsed'],
+                'id.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageInvalid'],
+                'id.not_in' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageUsed'],
             ]);
+            $langName = $ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
             foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
                 $myLang = $ob[$key];
                 unset($myLang['AllNamesLanguage'][request()->input('id')]);
@@ -62,38 +63,38 @@ class LangController extends DeleteModel
             }
             unset($ob[request()->input('id')]);
             $ob->save();
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['DeleteLanguage'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'].$langName;
         }else{
             parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['Title']['DeleteLanguageMessage'],
-            $ob[$ob['Setting']['Language']]['Label']['DeleteLanguageMessage'],
-            $ob[$ob['Setting']['Language']]['Button']['DeleteLanguageMessage'],
+            $ob[$ob['Setting']['Language']]['ChangeLanguage']['TitleDeleteLanguageMessage'],
+            $ob[$ob['Setting']['Language']]['ChangeLanguage']['LabelDeleteLanguageMessage'],
+            $ob[$ob['Setting']['Language']]['ChangeLanguage']['ButtonDeleteLanguageMessage'],
             route('language.delete'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['ChangeLanguage'],
+            $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguage'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']));
-            $this->error1 = $ob[$this->language]['Error']['NewLangNameRequired'];
-            $this->error2 = $ob[$this->language]['Error']['NewLangNameInvalid'];
+            $this->error1 = $ob[$this->language]['ChangeLanguage']['NewLangNameRequired'];
+            $this->error2 = $ob[$this->language]['ChangeLanguage']['NewLangNameInvalid'];
             //init table
-            $this->IdLangaue = $ob[$this->language]['Table']['IdLangaue'];
-            $this->NameLangaue = $ob[$this->language]['Table']['NameLangaue'];
-            $this->EditLangaue = $ob[$this->language]['Table']['EditLangaue'];
+            $this->IdLangaue = $ob[$this->language]['ChangeLanguage']['IdLangaue'];
+            $this->NameLangaue = $ob[$this->language]['ChangeLanguage']['NameLangaue'];
+            $this->EditLangaue = $ob[$this->language]['ChangeLanguage']['EditLangaue'];
             //init label
-            $this->label3 = $ob[$this->language]['Label']['LanguageInfo'];     
-            $this->label4 = $ob[$this->language]['Label']['LanguageSelect'];
-            $this->label5 = $ob[$this->language]['Label']['ChangeLanguageMessage'];
-            $this->label6 = $ob[$this->language]['Label']['CopyLanguageMessage'];
-            $this->label7 = $ob[$this->language]['Label']['NewLangName'];
+            $this->label3 = $ob[$this->language]['ChangeLanguage']['LanguageInfo'];     
+            $this->label4 = $ob[$this->language]['ChangeLanguage']['LanguageSelect'];
+            $this->label5 = $ob[$this->language]['ChangeLanguage']['LabelChangeLanguageMessage'];
+            $this->label6 = $ob[$this->language]['ChangeLanguage']['LabelCopyLanguageMessage'];
+            $this->label7 = $ob[$this->language]['ChangeLanguage']['LabelNewLangName'];
             //hint
-            $this->hint1 = $ob[$this->language]['Hint']['NewLangName'];
+            $this->hint1 = $ob[$this->language]['ChangeLanguage']['HintNewLangName'];
             //init button
-            $this->button4 = $ob[$this->language]['Button']['ChangeLanguageMessage'];
-            $this->button5 = $ob[$this->language]['Button']['CopyLanguageMessage'];
-            $this->title2 = $ob[$this->language]['Title']['ChangeLanguageMessage'];
-            $this->title3 = $ob[$this->language]['Title']['CopyLanguageMessage'];
+            $this->button4 = $ob[$this->language]['ChangeLanguage']['ButtonChangeLanguageMessage'];
+            $this->button5 = $ob[$this->language]['ChangeLanguage']['ButtonCopyLanguageMessage'];
+            $this->title2 = $ob[$this->language]['ChangeLanguage']['TitleChangeLanguageMessage'];
+            $this->title3 = $ob[$this->language]['ChangeLanguage']['TitleCopyLanguageMessage'];
             //init lang
             $this->myRadios = array();
             foreach ($ob[$this->language]['AllNamesLanguage'] as $key => $value)

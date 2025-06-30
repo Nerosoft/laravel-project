@@ -17,6 +17,19 @@
     <script defer src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
     <script defer src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
     <script src="{{asset('js/rays.js')}}" type="text/javascript"></script>
+    
+    <!-- <link href="{{asset('lib/bootstrap-icons.min.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{asset('lib/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/dataTables.bootstrap5.css')}}" rel="stylesheet">
+    <link href="{{asset('lib/twitter-bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/rays.css')}}" rel="stylesheet">
+
+    <script src="{{asset('lib/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('lib/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('lib/dataTables.js')}}" type="text/javascript"></script>
+    <script src="{{asset('lib/dataTables.bootstrap5.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/rays.js')}}" type="text/javascript"></script> -->
+
     @extends('layout.display_error')
   </head>
   <body>

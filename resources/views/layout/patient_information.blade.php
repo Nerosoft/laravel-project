@@ -3,7 +3,7 @@
         <div class="pt-2 form-group">
             <label for="patent-name">
                 <i class="bi bi-person"></i>
-                {{$lang->label16}}adas
+                {{$lang->label16}}
             </label>
             <input {{$state}} id="patent-name" type="text" class="form-control" value="{{isset($index) ? $patent->getName() : old('patent-name')}}" name="patent-name" placeholder="{{$lang->hint1}}">
         </div>

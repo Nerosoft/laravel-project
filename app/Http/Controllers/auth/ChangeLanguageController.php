@@ -15,11 +15,11 @@ class ChangeLanguageController extends Controller
         request()->validate([
             'mylanguage' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
         ], [
-            'mylanguage.required' => $ob[$ob['Setting']['Language']]['Error']['UserLanguageRequired'], 
-            'mylanguage.in' =>$ob[$ob['Setting']['Language']]['Error']['UserLanguageInvalid']
+            'mylanguage.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageRequired'], 
+            'mylanguage.in' =>$ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLanguageInvalid']
         ]);
         Cookie::queue(request()->input('id'), serialize(request()->input('mylanguage')),2628000);
-        $this->successfully1 = $ob[request()->input('mylanguage')]['Message']['UserLanguage'].$ob[request()->input('mylanguage')]['AllNamesLanguage'][request()->input('mylanguage')];
+        $this->successfully1 = $ob[request()->input('mylanguage')]['ChangeLanguage']['ChangeLang'].$ob[request()->input('mylanguage')]['AllNamesLanguage'][request()->input('mylanguage')];
     }
     public function changeLanguage(){
         return back()->with('success', $this->successfully1);

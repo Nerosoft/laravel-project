@@ -17,26 +17,25 @@ class BranchesController extends Page implements LangObject
 {
     public function __construct(){
         $ob = Rays::find(request()->session()->get('userId'));
-        $this->error1 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysNameRequired'];
-        $this->error2 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysPhoneRequired'];
-        $this->error3 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysGovernmentsRequired'];
-        $this->error4 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysCityRequired'];
-        $this->error5 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysStreetRequired'];
-        $this->error6 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysBuildingRequired'];
-        $this->error7 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysAddressRequired'];
-        $this->error8 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysCountryRequired'];
-        $this->error9 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysFollowRequired'];
-        $this->error10 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysNameLength'];
-        $this->error11 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysPhoneLength'];
-        $this->error12 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysGovernmentsLength'];
-        $this->error13 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysCityLength'];
-        $this->error14 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysStreetLength'];
-        $this->error15 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysBuildingLength'];
-        $this->error16 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysAddressLength'];
-        $this->error17 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysCountryLength'];
+        $this->error1 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysNameRequired'];
+        $this->error2 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysPhoneRequired'];
+        $this->error3 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysGovernmentsRequired'];
+        $this->error4 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysCityRequired'];
+        $this->error5 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysStreetRequired'];
+        $this->error6 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysBuildingRequired'];
+        $this->error7 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysAddressRequired'];
+        $this->error8 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysCountryRequired'];
+        $this->error9 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysFollowRequired'];
+        $this->error10 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysNameLength'];
+        $this->error11 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysPhoneLength'];
+        $this->error12 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysGovernmentsLength'];
+        $this->error13 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysCityLength'];
+        $this->error14 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysStreetLength'];
+        $this->error15 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysBuildingLength'];
+        $this->error16 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysAddressLength'];
+        $this->error17 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysCountryLength'];
         if(Route::currentRouteName() === 'addBranchRays'){
-            $this->error18 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysFollowLength'];
-            $this->error19 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysFollowValue'];
+            $this->error19 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
             request()->validate([
                 'brance_rays_name' => ['required', 'min:3'],
                 'brance_rays_phone' => ['required', 'regex:/^[0-9]{11}$/'],
@@ -46,7 +45,7 @@ class BranchesController extends Page implements LangObject
                 'brance_rays_building' => ['required', 'min:3'],
                 'brance_rays_address' => ['required', 'min:3'],
                 'brance_rays_country' => ['required', 'min:3'],
-                'brance_rays_follow' => ['required', 'min:3', Rule::in(array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']))],
+                'brance_rays_follow' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']))],
                 ], [
                 'brance_rays_name.min' => $this->error10,
                 'brance_rays_name.required' => $this->error1,
@@ -64,7 +63,6 @@ class BranchesController extends Page implements LangObject
                 'brance_rays_address.required' => $this->error7,
                 'brance_rays_country.min' => $this->error17,
                 'brance_rays_country.required' => $this->error8,
-                'brance_rays_follow.min' => $this->error18,
                 'brance_rays_follow.required' => $this->error9,
                 'brance_rays_follow.in' => $this->error19
             ]);
@@ -80,12 +78,11 @@ class BranchesController extends Page implements LangObject
             $myBranch['_id'] = $myId;
             //insert the object in database
             Rays::insert($myBranch);
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['BranchesAdd'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Branch']['BranchesAdd'];
         }else if(Route::currentRouteName() === 'editBranchRays'){
-            $this->error18 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysFollowLength'];
-            $this->error19 = $ob[$ob['Setting']['Language']]['Error']['BranceRaysFollowValue'];
-            $this->error20 = $ob[$ob['Setting']['Language']]['Error']['BranchRaysId'];
-            $this->error21 = $ob[$ob['Setting']['Language']]['Error']['BranchRaysLenght'];
+            $this->error19 = $ob[$ob['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
+            $this->error20 = $ob[$ob['Setting']['Language']]['Branch']['BranchRaysId'];
+            $this->error21 = $ob[$ob['Setting']['Language']]['Branch']['BranchRaysLenght'];
             $myDb = request()->session()->get('userId') !== request()->session()->get('userlogout')?Rays::find(request()->session()->get('userLogout')):$ob;
             request()->validate([
             'id' => ['required', Rule::in(isset($myDb['Branch'])?array_keys($myDb['Branch']):null)],
@@ -97,7 +94,7 @@ class BranchesController extends Page implements LangObject
             'brance_rays_building' => ['required', 'min:3'],
             'brance_rays_address' => ['required', 'min:3'],
             'brance_rays_country' => ['required', 'min:3'],
-            'brance_rays_follow' => ['required', 'min:3', Rule::in(array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']))],
+            'brance_rays_follow' => ['required', Rule::in(array_keys($myDb[$myDb['Setting']['Language']]['SelectBranchBox']))],
             ], [
                 'id.required' => $this->error20,
                 'id.in' => $this->error21,
@@ -117,65 +114,62 @@ class BranchesController extends Page implements LangObject
                 'brance_rays_address.required' => $this->error7,
                 'brance_rays_country.min' => $this->error17,
                 'brance_rays_country.required' => $this->error8,
-                'brance_rays_follow.min' => $this->error18,
                 'brance_rays_follow.required' => $this->error9,
                 'brance_rays_follow.in' => $this->error19
             ]);
             $this->getEditDataBase($myDb, 'Branch', $this); 
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['BranchesEdit'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Branch']['BranchesEdit'];
         }else if(Route::currentRouteName() === 'branchMain'){
             $ob = Rays::find(request()->route('id'))? Rays::find(request()->route('id')):$ob;
-            $myBranch = isset(Rays::find(request()->session()->get('userLogout'))['Branch'][request()->route('id')])?
-            Rays::find(request()->session()->get('userLogout'))['Branch']:
-            array(request()->session()->get('userLogout')=>['Name'=>$ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']]);
+            $myBranch = isset(Rays::find(request()->session()->get('userLogout'))['Branch'][request()->route('id')])?Rays::find(request()->session()->get('userLogout'))['Branch']:array(request()->session()->get('userLogout')=>['Name'=>$ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']]);
             Validator::make(['id'=>request()->route('id')], [
                 'id'=>['required', Rule::in(array_keys($myBranch))]
             ], [
-                'id.required'=>$ob[$ob['Setting']['Language']]['Error']['BranchRaysId'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Error']['BranchRaysLenght'],
+                'id.required'=>$ob[$ob['Setting']['Language']]['Branch']['BranchRaysId'],
+                'id.in'=>$ob[$ob['Setting']['Language']]['Branch']['BranchRaysLenght'],
             ])->validate();
             request()->session()->put('userId', request()->route('id'));
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['BranchesChange'].' '.$myBranch[request()->route('id')]['Name'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Branch']['BranchesChange'].' '.$myBranch[request()->route('id')]['Name'];
         }else{
             parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['Title']['BranchRaysDelete'],
-            $ob[$ob['Setting']['Language']]['Label']['BranchRaysDelete'],
-            $ob[$ob['Setting']['Language']]['Button']['BranchRaysDelete'],
+            $ob[$ob['Setting']['Language']]['Branch']['BranchRaysDelete1'],
+            $ob[$ob['Setting']['Language']]['Branch']['BranchRaysDelete2'],
+            $ob[$ob['Setting']['Language']]['Branch']['BranchRaysDelete3'],
             route('deleteItem', 'Branch'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['Branches'],
+            $ob[$ob['Setting']['Language']]['Branch']['Branches'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
-            $ob[$ob['Setting']['Language']]['Title']['BranchRays'],
-            $ob[$ob['Setting']['Language']]['Title']['BranchRaysEdit'],
-            $ob[$ob['Setting']['Language']]['Button']['CreateBranche'],
-            $ob[$ob['Setting']['Language']]['Button']['AddBranchRays'],
-            $ob[$ob['Setting']['Language']]['Button']['EditBranchRays'],
-            $ob[$ob['Setting']['Language']]['Table']['BranchRaysId'],
-            $ob[$ob['Setting']['Language']]['Table']['LanguageEvent']);
+            $ob[$ob['Setting']['Language']]['Branch']['BranchRays'],
+            $ob[$ob['Setting']['Language']]['Branch']['BranchRaysEdit'],
+            $ob[$ob['Setting']['Language']]['Branch']['CreateBranche'],
+            $ob[$ob['Setting']['Language']]['Branch']['AddBranchRays'],
+            $ob[$ob['Setting']['Language']]['Branch']['EditBranchRays'],
+            $ob[$ob['Setting']['Language']]['Branch']['TableBranchRaysId'],
+            $ob[$ob['Setting']['Language']]['Branch']['LanguageEvent']);
             //init label
-            $this->table8 = $ob[$this->language]['Table']['BranchStreet'];
-            $this->table9 = $ob[$this->language]['Table']['BranchName'];
-            $this->table10 = $ob[$this->language]['Table']['BranchPhone'];
-            $this->table16 = $ob[$this->language]['Table']['BranchGovernments'];
-            $this->table17 = $ob[$this->language]['Table']['BranchCity'];
-            $this->table12 = $ob[$this->language]['Table']['BranchBuilding'];
-            $this->table13 = $ob[$this->language]['Table']['BranchAddress'];
-            $this->table14 = $ob[$this->language]['Table']['BranchCountry'];
-            $this->table15 = $ob[$this->language]['Table']['BranchFollow'];
+            $this->table8 = $ob[$this->language]['Branch']['BranchStreet'];
+            $this->table9 = $ob[$this->language]['Branch']['BranchName'];
+            $this->table10 = $ob[$this->language]['Branch']['BranchPhone'];
+            $this->table16 = $ob[$this->language]['Branch']['BranchGovernments'];
+            $this->table17 = $ob[$this->language]['Branch']['BranchCity'];
+            $this->table12 = $ob[$this->language]['Branch']['BranchBuilding'];
+            $this->table13 = $ob[$this->language]['Branch']['BranchAddress'];
+            $this->table14 = $ob[$this->language]['Branch']['BranchCountry'];
+            $this->table15 = $ob[$this->language]['Branch']['BranchFollow'];
             //get all hint
-            $this->hint1 = $ob[$this->language]['Hint']['BranchRaysName'];
-            $this->hint2 = $ob[$this->language]['Hint']['BranchRaysPhone'];
-            $this->hint3 = $ob[$this->language]['Hint']['BranchRaysCountry'];
-            $this->hint4 = $ob[$this->language]['Hint']['BranchRaysGovernments'];
-            $this->hint5 = $ob[$this->language]['Hint']['BranchRaysCity'];
-            $this->hint6 = $ob[$this->language]['Hint']['BranchRaysStreet'];
-            $this->hint7 = $ob[$this->language]['Hint']['BranchRaysBuilding'];
-            $this->hint8 = $ob[$this->language]['Hint']['BranchRaysAddress'];
+            $this->hint1 = $ob[$this->language]['Branch']['BranchRaysName'];
+            $this->hint2 = $ob[$this->language]['Branch']['BranchRaysPhone'];
+            $this->hint3 = $ob[$this->language]['Branch']['BranchRaysCountry'];
+            $this->hint4 = $ob[$this->language]['Branch']['BranchRaysGovernments'];
+            $this->hint5 = $ob[$this->language]['Branch']['BranchRaysCity'];
+            $this->hint6 = $ob[$this->language]['Branch']['BranchRaysStreet'];
+            $this->hint7 = $ob[$this->language]['Branch']['BranchRaysBuilding'];
+            $this->hint8 = $ob[$this->language]['Branch']['BranchRaysAddress'];
             $this->branchInputOutput = $ob[$this->language]['SelectBranchBox'];
-            $this->selectBox1 = $ob[$this->language]['SelectBox']['WithRaysOut'];
+            $this->selectBox1 = $ob[$this->language]['Branch']['WithRaysOut'];
             $ob = request()->session()->get('userLogout') !== request()->session()->get('userId')?Rays::find(request()->session()->get('userLogout')):$ob;
             $this->allBranch = isset($ob['Branch'])?Branch::fromArray($ob['Branch'], $this->branchInputOutput):array();
         }

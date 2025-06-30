@@ -22,15 +22,15 @@ class ContractsController extends Page implements LangObject
                 'governorate' => ['required', 'min:3'],
                 'area' => ['required', 'min:3'],
             ], [
-                'name.required' => $ob[$ob['Setting']['Language']]['Error']['ContractNameRequired'],
-                'name.min' => $ob[$ob['Setting']['Language']]['Error']['ContractNameInvalid'],
-                'governorate.required' => $ob[$ob['Setting']['Language']]['Error']['ContractGovernorateRequired'],
-                'governorate.min' => $ob[$ob['Setting']['Language']]['Error']['ContractGovernorateInvalid'],
-                'area.required' => $ob[$ob['Setting']['Language']]['Error']['ContractAreaRequired'],
-                'area.min' => $ob[$ob['Setting']['Language']]['Error']['ContractAreaInvalid'],
+                'name.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameRequired'],
+                'name.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameInvalid'],
+                'governorate.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractGovernorateRequired'],
+                'governorate.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractGovernorateInvalid'],
+                'area.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractAreaRequired'],
+                'area.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractAreaInvalid'],
             ]);
             $this->getCreateDataBase($ob, 'Contracts', $this->generateUniqueIdentifier(), $this);
-            $this->successfully1=$ob[$ob['Setting']['Language']]['Message']['ContractsAdd'];
+            $this->successfully1=$ob[$ob['Setting']['Language']]['Contracts']['ContractsAdd'];
         }else if(Route::currentRouteName() === 'editContract'){
             request()->validate([
                 'id' => ['required', Rule::in(isset($ob['Contracts'])?array_keys($ob['Contracts']):null)],
@@ -38,104 +38,104 @@ class ContractsController extends Page implements LangObject
                 'governorate' => ['required', 'min:3'],
                 'area' => ['required', 'min:3'],
             ], [
-                'id.required'=>$ob[$ob['Setting']['Language']]['Error']['ContractIdRequired'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Error']['ContractIdInvalid'],
-                'name.required' => $ob[$ob['Setting']['Language']]['Error']['ContractNameRequired'],
-                'name.min' => $ob[$ob['Setting']['Language']]['Error']['ContractNameInvalid'],
-                'governorate.required' => $ob[$ob['Setting']['Language']]['Error']['ContractGovernorateRequired'],
-                'governorate.min' => $ob[$ob['Setting']['Language']]['Error']['ContractGovernorateInvalid'],
-                'area.required' => $ob[$ob['Setting']['Language']]['Error']['ContractAreaRequired'],
-                'area.min' => $ob[$ob['Setting']['Language']]['Error']['ContractAreaInvalid'],
+                'id.required'=>$ob[$ob['Setting']['Language']]['Contracts']['ContractIdRequired'],
+                'id.in'=>$ob[$ob['Setting']['Language']]['Contracts']['ContractIdInvalid'],
+                'name.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameRequired'],
+                'name.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameInvalid'],
+                'governorate.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractGovernorateRequired'],
+                'governorate.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractGovernorateInvalid'],
+                'area.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractAreaRequired'],
+                'area.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractAreaInvalid'],
             ]);
             $this->getEditDataBase($ob, 'Contracts', $this);
-            $this->successfully1=$ob[$ob['Setting']['Language']]['Message']['ContractsEdit'];
+            $this->successfully1=$ob[$ob['Setting']['Language']]['Contracts']['ContractsEdit'];
         }else if(Route::currentRouteName() === 'createKnows'){
             request()->validate([
                 'name' => ['required', 'min:3'],
             ], [
-                'name.required' => $ob[$ob['Setting']['Language']]['Error']['KnowsNameRequired'],
-                'name.min' => $ob[$ob['Setting']['Language']]['Error']['KnowsNameInvalid'],
+                'name.required' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameRequired'],
+                'name.min' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameInvalid'],
             ]);
             $this->getCreateDataBase($ob, 'Knows', $this->generateUniqueIdentifier(), $this);
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['KnowsAdd'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Knows']['KnowsAdd'];
         }else if(Route::currentRouteName() === 'editKnows'){
             request()->validate([
                 'id' => ['required', Rule::in(isset($ob['Knows'])?array_keys($ob['Knows']):null)],
                 'name' => ['required', 'min:3'],
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Error']['KnowsIdRequired'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Error']['KnowsIdInvalid'],
-                'name.required' => $ob[$ob['Setting']['Language']]['Error']['KnowsNameRequired'],
-                'name.min' => $ob[$ob['Setting']['Language']]['Error']['KnowsNameInvalid'],
+                'id.required' => $ob[$ob['Setting']['Language']]['Knows']['KnowsIdRequired'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Knows']['KnowsIdInvalid'],
+                'name.required' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameRequired'],
+                'name.min' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameInvalid'],
             ]);
             $this->getEditDataBase($ob, 'Knows', $this);
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['KnowsEdit'];
-        }else if(Route::currentRouteName() === 'Contracts' && request()->route('id') === 'Knows'){
-            $this->error1 = $ob[$ob['Setting']['Language']]['Error']['KnowsNameRequired'];
-            $this->error2 = $ob[$ob['Setting']['Language']]['Error']['KnowsNameInvalid'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Knows']['KnowsEdit'];
+        }else if(request()->route('id') === 'Knows'){
+            $this->error1 = $ob[$ob['Setting']['Language']]['Knows']['KnowsNameRequired'];
+            $this->error2 = $ob[$ob['Setting']['Language']]['Knows']['KnowsNameInvalid'];
             parent::__construct($ob['Setting']['Language'], 
-            $ob[$ob['Setting']['Language']]['Title']['KnowsDelete'],
-            $ob[$ob['Setting']['Language']]['Label']['KnowsDelete'],
-            $ob[$ob['Setting']['Language']]['Button']['KnowsDelete'],
+            $ob[$ob['Setting']['Language']]['Knows']['TitleKnowsDelete'],
+            $ob[$ob['Setting']['Language']]['Knows']['LabelKnowsDelete'],
+            $ob[$ob['Setting']['Language']]['Knows']['ButtonKnowsDelete'],
             route('deleteItem', 'Knows'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['Knows'],
+            $ob[$ob['Setting']['Language']]['Knows']['Knows'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
-            $ob[$ob['Setting']['Language']]['Title']['KnowsCreate'],
-            $ob[$ob['Setting']['Language']]['Title']['KnowsEdit'],
-            $ob[$ob['Setting']['Language']]['Button']['KnowsCreate'],
-            $ob[$ob['Setting']['Language']]['Button']['KnowsAdd'],
-            $ob[$ob['Setting']['Language']]['Button']['KnowsEdit'],
-            $ob[$ob['Setting']['Language']]['Table']['KnowsId'],
-            $ob[$ob['Setting']['Language']]['Table']['KnowsEdit']);
+            $ob[$ob['Setting']['Language']]['Knows']['TitleKnowsCreate'],
+            $ob[$ob['Setting']['Language']]['Knows']['TitleKnowsEdit'],
+            $ob[$ob['Setting']['Language']]['Knows']['ButtonKnowsCreate'],
+            $ob[$ob['Setting']['Language']]['Knows']['ButtonKnowsAdd'],
+            $ob[$ob['Setting']['Language']]['Knows']['ButtonKnowsEdit'],
+            $ob[$ob['Setting']['Language']]['Knows']['TableKnowsId'],
+            $ob[$ob['Setting']['Language']]['Knows']['TableKnowsEdit']);
             //init table
-            $this->table8 = $ob[$this->language]['Table']['KnowsName'];
+            $this->table8 = $ob[$this->language]['Knows']['TableKnowsName'];
             //init label
-            $this->label3 = $ob[$this->language]['Label']['KnowsName'];
+            $this->label3 = $ob[$this->language]['Knows']['LabelKnowsName'];
             //init hint
-            $this->hint1 = $ob[$this->language]['Hint']['KnowsName'];
+            $this->hint1 = $ob[$this->language]['Knows']['HintKnowsName'];
             //---------------
             $this->knows = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
         }else{
             parent::__construct($ob['Setting']['Language'], 
-            $ob[$ob['Setting']['Language']]['Title']['DeleteContract'],
-            $ob[$ob['Setting']['Language']]['Label']['DeleteContract'],
-            $ob[$ob['Setting']['Language']]['Button']['DeleteContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['ButtonDeleteContract'],
             route('deleteItem', 'Contracts'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['PackagesContracts'],
+            $ob[$ob['Setting']['Language']]['Contracts']['PackagesContracts'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
-            $ob[$ob['Setting']['Language']]['Title']['CreateContract'],
-            $ob[$ob['Setting']['Language']]['Title']['EditContract'],
-            $ob[$ob['Setting']['Language']]['Button']['CreateContract'],
-            $ob[$ob['Setting']['Language']]['Button']['AddContract'],
-            $ob[$ob['Setting']['Language']]['Button']['EditContract'],
-            $ob[$ob['Setting']['Language']]['Table']['ContractId'],
-            $ob[$ob['Setting']['Language']]['Table']['ContractEdit']);
-            $this->error1 = $ob[$this->language]['Error']['ContractNameRequired'];
-            $this->error2 = $ob[$this->language]['Error']['ContractNameInvalid'];
-            $this->error3 = $ob[$this->language]['Error']['ContractGovernorateRequired'];
-            $this->error4 = $ob[$this->language]['Error']['ContractGovernorateInvalid'];
-            $this->error5 = $ob[$this->language]['Error']['ContractAreaRequired'];
-            $this->error6 = $ob[$this->language]['Error']['ContractAreaInvalid'];
+            $ob[$ob['Setting']['Language']]['Contracts']['TitleCreateContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['TitleEditContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['ButtonCreateContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['ButtonAddContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['ButtonEditContract'],
+            $ob[$ob['Setting']['Language']]['Contracts']['TableContractId'],
+            $ob[$ob['Setting']['Language']]['Contracts']['TableContractEdit']);
+            $this->error1 = $ob[$this->language]['Contracts']['ContractNameRequired'];
+            $this->error2 = $ob[$this->language]['Contracts']['ContractNameInvalid'];
+            $this->error3 = $ob[$this->language]['Contracts']['ContractGovernorateRequired'];
+            $this->error4 = $ob[$this->language]['Contracts']['ContractGovernorateInvalid'];
+            $this->error5 = $ob[$this->language]['Contracts']['ContractAreaRequired'];
+            $this->error6 = $ob[$this->language]['Contracts']['ContractAreaInvalid'];
             //init table
-            $this->table8 = $ob[$this->language]['Table']['ContractName'];
-            $this->table9 = $ob[$this->language]['Table']['ContractGovernorate'];
-            $this->table10 = $ob[$this->language]['Table']['ContractArea'];
+            $this->table8 = $ob[$this->language]['Contracts']['TableContractName'];
+            $this->table9 = $ob[$this->language]['Contracts']['TableContractGovernorate'];
+            $this->table10 = $ob[$this->language]['Contracts']['TableContractArea'];
             //init label
-            $this->label3 = $ob[$this->language]['Label']['ContractName'];
-            $this->label4 = $ob[$this->language]['Label']['ContractGovernorate'];
-            $this->label5 = $ob[$this->language]['Label']['ContractArea'];
+            $this->label3 = $ob[$this->language]['Contracts']['LabelContractName'];
+            $this->label4 = $ob[$this->language]['Contracts']['LabelContractGovernorate'];
+            $this->label5 = $ob[$this->language]['Contracts']['LabelContractArea'];
             //init hint
-            $this->hint1 = $ob[$this->language]['Hint']['ContractName'];
-            $this->hint2 = $ob[$this->language]['Hint']['ContractGovernorate'];
-            $this->hint3 = $ob[$this->language]['Hint']['ContractArea'];
+            $this->hint1 = $ob[$this->language]['Contracts']['HintContractName'];
+            $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
+            $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();    
         }
     }

@@ -42,45 +42,45 @@ class ReceptionController extends PatientInfo implements LangObject
                 'choices.*'=>[Rule::in(array_keys($ob[$ob['Setting']['Language']]['CheckBox']))],
                 'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
                     ], [
-                    'patent-name.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNameRequired'],
-                    'patent-name.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentNameInvalid'],
-                    'patent-national-id.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalIdRequired'],
-                    'patent-national-id.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalIdInvalid'],
-                    'patent-passport-no.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPassportNoRequired'],
-                    'patent-passport-no.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentPassportNoInvalid'],
-                    'patent-email.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentEmailRequired'],
-                    'patent-email.email'=>$ob[$ob['Setting']['Language']]['Error']['PatentEmailInvalid'],
-                    'patent-phone.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhoneRequired'],
-                    'patent-phone.regex'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhoneInvalid'],
-                    'patent-phone2.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhone2Required'],
-                    'patent-phone2.regex'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhone2Invalid'],
-                    'patent-address.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentAddressRequired'],
-                    'patent-address.min' => $ob[$ob['Setting']['Language']]['Error']['PatentAddressInvalid'], 
-                    'patent-hours.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentFastingHoursRequired'],
-                    'patent-hours.integer' => $ob[$ob['Setting']['Language']]['Error']['PatentFastingHoursInvalid'],
-                    'avatar.dimensions' => $ob[$ob['Setting']['Language']]['Error']['PatentAvatarDimensions'],
-                    'patent-nationality.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalityRequired'],
-                    'patent-nationality.in'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalityInvalid'],
-                    'patent-gender.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentGenderRequired'],
-                    'patent-gender.in'=>$ob[$ob['Setting']['Language']]['Error']['PatentGenderInvalid'],
-                    'last-period-date.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentLastPeriodDateRequired'],
-                    'last-period-date.date' => $ob[$ob['Setting']['Language']]['Error']['PatentLastPeriodDateInvalid'],
-                    'date-birth.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentDateBirthRequired'],
-                    'date-birth.date' => $ob[$ob['Setting']['Language']]['Error']['PatentDateBirthInvalid'],
-                    'patent-contracting.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentContractingRequired'],
-                    'patent-contracting.in' => $ob[$ob['Setting']['Language']]['Error']['PatentContractingInvalid'], 
-                    'choices.array' =>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseInvalid'],
-                    'choices.*.in' =>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseInvalid'],
-                    'patent-other.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseasOtherInvalid'],
-                    'avatar.image'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarImage'],
-                    'avatar.mimes'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarMimes'],
-                    'avatar.max'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarMax'],
-                    'avatar.uploaded'=>$ob[$ob['Setting']['Language']]['Error']['PatentAvatarImage'],
-                    'choices.required_without'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseRequired'],
-                    'patent-other.required_without'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseRequired'],
+                    'patent-name.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameRequired'],
+                    'patent-name.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameInvalid'],
+                    'patent-national-id.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalIdRequired'],
+                    'patent-national-id.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalIdInvalid'],
+                    'patent-passport-no.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPassportNoRequired'],
+                    'patent-passport-no.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPassportNoInvalid'],
+                    'patent-email.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentEmailRequired'],
+                    'patent-email.email'=>$ob[$ob['Setting']['Language']]['Patent']['PatentEmailInvalid'],
+                    'patent-phone.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhoneRequired'],
+                    'patent-phone.regex'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhoneInvalid'],
+                    'patent-phone2.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhone2Required'],
+                    'patent-phone2.regex'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhone2Invalid'],
+                    'patent-address.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentAddressRequired'],
+                    'patent-address.min' => $ob[$ob['Setting']['Language']]['Patent']['PatentAddressInvalid'], 
+                    'patent-hours.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentFastingHoursRequired'],
+                    'patent-hours.integer' => $ob[$ob['Setting']['Language']]['Patent']['PatentFastingHoursInvalid'],
+                    'avatar.dimensions' => $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarDimensions'],
+                    'patent-nationality.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalityRequired'],
+                    'patent-nationality.in'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalityInvalid'],
+                    'patent-gender.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentGenderRequired'],
+                    'patent-gender.in'=>$ob[$ob['Setting']['Language']]['Patent']['PatentGenderInvalid'],
+                    'last-period-date.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentLastPeriodDateRequired'],
+                    'last-period-date.date' => $ob[$ob['Setting']['Language']]['Patent']['PatentLastPeriodDateInvalid'],
+                    'date-birth.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDateBirthRequired'],
+                    'date-birth.date' => $ob[$ob['Setting']['Language']]['Patent']['PatentDateBirthInvalid'],
+                    'patent-contracting.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentContractingRequired'],
+                    'patent-contracting.in' => $ob[$ob['Setting']['Language']]['Patent']['PatentContractingInvalid'], 
+                    'choices.array' =>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseInvalid'],
+                    'choices.*.in' =>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseInvalid'],
+                    'patent-other.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseasOtherInvalid'],
+                    'avatar.image'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarImage'],
+                    'avatar.mimes'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarMimes'],
+                    'avatar.max'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarMax'],
+                    'avatar.uploaded'=>$ob[$ob['Setting']['Language']]['Patent']['PatentAvatarImage'],
+                    'choices.required_without'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseRequired'],
+                    'patent-other.required_without'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseRequired'],
                 ]);
             $this->avatar = request()->file('avatar') ? $this->setupImage():null;
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['PatientsAdd'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Patent']['PatientsAdd'];
             $this->myDbId = $this->generateUniqueIdentifier();
             $this->getCreateDataBase($ob, 'Patent', $this->myDbId, $this);
         }else if(Route::currentRouteName() === 'editPatent'){
@@ -104,47 +104,47 @@ class ReceptionController extends PatientInfo implements LangObject
                 'choices.*'=>[Rule::in(array_keys($ob[$ob['Setting']['Language']]['CheckBox']))],
                 'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
                     ], [
-                    'id.required' => $ob[$ob['Setting']['Language']]['Error']['PatentIdRequired'],
-                    'id.in' => $ob[$ob['Setting']['Language']]['Error']['PatentIdInvalid'],
-                    'patent-name.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNameRequired'],
-                    'patent-name.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentNameInvalid'],
-                    'patent-national-id.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalIdRequired'],
-                    'patent-national-id.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalIdInvalid'],
-                    'patent-passport-no.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPassportNoRequired'],
-                    'patent-passport-no.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentPassportNoInvalid'],
-                    'patent-email.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentEmailRequired'],
-                    'patent-email.email'=>$ob[$ob['Setting']['Language']]['Error']['PatentEmailInvalid'],
-                    'patent-phone.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhoneRequired'],
-                    'patent-phone.regex'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhoneInvalid'],
-                    'patent-phone2.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhone2Required'],
-                    'patent-phone2.regex'=>$ob[$ob['Setting']['Language']]['Error']['PatentPhone2Invalid'],
-                    'patent-address.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentAddressRequired'],
-                    'patent-address.min' => $ob[$ob['Setting']['Language']]['Error']['PatentAddressInvalid'], 
-                    'patent-hours.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentFastingHoursRequired'],
-                    'patent-hours.integer' => $ob[$ob['Setting']['Language']]['Error']['PatentFastingHoursInvalid'],
-                    'avatar.dimensions' => $ob[$ob['Setting']['Language']]['Error']['PatentAvatarDimensions'],
-                    'patent-nationality.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalityRequired'],
-                    'patent-nationality.in'=>$ob[$ob['Setting']['Language']]['Error']['PatentNationalityInvalid'],
-                    'patent-gender.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentGenderRequired'],
-                    'patent-gender.in'=>$ob[$ob['Setting']['Language']]['Error']['PatentGenderInvalid'],
-                    'last-period-date.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentLastPeriodDateRequired'],
-                    'last-period-date.date' => $ob[$ob['Setting']['Language']]['Error']['PatentLastPeriodDateInvalid'],
-                    'date-birth.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentDateBirthRequired'],
-                    'date-birth.date' => $ob[$ob['Setting']['Language']]['Error']['PatentDateBirthInvalid'],
-                    'patent-contracting.required'=>$ob[$ob['Setting']['Language']]['Error']['PatentContractingRequired'],
-                    'patent-contracting.in' => $ob[$ob['Setting']['Language']]['Error']['PatentContractingInvalid'], 
-                    'choices.array' =>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseInvalid'],
-                    'choices.*.in' =>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseInvalid'],
-                    'patent-other.min'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseasOtherInvalid'],
-                    'avatar.image'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarImage'],
-                    'avatar.mimes'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarMimes'],
-                    'avatar.max'=> $ob[$ob['Setting']['Language']]['Error']['PatentAvatarMax'],
-                    'avatar.uploaded'=>$ob[$ob['Setting']['Language']]['Error']['PatentAvatarImage'],
-                    'choices.required_without'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseRequired'],
-                    'patent-other.required_without'=>$ob[$ob['Setting']['Language']]['Error']['PatentDiseaseRequired'],
+                    'id.required' => $ob[$ob['Setting']['Language']]['Patent']['PatentIdRequired'],
+                    'id.in' => $ob[$ob['Setting']['Language']]['Patent']['PatentIdInvalid'],
+                    'patent-name.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameRequired'],
+                    'patent-name.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameInvalid'],
+                    'patent-national-id.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalIdRequired'],
+                    'patent-national-id.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalIdInvalid'],
+                    'patent-passport-no.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPassportNoRequired'],
+                    'patent-passport-no.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPassportNoInvalid'],
+                    'patent-email.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentEmailRequired'],
+                    'patent-email.email'=>$ob[$ob['Setting']['Language']]['Patent']['PatentEmailInvalid'],
+                    'patent-phone.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhoneRequired'],
+                    'patent-phone.regex'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhoneInvalid'],
+                    'patent-phone2.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhone2Required'],
+                    'patent-phone2.regex'=>$ob[$ob['Setting']['Language']]['Patent']['PatentPhone2Invalid'],
+                    'patent-address.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentAddressRequired'],
+                    'patent-address.min' => $ob[$ob['Setting']['Language']]['Patent']['PatentAddressInvalid'], 
+                    'patent-hours.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentFastingHoursRequired'],
+                    'patent-hours.integer' => $ob[$ob['Setting']['Language']]['Patent']['PatentFastingHoursInvalid'],
+                    'avatar.dimensions' => $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarDimensions'],
+                    'patent-nationality.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalityRequired'],
+                    'patent-nationality.in'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalityInvalid'],
+                    'patent-gender.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentGenderRequired'],
+                    'patent-gender.in'=>$ob[$ob['Setting']['Language']]['Patent']['PatentGenderInvalid'],
+                    'last-period-date.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentLastPeriodDateRequired'],
+                    'last-period-date.date' => $ob[$ob['Setting']['Language']]['Patent']['PatentLastPeriodDateInvalid'],
+                    'date-birth.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDateBirthRequired'],
+                    'date-birth.date' => $ob[$ob['Setting']['Language']]['Patent']['PatentDateBirthInvalid'],
+                    'patent-contracting.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentContractingRequired'],
+                    'patent-contracting.in' => $ob[$ob['Setting']['Language']]['Patent']['PatentContractingInvalid'], 
+                    'choices.array' =>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseInvalid'],
+                    'choices.*.in' =>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseInvalid'],
+                    'patent-other.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseasOtherInvalid'],
+                    'avatar.image'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarImage'],
+                    'avatar.mimes'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarMimes'],
+                    'avatar.max'=> $ob[$ob['Setting']['Language']]['Patent']['PatentAvatarMax'],
+                    'avatar.uploaded'=>$ob[$ob['Setting']['Language']]['Patent']['PatentAvatarImage'],
+                    'choices.required_without'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseRequired'],
+                    'patent-other.required_without'=>$ob[$ob['Setting']['Language']]['Patent']['PatentDiseaseRequired'],
                 ]);
             $this->avatar = request()->file('avatar') ? $this->setupImage() : $ob['Patent'][request()->input('id')]['Avatar'];
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['PatientsEdit'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Patent']['PatientsEdit'];
             $this->getEditDataBase($ob, 'Patent', $this);
         }else if(Route::currentRouteName() === 'createPatientServices'){
             request()->validate([
@@ -158,7 +158,7 @@ class ReceptionController extends PatientInfo implements LangObject
                 else if(isset($ob['Cultures'][$value]))
                     array_push($this->testArr, new Test($ob['Cultures'][$value]['Name'], $ob['Cultures'][$value]['Shortcut'], $ob['Cultures'][$value]['Price'], $ob['Cultures'][$value]['InputOutputLab'], $ob['Cultures'][$value]['Id']));
                 else
-                    $fail($ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid']);
+                    $fail($ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']);
             },],
             'patentCode' => ['required', Rule::in(isset($ob['Patent'])?array_keys($ob['Patent']):null)],
             'know' => ['required', Rule::in(isset($ob['Knows'])?array_keys($ob['Knows']):null)],
@@ -168,29 +168,29 @@ class ReceptionController extends PatientInfo implements LangObject
             'paymentAmount' => ['required', 'numeric', 'min:0'],
             'paymentMethod' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['PaymentMethodBox']))],
             ],[
-                'item.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemRequired'],
-                'item.array'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid'],
-                'patentCode.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPatentCodeRequired'],
-                'patentCode.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPatentCodeInvalid'],
-                'know.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationKnowRequired'],
-                'know.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationKnowInvalid'],
-                'discount.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountRequired'],
-                'discount.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountInvalid'],
-                'discount.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountInvalid'],
-                'delayedMoney.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyRequired'],
-                'delayedMoney.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyInvalid'],
-                'delayedMoney.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyInvalid'],
-                'paymentDate.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentDateRequired'],
-                'paymentDate.date'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentDateInvalid'],
-                'paymentAmount.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountRequired'],
-                'paymentAmount.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountInvalid'],
-                'paymentAmount.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountInvalid'],
-                'paymentMethod.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentMethodRequired'],
-                'paymentMethod.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentMethodInvalid'],
-                'item.*.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid']
+                'item.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemRequired'],
+                'item.array'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'],
+                'patentCode.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPatentCodeRequired'],
+                'patentCode.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPatentCodeInvalid'],
+                'know.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationKnowRequired'],
+                'know.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationKnowInvalid'],
+                'discount.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountRequired'],
+                'discount.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountInvalid'],
+                'discount.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountInvalid'],
+                'delayedMoney.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyRequired'],
+                'delayedMoney.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyInvalid'],
+                'delayedMoney.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyInvalid'],
+                'paymentDate.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentDateRequired'],
+                'paymentDate.date'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentDateInvalid'],
+                'paymentAmount.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountRequired'],
+                'paymentAmount.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountInvalid'],
+                'paymentAmount.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountInvalid'],
+                'paymentMethod.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodRequired'],
+                'paymentMethod.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'],
+                'item.*.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']
             ]);
             $this->getCreateDataBase($ob, 'Receipt', $this->generateUniqueIdentifier(), $this);
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['PatientRegisterationAdd'];
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationAdd'];
         }else if(Route::currentRouteName() === 'editPatientServices'){
             request()->validate([
             'id' => ['required', Rule::in(isset($ob['Receipt'])?array_keys($ob['Receipt']):null)],
@@ -204,7 +204,7 @@ class ReceptionController extends PatientInfo implements LangObject
                 else if(isset($ob['Cultures'][$value]))
                     array_push($this->testArr, new Test($ob['Cultures'][$value]['Name'], $ob['Cultures'][$value]['Shortcut'], $ob['Cultures'][$value]['Price'], $ob['Cultures'][$value]['InputOutputLab'], $ob['Cultures'][$value]['Id']));
                 else
-                    $fail($ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid']);
+                    $fail($ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']);
             },],
             'patentCode' => ['required', Rule::in(isset($ob['Patent'])?array_keys($ob['Patent']):null)],
             'know' => ['required', Rule::in(isset($ob['Knows'])?array_keys($ob['Knows']):null)],
@@ -214,167 +214,161 @@ class ReceptionController extends PatientInfo implements LangObject
             'paymentAmount' => ['required', 'numeric', 'min:0'],
             'paymentMethod' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['PaymentMethodBox']))],
             ],[
-                'id.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationIdRequired'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationIdInvalid'],
-                'item.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemRequired'],
-                'item.array'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid'],
-                'patentCode.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPatentCodeRequired'],
-                'patentCode.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPatentCodeInvalid'],
-                'know.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationKnowRequired'],
-                'know.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationKnowInvalid'],
-                'discount.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountRequired'],
-                'discount.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountInvalid'],
-                'discount.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDiscountInvalid'],
-                'delayedMoney.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyRequired'],
-                'delayedMoney.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyInvalid'],
-                'delayedMoney.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationDelayedMoneyInvalid'],
-                'paymentDate.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentDateRequired'],
-                'paymentDate.date'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentDateInvalid'],
-                'paymentAmount.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountRequired'],
-                'paymentAmount.numeric'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountInvalid'],
-                'paymentAmount.min'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentAmountInvalid'],
-                'paymentMethod.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentMethodRequired'],
-                'paymentMethod.in'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationPaymentMethodInvalid'],
-                'item.*.required'=>$ob[$ob['Setting']['Language']]['Error']['PatientRegisterationItemInvalid']
+                'id.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationIdRequired'],
+                'id.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationIdInvalid'],
+                'item.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemRequired'],
+                'item.array'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'],
+                'patentCode.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPatentCodeRequired'],
+                'patentCode.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPatentCodeInvalid'],
+                'know.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationKnowRequired'],
+                'know.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationKnowInvalid'],
+                'discount.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountRequired'],
+                'discount.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountInvalid'],
+                'discount.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDiscountInvalid'],
+                'delayedMoney.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyRequired'],
+                'delayedMoney.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyInvalid'],
+                'delayedMoney.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationDelayedMoneyInvalid'],
+                'paymentDate.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentDateRequired'],
+                'paymentDate.date'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentDateInvalid'],
+                'paymentAmount.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountRequired'],
+                'paymentAmount.numeric'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountInvalid'],
+                'paymentAmount.min'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountInvalid'],
+                'paymentMethod.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodRequired'],
+                'paymentMethod.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'],
+                'item.*.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']
             ]);
             $this->getEditDataBase($ob, 'Receipt', $this);
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['Message']['PatientRegisterationEdit'];
-        }else if(Route::currentRouteName() === 'Reception' && request()->route('id') === 'PatientRegisteration'){
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationEdit'];
+        }else if(request()->route('id') === 'PatientRegisteration'){
             parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['Title']['DeleteReceipt'],
-            $ob[$ob['Setting']['Language']]['Label']['DeleteReceipt'],
-            $ob[$ob['Setting']['Language']]['Button']['DeleteReceipt'],
+            $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
+            $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
             route('deleteItem', 'Receipt'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['PatientRegisteration'],
+            $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
-            $ob[$ob['Setting']['Language']]['Title']['AddPatientServices'],
-            $ob[$ob['Setting']['Language']]['Title']['EditReceipt'],
-            $ob[$ob['Setting']['Language']]['Button']['PatientServices'],
-            $ob[$ob['Setting']['Language']]['Button']['AddPatientServices'],
-            $ob[$ob['Setting']['Language']]['Button']['EditReceipt'],
-            $ob[$ob['Setting']['Language']]['Table']['ReceiptId'],
-            $ob[$ob['Setting']['Language']]['Table']['ReceiptPatientEdit'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentName'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentName'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentNationalId'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentNationalId'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPassportNo'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPassportNo'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentEmail'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentEmail'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPhone'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPhone2'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone2'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentLastPeriodDate'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentLastPeriodDate'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentDateBirth'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentDateBirth'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentAddress'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentAddress'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentFastingGours'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Receipt']['TitleAddPatientServices'],
+            $ob[$ob['Setting']['Language']]['Receipt']['TitleEditReceipt'],
+            $ob[$ob['Setting']['Language']]['Receipt']['ButtonPatientServices'],
+            $ob[$ob['Setting']['Language']]['Receipt']['ButtonAddPatientServices'],
+            $ob[$ob['Setting']['Language']]['Receipt']['ButtonEditReceipt'],
+            $ob[$ob['Setting']['Language']]['Receipt']['TableReceiptId'],
+            $ob[$ob['Setting']['Language']]['Receipt']['TableReceiptPatientEdit'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentName'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentName'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentEmail'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentEmail'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentPhone'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentPhone'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentAddress'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentAddress'],
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentFastingGours'],
             $ob[$ob['Setting']['Language']]['CheckBox'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentOther'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentOther']);
-            $this->title5 = $ob[$this->language]['Title']['ReceiptPatient'];  
-            $this->myCodePatient = $ob[$this->language]['Label']['PatientCode'];
+            $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentOther'],
+            $ob[$ob['Setting']['Language']]['Receipt']['HintPatentOther']);
+            $this->title5 = $ob[$this->language]['Receipt']['ReceiptPatient'];  
+            $this->myCodePatient = $ob[$this->language]['Receipt']['PatientCode'];
             //init table
-            $this->table28 = $ob[$this->language]['Table']['PatientTestName'];
-            $this->table8 = $ob[$this->language]['Table']['PatientTestShortcut'];
-            $this->table9 = $ob[$this->language]['Table']['PatientTestState'];
-            $this->table10 = $ob[$this->language]['Table']['PatientTestCostBefore'];
-            $this->table45 = $ob[$this->language]['Table']['PatientTestCostAfetr'];
-            $this->table12 = $ob[$this->language]['Table']['PatientTestDelete'];
-            $this->table13 = $ob[$this->language]['Table']['PatientRaysName'];
-            $this->table14 = $ob[$this->language]['Table']['PatientRaysPrice'];
-            $this->table15 = $ob[$this->language]['Table']['PatientRaysInOut'];
-            $this->table16 = $ob[$this->language]['Table']['PatientRaysShortcut'];
-            $this->table17 = $ob[$this->language]['Table']['PatientRaysDelete'];
-            $this->table18 = $ob[$this->language]['Table']['PatientRaysSubtotal'];
-            $this->table19 = $ob[$this->language]['Table']['PatientRaysDiscount'];
-            $this->table20 = $ob[$this->language]['Table']['PatientRaysTotalDiscount'];
-            $this->table21 = $ob[$this->language]['Table']['PatientRaysTotal'];
-            $this->table22 = $ob[$this->language]['Table']['PatientRaysPaid'];
-            $this->table23 = $ob[$this->language]['Table']['PatientRaysDue'];
-            $this->table24 = $ob[$this->language]['Table']['PatientRaysDelayedMoney'];
-            $this->table25 = $ob[$this->language]['Table']['PatientRaysDueUser'];
-            $this->table26 = $ob[$this->language]['Table']['PatientRaysEGP'];
-            $this->table27 = $ob[$this->language]['Table']['PatientRaysPercent'];
-            $this->table29 = $ob[$this->language]['Table']['ReceiptPatientCode'];
-            $this->table30 = $ob[$this->language]['Table']['ReceiptPatientName'];
-            $this->table31 = $ob[$this->language]['Table']['ReceiptPatientAge'];
-            $this->table32 = $ob[$this->language]['Table']['ReceiptPatientPhone'];
-            $this->table33 = $ob[$this->language]['Table']['ReceiptPatientTest'];
-            $this->table34 = $ob[$this->language]['Table']['ReceiptPatientSubtotal'];
-            $this->table35 = $ob[$this->language]['Table']['ReceiptPatientDiscount'];
-            $this->table36 = $ob[$this->language]['Table']['ReceiptPatientTotalDiscount'];
-            $this->table37 = $ob[$this->language]['Table']['ReceiptPatientTotal'];
-            $this->table38 = $ob[$this->language]['Table']['ReceiptPatientPaid'];
-            $this->table39 = $ob[$this->language]['Table']['ReceiptPatientDue'];
-            $this->table40 = $ob[$this->language]['Table']['ReceiptPatientDelayedMoney'];
-            $this->table41 = $ob[$this->language]['Table']['ReceiptPatientDueUser'];
-            $this->table42 = $ob[$this->language]['Table']['ReceiptPatientPaymentDate'];
-            $this->table43 = $ob[$this->language]['Table']['ReceiptPatientAmountPaid'];
-            $this->table44 = $ob[$this->language]['Table']['ReceiptPatientPaymentMethod'];
-            $this->error1 = $ob[$this->language]['Error']['PatientRegisterationTestRequired'];
-            $this->error8 = $ob[$this->language]['Error']['PatientRegisterationNameRequired'];
-            $this->button5 = $ob[$this->language]['Button']['PatientAddTest'];
-            $this->button4 = $ob[$this->language]['Button']['PatientDeleteTest'];
+            $this->table13 = $ob[$this->language]['Receipt']['PatientRaysName'];
+            $this->table14 = $ob[$this->language]['Receipt']['PatientRaysPrice'];
+            $this->table15 = $ob[$this->language]['Receipt']['PatientRaysInOut'];
+            $this->table16 = $ob[$this->language]['Receipt']['PatientRaysShortcut'];
+            $this->table17 = $ob[$this->language]['Receipt']['PatientRaysDelete'];
+            $this->table18 = $ob[$this->language]['Receipt']['PatientRaysSubtotal'];
+            $this->table19 = $ob[$this->language]['Receipt']['PatientRaysDiscount'];
+            $this->table20 = $ob[$this->language]['Receipt']['PatientRaysTotalDiscount'];
+            $this->table21 = $ob[$this->language]['Receipt']['PatientRaysTotal'];
+            $this->table22 = $ob[$this->language]['Receipt']['PatientRaysPaid'];
+            $this->table23 = $ob[$this->language]['Receipt']['PatientRaysDue'];
+            $this->table24 = $ob[$this->language]['Receipt']['PatientRaysDelayedMoney'];
+            $this->table25 = $ob[$this->language]['Receipt']['PatientRaysDueUser'];
+            $this->table26 = $ob[$this->language]['Receipt']['PatientRaysEGP'];
+            $this->table27 = $ob[$this->language]['Receipt']['PatientRaysPercent'];
+            $this->table29 = $ob[$this->language]['Receipt']['ReceiptPatientCode'];
+            $this->table30 = $ob[$this->language]['Receipt']['ReceiptPatientName'];
+            $this->table31 = $ob[$this->language]['Receipt']['ReceiptPatientAge'];
+            $this->table32 = $ob[$this->language]['Receipt']['ReceiptPatientPhone'];
+            $this->table33 = $ob[$this->language]['Receipt']['ReceiptPatientTest'];
+            $this->table34 = $ob[$this->language]['Receipt']['ReceiptPatientSubtotal'];
+            $this->table35 = $ob[$this->language]['Receipt']['ReceiptPatientDiscount'];
+            $this->table36 = $ob[$this->language]['Receipt']['ReceiptPatientTotalDiscount'];
+            $this->table37 = $ob[$this->language]['Receipt']['ReceiptPatientTotal'];
+            $this->table38 = $ob[$this->language]['Receipt']['ReceiptPatientPaid'];
+            $this->table39 = $ob[$this->language]['Receipt']['ReceiptPatientDue'];
+            $this->table40 = $ob[$this->language]['Receipt']['ReceiptPatientDelayedMoney'];
+            $this->table41 = $ob[$this->language]['Receipt']['ReceiptPatientDueUser'];
+            $this->table42 = $ob[$this->language]['Receipt']['ReceiptPatientPaymentDate'];
+            $this->table43 = $ob[$this->language]['Receipt']['ReceiptPatientAmountPaid'];
+            $this->table44 = $ob[$this->language]['Receipt']['ReceiptPatientPaymentMethod'];
+            $this->error1 = $ob[$this->language]['Receipt']['PatientRegisterationTestRequired'];
+            $this->error8 = $ob[$this->language]['Receipt']['PatientRegisterationNameRequired'];
+            $this->button5 = $ob[$this->language]['Receipt']['PatientAddTest'];
+            $this->button4 = $ob[$this->language]['Receipt']['PatientDeleteTest'];
             //init label
-            $this->label3 = $ob[$this->language]['Label']['PatentNationality'];
-            $this->label9 = $ob[$this->language]['Label']['PatentGender'];
-            $this->label13 = $ob[$this->language]['Label']['PatentContracting'];
-            $this->PatientNameServices = $ob[$this->language]['Label']['PatientNameServices'];
-            $this->label18 = $ob[$this->language]['Label']['PatientReceipt'];
-            $this->label19 = $ob[$this->language]['Label']['PatientKnow'];
-            $this->label20 = $ob[$this->language]['Label']['PatientNewItem'];
-            $this->label21 = $ob[$this->language]['Label']['PatientRaysName'];
-            $this->label22 = $ob[$this->language]['Label']['PatientRaysOption'];
-            $this->label23 = $ob[$this->language]['Label']['PatientPaymentDetails'];
-            $this->label24 = $ob[$this->language]['Label']['PatientPaymentDate'];
-            $this->label25 = $ob[$this->language]['Label']['PatientAmountPaid'];
-            $this->label26 = $ob[$this->language]['Label']['PatientPaymentMethod'];
-            $this->label27 = $ob[$this->language]['Label']['PatientEndReceipt'];
-            $this->label29 = $ob[$this->language]['Label']['ReceiptNumber'];
-            $this->label30 = $ob[$this->language]['Label']['ReceiptDate'];
-            $this->label31 = $ob[$this->language]['Label']['ReceiptPatentName'];
-            $this->label32 = $ob[$this->language]['Label']['ReceiptPatentCode'];
-            $this->label33 = $ob[$this->language]['Label']['ReceiptPatentTestName'];
-            $this->label34 = $ob[$this->language]['Label']['ReceiptPatentTestPrice'];
-            $this->label35 = $ob[$this->language]['Label']['ReceiptPatentSubtotal'];
-            $this->label36 = $ob[$this->language]['Label']['ReceiptPatentTotalDiscount'];
-            $this->label37 = $ob[$this->language]['Label']['ReceiptPatentTotal'];
-            $this->label38 = $ob[$this->language]['Label']['ReceiptPatentPaymentDate'];
-            $this->label39 = $ob[$this->language]['Label']['ReceiptPatentAmountPaid'];
-            $this->label40 = $ob[$this->language]['Label']['ReceiptPatentPaymentMethod'];
-            $this->label41 = $ob[$this->language]['Label']['ReceiptPatentDue'];
-            $this->label42 = $ob[$this->language]['Label']['ReceiptPatentInfo'];
-            $this->label43 = $ob[$this->language]['Label']['ReceiptPatientTitle'];
-            $this->label45 = $ob[$this->language]['Label']['PatentAvatar'];
-            $this->hint12 = $ob[$this->language]['Hint']['PatientCode'];
-            $this->hint13 = $ob[$this->language]['Hint']['PatientNationality'];
-            $this->hint14 = $ob[$this->language]['Hint']['PatientGender'];
-            $this->hint15 = $ob[$this->language]['Hint']['PatientContracting'];
-            $this->hint16 = $ob[$this->language]['Hint']['patientAmountPaid'];
+            $this->label3 = $ob[$this->language]['Receipt']['PatentNationality'];
+            $this->label9 = $ob[$this->language]['Receipt']['PatentGender'];
+            $this->label13 = $ob[$this->language]['Receipt']['PatentContracting'];
+            $this->PatientNameServices = $ob[$this->language]['Receipt']['PatientNameServices'];
+            $this->label18 = $ob[$this->language]['Receipt']['PatientReceipt'];
+            $this->label19 = $ob[$this->language]['Receipt']['PatientKnow'];
+            $this->label20 = $ob[$this->language]['Receipt']['PatientNewItem'];
+            $this->label21 = $ob[$this->language]['Receipt']['PatientRaysName'];
+            $this->label22 = $ob[$this->language]['Receipt']['PatientRaysOption'];
+            $this->label23 = $ob[$this->language]['Receipt']['PatientPaymentDetails'];
+            $this->label24 = $ob[$this->language]['Receipt']['PatientPaymentDate'];
+            $this->label25 = $ob[$this->language]['Receipt']['PatientAmountPaid'];
+            $this->label26 = $ob[$this->language]['Receipt']['PatientPaymentMethod'];
+            $this->label27 = $ob[$this->language]['Receipt']['PatientEndReceipt'];
+            $this->label29 = $ob[$this->language]['Receipt']['ReceiptNumber'];
+            $this->label30 = $ob[$this->language]['Receipt']['ReceiptDate'];
+            $this->label31 = $ob[$this->language]['Receipt']['ReceiptPatentName'];
+            $this->label32 = $ob[$this->language]['Receipt']['ReceiptPatentCode'];
+            $this->label33 = $ob[$this->language]['Receipt']['ReceiptPatentTestName'];
+            $this->label34 = $ob[$this->language]['Receipt']['ReceiptPatentTestPrice'];
+            $this->label35 = $ob[$this->language]['Receipt']['ReceiptPatentSubtotal'];
+            $this->label36 = $ob[$this->language]['Receipt']['ReceiptPatentTotalDiscount'];
+            $this->label37 = $ob[$this->language]['Receipt']['ReceiptPatentTotal'];
+            $this->label38 = $ob[$this->language]['Receipt']['ReceiptPatentPaymentDate'];
+            $this->label39 = $ob[$this->language]['Receipt']['ReceiptPatentAmountPaid'];
+            $this->label40 = $ob[$this->language]['Receipt']['ReceiptPatentPaymentMethod'];
+            $this->label41 = $ob[$this->language]['Receipt']['ReceiptPatentDue'];
+            $this->label42 = $ob[$this->language]['Receipt']['ReceiptPatentInfo'];
+            $this->label43 = $ob[$this->language]['Receipt']['ReceiptPatientTitle'];
+            $this->label45 = $ob[$this->language]['Receipt']['PatentAvatar'];
+            $this->hint12 = $ob[$this->language]['Receipt']['HintPatientCode'];
+            $this->hint13 = $ob[$this->language]['Receipt']['HintPatientNationality'];
+            $this->hint14 = $ob[$this->language]['Receipt']['HintPatientGender'];
+            $this->hint15 = $ob[$this->language]['Receipt']['HintPatientContracting'];
+            $this->hint16 = $ob[$this->language]['Receipt']['HintpatientAmountPaid'];
             //init selectbox
-            $this->selectBox1 = $ob[$this->language]['SelectBox']['PatientPaymentMethod'];
-            $this->selectBox2 = $ob[$this->language]['SelectBox']['PatientNameServices'];
-            $this->selectBox5 = $ob[$this->language]['SelectBox']['Patientknow'];
-            $this->selectBox6 = $ob[$this->language]['SelectBox']['PatientTest'];
-            $this->selectBox7 = $ob[$this->language]['SelectBox']['ReceiptPatientPrint'];
+            $this->selectBox1 = $ob[$this->language]['Receipt']['PatientPaymentMethod'];
+            $this->selectBox2 = $ob[$this->language]['Receipt']['PatientNameServices'];
+            $this->selectBox5 = $ob[$this->language]['Receipt']['Patientknow'];
+            $this->selectBox6 = $ob[$this->language]['Receipt']['PatientTest'];
+            $this->selectBox7 = $ob[$this->language]['Receipt']['ReceiptPatientPrint'];
             $this->payment = $ob[$this->language]['PaymentMethodBox'];
             $this->allTests = $ob[$this->language]['OptionTestBox'];
-            $this->error2 = $ob[$this->language]['Error']['PatientRegisterationPaymentMethodRequired'];
-            $this->error3 = $ob[$this->language]['Error']['PatientRegisterationPatentCodeRequired'];
-            $this->error4 = $ob[$this->language]['Error']['PatientRegisterationKnowRequired'];
-            $this->error5 = $ob[$this->language]['Error']['PatientRegisterationItemRequired'];
-            $this->error6 = $ob[$this->language]['Error']['PatientRegisterationPaymentDateRequired'];
-            $this->error7 = $ob[$this->language]['Error']['PatientRegisterationPaymentAmountRequired'];
+            $this->error2 = $ob[$this->language]['Receipt']['PatientRegisterationPaymentMethodRequired'];
+            $this->error3 = $ob[$this->language]['Receipt']['PatientRegisterationPatentCodeRequired'];
+            $this->error4 = $ob[$this->language]['Receipt']['PatientRegisterationKnowRequired'];
+            $this->error5 = $ob[$this->language]['Receipt']['PatientRegisterationItemRequired'];
+            $this->error6 = $ob[$this->language]['Receipt']['PatientRegisterationPaymentDateRequired'];
+            $this->error7 = $ob[$this->language]['Receipt']['PatientRegisterationPaymentAmountRequired'];
             //add test
             $this->arr2 = isset($ob['Test'])?(array)$ob['Test']:null;
             $this->arr3 = isset($ob['Cultures'])?(array)$ob['Cultures']:null;
@@ -395,101 +389,101 @@ class ReceptionController extends PatientInfo implements LangObject
         }else //if(Route::currentRouteName() === 'Reception' && request()->route('id') === 'Patients')
         {
             parent::__construct($ob['Setting']['Language'], 
-            $ob[$ob['Setting']['Language']]['Title']['PatentDelete'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentDelete'],
-            $ob[$ob['Setting']['Language']]['Button']['PatentDelete'],
+            $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
+            $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
             route('deleteItem', 'Patent'),
             $ob[$ob['Setting']['Language']]['TableInfo'],
-            $ob[$ob['Setting']['Language']]['Title']['Patients'],
+            $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
-            $ob[$ob['Setting']['Language']]['Title']['AddPatent'],
-            $ob[$ob['Setting']['Language']]['Title']['PatentEdit'],
-            $ob[$ob['Setting']['Language']]['Button']['PatentAvatar'],
-            $ob[$ob['Setting']['Language']]['Button']['AddPatent'],
-            $ob[$ob['Setting']['Language']]['Button']['CreatePatent'],
-            $ob[$ob['Setting']['Language']]['Table']['PatentEdit'],
-            $ob[$ob['Setting']['Language']]['Table']['PatentId'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentName'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentName'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentNationalId'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentNationalId'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPassportNo'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPassportNo'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentEmail'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentEmail'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPhone'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentPhone2'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentPhone2'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentLastPeriodDate'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentLastPeriodDate'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentDateBirth'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentDateBirth'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentAddress'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentAddress'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentFastingGours'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Patent']['TitleAddPatent'],
+            $ob[$ob['Setting']['Language']]['Patent']['TitlePatentEdit'],
+            $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentAvatar'],
+            $ob[$ob['Setting']['Language']]['Patent']['ButtonAddPatent'],
+            $ob[$ob['Setting']['Language']]['Patent']['ButtonCreatePatent'],
+            $ob[$ob['Setting']['Language']]['Patent']['TablePatentEdit'],
+            $ob[$ob['Setting']['Language']]['Patent']['TablePatentId'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentName'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentName'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentNationalId'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentPassportNo'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentEmail'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentEmail'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentPhone'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentPhone'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentPhone2'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentLastPeriodDate'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentDateBirth'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentAddress'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentAddress'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentFastingGours'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentFastingGours'],
             $ob[$ob['Setting']['Language']]['CheckBox'],
-            $ob[$ob['Setting']['Language']]['Label']['PatentOther'],
-            $ob[$ob['Setting']['Language']]['Hint']['PatentOther']);
-            $this->error1 = $ob[$this->language]['Error']['PatentNameRequired'];
-            $this->error2 = $ob[$this->language]['Error']['PatentNameInvalid'];
-            $this->error3 = $ob[$this->language]['Error']['PatentNationalIdRequired'];
-            $this->error4 = $ob[$this->language]['Error']['PatentNationalIdInvalid'];
-            $this->error5 = $ob[$this->language]['Error']['PatentPassportNoRequired'];
-            $this->error6 = $ob[$this->language]['Error']['PatentPassportNoInvalid'];
-            $this->error7 = $ob[$this->language]['Error']['PatentEmailRequired'];
-            $this->error8 = $ob[$this->language]['Error']['PatentEmailInvalid'];
-            $this->error9 = $ob[$this->language]['Error']['PatentPhoneRequired'];
-            $this->error10 = $ob[$this->language]['Error']['PatentPhoneInvalid'];
-            $this->error11 = $ob[$this->language]['Error']['PatentPhone2Required'];
-            $this->error12 = $ob[$this->language]['Error']['PatentPhone2Invalid'];
-            $this->error13 = $ob[$this->language]['Error']['PatentAddressRequired'];
-            $this->error14 = $ob[$this->language]['Error']['PatentAddressInvalid'];
-            $this->error15 = $ob[$this->language]['Error']['PatentFastingHoursRequired'];
-            $this->error16 = $ob[$this->language]['Error']['PatentDiseaseRequired'];
-            $this->error17 = $ob[$this->language]['Error']['PatentNationalityRequired'];
-            $this->error18 = $ob[$this->language]['Error']['PatentGenderRequired'];
-            $this->error19 = $ob[$this->language]['Error']['PatentLastPeriodDateRequired'];
-            $this->error20 = $ob[$this->language]['Error']['PatentDateBirthRequired'];
-            $this->error21 = $ob[$this->language]['Error']['PatentContractingRequired'];
-            $this->error22 = $ob[$this->language]['Error']['PatentDiseasOtherInvalid'];
-            $this->error23 = $ob[$this->language]['Error']['PatentAvatarImage'];
-            $this->error32 = $ob[$this->language]['Error']['PatentAvatarMax'];
-            $this->PatentAvatarDimensions = $ob[$this->language]['Error']['PatentAvatarDimensions'];
-            $this->title5 = $ob[$this->language]['Title']['PatentIamge'];
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentOther'],
+            $ob[$ob['Setting']['Language']]['Patent']['HintPatentOther']);
+            $this->error1 = $ob[$this->language]['Patent']['PatentNameRequired'];
+            $this->error2 = $ob[$this->language]['Patent']['PatentNameInvalid'];
+            $this->error3 = $ob[$this->language]['Patent']['PatentNationalIdRequired'];
+            $this->error4 = $ob[$this->language]['Patent']['PatentNationalIdInvalid'];
+            $this->error5 = $ob[$this->language]['Patent']['PatentPassportNoRequired'];
+            $this->error6 = $ob[$this->language]['Patent']['PatentPassportNoInvalid'];
+            $this->error7 = $ob[$this->language]['Patent']['PatentEmailRequired'];
+            $this->error8 = $ob[$this->language]['Patent']['PatentEmailInvalid'];
+            $this->error9 = $ob[$this->language]['Patent']['PatentPhoneRequired'];
+            $this->error10 = $ob[$this->language]['Patent']['PatentPhoneInvalid'];
+            $this->error11 = $ob[$this->language]['Patent']['PatentPhone2Required'];
+            $this->error12 = $ob[$this->language]['Patent']['PatentPhone2Invalid'];
+            $this->error13 = $ob[$this->language]['Patent']['PatentAddressRequired'];
+            $this->error14 = $ob[$this->language]['Patent']['PatentAddressInvalid'];
+            $this->error15 = $ob[$this->language]['Patent']['PatentFastingHoursRequired'];
+            $this->error16 = $ob[$this->language]['Patent']['PatentDiseaseRequired'];
+            $this->error17 = $ob[$this->language]['Patent']['PatentNationalityRequired'];
+            $this->error18 = $ob[$this->language]['Patent']['PatentGenderRequired'];
+            $this->error19 = $ob[$this->language]['Patent']['PatentLastPeriodDateRequired'];
+            $this->error20 = $ob[$this->language]['Patent']['PatentDateBirthRequired'];
+            $this->error21 = $ob[$this->language]['Patent']['PatentContractingRequired'];
+            $this->error22 = $ob[$this->language]['Patent']['PatentDiseasOtherInvalid'];
+            $this->error23 = $ob[$this->language]['Patent']['PatentAvatarImage'];
+            $this->error32 = $ob[$this->language]['Patent']['PatentAvatarMax'];
+            $this->PatentAvatarDimensions = $ob[$this->language]['Patent']['PatentAvatarDimensions'];
+            $this->title5 = $ob[$this->language]['Patent']['PatentIamge'];
             //init table
-            $this->table24 = $ob[$this->language]['Table']['PatentCode'];
-            $this->table8 = $ob[$this->language]['Table']['PatentAvatar'];
-            $this->table9 = $ob[$this->language]['Table']['PatentName'];
-            $this->table10 = $ob[$this->language]['Table']['PatentNationality'];
-            $this->table22 = $ob[$this->language]['Table']['PatentNationalId'];
-            $this->table12 = $ob[$this->language]['Table']['PatentPassportNo'];
-            $this->table13 = $ob[$this->language]['Table']['PatentEmail'];
-            $this->table14 = $ob[$this->language]['Table']['PatentPhone'];
-            $this->table15 = $ob[$this->language]['Table']['PatentPhone2'];
-            $this->table16 = $ob[$this->language]['Table']['PatentGender'];
-            $this->table17 = $ob[$this->language]['Table']['PatentLastPeriodDate'];
-            $this->table18 = $ob[$this->language]['Table']['PatentDateBirth'];
-            $this->table19 = $ob[$this->language]['Table']['PatentContracting'];
-            $this->table20 = $ob[$this->language]['Table']['PatentHours'];
-            $this->table21 = $ob[$this->language]['Table']['PatentDisease'];
-            $this->table23 = $ob[$this->language]['Table']['PatentAddress'];
+            $this->table24 = $ob[$this->language]['Patent']['TablePatentCode'];
+            $this->table8 = $ob[$this->language]['Patent']['TablePatentAvatar'];
+            $this->table9 = $ob[$this->language]['Patent']['TablePatentName'];
+            $this->table10 = $ob[$this->language]['Patent']['TablePatentNationality'];
+            $this->table22 = $ob[$this->language]['Patent']['TablePatentNationalId'];
+            $this->table12 = $ob[$this->language]['Patent']['TablePatentPassportNo'];
+            $this->table13 = $ob[$this->language]['Patent']['TablePatentEmail'];
+            $this->table14 = $ob[$this->language]['Patent']['TablePatentPhone'];
+            $this->table15 = $ob[$this->language]['Patent']['TablePatentPhone2'];
+            $this->table16 = $ob[$this->language]['Patent']['TablePatentGender'];
+            $this->table17 = $ob[$this->language]['Patent']['TablePatentLastPeriodDate'];
+            $this->table18 = $ob[$this->language]['Patent']['TablePatentDateBirth'];
+            $this->table19 = $ob[$this->language]['Patent']['TablePatentContracting'];
+            $this->table20 = $ob[$this->language]['Patent']['TablePatentHours'];
+            $this->table21 = $ob[$this->language]['Patent']['TablePatentDisease'];
+            $this->table23 = $ob[$this->language]['Patent']['TablePatentAddress'];
             //init label
-            $this->label3 = $ob[$this->language]['Label']['PatentAvatar'];
-            $this->label4 = $ob[$this->language]['Label']['PatentNationality'];
-            $this->label9 = $ob[$this->language]['Label']['PatentGender'];
-            $this->label13 = $ob[$this->language]['Label']['PatentContracting'];
+            $this->label3 = $ob[$this->language]['Patent']['LabelPatentAvatar'];
+            $this->label4 = $ob[$this->language]['Patent']['LabelPatentNationality'];
+            $this->label9 = $ob[$this->language]['Patent']['LabelPatentGender'];
+            $this->label13 = $ob[$this->language]['Patent']['LabelPatentContracting'];
             $this->nationality = $ob[$this->language]['SelectNationalityBox'];
             $this->gender = $ob[$this->language]['SelectGenderBox'];
-            $this->selectBox1 = $ob[$this->language]['SelectBox']['PatentNationality'];
-            $this->selectBox2 = $ob[$this->language]['SelectBox']['PatentGender'];
-            $this->selectBox5 = $ob[$this->language]['SelectBox']['PatentContracting'];
+            $this->selectBox1 = $ob[$this->language]['Patent']['SelectBoxPatentNationality'];
+            $this->selectBox2 = $ob[$this->language]['Patent']['SelectBoxPatentGender'];
+            $this->selectBox5 = $ob[$this->language]['Patent']['SelectBoxPatentContracting'];
             //make button
-            $this->button4 = $ob[$this->language]['Button']['PatentEdit'];
+            $this->button4 = $ob[$this->language]['Patent']['ButtonPatentEdit'];
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], $this->myContract, $ob[$ob['Setting']['Language']]['SelectGenderBox'], $ob[$ob['Setting']['Language']]['SelectNationalityBox'], $ob[$ob['Setting']['Language']]['CheckBox']):array();
         }
