@@ -41,6 +41,7 @@ Route::controller(SystemLangController::class)->group(function () {
 });
 Route::controller(LangController::class)->group(function () {
     Route::get('/ChangeLanguage', 'index')->name('ChangeLanguage')->middleware(IsLogin::class.':admin');
+    Route::post('/newLanguage', 'action')->name('lang.createLanguage')->middleware(IsLogin::class.':admin');
     Route::post('/changeLanguage', 'action')->name('language.change')->middleware(IsLogin::class.':admin');
     Route::post('/copyLanguage', 'action')->name('language.copy')->middleware(IsLogin::class.':admin');
     Route::post('/deleteLanguage', 'action')->name('language.delete')->middleware(IsLogin::class.':admin');

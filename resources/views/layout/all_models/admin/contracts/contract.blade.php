@@ -16,15 +16,15 @@
                 @endisset   
                 <div class="mb-3">
                     <label for="name" class="form-label">{{$lang->label3}}</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{isset($index) ? $contract->getName() : old('name')}}" placeholder="{{$lang->hint1}}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{isset($index) ? $contract->getName() : ''}}" placeholder="{{$lang->hint1}}">
                 </div>
                 <div class="mb-3">
                     <label for="governorate" class="form-label">{{$lang->label4}}</label>
-                    <input type="text" class="form-control" id="governorate" name="governorate" value="{{isset($index) ? $contract->getGovernorate() : old('governorate')}}" placeholder="{{$lang->hint2}}">
+                    <input type="text" class="form-control" id="governorate" name="governorate" value="{{isset($index) ? $contract->getGovernorate() : ''}}" placeholder="{{$lang->hint2}}">
                 </div>
                 <div class="mb-3">
                     <label for="area" class="form-label">{{$lang->label5}}</label>
-                    <input type="text" class="form-control" id="area" name="area" value="{{isset($index) ? $contract->getArea() : old('area')}}" placeholder="{{$lang->hint3}}">
+                    <input type="text" class="form-control" id="area" name="area" value="{{isset($index) ? $contract->getArea() : ''}}" placeholder="{{$lang->hint3}}">
                 </div>
         </form>
       </div>

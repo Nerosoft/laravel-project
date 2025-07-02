@@ -164,7 +164,7 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
   preview.attr('src', myAvatar);
   patent_name.val(myName);
   patent_nationality.find('option').each(function(idx, el){
-    if($(this).val() === myNationality)
+    if($(this).html() === myNationality)
       $(this).prop('selected', true);
   });
   patent_national_id.val(myNationalId);
@@ -173,14 +173,14 @@ function displayEditForm(patent_name, patent_nationality, patent_gender, patent_
   patent_phone.val(myPhone);
   patent_phone2.val(myPhone2);
   patent_gender.find('option').each(function(idx, el){
-    if($(this).val() === myGender)
+    if($(this).html() === myGender)
       $(this).prop('selected', true);
   });
   last_period_date.val(myLastPeriodDate);
   date_birth.val(myDateBirth);
   patent_address.val(myAddress);
   patent_contracting.find('option').each(function(idx, el){
-    if($(this).val() === myContracting)
+    if($(this).html() === myContracting)
       $(this).prop('selected', true);
   });
   patent_hours.val(myHours);

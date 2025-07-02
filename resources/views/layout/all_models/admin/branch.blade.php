@@ -21,7 +21,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-hospital input-icon"></div>
                                 </div>
-                                <input id="brance-rays-name" type="tel" class="form-control" name="brance_rays_name" value="{{isset($index) ? $branch->getName() : old('brance_rays_name')}}" placeholder="{{$lang->hint1}}">
+                                <input id="brance-rays-name" type="tel" class="form-control" name="brance_rays_name" value="{{isset($index) ? $branch->getName() : ''}}" placeholder="{{$lang->hint1}}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -29,7 +29,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-telephone input-icon"></div>
                                 </div>
-                                <input id="brance-rays-phone" type="text" class="form-control" name="brance_rays_phone" value="{{isset($index) ? $branch->getPhone() : old('brance_rays_phone')}}" placeholder="{{ $lang->hint2 }}">
+                                <input id="brance-rays-phone" type="text" class="form-control" name="brance_rays_phone" value="{{isset($index) ? $branch->getPhone() : ''}}" placeholder="{{ $lang->hint2 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -37,7 +37,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                    <input id="brance-rays-country" type="text" class="form-control" name="brance_rays_country" value="{{isset($index) ? $branch->getCountry() : old('brance_rays_country')}}" placeholder="{{ $lang->hint3 }}">
+                                    <input id="brance-rays-country" type="text" class="form-control" name="brance_rays_country" value="{{isset($index) ? $branch->getCountry() : ''}}" placeholder="{{ $lang->hint3 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -45,7 +45,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                <input id="brance-rays-governments" type="text" class="form-control" name="brance_rays_governments" value="{{isset($index) ? $branch->getGovernments() : old('brance_rays_governments')}}" placeholder="{{ $lang->hint4 }}">
+                                <input id="brance-rays-governments" type="text" class="form-control" name="brance_rays_governments" value="{{isset($index) ? $branch->getGovernments() : ''}}" placeholder="{{ $lang->hint4 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -53,7 +53,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                <input id="brance-rays-city" type="text" class="form-control" name="brance_rays_city" value="{{isset($index) ? $branch->getCity() : old('brance_rays_city')}}" placeholder="{{ $lang->hint5 }}">
+                                <input id="brance-rays-city" type="text" class="form-control" name="brance_rays_city" value="{{isset($index) ? $branch->getCity() : ''}}" placeholder="{{ $lang->hint5 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -61,7 +61,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                <input id="brance-rays-street" type="text" class="form-control" name="brance_rays_street" value="{{isset($index) ? $branch->getStreet() : old('brance_rays_street')}}" placeholder="{{ $lang->hint6 }}">
+                                <input id="brance-rays-street" type="text" class="form-control" name="brance_rays_street" value="{{isset($index) ? $branch->getStreet() : ''}}" placeholder="{{ $lang->hint6 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -69,7 +69,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                <input id="brance-rays-building" type="text" class="form-control" name="brance_rays_building" value="{{isset($index) ? $branch->getBuilding() : old('brance_rays_building')}}" placeholder="{{ $lang->hint7 }}">
+                                <input id="brance-rays-building" type="text" class="form-control" name="brance_rays_building" value="{{isset($index) ? $branch->getBuilding() : ''}}" placeholder="{{ $lang->hint7 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -77,7 +77,7 @@
                                 <div class="input-group-prepend">
                                 <div class="input-group-text bi bi-geo-alt input-icon"></div>
                                 </div>
-                                <input id="brance-rays-address" type="text" class="form-control" name="brance_rays_address" value="{{isset($index) ? $branch->getAddress() : old('brance_rays_address')}}" placeholder="{{ $lang->hint8 }}">
+                                <input id="brance-rays-address" type="text" class="form-control" name="brance_rays_address" value="{{isset($index) ? $branch->getAddress() : ''}}" placeholder="{{ $lang->hint8 }}">
                             </div>
                         </div>
                         <div class="col-lg-auto pt-2">
@@ -88,7 +88,7 @@
                                 <select class="form-select" id="brance-rays-follow" name="brance_rays_follow"  aria-label="Default select example">
                                     <option selected disabled>{{ $lang->selectBox1 }}</option>
                                     @foreach($lang->branchInputOutput as $key=>$inpBranch)
-                                    <option {{isset($index) ? ($branch->getFollowId() === $inpBranch ? 'selected' : '') : (old('brance_rays_follow') === $key ? 'selected' : '')}} value="{{ $key}}">{{ $inpBranch }}</option>
+                                    <option {{isset($index) ? ($branch->getFollowId() === $inpBranch ? 'selected' : '') : ''}} value="{{ $key}}">{{ $inpBranch }}</option>
                                     @endforeach
                                 </select>
 

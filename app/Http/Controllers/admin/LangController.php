@@ -47,7 +47,29 @@ class LangController extends DeleteModel
             $ob[$newKey] = $ob[request()->input('id')];
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['CopyLanguage'].$ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];;
-        }else if(Route::currentRouteName() === 'language.delete'){
+        }
+        else if(Route::currentRouteName() === 'lang.createLanguage'){
+            request()->validate([
+                'lang_name' =>['required', 'min:3']
+            ], [
+                'lang_name.required' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLangNameRequired'],
+                'lang_name.min' => $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLangNameInvalid'],
+            ]);
+            $newKey = $this->generateUniqueIdentifier();
+            $model = Rays::find(request()->session()->get('userId'));
+            foreach (array_keys($model[$model['Setting']['Language']]['AllNamesLanguage']) as $key2) {
+                $myLang = $model[$key2];
+                $myLang['AllNamesLanguage'][$newKey] = request()->input('lang_name');
+                $model[$key2] = $myLang;
+            }
+            //after add new language name
+            $myLanguage = $model['MyLanguage'];
+            $myLanguage['AllNamesLanguage'] = $model[$model['Setting']['Language']]['AllNamesLanguage'];
+            $model[$newKey] = $myLanguage;
+            $model->save();
+            $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLanguageMessage'].request()->input('lang_name');
+        }
+        else if(Route::currentRouteName() === 'language.delete'){
             request()->validate([
                 'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])), Rule::notIn([$ob['Setting']['Language'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[0], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[1]])]
             ], [
@@ -76,6 +98,9 @@ class LangController extends DeleteModel
             $ob[$ob['Setting']['Language']]['Html']['Direction'],
             $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],
             new Menu($ob[$ob['Setting']['Language']]['Menu']));
+            $this->NewLanguage = $ob[$this->language]['ChangeLanguage']['NewLanguage'];
+            $this->TitleNewLang = $ob[$this->language]['ChangeLanguage']['TitleNewLang'];
+            $this->ButtonNewLang = $ob[$this->language]['ChangeLanguage']['ButtonNewLang'];
             $this->error1 = $ob[$this->language]['ChangeLanguage']['NewLangNameRequired'];
             $this->error2 = $ob[$this->language]['ChangeLanguage']['NewLangNameInvalid'];
             //init table
@@ -87,6 +112,8 @@ class LangController extends DeleteModel
             $this->label4 = $ob[$this->language]['ChangeLanguage']['LanguageSelect'];
             $this->label5 = $ob[$this->language]['ChangeLanguage']['LabelChangeLanguageMessage'];
             $this->label6 = $ob[$this->language]['ChangeLanguage']['LabelCopyLanguageMessage'];
+            $this->LabelNameLanguage = $ob[$this->language]['ChangeLanguage']['LabelCreateLanguage'];
+            $this->HintCopyLanguage = $ob[$this->language]['ChangeLanguage']['HintCopyLangName'];
             $this->label7 = $ob[$this->language]['ChangeLanguage']['LabelNewLangName'];
             //hint
             $this->hint1 = $ob[$this->language]['ChangeLanguage']['HintNewLangName'];

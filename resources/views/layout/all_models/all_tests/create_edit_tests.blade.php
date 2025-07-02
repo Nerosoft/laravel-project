@@ -16,22 +16,22 @@
                 @endisset   
                 <div class="mb-3">
                     <label for="name" class="form-label">{{$lang->label3}}</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{isset($index) ? $test->getName() : old('name')}}" placeholder="{{$lang->hint1}}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{isset($index) ? $test->getName() : ''}}" placeholder="{{$lang->hint1}}">
                 </div>
                 <div class="mb-3">
                     <label for="shortcut" class="form-label">{{$lang->label7}}</label>
-                    <input type="text" class="form-control" id="shortcut" name="shortcut" value="{{isset($index) ? $test->getShortcut() : old('shortcut')}}" placeholder="{{$lang->hint3}}">
+                    <input type="text" class="form-control" id="shortcut" name="shortcut" value="{{isset($index) ? $test->getShortcut() : ''}}" placeholder="{{$lang->hint3}}">
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">{{$lang->label4}}</label>
-                    <input type="number" class="form-control" id="price" min="0" name="price" value="{{isset($index) ? $test->getPrice() : old('price')}}" placeholder="{{$lang->hint2}}">
+                    <input type="number" class="form-control" id="price" min="0" name="price" value="{{isset($index) ? $test->getPrice() : ''}}" placeholder="{{$lang->hint2}}">
                 </div>
                 <div class="mb-3">
                     <label for="input-output-lab" class="form-label">{{$lang->label5}}</label>
                     <select class="form-select" id="input-output-lab" name="input-output-lab">
                     <option selected disabled>{{$lang->selectBox1}}</option>
                     @foreach($lang->inputOutPut as $key=>$inp)
-                    <option {{isset($index) ? ($test->getInputOutputLabId() === $inp ? 'selected' : '') : (old('input-output-lab') === $key ? 'selected' : '')}} value="{{$key}}">{{$inp}}</option>
+                    <option {{isset($index) ? ($test->getInputOutputLabId() === $inp ? 'selected' : '') : ''}} value="{{$key}}">{{$inp}}</option>
                     @endforeach
                     </select>
                 </div>

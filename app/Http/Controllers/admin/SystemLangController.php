@@ -72,7 +72,8 @@ class SystemLangController extends TableSetting
             $ob[$ob['Setting']['Language']]['CutomLang'],
             $ob[$ob['Setting']['Language']]['AllNamesLanguage']));
             $this->myAllLanguage = $ob[request()->route('lang')][request()->route('id')];
-            $this->myDirectionOption = $ob[$this->language]['Direction'];
+            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
             //init label
             $this->label3 = $ob[$this->language]['SystemLang']['Text'];
             $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
@@ -100,7 +101,8 @@ class SystemLangController extends TableSetting
             foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
                 $this->myAllLanguage[$key] = $ob[$key];
             //label
-            $this->myDirectionOption = $this->myAllLanguage[$this->language]['Direction'];
+            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
             //init label
             $this->label3 = $this->myAllLanguage[$this->language]['SystemLang']['Text'];
             $this->label4 = $this->myAllLanguage[$this->language]['SystemLang']['DirectionPage']; 

@@ -15,7 +15,7 @@
             @endisset   
             <div class="mb-3">
               <label for="name" class="form-label">{{$lang->label3}}</label>
-              <input type="text" class="form-control" id="name" value="{{isset($index) ? $know->getName() : old('name')}}" name="name" placeholder="{{$lang->hint1}}">
+              <input type="text" class="form-control" id="name" value="{{isset($index) ? $know->getName() : ''}}" name="name" placeholder="{{$lang->hint1}}">
             </div>
         </form>
       </div>
