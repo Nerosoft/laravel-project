@@ -258,6 +258,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonEditReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['TableReceiptId'],
             $ob[$ob['Setting']['Language']]['Receipt']['TableReceiptPatientEdit'],
+            $ob[$ob['Setting']['Language']]['Receipt']['PatentAvatar'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentName'],
             $ob[$ob['Setting']['Language']]['Receipt']['HintPatentName'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelPatentNationalId'],
@@ -349,7 +350,6 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->label41 = $ob[$this->language]['Receipt']['ReceiptPatentDue'];
             $this->label42 = $ob[$this->language]['Receipt']['ReceiptPatentInfo'];
             $this->label43 = $ob[$this->language]['Receipt']['ReceiptPatientTitle'];
-            $this->label45 = $ob[$this->language]['Receipt']['PatentAvatar'];
             $this->hint12 = $ob[$this->language]['Receipt']['HintPatientCode'];
             $this->hint13 = $ob[$this->language]['Receipt']['HintPatientNationality'];
             $this->hint14 = $ob[$this->language]['Receipt']['HintPatientGender'];
@@ -406,6 +406,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['ButtonCreatePatent'],
             $ob[$ob['Setting']['Language']]['Patent']['TablePatentEdit'],
             $ob[$ob['Setting']['Language']]['Patent']['TablePatentId'],
+            $ob[$ob['Setting']['Language']]['Patent']['LabelPatentAvatar'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentName'],
             $ob[$ob['Setting']['Language']]['Patent']['HintPatentName'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentNationalId'],
@@ -473,7 +474,6 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->table21 = $ob[$this->language]['Patent']['TablePatentDisease'];
             $this->table23 = $ob[$this->language]['Patent']['TablePatentAddress'];
             //init label
-            $this->label3 = $ob[$this->language]['Patent']['LabelPatentAvatar'];
             $this->label4 = $ob[$this->language]['Patent']['LabelPatentNationality'];
             $this->label9 = $ob[$this->language]['Patent']['LabelPatentGender'];
             $this->label13 = $ob[$this->language]['Patent']['LabelPatentContracting'];

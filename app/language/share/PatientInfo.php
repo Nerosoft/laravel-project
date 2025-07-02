@@ -2,10 +2,11 @@
 namespace App\language\share;
 class PatientInfo extends Page{
     protected function __construct($Language, $TitleDeleteTest, $LabelDeleteTest, $ButtonDeleteTest, $RouteDeleteTest, $TableInfo, $Title, $AppSettingAdmin, $Direction, $Branch, $Menu, $title2, $title3, $button1, $button2, $button3, $table7, $table11,
-    $label16, $hint1, $label5, $hint4, $label6, $hint5, $label17, $hint2,
+    $labelPatient, $label16, $hint1, $label5, $hint4, $label6, $hint5, $label17, $hint2,
     $label7, $hint6, $label8, $hint7, $label10, $hint9, $label11, $hint10,
     $label12, $hint11, $label14, $hint3, $dis, $label15, $hint8){
         parent::__construct($Language, $TitleDeleteTest, $LabelDeleteTest, $ButtonDeleteTest, $RouteDeleteTest, $TableInfo, $Title, $AppSettingAdmin, $Direction, $Branch, $Menu, $title2, $title3, $button1, $button2, $button3, $table7, $table11);
+        $this->labelPatient = $labelPatient;
         $this->label16 = $label16;
         $this->hint1 = $hint1; 
         $this->label5 = $label5; 

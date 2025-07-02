@@ -16,15 +16,12 @@
             @endisset   
                 <div class="container">
                     <div class="row justify-content-md-center">
-                        <div class="col-md-auto">
+                        <div class="col-12 text-center">
                             <input onchange="changeImage(this.files[0], $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
-                            <div class="pt-2 form-group">
-                            <h5>{{ $lang->label3 }}</h5>
-                            <img id="preview" src="{{ isset($index) ? ($patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')) : asset('img/admin/avatar1.png')}}" alt="Avatar Preview" class="avatar preview">
                             <button type="button" class="upload-btn" onclick="openImage($('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#avatar'))" id="uploadBtn">{{$lang->button1}}</button>
-                            </div>
                         </div>
                     </div>
+                    @include('layout.patient_information',['state'=>'enable'])
                     <div class="row">
                         <div class="col-md-auto">
                             <div class="pt-2 form-group">
@@ -35,7 +32,7 @@
                                 <select class="form-select" id="patent-nationality" name="patent-nationality" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox1}}</option>
                                     @foreach($lang->nationality as $key=>$nat)
-                                    <option {{ isset($index) ? ($patent->getNationalityId() === $nat ? 'selected' : '') : ''  }} value="{{$key}}">{{$nat}}</option>
+                                    <option {{ isset($index) && $patent->getNationalityId() === $nat ? 'selected' : ''  }} value="{{$key}}">{{$nat}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -49,7 +46,7 @@
                                 <select class="form-select" id="patent-gender" name="patent-gender" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox2}}</option>
                                     @foreach($lang->gender as $key=>$gender)
-                                    <option {{isset($index) ? ($patent->getGenderId() === $gender ? 'selected' : '') : ''}} value="{{$key}}">{{$gender}}</option>            
+                                    <option {{isset($index) && $patent->getGenderId() === $gender ? 'selected' : ''}} value="{{$key}}">{{$gender}}</option>            
                                     @endforeach
                                 </select>
                             </div>
@@ -63,13 +60,12 @@
                                 <select class="form-select" id="patent-contracting" name="patent-contracting" aria-label="Default select example">
                                     <option selected disabled>{{$lang->selectBox5}}</option>
                                     @foreach($lang->myContract as $key=>$contract)
-                                    <option {{isset($index) ? ($patent->getContractingId() === $contract->getName() ? 'selected' : '') : ''}} value="{{$key}}">{{$contract->getName()}}</option>
+                                    <option {{isset($index) && $patent->getContractingId() === $contract->getName() ? 'selected' : ''}} value="{{$key}}">{{$contract->getName()}}</option>
                                     @endforeach 
                                 </select>
                             </div>
                         </div>
                     </div>
-                    @include('layout.patient_information',['state'=>'enable'])
                 </div>
             
         </form>

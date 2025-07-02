@@ -14,14 +14,6 @@
                 @include('layout.my_id', ['myId'=>$index])
             @endisset   
             <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-md-auto">
-                        <div class="pt-2 form-group">
-                        <h5>{{ $lang->label45 }}</h5>
-                        <img id="preview" src="{{isset($index) ? ($patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')) : asset('img/admin/avatar1.png')}}" class="avatar preview">
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="pt-2 form-group">
@@ -32,11 +24,14 @@
                             <select class="form-select" onchange="initPatient(this, $('{{isset($index) ? "#editForm".$index : "#createForm"}}'), '{{asset("img/admin/avatar1.png")}}')" id="selectPatient">
                                 <option selected disabled>{{$lang->selectBox2}}</option>
                                 @foreach($lang->myPatent as $key=>$patientInfo)
-                                <option {{isset($index) ? ($patent->getPatentCode() === $key ? 'selected' : '') : ''}} value="{{json_encode($lang->myPatent[$key]->getObjectPateint())}}">{{$patientInfo->getName()}}</option>
+                                <option {{isset($index) && $patent->getPatentCode() === $key ? 'selected' : ''}} value="{{json_encode($lang->myPatent[$key]->getObjectPateint())}}">{{$patientInfo->getName()}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
+                </div>
+                @include('layout.patient_information', ['state'=>'disabled'])
+                <div class="row">
                     <div class="col-md-auto">
                         <div class="pt-2 form-group">
                             <label for="patent-code">
@@ -75,7 +70,6 @@
                         </div>
                     </div>
                 </div>
-                @include('layout.patient_information', ['state'=>'disabled'])
                 <div class="row pt-2">
                     <div class="col-12">
                         <div class="card">
@@ -87,7 +81,7 @@
                                 <select class="form-select" aria-label="Knowed Us By" id="know">
                                 <option selected disabled>{{$lang->selectBox5}}</option>
                                 @foreach($lang->arr1 as $key=>$know)
-                                <option {{isset($index) ? ($patent->getKnowId() === $know->getName() ? 'selected' : '') : ''}} value="{{$key}}">{{$know->getName()}}</option>
+                                <option {{isset($index) && $patent->getKnowId() === $know->getName() ? 'selected' : ''}} value="{{$key}}">{{$know->getName()}}</option>
                                 @endforeach
                                 </select>
                                 <!-- Add New Item Form -->
@@ -216,7 +210,7 @@
                                 <select id="payment-method" class="form-select">
                                     <option selected disabled>{{$lang->selectBox1}}</option>
                                     @foreach($lang->payment as $key=>$pay)
-                                    <option {{isset($index) ? ($patent->getPaymentMethodId() === $pay ? 'selected' : '') : ''}} value="{{$key}}">{{$pay}}</option>
+                                    <option {{isset($index) && $patent->getPaymentMethodId() === $pay ? 'selected' : ''}} value="{{$key}}">{{$pay}}</option>
                                     @endforeach
                                 </select>
                                 </div>

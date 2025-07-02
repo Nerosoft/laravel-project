@@ -1,4 +1,10 @@
 <div class="row">
+    <div class="col-12">
+        <div class="pt-2 form-group text-center">
+        <h5>{{ $lang->labelPatient }}</h5>
+        <img id="preview" src="{{isset($index) && $patent->getAvatar() !== null ? $patent->getAvatar() : asset('img/admin/avatar1.png')}}" class="avatar preview">
+        </div>
+    </div>
     <div class="col-md-auto">
         <div class="pt-2 form-group">
             <label for="patent-name">
@@ -113,7 +119,7 @@
                 <i class="bi bi-list-ul"></i>
                 {{$lang->label15}}
             </label>
-            <input {{$state}}  id="patent-other" type="text" class="form-control" value="{{isset($index) ? ( is_array($patent->getDiseaseId()) ? '' : $patent->getDiseaseId() ) : ''}}" name="patent-other" placeholder="{{$lang->hint8}}">
+            <input {{$state}}  id="patent-other" type="text" class="form-control" value="{{isset($index) && is_string($patent->getDiseaseId()) ? $patent->getDiseaseId() : ''}}" name="patent-other" placeholder="{{$lang->hint8}}">
         </div>
     </div>
 </div>

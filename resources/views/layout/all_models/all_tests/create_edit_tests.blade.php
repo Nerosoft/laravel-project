@@ -31,7 +31,7 @@
                     <select class="form-select" id="input-output-lab" name="input-output-lab">
                     <option selected disabled>{{$lang->selectBox1}}</option>
                     @foreach($lang->inputOutPut as $key=>$inp)
-                    <option {{isset($index) ? ($test->getInputOutputLabId() === $inp ? 'selected' : '') : ''}} value="{{$key}}">{{$inp}}</option>
+                    <option {{isset($index) && $test->getInputOutputLabId() === $inp ? 'selected' : ''}} value="{{$key}}">{{$inp}}</option>
                     @endforeach
                     </select>
                 </div>

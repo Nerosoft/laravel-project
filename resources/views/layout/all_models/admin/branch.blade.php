@@ -88,7 +88,7 @@
                                 <select class="form-select" id="brance-rays-follow" name="brance_rays_follow"  aria-label="Default select example">
                                     <option selected disabled>{{ $lang->selectBox1 }}</option>
                                     @foreach($lang->branchInputOutput as $key=>$inpBranch)
-                                    <option {{isset($index) ? ($branch->getFollowId() === $inpBranch ? 'selected' : '') : ''}} value="{{ $key}}">{{ $inpBranch }}</option>
+                                    <option {{isset($index) && $branch->getFollowId() === $inpBranch ? 'selected' : ''}} value="{{ $key}}">{{ $inpBranch }}</option>
                                     @endforeach
                                 </select>
 
