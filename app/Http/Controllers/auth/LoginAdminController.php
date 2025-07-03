@@ -14,20 +14,20 @@ class LoginAdminController extends EmailPassInformaion
 {
     public function __construct(){
         $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
-        $this->error1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserEmail'];
-        $this->error2 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserEmailRequired'];
-        $this->error3 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserPassword'];
-        $this->error4 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserPasswordRequired'];
         if(Route::currentRouteName() === 'loginUser.loginUser'){
+            parent::__construct($ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserEmail'],
+            $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserEmailRequired'],
+            $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserPassword'],
+            $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserPasswordRequired']);
             request()->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
             ], [
-                'email.email' => $this->error1 ,
-                'email.required' => $this->error2,
+                'email.email' => $this->errorUserEmail ,
+                'email.required' => $this->errorUserEmailRequired,
     
-                'password.min' => $this->error3 ,
-                'password.required' => $this->error4,
+                'password.min' => $this->errorUserPassword ,
+                'password.required' => $this->errorUserPasswordRequired,
             ]);
             foreach ($ob['User'] as $key => $user)
                 if($user['Email'] === request()->input('email') && $user['Password'] === request()->input('password')){
@@ -42,10 +42,11 @@ class LoginAdminController extends EmailPassInformaion
             $this->errorMessage = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['LoginAdmin']['UserPasswordDntMatch'];
         }else if(isset($ob[unserialize(request()->cookie($ob['_id']))])){
             parent::__construct(
-            $this->error1, 
-            $this->error2,
-            $this->error3,
-            $this->error4,
+            $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['UserEmail'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['UserEmailRequired'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['UserPassword'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['UserPasswordRequired'],
+
             $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['LabelLoginUser'],
             $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['LabelUserEmail'],
             $ob[unserialize(request()->cookie($ob['_id']))]['LoginAdmin']['LabelUserPassword'],
@@ -63,10 +64,11 @@ class LoginAdminController extends EmailPassInformaion
         }else{
             Cookie::queue($ob['_id'], serialize($ob['Setting']['Language']),2628000);
             parent::__construct(
-            $this->error1,
-            $this->error2,
-            $this->error3,
-            $this->error4,
+            $ob[$ob['Setting']['Language']]['LoginAdmin']['UserEmail'],
+            $ob[$ob['Setting']['Language']]['LoginAdmin']['UserEmailRequired'],
+            $ob[$ob['Setting']['Language']]['LoginAdmin']['UserPassword'],
+            $ob[$ob['Setting']['Language']]['LoginAdmin']['UserPasswordRequired'],
+
             $ob[$ob['Setting']['Language']]['LoginAdmin']['LabelLoginUser'],
             $ob[$ob['Setting']['Language']]['LoginAdmin']['LabelUserEmail'],
             $ob[$ob['Setting']['Language']]['LoginAdmin']['LabelUserPassword'],

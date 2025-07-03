@@ -15,6 +15,7 @@ class RaysSeeder extends Seeder
                 '_id'=>$i !=0 ? 'test'.$i:'salamtak-care',
                 'Setting'=>[
                     'Language'=>'english',
+                    'Style'=>'dark',
                 ],
                 'User'=>[
                     'yQd40431'=>[
@@ -734,6 +735,9 @@ class RaysSeeder extends Seeder
                     ],
                 ],
                 'english'=>[
+                    // 'Style'=>[
+                    //     'dark'=>'Dark',
+                    // ],
                     'Admin'=>[
                         'TotalVaul'=>'Total In Vaul',
                         'ReceivedCach'=>'Received cach',

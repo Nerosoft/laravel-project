@@ -13,30 +13,33 @@ use App\Http\interface\LangObject;
 
 class RegisterAdminController extends EmailPassInformaion implements LangObject
 {   
+    public $ob;
     public function __construct(){
         $ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
-        $this->error2 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserEmail'];
-        $this->error3 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserEmailRequired'];
-        $this->error5 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserPassword'];//len
-        $this->error6 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserPasswordRequired'];
         $this->UserRepeatPassword = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserRepeatPassword'];
         $this->UserRepeatPasswordRequired = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserRepeatPasswordRequired'];
         $this->error7 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserPasswordDntMatch'];
         $this->error8 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserCodePasswordRequired'];
         $this->error9 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserCodePassword'];
         if(Route::currentRouteName() === 'register.registerUser'){
+            parent::__construct(
+                $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserEmail'],
+                $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserEmailRequired'],
+                $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserPassword'],
+                $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserPasswordRequired'],
+            );
             request()->validate([
                 'email' => ['required', 'email', Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $ob['User'])))],
                 'password' => ['required', 'confirmed', 'min:8'],
                 'password_confirmation' => ['required', 'min:8'],
                 'codePassword' => ['required', 'min:8'],
             ], [
-                'email.email' => $this->error2 ,
+                'email.email' => $this->errorUserEmail ,
                 'email.not_in' => $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['UserEmailExist'] ,
-                'email.required' => $this->error3,
+                'email.required' => $this->errorUserEmailRequired,
 
-                'password.min' => $this->error5 ,
-                'password.required' => $this->error6,
+                'password.min' => $this->errorUserPassword ,
+                'password.required' => $this->errorUserPasswordRequired,
 
                 'password_confirmation.min' => $this->UserRepeatPassword ,
                 'password_confirmation.required' => $this->UserRepeatPasswordRequired,
@@ -51,10 +54,10 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             $this->successfully1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['AdminLogin'];       
         }else if(isset($ob[unserialize(request()->cookie($ob['_id']))])){
             parent::__construct(
-            $this->error2, 
-            $this->error3,
-            $this->error5,
-            $this->error6,
+            $ob[unserialize(request()->cookie($ob['_id']))]['Register']['UserEmail'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['Register']['UserEmailRequired'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['Register']['UserPassword'],
+            $ob[unserialize(request()->cookie($ob['_id']))]['Register']['UserPasswordRequired'],
             $ob[unserialize(request()->cookie($ob['_id']))]['Register']['LabelRegisterUser'],
             $ob[unserialize(request()->cookie($ob['_id']))]['Register']['LabelUserEmail'],
             $ob[unserialize(request()->cookie($ob['_id']))]['Register']['LabelUserPassword'],
@@ -76,10 +79,10 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         }else{
             Cookie::queue($ob['_id'], serialize($ob['Setting']['Language']),2628000);
             parent::__construct(
-            $this->error2, 
-            $this->error3,
-            $this->error5,
-            $this->error6,
+            $ob[$ob['Setting']['Language']]['Register']['UserEmail'],
+            $ob[$ob['Setting']['Language']]['Register']['UserEmailRequired'],
+            $ob[$ob['Setting']['Language']]['Register']['UserPassword'],
+            $ob[$ob['Setting']['Language']]['Register']['UserPasswordRequired'],
             $ob[$ob['Setting']['Language']]['Register']['LabelRegisterUser'],
             $ob[$ob['Setting']['Language']]['Register']['LabelUserEmail'],
             $ob[$ob['Setting']['Language']]['Register']['LabelUserPassword'],
