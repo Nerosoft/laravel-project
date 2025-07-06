@@ -26,15 +26,6 @@ class DeleteController extends Controller
             $this->getDeleteDatabade($ob, request()->route('id'));
             Rays::find(request()->input('id'))->delete();
             $this->successfully1 = $ob[$ob['Setting']['Language']][request()->route('id')]['BranchesDelete'];
-        }else if(request()->route('id') === 'CurrentOffers'){
-            $ob = Rays::find(request()->session()->get('userId'));
-            request()->validate(['id' => ['required', Rule::in(isset($ob[request()->route('id')]) ? array_keys($ob[request()->route('id')]) : array())],
-            ], [
-                'id.required'=>$ob[$ob['Setting']['Language']][request()->route('id')]['CurrentOffersIdRequired'],
-                'id.in'=>$ob[$ob['Setting']['Language']][request()->route('id')]['CurrentOffersIdInvalid'],
-            ]);
-            $this->getDeleteDatabade($ob, request()->route('id'));
-            $this->successfully1 = $ob[$ob['Setting']['Language']][request()->route('id')]['CurrentOffersDelete'];
         }else if(request()->route('id') === 'Test'){
             $ob = Rays::find(request()->session()->get('userId'));
             request()->validate(['id' => ['required', Rule::in(isset($ob[request()->route('id')]) ? array_keys($ob[request()->route('id')]) : array())],
