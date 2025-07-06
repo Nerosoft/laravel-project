@@ -7,20 +7,32 @@ let setting = [
 ];
 function validateContract(name, governorate, area){
     isValid = true;
-    if(name.val() === '' || name.val().length < 3){
-        (new bootstrap.Toast($(name.val() === '' ? '#myToast1' : '#myToast2'), { delay: 10000 })).show();
+    if(name.val() === ''){
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
+        name.addClass('error-message');
+        isValid = false;
+    }else if(name.val().length < 3){
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
         name.addClass('error-message');
         isValid = false;
     }else
         name.removeClass('error-message');
-    if(governorate.val() === '' || governorate.val().length < 3){
-        (new bootstrap.Toast($(governorate.val() === '' ? '#myToast3' : '#myToast4'), { delay: 10000 })).show();
+    if(governorate.val() === ''){
+        (new bootstrap.Toast('#myToast3', { delay: 10000 })).show();
+        governorate.addClass('error-message');
+        isValid = false;
+    }else if(governorate.val().length < 3){
+        (new bootstrap.Toast('#myToast4', { delay: 10000 })).show();
         governorate.addClass('error-message');
         isValid = false;
     }else
         governorate.removeClass('error-message');
-    if(area.val() === '' || area.val().length < 3){
-        (new bootstrap.Toast($(area.val() === '' ? '#myToast5' : '#myToast6'), { delay: 10000 })).show();
+    if(area.val() === ''){
+        (new bootstrap.Toast('#myToast5', { delay: 10000 })).show();
+        area.addClass('error-message');
+        isValid = false;
+    }else if(area.val().length < 3){
+        (new bootstrap.Toast('#myToast6', { delay: 10000 })).show();
         area.addClass('error-message');
         isValid = false;
     }else

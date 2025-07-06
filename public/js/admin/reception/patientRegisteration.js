@@ -326,15 +326,10 @@ function myUpdatePrice(value, egp, paid, discount, due, dueUser, combinedArray){
 }
 
 function addItem3(test_select, tests_name, table, subtotal, totalDiscount, discount, total, due, payment_amount, dueUser, key, egp, button1){
-    if(test_select.val() === null){
-        (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
-        (new bootstrap.Toast($('#myToast2'), { delay: 10000 })).show();
+    if(test_select.val() === null || tests_name.val() === null){
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
         test_select.addClass('error-message');
-    }
-    else if(tests_name.val() === null){
-        test_select.addClass('error-message');
-        (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
-        (new bootstrap.Toast($('#myToast2'), { delay: 10000 })).show();
     }
     else{
         //check if has class test-select and tests-name
@@ -374,7 +369,7 @@ function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, pa
 function validateT2(test_select, tests_name, selectPatient, know, payment_date, payment_amount, payment_method, patent_code, discount, delayedMoney, key, url, message, state){
     let isValid = false;
     if(test_select.val() === null && keyValueMap.get(key).length === 0){
-        (new bootstrap.Toast($('#myToast1'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
         test_select.addClass('error-message');
         isValid = true;
     }
@@ -382,7 +377,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         test_select.removeClass('error-message');
 
     if(tests_name === null && keyValueMap.get(key).length === 0){
-        (new bootstrap.Toast($('#myToast2'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
         test_select.addClass('error-message');
         isValid = true;
     }
@@ -390,14 +385,14 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         test_select.removeClass('error-message');
 
     if(selectPatient.val() === null){
-        (new bootstrap.Toast($('#myToast3'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast3', { delay: 10000 })).show();
         selectPatient.addClass('error-message');
         isValid = true;
     }
     else
         selectPatient.removeClass('error-message');
     if(know.val() === null){
-        (new bootstrap.Toast($('#myToast4'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast4', { delay: 10000 })).show();
         know.addClass('error-message');
         isValid = true;
     }
@@ -405,11 +400,11 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         know.removeClass('error-message');
 
     if(keyValueMap.get(key).length === 0){
-        (new bootstrap.Toast($('#myToast5'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast5', { delay: 10000 })).show();
         isValid = true;
     }
     if(!(/^\d{4}-\d{2}-\d{2}$/).test(payment_date.val())){
-        (new bootstrap.Toast($('#myToast6'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast6', { delay: 10000 })).show();
         payment_date.addClass('error-message');
         isValid = true;
     }
@@ -418,7 +413,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
 
 
     if(payment_amount.val() === ''){
-        (new bootstrap.Toast($('#myToast7'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast7', { delay: 10000 })).show();
         payment_amount.addClass('error-message');
         isValid = true;
     }
@@ -426,7 +421,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         payment_amount.removeClass('error-message');
 
     if(payment_method.val() === null){
-        (new bootstrap.Toast($('#myToast8'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast8', { delay: 10000 })).show();
         payment_method.addClass('error-message');
         isValid = true;
     }
@@ -468,7 +463,7 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         success: function (response) {
             // window.location.href = message;
             $('#myToastActionBody').text(response['message']);
-            (new bootstrap.Toast($('#myToastAction'), { delay: 10000 })).show();
+            (new bootstrap.Toast('#myToastAction', { delay: 10000 })).show();
             setTimeout(() => {
                 window.location.href = message;
             }, 1000);

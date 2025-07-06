@@ -1,14 +1,21 @@
 function validateFormLoginAdmin(){
     let isValid = true;
-    if ($('#email').val() === "" || (!IsEmail($('#email').val()))){
-        (new bootstrap.Toast($($('#email').val() !== '' ? '#myToast2' : '#myToast1'), { delay: 10000 })).show();
+    if ($('#email').val() === ""){
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
+        $('#email').addClass('error-message');
+        isValid = false;
+    }else if((!IsEmail($('#email').val()))){
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
         $('#email').addClass('error-message');
         isValid = false;
     }else
         $('#email').removeClass('error-message');
-
-    if ($('#password').val() === "" || $('#password').val().length < 8){
-        (new bootstrap.Toast($($('#password').val() !== '' ? '#myToast4' : '#myToast3'), { delay: 10000 })).show();
+    if ($('#password').val() === ""){
+        (new bootstrap.Toast('#myToast4', { delay: 10000 })).show();
+        $('#password').addClass('error-message');
+        isValid = false;
+    }else if($('#password').val().length < 8){
+        (new bootstrap.Toast('#myToast3', { delay: 10000 })).show();
         $('#password').addClass('error-message');
         isValid = false;
     }else

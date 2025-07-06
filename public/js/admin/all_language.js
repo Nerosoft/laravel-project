@@ -1,6 +1,10 @@
 function save(el){
-    if($(el).find('#word').val() === "" || $(el).find('#word').val().length < 2){
-        (new bootstrap.Toast($($(el).find('#word').val() === '' ? '#myToast1' : '#myToast2'), { delay: 10000 })).show();
+    if($(el).find('#word').val() === ""){
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
+        $(el).find('#word').addClass('error-message');
+        return false;
+    }else if($(el).find('#word').val().length < 2){
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
         $(el).find('#word').addClass('error-message');
         return false;
     }else

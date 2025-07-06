@@ -18,7 +18,6 @@
     <script defer src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
     <script src="{{asset('js/rays.js')}}" type="text/javascript"></script>
     
-    <!-- <link href="{{asset('lib/bootstrap-icons.min.css')}}" rel="stylesheet"> -->
     <!-- <link href="{{asset('lib/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('lib/dataTables.bootstrap5.css')}}" rel="stylesheet">
     <link href="{{asset('lib/twitter-bootstrap.min.css')}}" rel="stylesheet">

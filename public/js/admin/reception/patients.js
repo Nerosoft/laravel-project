@@ -20,84 +20,114 @@ let setting = [
 ];
 function validatePatent(patent_name, patent_nationality, patent_gender, patent_contracting, patent_national_id, patent_passport_no, patent_email, patent_phone, patent_phone2, patent_address, patent_hours, patent_other, checkBoxLength, last_period_date, date_birth, file, preview){
       let isValid = true;
-      if (patent_name.val() === "" || patent_name.val().length < 3){
-        (new bootstrap.Toast($(patent_name.val() === '' ? '#myToast1' : '#myToast2'), { delay: 10000 })).show();
+      if (patent_name.val() === ""){
+        (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
+        patent_name.addClass('error-message');
+          isValid = false;
+      }else if (patent_name.val().length < 3){
+        (new bootstrap.Toast('#myToast2', { delay: 10000 })).show();
         patent_name.addClass('error-message');
           isValid = false;
       }else
         patent_name.removeClass('error-message');
       if (patent_nationality.val() === null){
-        (new bootstrap.Toast($('#myToast3'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast3', { delay: 10000 })).show();
         patent_nationality.addClass('error-message');
           isValid = false;
       }else 
         patent_nationality.removeClass('error-message');
-
       if (patent_gender.val() === null){
-        (new bootstrap.Toast($('#myToast4'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast4', { delay: 10000 })).show();
         patent_gender.addClass('error-message');
           isValid = false;
       }else
         patent_gender.removeClass('error-message');
-
       if (patent_contracting.val() === null){
-        (new bootstrap.Toast($('#myToast5'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast5', { delay: 10000 })).show();
         patent_contracting.addClass('error-message');
           isValid = false;
       }else
         patent_contracting.removeClass('error-message');
 
-      if (patent_national_id.val() === "" || patent_national_id.val().length < 3){
-        (new bootstrap.Toast($(patent_national_id.val() === '' ? '#myToast6' : '#myToast7'), { delay: 10000 })).show();
+      if (patent_national_id.val() === ""){
+        (new bootstrap.Toast('#myToast6', { delay: 10000 })).show();
+        patent_national_id.addClass('error-message');
+          isValid = false;
+      }else if (patent_national_id.val().length < 3){
+        (new bootstrap.Toast('#myToast7', { delay: 10000 })).show();
         patent_national_id.addClass('error-message');
           isValid = false;
       }else
         patent_national_id.removeClass('error-message');
 
-      if (patent_passport_no.val() === "" || patent_passport_no.val().length < 3){
-        (new bootstrap.Toast($(patent_passport_no.val() === '' ? '#myToast8' : '#myToast9'), { delay: 10000 })).show();
+      if(patent_passport_no.val() === ""){
+        (new bootstrap.Toast('#myToast8', { delay: 10000 })).show();
+        patent_passport_no.addClass('error-message');
+          isValid = false;
+      }else if(patent_passport_no.val().length < 3){
+        (new bootstrap.Toast('#myToast9', { delay: 10000 })).show();
         patent_passport_no.addClass('error-message');
           isValid = false;
       }else 
         patent_passport_no.removeClass('error-message');
 
-      if (patent_email.val() === "" || (!IsEmail(patent_email.val()))){
-        (new bootstrap.Toast($(patent_email.val() === "" ? '#myToast10' : '#myToast11'), { delay: 10000 })).show();
+      if(patent_email.val() === ""){
+        (new bootstrap.Toast('#myToast10', { delay: 10000 })).show();
+        patent_email.addClass('error-message');
+          isValid = false;
+      }else if((!IsEmail(patent_email.val()))){
+        (new bootstrap.Toast('#myToast11', { delay: 10000 })).show();
         patent_email.addClass('error-message');
           isValid = false;
       }else
         patent_email.removeClass('error-message');
 
-      if (patent_phone.val() === "" || (!isPhone(patent_phone.val()))){
-        (new bootstrap.Toast($(patent_phone.val() === '' ? '#myToast12' : '#myToast13'), { delay: 10000 })).show();
+      if(patent_phone.val() === ""){
+        (new bootstrap.Toast('#myToast12', { delay: 10000 })).show();
+        patent_phone.addClass('error-message');
+        isValid = false;
+      }else if((!isPhone(patent_phone.val()))){
+        (new bootstrap.Toast('#myToast13', { delay: 10000 })).show();
         patent_phone.addClass('error-message');
         isValid = false;
       }else 
         patent_phone.removeClass('error-message');
 
-      if (patent_phone2.val() === "" || (!isPhone(patent_phone2.val()))){
-        (new bootstrap.Toast($(patent_phone2.val() === '' ? '#myToast14' : '#myToast15'), { delay: 10000 })).show();
+      if(patent_phone2.val() === ""){
+        (new bootstrap.Toast('#myToast14', { delay: 10000 })).show();
+        patent_phone2.addClass('error-message');
+        isValid = false;
+      }else if((!isPhone(patent_phone2.val()))){
+        (new bootstrap.Toast('#myToast15', { delay: 10000 })).show();
         patent_phone2.addClass('error-message');
         isValid = false;
       }else
         patent_phone2.removeClass('error-message');
 
-      if (patent_address.val() === "" || patent_address.val().length < 3){
-        (new bootstrap.Toast($(patent_address.val() === '' ? '#myToast16' : '#myToast17'), { delay: 10000 })).show();
+      if (patent_address.val() === ""){
+        (new bootstrap.Toast('#myToast16', { delay: 10000 })).show();
+        patent_address.addClass('error-message');
+        isValid = false;
+      }else if (patent_address.val().length < 3){
+        (new bootstrap.Toast('#myToast17', { delay: 10000 })).show();
         patent_address.addClass('error-message');
         isValid = false;
       }else
         patent_address.removeClass('error-message');
 
-      if (patent_hours.val() === ""){
-        (new bootstrap.Toast($('#myToast18'), { delay: 10000 })).show();
+      if(patent_hours.val() === ""){
+        (new bootstrap.Toast('#myToast18', { delay: 10000 })).show();
         patent_hours.addClass('error-message');
         isValid = false;
       }else
         patent_hours.removeClass('error-message');
 
-      if (patent_other.val() !== "" && checkBoxLength >= 1 || patent_other.val() === "" && checkBoxLength === 0 || patent_other.val().length < 3 && checkBoxLength === 0 || patent_other.val().length >= 1 && patent_other.val().length < 3 && checkBoxLength >= 1){
-        (new bootstrap.Toast($(patent_other.val() === '' ? '#myToast19' : '#myToast20'), { delay: 10000 })).show();
+      if(patent_other.val() === "" && checkBoxLength === 0){
+        (new bootstrap.Toast('#myToast19', { delay: 10000 })).show();
+        patent_other.addClass('error-message');
+        isValid = false;
+      }else if (patent_other.val() !== "" && checkBoxLength >= 1 || patent_other.val().length < 3 && checkBoxLength === 0 || patent_other.val().length >= 1 && patent_other.val().length < 3 && checkBoxLength >= 1){
+        (new bootstrap.Toast('#myToast20', { delay: 10000 })).show();
         patent_other.addClass('error-message');
         isValid = false;
       }else
@@ -105,7 +135,7 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
 
        // Check if the input matches the date format
       if (!(/^\d{4}-\d{2}-\d{2}$/).test(last_period_date.val())) {
-        (new bootstrap.Toast($('#myToast21'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast21', { delay: 10000 })).show();
         last_period_date.addClass('error-message');
         isValid = false;
       }else
@@ -113,21 +143,21 @@ function validatePatent(patent_name, patent_nationality, patent_gender, patent_c
 
       // Check if the input matches the date format
       if (!(/^\d{4}-\d{2}-\d{2}$/).test(date_birth.val())) {
-        (new bootstrap.Toast($('#myToast22'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast22', { delay: 10000 })).show();
         date_birth.addClass('error-message');
         isValid = false;
       }else
         date_birth.removeClass('error-message');
       if(file && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif'){
-        (new bootstrap.Toast($('#myToast23'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast23', { delay: 10000 })).show();
         preview.addClass('error-message');
         isValid = false;
       }else if(file && file.size > 1048576){
-        (new bootstrap.Toast($('#myToast24'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast24', { delay: 10000 })).show();
         preview.addClass('error-message');
         isValid = false;
       }else if(file && preview.data('height')<=300 || file && preview.data('width')<=300){
-        (new bootstrap.Toast($('#myToast25'), { delay: 10000 })).show();
+        (new bootstrap.Toast('#myToast25', { delay: 10000 })).show();
         preview.addClass('error-message');  
         isValid = false;
       }else
