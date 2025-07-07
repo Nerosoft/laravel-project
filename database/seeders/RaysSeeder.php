@@ -42,6 +42,8 @@ class RaysSeeder extends Seeder
                         'AdminUser'=>'Admin user',
                     ],
                     'Branch'=>[
+                        'TryMessage'=>'welcome in branch main',
+                        'Active'=>'this branch is used',
                         'BranceRaysNameRequired'=>'Name required',
                         'BranceRaysPhoneRequired'=>'Phone required',
                         'BranceRaysGovernmentsRequired'=>'Governments required',
@@ -94,7 +96,7 @@ class RaysSeeder extends Seeder
                         'BranchRaysLenght'=>'branch id invalid',
                         'BranchesEdit'=>'Seccessfully branch edit',
                         'BranchesChange'=>'Seccessfully change branch',
-                        'BranchesDelete'=>'Seccessfully change delete',
+                        'BranchesDelete'=>'Seccessfully delete branch',
                     ],
                     'Knows'=>[
                         'KnowsNameRequired'=>'Required name',
@@ -755,6 +757,8 @@ class RaysSeeder extends Seeder
                         'AdminUser'=>'Admin user',
                     ],
                     'Branch'=>[
+                        'TryMessage'=>'welcome in branch main',
+                        'Active'=>'this branch is used',
                         'BranceRaysNameRequired'=>'Name required',
                         'BranceRaysPhoneRequired'=>'Phone required',
                         'BranceRaysGovernmentsRequired'=>'Governments required',
@@ -807,7 +811,7 @@ class RaysSeeder extends Seeder
                         'BranchRaysLenght'=>'branch id invalid',
                         'BranchesEdit'=>'Seccessfully branch edit',
                         'BranchesChange'=>'Seccessfully change branch',
-                        'BranchesDelete'=>'Seccessfully change delete',
+                        'BranchesDelete'=>'Seccessfully delete branch',
                     ],
                     'Knows'=>[
                         'KnowsNameRequired'=>'Required name',
@@ -1466,6 +1470,8 @@ class RaysSeeder extends Seeder
                         'AdminUser'=>'الشاشة الرئيسية',
                     ],
                     'Branch'=>[
+                        'TryMessage'=>'اهلا بك في شاشة الافرع',
+                        'Active'=>'انت بالفعل تعمل علي هذا الفرع',
                         'BranceRaysNameRequired'=>'يرجي ادخال الاسم',
                         'BranceRaysPhoneRequired'=>'يرجي ادخال الهاتف',
                         'BranceRaysGovernmentsRequired'=>'يرجي ادخال الحكومه',
