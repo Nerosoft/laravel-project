@@ -20,13 +20,13 @@
         @endphp
         <tbody id="table-data">
             @if($active === 'SystemLang')
-                @foreach($lang->myAllLanguage as $myNameLang=>$data)
+                @foreach($lang->tableData as $myNameLang=>$data)
                     @foreach($data as $key=>$myData)
                         @if($key === 'Menu')
                             @foreach($myData as $key2=>$menu)      
                                 <tr>
                                     <th>{{$index++}}</th>
-                                    <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
+                                    <th>{{$lang->tableData[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                     <th>{{is_array($menu) ? $menu['Name'] : $menu}}</th>
                                     <th>
                                         <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,7 +62,7 @@
                                     @foreach($menu['Item'] as $key3=>$item)
                                         <tr>
                                             <th>{{$index++}}</th>
-                                            <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
+                                            <th>{{$lang->tableData[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                             <th>{{$item}}</th>
                                             <th>
                                                 <div class="modal fade" id="editModel{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,7 +101,7 @@
                         @foreach($myData as $key2=>$item)
                             <tr>
                                 <th>{{$index++}}</th>
-                                <th>{{$lang->myAllLanguage[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
+                                <th>{{$lang->tableData[$lang->language]['AllNamesLanguage'][$myNameLang]}}</th>
                                 <th>{{$item}}</th>
                                 <th>
                                     @if($key !== 'Html')
@@ -167,7 +167,7 @@
                     @endforeach
                 @endforeach
             @elseif($activeItem === 'Menu')
-                @foreach($lang->myAllLanguage as $myKeyMenu=>$menu)      
+                @foreach($lang->tableData as $myKeyMenu=>$menu)      
                     <tr>
                         <th>{{$index++}}</th>
                         <th>{{is_array($menu) ? $menu['Name'] : $menu}}</th>
@@ -240,7 +240,7 @@
                     @endif
                 @endforeach
             @elseif($activeItem === 'Html')
-                @foreach($lang->myAllLanguage as $key=>$data)
+                @foreach($lang->tableData as $key=>$data)
                     <tr>
                         <th>{{$index++}}</th>
                         <th>{{$data}}</th>
@@ -275,7 +275,7 @@
                     </tr>
                 @endforeach
             @else
-                @foreach($lang->myAllLanguage as $key=>$data)
+                @foreach($lang->tableData as $key=>$data)
                     <tr>
                         <th>{{$index++}}</th>
                         <th>{{$data}}</th>

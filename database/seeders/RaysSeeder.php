@@ -25,6 +25,9 @@ class RaysSeeder extends Seeder
                     ]
                 ],
                 'MyLanguage'=>[
+                    // 'Style'=>[
+                    //     'dark'=>'Dark',
+                    // ],
                     'Admin'=>[
                         'TotalVaul'=>'Total In Vaul',
                         'ReceivedCach'=>'Received cach',
@@ -99,6 +102,7 @@ class RaysSeeder extends Seeder
                         'BranchesDelete'=>'Seccessfully delete branch',
                     ],
                     'Knows'=>[
+                        'LoadMessage'=>'welcome in page Knows',
                         'KnowsNameRequired'=>'Required name',
                         'KnowsNameInvalid'=>'Invalid name',
                         'TitleKnowsDelete'=>'Screen delete knows',
@@ -122,6 +126,7 @@ class RaysSeeder extends Seeder
                         'KnowsDelete'=>'Seccessfully delete know',
                     ],
                     'Contracts'=>[
+                        'LoadMessage'=>'welcome in page Contracts',
                         'TitleDeleteContract'=>'Screen delete contract',
                         'LabelDeleteContract'=>'do you want to delete contract',
                         'ButtonDeleteContract'=>'Delete contract',
@@ -188,6 +193,7 @@ class RaysSeeder extends Seeder
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
+                        'LoadMessage'=>'welcome in page Patent',
                         'TitlePatentDelete'=>'Screen delete patient',
                         'LabelPatentDelete'=>'Do you want to delete patient',
                         'ButtonPatentDelete'=>'Delete Patient',
@@ -286,6 +292,7 @@ class RaysSeeder extends Seeder
                         'PatientsDelete'=>'Seccessfully delete patient',
                     ],
                     'Receipt'=>[
+                        'LoadMessage'=>'welcome in page Receipt',
                         'TitleDeleteReceipt'=>'Screen delete receipt',
                         'LabelDeleteReceipt'=>'Do you want to delete receipt',
                         'ButtonDeleteReceipt'=>'Delete receipt',
@@ -444,6 +451,7 @@ class RaysSeeder extends Seeder
                         'rtl'=>'set right to left direction',
                     ],
                     'Test'=>[
+                        'LoadMessage'=>'welcome in page test',
                         'TitleDeleteTest'=>'Screen delete Test',
                         'LabelDeleteTest'=>'Do you want to delete Test',
                         'ButtonDeleteTest'=>'Delete Test',
@@ -482,6 +490,7 @@ class RaysSeeder extends Seeder
                         'TestDelete'=>'Seccessfully delete Test',
                     ],
                     'Cultures'=>[
+                        'LoadMessage'=>'welcome in page Cultures',
                         'TitleDeleteCultures'=>'Screen delete cultures',
                         'LabelDeleteCultures'=>'Do you want to delete cultures',
                         'ButtonDeleteCultures'=>'Delete cultures',
@@ -520,6 +529,7 @@ class RaysSeeder extends Seeder
                         'CulturesDelete'=>'Seccessfully delete cultures',
                     ],
                     'Packages'=>[
+                        'LoadMessage'=>'welcome in page Packages',
                         'TitleDeletePackages'=>'Screen delete Packages',
                         'LabelDeletePackages'=>'Do you want to delete Packages',
                         'ButtonDeletePackages'=>'Delete Packages',
@@ -814,6 +824,7 @@ class RaysSeeder extends Seeder
                         'BranchesDelete'=>'Seccessfully delete branch',
                     ],
                     'Knows'=>[
+                        'LoadMessage'=>'welcome in page Knows',
                         'KnowsNameRequired'=>'Required name',
                         'KnowsNameInvalid'=>'Invalid name',
                         'TitleKnowsDelete'=>'Screen delete knows',
@@ -837,6 +848,7 @@ class RaysSeeder extends Seeder
                         'KnowsDelete'=>'Seccessfully delete know',
                     ],
                     'Contracts'=>[
+                        'LoadMessage'=>'welcome in page Contracts',
                         'TitleDeleteContract'=>'Screen delete contract',
                         'LabelDeleteContract'=>'do you want to delete contract',
                         'ButtonDeleteContract'=>'Delete contract',
@@ -903,6 +915,7 @@ class RaysSeeder extends Seeder
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
+                        'LoadMessage'=>'welcome in page Patent',
                         'TitlePatentDelete'=>'Screen delete patient',
                         'LabelPatentDelete'=>'Do you want to delete patient',
                         'ButtonPatentDelete'=>'Delete Patient',
@@ -1001,6 +1014,7 @@ class RaysSeeder extends Seeder
                         'PatientsDelete'=>'Seccessfully delete patient',
                     ],
                     'Receipt'=>[
+                        'LoadMessage'=>'welcome in page Receipt',
                         'TitleDeleteReceipt'=>'Screen delete receipt',
                         'LabelDeleteReceipt'=>'Do you want to delete receipt',
                         'ButtonDeleteReceipt'=>'Delete receipt',
@@ -1159,6 +1173,7 @@ class RaysSeeder extends Seeder
                         'rtl'=>'set right to left direction',
                     ],
                     'Test'=>[
+                        'LoadMessage'=>'welcome in page test',
                         'TitleDeleteTest'=>'Screen delete Test',
                         'LabelDeleteTest'=>'Do you want to delete Test',
                         'ButtonDeleteTest'=>'Delete Test',
@@ -1197,6 +1212,7 @@ class RaysSeeder extends Seeder
                         'TestDelete'=>'Seccessfully delete Test',
                     ],
                     'Cultures'=>[
+                        'LoadMessage'=>'welcome in page Cultures',
                         'TitleDeleteCultures'=>'Screen delete cultures',
                         'LabelDeleteCultures'=>'Do you want to delete cultures',
                         'ButtonDeleteCultures'=>'Delete cultures',
@@ -1235,6 +1251,7 @@ class RaysSeeder extends Seeder
                         'CulturesDelete'=>'Seccessfully delete cultures',
                     ],
                     'Packages'=>[
+                        'LoadMessage'=>'welcome in page Packages',
                         'TitleDeletePackages'=>'Screen delete Packages',
                         'LabelDeletePackages'=>'Do you want to delete Packages',
                         'ButtonDeletePackages'=>'Delete Packages',
@@ -1528,6 +1545,7 @@ class RaysSeeder extends Seeder
                         'BranchesDelete'=>'تم حذف الفرع بنجاح',
                     ],
                     'Knows'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة التواصل الاجتماعي',
                         'KnowsNameRequired'=>'يرجي ادخال الاسم',
                         'KnowsNameInvalid'=>'الاسم غير صحيح',
                         'TitleKnowsDelete'=>'شاشة حذف المعارف',
@@ -1551,6 +1569,7 @@ class RaysSeeder extends Seeder
                         'KnowsDelete'=>'تم حذف المعارف بنجاح',
                     ],
                     'Contracts'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة التعاقدات',
                         'TitleDeleteContract'=>'شاشة حذف التعاقد',
                         'LabelDeleteContract'=>'هل تريد حذف التعاقد',
                         'ButtonDeleteContract'=>'حذف التعاقد',
@@ -1617,6 +1636,7 @@ class RaysSeeder extends Seeder
                         'DeleteLanguage'=>'تم حذف اللغة'
                     ],
                     'Patent'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة المرضي',
                         'TitlePatentDelete'=>'شاشة حذف المريض',
                         'LabelPatentDelete'=>'هل تريد حذف المريض',
                         'ButtonPatentDelete'=>'حذف المريض',
@@ -1715,6 +1735,7 @@ class RaysSeeder extends Seeder
                         'PatientsDelete'=>'تم حذف المريض',
                     ],
                     'Receipt'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة الفواتير',
                         'TitleDeleteReceipt'=>'شاشة حذف الفاتورة',
                         'LabelDeleteReceipt'=>'هل تريد حذف الفاتورة',
                         'ButtonDeleteReceipt'=>'حذف الفاتورة',
@@ -1873,6 +1894,7 @@ class RaysSeeder extends Seeder
                         'rtl'=>'تغير الاتجاه من الايمن الي الايسر'
                     ],
                     'Test'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة الاختبارات',
                         'TitleDeleteTest'=>'شاشة حذف الاختبار',
                         'LabelDeleteTest'=>'هل تريد حذف الاختبار',
                         'ButtonDeleteTest'=>'حذف الاختبار',
@@ -1911,6 +1933,7 @@ class RaysSeeder extends Seeder
                         'TestDelete'=>'تم حذف الاختبار بنجاح',
                     ],
                     'Cultures'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة المزارع',
                         'TitleDeleteCultures'=>'شاشة حذف المزرعة',
                         'LabelDeleteCultures'=>'هل تريد حذف المزرعة',
                         'ButtonDeleteCultures'=>'حذف المزرعة',
@@ -1949,6 +1972,7 @@ class RaysSeeder extends Seeder
                         'CulturesDelete'=>'تم حذف المزرعة بنجاح',
                     ],
                     'Packages'=>[
+                        'LoadMessage'=>'مرحبا بك في صفحة الحزم',
                         'TitleDeletePackages'=>'شاشة حذف الحزم',
                         'LabelDeletePackages'=>'هل تريد حذف الحزم',
                         'ButtonDeletePackages'=>'حذف الحزم',

@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(array_reverse($lang->arr1) as $index=>$test)
+            @foreach($lang->tableData as $index=>$test)
             <tr>
                 <th>{{$loop->index+1}}</th>
                 <th>{{$test->getName()}}</th>

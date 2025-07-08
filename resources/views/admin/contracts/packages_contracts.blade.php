@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(array_reverse($lang->myContract) as $index=>$contract)
+            @foreach($lang->tableData as $index=>$contract)
             <tr>
                 <th>{{$loop->index+1}}</th>
                 <th>{{$contract->getName()}}</th>

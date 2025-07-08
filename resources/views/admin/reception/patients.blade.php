@@ -31,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-          @foreach(array_reverse($lang->myPatent) as $index=>$patent)
+          @foreach($lang->tableData as $index=>$patent)
             <tr>
               <td>{{$loop->index+1}}</td>
               <!-- patient code -->

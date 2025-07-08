@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(array_reverse($lang->allBranch) as $index=>$branch)
+            @foreach($lang->tableData as $index=>$branch)
             <tr>
                 <td>{{$loop->index + 1}}</td>
                 <td>{{$branch->getName()}}</td>

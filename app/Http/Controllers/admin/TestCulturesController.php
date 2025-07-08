@@ -13,6 +13,8 @@ use App\Menu;
 use App\instance\admin\test_cultures\Test;
 use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\Cultures;
+use App\instance\admin\Branch;
+
 class TestCulturesController extends Page implements LangObject
 {
     public function __construct(){
@@ -42,9 +44,9 @@ class TestCulturesController extends Page implements LangObject
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Test']['TestAdd'];
             $this->myDbId = $this->generateUniqueIdentifier();
             $this->getCreateDataBase($ob, 'Test', $this->myDbId, $this);
-        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'AllTestCultures'){
+        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'AllTestCultures' && $ob['Test']){
             request()->validate([
-            'id' => ['required', Rule::in(isset($ob['Test'])?array_keys($ob['Test']):null)],
+            'id' => ['required', Rule::in(array_keys($ob['Test']))],
             'name' => ['required', 'min:3'],
             'shortcut' => ['required', 'min:3'],
             'price' => ['required', 'integer'],
@@ -82,9 +84,9 @@ class TestCulturesController extends Page implements LangObject
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Packages']['PackagesAdd'];
             $this->myDbId = $this->generateUniqueIdentifier();
             $this->getCreateDataBase($ob, 'Packages', $this->myDbId, $this);
-        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'PackagesCultures'){
+        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'PackagesCultures' && $ob['Packages']){
             request()->validate([
-            'id' => ['required', Rule::in(isset($ob['Packages'])?array_keys($ob['Packages']):null)],
+            'id' => ['required', Rule::in(array_keys($ob['Packages']))],
             'name' => ['required', 'min:3'],
             'shortcut' => ['required', 'min:3'],
             'price' => ['required', 'integer'],
@@ -122,9 +124,9 @@ class TestCulturesController extends Page implements LangObject
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Cultures']['CulturesAdd'];
             $this->myDbId = $this->generateUniqueIdentifier();
             $this->getCreateDataBase($ob, 'Cultures', $this->myDbId, $this);
-        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'TheCultures'){
+        }else if(Route::currentRouteName() === 'editTest' && request()->route('id') === 'TheCultures' && $ob['Cultures']){
             request()->validate([
-            'id' => ['required', Rule::in(isset($ob['Cultures'])?array_keys($ob['Cultures']):null)],
+            'id' => ['required', Rule::in(array_keys($ob['Cultures']))],
             'name' => ['required', 'min:3'],
             'shortcut' => ['required', 'min:3'],
             'price' => ['required', 'integer'],
@@ -143,7 +145,7 @@ class TestCulturesController extends Page implements LangObject
             ]);
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Cultures']['CulturesEdit'];
             $this->getEditDataBase($ob, 'Cultures', $this);
-        }else if(request()->route('id') === 'AllTestCultures'){
+        }else if(request()->route('id') === 'AllTestCultures' && $ob['Test'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
             $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
@@ -153,7 +155,75 @@ class TestCulturesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']]['Test']['Test'], 
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
             $ob[$ob['Setting']['Language']]['Html']['Direction'], 
-            $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonAddTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestId'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestEdit'],
+            Test::fromArray(array_reverse($ob['Test']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Test']['TableTestName'];
+            $this->table9 = $ob[$this->language]['Test']['TableTestPrice'];
+            $this->table10 = $ob[$this->language]['Test']['TableTestInputOutput'];
+            $this->table12 = $ob[$this->language]['Test']['TableTestShortcut'];
+            $this->label3 = $ob[$this->language]['Test']['LabelTestName'];
+            $this->label4 = $ob[$this->language]['Test']['LabelTestPrice'];
+            $this->label5 = $ob[$this->language]['Test']['LabelTestInputOutLab'];
+            $this->label7 = $ob[$this->language]['Test']['LabelTestShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Test']['TestInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
+            $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
+            $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'AllTestCultures' && $ob['Test'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['ButtonDeleteTest'], 
+            route('deleteItem', 'Test'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Test']['Test'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonAddTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestId'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestEdit'],
+            Test::fromArray(array_reverse($ob['Test']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Test']['TableTestName'];
+            $this->table9 = $ob[$this->language]['Test']['TableTestPrice'];
+            $this->table10 = $ob[$this->language]['Test']['TableTestInputOutput'];
+            $this->table12 = $ob[$this->language]['Test']['TableTestShortcut'];
+            $this->label3 = $ob[$this->language]['Test']['LabelTestName'];
+            $this->label4 = $ob[$this->language]['Test']['LabelTestPrice'];
+            $this->label5 = $ob[$this->language]['Test']['LabelTestInputOutLab'];
+            $this->label7 = $ob[$this->language]['Test']['LabelTestShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Test']['TestInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
+            $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
+            $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'AllTestCultures' && !$ob['Test'] && $ob['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['ButtonDeleteTest'], 
+            route('deleteItem', 'Test'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Test']['Test'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
             $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
             $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
@@ -175,8 +245,108 @@ class TestCulturesController extends Page implements LangObject
             $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
             $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
             $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
-            $this->arr1 = isset($ob['Test']) ? Test::fromArray($ob['Test'], $ob[$ob['Setting']['Language']]['SelectTestBox']) : array();
-        }else if(request()->route('id') === 'PackagesCultures'){
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'AllTestCultures' && !$ob['Test'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['ButtonDeleteTest'], 
+            route('deleteItem', 'Test'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Test']['Test'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonAddTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestId'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestEdit']);
+            $this->table8 = $ob[$this->language]['Test']['TableTestName'];
+            $this->table9 = $ob[$this->language]['Test']['TableTestPrice'];
+            $this->table10 = $ob[$this->language]['Test']['TableTestInputOutput'];
+            $this->table12 = $ob[$this->language]['Test']['TableTestShortcut'];
+            $this->label3 = $ob[$this->language]['Test']['LabelTestName'];
+            $this->label4 = $ob[$this->language]['Test']['LabelTestPrice'];
+            $this->label5 = $ob[$this->language]['Test']['LabelTestInputOutLab'];
+            $this->label7 = $ob[$this->language]['Test']['LabelTestShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Test']['TestInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
+            $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
+            $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'AllTestCultures' && $ob['Test']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['ButtonDeleteTest'], 
+            route('deleteItem', 'Test'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Test']['Test'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonAddTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestId'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestEdit'],
+            Test::fromArray(array_reverse($ob['Test']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Test']['TableTestName'];
+            $this->table9 = $ob[$this->language]['Test']['TableTestPrice'];
+            $this->table10 = $ob[$this->language]['Test']['TableTestInputOutput'];
+            $this->table12 = $ob[$this->language]['Test']['TableTestShortcut'];
+            $this->label3 = $ob[$this->language]['Test']['LabelTestName'];
+            $this->label4 = $ob[$this->language]['Test']['LabelTestPrice'];
+            $this->label5 = $ob[$this->language]['Test']['LabelTestInputOutLab'];
+            $this->label7 = $ob[$this->language]['Test']['LabelTestShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Test']['TestInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
+            $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
+            $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'AllTestCultures'){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['LabelDeleteTest'], 
+            $ob[$ob['Setting']['Language']]['Test']['ButtonDeleteTest'], 
+            route('deleteItem', 'Test'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Test']['Test'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Test']['TitleCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TitleEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonCreateTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonAddTest'],
+            $ob[$ob['Setting']['Language']]['Test']['ButtonEditTest'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestId'],
+            $ob[$ob['Setting']['Language']]['Test']['TableTestEdit']);
+            $this->table8 = $ob[$this->language]['Test']['TableTestName'];
+            $this->table9 = $ob[$this->language]['Test']['TableTestPrice'];
+            $this->table10 = $ob[$this->language]['Test']['TableTestInputOutput'];
+            $this->table12 = $ob[$this->language]['Test']['TableTestShortcut'];
+            $this->label3 = $ob[$this->language]['Test']['LabelTestName'];
+            $this->label4 = $ob[$this->language]['Test']['LabelTestPrice'];
+            $this->label5 = $ob[$this->language]['Test']['LabelTestInputOutLab'];
+            $this->label7 = $ob[$this->language]['Test']['LabelTestShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Test']['TestInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Test']['HintTestName'];
+            $this->hint2 = $ob[$this->language]['Test']['HintTestPrice'];
+            $this->hint3 = $ob[$this->language]['Test']['HintTestShortcut'];
+            $this->successfully1 = $ob[$this->language]['Test']['LoadMessage'];
+        }else if(request()->route('id') === 'PackagesCultures' && $ob['Packages'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
             $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
@@ -186,7 +356,77 @@ class TestCulturesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
             $ob[$ob['Setting']['Language']]['Html']['Direction'], 
-            $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonAddPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesId'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesEdit'],
+            Packages::fromArray(array_reverse($ob['Packages']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Packages']['TablePackagesName'];
+            $this->table9 = $ob[$this->language]['Packages']['TablePackagesPrice'];
+            $this->table10 = $ob[$this->language]['Packages']['TablePackagesInputOutput'];
+            $this->table12 = $ob[$this->language]['Packages']['TablePackagesShortcut'];
+            $this->label3 = $ob[$this->language]['Packages']['LabelPackagesName'];
+            $this->label4 = $ob[$this->language]['Packages']['LabelPackagesPrice'];
+            $this->label5 = $ob[$this->language]['Packages']['LabelPackagesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Packages']['LabelPackagesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Packages']['PackagesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
+            $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
+            $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+
+        }else if(request()->route('id') === 'PackagesCultures' && $ob['Packages'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonDeletePackages'], 
+            route('deleteItem', 'Packages'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonAddPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesId'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesEdit'],
+            Packages::fromArray(array_reverse($ob['Packages']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Packages']['TablePackagesName'];
+            $this->table9 = $ob[$this->language]['Packages']['TablePackagesPrice'];
+            $this->table10 = $ob[$this->language]['Packages']['TablePackagesInputOutput'];
+            $this->table12 = $ob[$this->language]['Packages']['TablePackagesShortcut'];
+            $this->label3 = $ob[$this->language]['Packages']['LabelPackagesName'];
+            $this->label4 = $ob[$this->language]['Packages']['LabelPackagesPrice'];
+            $this->label5 = $ob[$this->language]['Packages']['LabelPackagesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Packages']['LabelPackagesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Packages']['PackagesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
+            $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
+            $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+
+        }else if(request()->route('id') === 'PackagesCultures' && !$ob['Packages'] && $ob['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonDeletePackages'], 
+            route('deleteItem', 'Packages'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
             $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
             $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
@@ -208,9 +448,109 @@ class TestCulturesController extends Page implements LangObject
             $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
             $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
             $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+        }else if(request()->route('id') === 'PackagesCultures' && !$ob['Packages'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonDeletePackages'], 
+            route('deleteItem', 'Packages'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonAddPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesId'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesEdit']);
+            $this->table8 = $ob[$this->language]['Packages']['TablePackagesName'];
+            $this->table9 = $ob[$this->language]['Packages']['TablePackagesPrice'];
+            $this->table10 = $ob[$this->language]['Packages']['TablePackagesInputOutput'];
+            $this->table12 = $ob[$this->language]['Packages']['TablePackagesShortcut'];
+            $this->label3 = $ob[$this->language]['Packages']['LabelPackagesName'];
+            $this->label4 = $ob[$this->language]['Packages']['LabelPackagesPrice'];
+            $this->label5 = $ob[$this->language]['Packages']['LabelPackagesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Packages']['LabelPackagesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Packages']['PackagesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
+            $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
+            $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+        }else if(request()->route('id') === 'PackagesCultures' && $ob['Packages']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonDeletePackages'], 
+            route('deleteItem', 'Packages'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonAddPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesId'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesEdit'],
+            Packages::fromArray(array_reverse($ob['Packages']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Packages']['TablePackagesName'];
+            $this->table9 = $ob[$this->language]['Packages']['TablePackagesPrice'];
+            $this->table10 = $ob[$this->language]['Packages']['TablePackagesInputOutput'];
+            $this->table12 = $ob[$this->language]['Packages']['TablePackagesShortcut'];
+            $this->label3 = $ob[$this->language]['Packages']['LabelPackagesName'];
+            $this->label4 = $ob[$this->language]['Packages']['LabelPackagesPrice'];
+            $this->label5 = $ob[$this->language]['Packages']['LabelPackagesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Packages']['LabelPackagesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Packages']['PackagesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
+            $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
+            $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
             $this->arr1 = isset($ob['Packages']) ? Packages::fromArray($ob['Packages'], $ob[$ob['Setting']['Language']]['SelectTestBox']) : array();
-        }else //if(Route::currentRouteName() === 'TestCultures' && request()->route('id') === 'TheCultures')
-        {
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+        }else if(request()->route('id') === 'PackagesCultures'){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['LabelDeletePackages'], 
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonDeletePackages'], 
+            route('deleteItem', 'Packages'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Packages']['Packages'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Packages']['TitleCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TitleEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonCreatePackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonAddPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['ButtonEditPackages'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesId'],
+            $ob[$ob['Setting']['Language']]['Packages']['TablePackagesEdit']);
+            $this->table8 = $ob[$this->language]['Packages']['TablePackagesName'];
+            $this->table9 = $ob[$this->language]['Packages']['TablePackagesPrice'];
+            $this->table10 = $ob[$this->language]['Packages']['TablePackagesInputOutput'];
+            $this->table12 = $ob[$this->language]['Packages']['TablePackagesShortcut'];
+            $this->label3 = $ob[$this->language]['Packages']['LabelPackagesName'];
+            $this->label4 = $ob[$this->language]['Packages']['LabelPackagesPrice'];
+            $this->label5 = $ob[$this->language]['Packages']['LabelPackagesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Packages']['LabelPackagesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Packages']['PackagesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Packages']['HintPackagesName'];
+            $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
+            $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
+        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
@@ -220,7 +560,75 @@ class TestCulturesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
             $ob[$ob['Setting']['Language']]['Html']['Direction'], 
-            $ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonAddCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesId'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesEdit'],
+            Cultures::fromArray(array_reverse($ob['Cultures']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Cultures']['TableCulturesName'];
+            $this->table9 = $ob[$this->language]['Cultures']['TableCulturesPrice'];
+            $this->table10 = $ob[$this->language]['Cultures']['TableCulturesInputOutput'];
+            $this->table12 = $ob[$this->language]['Cultures']['TableCulturesShortcut'];
+            $this->label3 = $ob[$this->language]['Cultures']['LabelCulturesName'];
+            $this->label4 = $ob[$this->language]['Cultures']['LabelCulturesPrice'];
+            $this->label5 = $ob[$this->language]['Cultures']['LabelCulturesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Cultures']['LabelCulturesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Cultures']['CulturesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
+            $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
+            $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonDeleteCultures'], 
+            route('deleteItem', 'Cultures'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonAddCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesId'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesEdit'],
+            Cultures::fromArray(array_reverse($ob['Cultures']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Cultures']['TableCulturesName'];
+            $this->table9 = $ob[$this->language]['Cultures']['TableCulturesPrice'];
+            $this->table10 = $ob[$this->language]['Cultures']['TableCulturesInputOutput'];
+            $this->table12 = $ob[$this->language]['Cultures']['TableCulturesShortcut'];
+            $this->label3 = $ob[$this->language]['Cultures']['LabelCulturesName'];
+            $this->label4 = $ob[$this->language]['Cultures']['LabelCulturesPrice'];
+            $this->label5 = $ob[$this->language]['Cultures']['LabelCulturesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Cultures']['LabelCulturesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Cultures']['CulturesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
+            $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
+            $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+        }else if(request()->route('id') === 'TheCultures' && !$ob['Cultures'] && $ob['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonDeleteCultures'], 
+            route('deleteItem', 'Cultures'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
             new Menu($ob[$ob['Setting']['Language']]['Menu']),
             $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
@@ -242,7 +650,109 @@ class TestCulturesController extends Page implements LangObject
             $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
             $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
             $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
-            $this->arr1 = isset($ob['Cultures']) ? Cultures::fromArray($ob['Cultures'], $ob[$ob['Setting']['Language']]['SelectTestBox']) : array();
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+        }else if(request()->route('id') === 'TheCultures' && !$ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonDeleteCultures'], 
+            route('deleteItem', 'Cultures'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonAddCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesId'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesEdit']);
+            $this->table8 = $ob[$this->language]['Cultures']['TableCulturesName'];
+            $this->table9 = $ob[$this->language]['Cultures']['TableCulturesPrice'];
+            $this->table10 = $ob[$this->language]['Cultures']['TableCulturesInputOutput'];
+            $this->table12 = $ob[$this->language]['Cultures']['TableCulturesShortcut'];
+            $this->label3 = $ob[$this->language]['Cultures']['LabelCulturesName'];
+            $this->label4 = $ob[$this->language]['Cultures']['LabelCulturesPrice'];
+            $this->label5 = $ob[$this->language]['Cultures']['LabelCulturesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Cultures']['LabelCulturesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Cultures']['CulturesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
+            $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
+            $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures']){
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonDeleteCultures'], 
+            route('deleteItem', 'Cultures'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonAddCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesId'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesEdit'],
+            Cultures::fromArray(array_reverse($ob['Cultures']), $ob[$ob['Setting']['Language']]['SelectTestBox']));
+            $this->table8 = $ob[$this->language]['Cultures']['TableCulturesName'];
+            $this->table9 = $ob[$this->language]['Cultures']['TableCulturesPrice'];
+            $this->table10 = $ob[$this->language]['Cultures']['TableCulturesInputOutput'];
+            $this->table12 = $ob[$this->language]['Cultures']['TableCulturesShortcut'];
+            $this->label3 = $ob[$this->language]['Cultures']['LabelCulturesName'];
+            $this->label4 = $ob[$this->language]['Cultures']['LabelCulturesPrice'];
+            $this->label5 = $ob[$this->language]['Cultures']['LabelCulturesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Cultures']['LabelCulturesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Cultures']['CulturesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
+            $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
+            $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+        }else //if(Route::currentRouteName() === 'TheCultures')
+        {
+            parent::__construct($ob['Setting']['Language'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonDeleteCultures'], 
+            route('deleteItem', 'Cultures'), 
+            $ob[$ob['Setting']['Language']]['TableInfo'], 
+            $ob[$ob['Setting']['Language']]['Cultures']['Cultures'], 
+            $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
+            $ob[$ob['Setting']['Language']]['Html']['Direction'], 
+            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
+            new Menu($ob[$ob['Setting']['Language']]['Menu']),
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TitleEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonCreateCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonAddCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['ButtonEditCultures'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesId'],
+            $ob[$ob['Setting']['Language']]['Cultures']['TableCulturesEdit']);
+            $this->table8 = $ob[$this->language]['Cultures']['TableCulturesName'];
+            $this->table9 = $ob[$this->language]['Cultures']['TableCulturesPrice'];
+            $this->table10 = $ob[$this->language]['Cultures']['TableCulturesInputOutput'];
+            $this->table12 = $ob[$this->language]['Cultures']['TableCulturesShortcut'];
+            $this->label3 = $ob[$this->language]['Cultures']['LabelCulturesName'];
+            $this->label4 = $ob[$this->language]['Cultures']['LabelCulturesPrice'];
+            $this->label5 = $ob[$this->language]['Cultures']['LabelCulturesInputOutLab'];
+            $this->label7 = $ob[$this->language]['Cultures']['LabelCulturesShortcut'];
+            $this->inputOutPut = $ob[$this->language]['SelectTestBox'];
+            $this->selectBox1 = $ob[$this->language]['Cultures']['CulturesInputOutLab'];
+            $this->hint1 = $ob[$this->language]['Cultures']['HintCulturesName'];
+            $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
+            $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
+            $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
+            dd($this->successfully1);
         }
     }
     public function index($id){
@@ -253,7 +763,7 @@ class TestCulturesController extends Page implements LangObject
         ]);
     }
     public function action($myId = null){
-        return isset($this->successfully1)?back()->with('success', $this->successfully1):back();
+        return back()->with('success', $this->successfully1);
     }
     public function getMyObject(){
         return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>isset($this->myDbId) ? $this->myDbId : request()->input('id'));

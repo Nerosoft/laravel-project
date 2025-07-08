@@ -32,7 +32,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(array_reverse($lang->arr6) as $index=>$patent)
+            @foreach($lang->tableData as $index=>$patent)
             <tr>
                 <th>{{$loop->index + 1}}</th>
                 <th>{{$patent->getPatentCode()}}</th>
@@ -160,7 +160,7 @@
 const keyValueMap = new Map();
 let res = @json(array_map(function($res) {
 return $res->getTestObject();
-}, $lang->arr6));
+}, $lang->tableData));
 keyValueMap.set("myArray", []);
 for(let key in res)
     keyValueMap.set(key, res[key]);

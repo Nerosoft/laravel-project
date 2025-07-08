@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(array_reverse($lang->myRadios) as $index=>$myLang)
+                @foreach($lang->tableData as $index=>$myLang)
                 <tr>
                     <th>{{$loop->index+1}}</th>
                     <th>{{$myLang->getName()}}</th>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if($loop->index < (count($lang->myRadios) - 2))
+                        @if($loop->index < (count($lang->tableData) - 2))
                         @include('layout.model_delete', ['name'=>$myLang->getName()])
                         @endif
                     </th>

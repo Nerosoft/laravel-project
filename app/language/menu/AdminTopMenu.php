@@ -1,7 +1,6 @@
 <?php
 
 namespace App\language\menu;
-use App\instance\admin\Branch;
 use App\language\share\SetupMenu;
 class AdminTopMenu extends SetupMenu
 {
@@ -13,11 +12,7 @@ class AdminTopMenu extends SetupMenu
         $this->MyBranch = array();
         //init select box
         $this->selectBox3 = $AppSetting['BranchesCompany'];
-        //init branch main
-        $this->selectBox4 = $AppSetting['BranchMain'];
         // make object branch
-        if(isset($branch))
-            foreach ($branch as $key => $branch)
-                $this->MyBranch[$key] = new Branch($branch['Name']);
+        $this->MyBranch = $branch;
     }
 }
