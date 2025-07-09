@@ -1127,7 +1127,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array(), $ob[$this->language]['SelectGenderBox'], $ob[$this->language]['SelectNationalityBox'], $ob[$this->language]['CheckBox']):array();
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
-        }else if(request()->route('id') === 'Patients' && $ob['Patent'] && $ob['Branch']){
+        }else if($ob['Patent'] && $ob['Branch']){
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
@@ -1227,7 +1227,7 @@ class ReceptionController extends PatientInfo implements LangObject
             //make button
             $this->button4 = $ob[$this->language]['Patent']['ButtonPatentEdit'];
             $this->successfully1 = $ob[$this->language]['Patent']['LoadMessage'];
-        }else if(request()->route('id') === 'Patients' && $ob['Patent'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if($ob['Patent'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
 
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             parent::__construct($ob['Setting']['Language'], 
@@ -1330,7 +1330,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], $this->myContract, $ob[$ob['Setting']['Language']]['SelectGenderBox'], $ob[$ob['Setting']['Language']]['SelectNationalityBox'], $ob[$ob['Setting']['Language']]['CheckBox']):array();
             $this->successfully1 = $ob[$this->language]['Patent']['LoadMessage'];
-        }else if(request()->route('id') === 'Patients' && !$ob['Patent'] && $ob['Branch']){
+        }else if(!$ob['Patent'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
@@ -1429,7 +1429,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->button4 = $ob[$this->language]['Patent']['ButtonPatentEdit'];
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             $this->successfully1 = $ob[$this->language]['Patent']['LoadMessage'];
-        }else if(request()->route('id') === 'Patients' && !$ob['Patent'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if(!$ob['Patent'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
@@ -1528,7 +1528,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->button4 = $ob[$this->language]['Patent']['ButtonPatentEdit'];
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();
             $this->successfully1 = $ob[$this->language]['Patent']['LoadMessage'];
-        }else if(request()->route('id') === 'Patients' && $ob['Patent']){
+        }else if($ob['Patent']){
             $this->myContract = isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array();            
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],

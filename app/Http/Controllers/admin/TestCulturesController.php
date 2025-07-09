@@ -550,7 +550,7 @@ class TestCulturesController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Packages']['HintPackagesPrice'];
             $this->hint3 = $ob[$this->language]['Packages']['HintPackagesShortcut'];
             $this->successfully1 = $ob[$this->language]['Packages']['LoadMessage'];
-        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures'] && $ob['Branch']){
+        }else if($ob['Cultures'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
@@ -584,7 +584,7 @@ class TestCulturesController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
             $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
             $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
-        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if($ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
@@ -618,7 +618,7 @@ class TestCulturesController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
             $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
             $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
-        }else if(request()->route('id') === 'TheCultures' && !$ob['Cultures'] && $ob['Branch']){
+        }else if(!$ob['Cultures'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
@@ -651,7 +651,7 @@ class TestCulturesController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
             $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
             $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
-        }else if(request()->route('id') === 'TheCultures' && !$ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if(!$ob['Cultures'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 
@@ -684,7 +684,7 @@ class TestCulturesController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Cultures']['HintCulturesPrice'];
             $this->hint3 = $ob[$this->language]['Cultures']['HintCulturesShortcut'];
             $this->successfully1 = $ob[$this->language]['Cultures']['LoadMessage'];
-        }else if(request()->route('id') === 'TheCultures' && $ob['Cultures']){
+        }else if($ob['Cultures']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Cultures']['TitleDeleteCultures'], 
             $ob[$ob['Setting']['Language']]['Cultures']['LabelDeleteCultures'], 

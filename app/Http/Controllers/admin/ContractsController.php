@@ -242,7 +242,7 @@ class ContractsController extends Page implements LangObject
             //init hint
             $this->hint1 = $ob[$this->language]['Knows']['HintKnowsName'];
             $this->successfully1 = $ob[$this->language]['Knows']['LoadMessage'];
-        }else if(request()->route('id') === 'PackagesContracts' && $ob['Contracts'] && $ob['Branch']){
+        }else if($ob['Contracts'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
@@ -281,7 +281,7 @@ class ContractsController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
             $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->successfully1 = $ob[$this->language]['Contracts']['LoadMessage'];
-        }else if(request()->route('id') === 'PackagesContracts' && $ob['Contracts'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if($ob['Contracts'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
@@ -320,7 +320,7 @@ class ContractsController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
             $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->successfully1 = $ob[$this->language]['Contracts']['LoadMessage'];
-        }else if(request()->route('id') === 'PackagesContracts' && !$ob['Contracts'] && $ob['Branch']){
+        }else if(!$ob['Contracts'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
@@ -358,7 +358,7 @@ class ContractsController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
             $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->successfully1 = $ob[$this->language]['Contracts']['LoadMessage'];
-        }else if(request()->route('id') === 'PackagesContracts' && !$ob['Contracts'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if(!$ob['Contracts'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
@@ -396,7 +396,7 @@ class ContractsController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
             $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->successfully1 = $ob[$this->language]['Contracts']['LoadMessage'];
-        }else if(request()->route('id') === 'PackagesContracts' && $ob['Contracts']){  
+        }else if($ob['Contracts']){  
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],
@@ -435,7 +435,7 @@ class ContractsController extends Page implements LangObject
             $this->hint2 = $ob[$this->language]['Contracts']['HintContractGovernorate'];
             $this->hint3 = $ob[$this->language]['Contracts']['HintContractArea'];
             $this->successfully1 = $ob[$this->language]['Contracts']['LoadMessage'];
-        }else{
+        }else{//request()->route('id') === 'PackagesContracts'
             parent::__construct($ob['Setting']['Language'], 
             $ob[$ob['Setting']['Language']]['Contracts']['TitleDeleteContract'],
             $ob[$ob['Setting']['Language']]['Contracts']['LabelDeleteContract'],

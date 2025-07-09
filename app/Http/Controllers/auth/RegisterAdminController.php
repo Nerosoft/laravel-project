@@ -51,7 +51,8 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             $this->getCreateDataBase($ob, 'User', $this->generateUniqueIdentifier(), $this);     
             request()->session()->put('userId', request()->input('id'));
             request()->session()->put('userLogout', request()->input('id'));
-            $this->successfully1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['AdminLogin'];       
+            $this->successfully1 = $ob[isset($ob[unserialize(request()->cookie($ob['_id']))]) ? unserialize(request()->cookie($ob['_id'])) : $ob['Setting']['Language']]['Register']['AdminLogin'];  
+            return;     
         }else if(isset($ob[unserialize(request()->cookie($ob['_id']))])){
             parent::__construct(
             $ob[unserialize(request()->cookie($ob['_id']))]['Register']['UserEmail'],
@@ -72,10 +73,6 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             unserialize(request()->cookie($ob['_id'])),
             $ob[unserialize(request()->cookie($ob['_id']))]['Register']['Title'],
             $ob[unserialize(request()->cookie($ob['_id']))]['Html']['Direction']);
-            $this->labelUserRepeatPassword = $ob[$this->language]['Register']['LabelUserRepeatPassword'];
-            $this->labelUserCodePassword = $ob[$this->language]['Register']['LabelUserCodePassword'];
-            $this->hintUserRepeatPassword = $ob[$this->language]['Register']['HintUserRepeatPassword'];
-            $this->hintUserCodePassword = $ob[$this->language]['Register']['HintUserCodePassword'];
         }else{
             Cookie::queue($ob['_id'], serialize($ob['Setting']['Language']),2628000);
             parent::__construct(
@@ -96,12 +93,12 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             $ob['_id'],
             $ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Register']['Title'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction']);
-            $this->labelUserRepeatPassword = $ob[$this->language]['Register']['LabelUserRepeatPassword'];
-            $this->labelUserCodePassword = $ob[$this->language]['Register']['LabelUserCodePassword'];
-            $this->hintUserRepeatPassword = $ob[$this->language]['Register']['HintUserRepeatPassword'];
-            $this->hintUserCodePassword = $ob[$this->language]['Register']['HintUserCodePassword'];
+            $ob[$ob['Setting']['Language']]['Html']['Direction']); 
         }
+        $this->labelUserRepeatPassword = $ob[$this->language]['Register']['LabelUserRepeatPassword'];
+        $this->labelUserCodePassword = $ob[$this->language]['Register']['LabelUserCodePassword'];
+        $this->hintUserRepeatPassword = $ob[$this->language]['Register']['HintUserRepeatPassword'];
+        $this->hintUserCodePassword = $ob[$this->language]['Register']['HintUserCodePassword'];
     }
     public function index(){
         return view('login.register',[
