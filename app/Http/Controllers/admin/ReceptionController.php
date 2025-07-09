@@ -105,8 +105,8 @@ class ReceptionController extends PatientInfo implements LangObject
                 'choices.*'=>[Rule::in(array_keys($ob[$ob['Setting']['Language']]['CheckBox']))],
                 'patent-other'=>['required_without:choices', 'nullable', 'min:3'],
                     ], [
-                    'id.required' => $ob[$ob['Setting']['Language']]['Patent']['PatentIdRequired'],
-                    'id.in' => $ob[$ob['Setting']['Language']]['Patent']['PatentIdInvalid'],
+                    'id.required' => $ob[$ob['Setting']['Language']]['Patent']['IdIsReq'],
+                    'id.in' => $ob[$ob['Setting']['Language']]['Patent']['IdIsInv'],
                     'patent-name.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameRequired'],
                     'patent-name.min'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNameInvalid'],
                     'patent-national-id.required'=>$ob[$ob['Setting']['Language']]['Patent']['PatentNationalIdRequired'],
@@ -215,8 +215,8 @@ class ReceptionController extends PatientInfo implements LangObject
             'paymentAmount' => ['required', 'numeric', 'min:0'],
             'paymentMethod' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['PaymentMethodBox']))],
             ],[
-                'id.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationIdRequired'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationIdInvalid'],
+                'id.required'=>$ob[$ob['Setting']['Language']]['Receipt']['IdIsReq'],
+                'id.in'=>$ob[$ob['Setting']['Language']]['Receipt']['IdIsInv'],
                 'item.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemRequired'],
                 'item.array'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'],
                 'patentCode.required'=>$ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationPatentCodeRequired'],

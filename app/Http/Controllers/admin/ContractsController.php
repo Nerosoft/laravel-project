@@ -39,8 +39,8 @@ class ContractsController extends Page implements LangObject
                 'governorate' => ['required', 'min:3'],
                 'area' => ['required', 'min:3'],
             ], [
-                'id.required'=>$ob[$ob['Setting']['Language']]['Contracts']['ContractIdRequired'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Contracts']['ContractIdInvalid'],
+                'id.required'=>$ob[$ob['Setting']['Language']]['Contracts']['IdIsReq'],
+                'id.in'=>$ob[$ob['Setting']['Language']]['Contracts']['IdIsInv'],
                 'name.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameRequired'],
                 'name.min' => $ob[$ob['Setting']['Language']]['Contracts']['ContractNameInvalid'],
                 'governorate.required' => $ob[$ob['Setting']['Language']]['Contracts']['ContractGovernorateRequired'],
@@ -64,8 +64,8 @@ class ContractsController extends Page implements LangObject
                 'id' => ['required', Rule::in(array_keys($ob['Knows']))],
                 'name' => ['required', 'min:3'],
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Knows']['KnowsIdRequired'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Knows']['KnowsIdInvalid'],
+                'id.required' => $ob[$ob['Setting']['Language']]['Knows']['IdIsReq'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Knows']['IdIsInv'],
                 'name.required' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameRequired'],
                 'name.min' => $ob[$ob['Setting']['Language']]['Knows']['KnowsNameInvalid'],
             ]);

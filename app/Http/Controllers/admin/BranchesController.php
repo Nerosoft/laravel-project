@@ -137,8 +137,8 @@ class BranchesController extends Page implements LangObject
             'brance_rays_country' => ['required', 'min:3'],
             'brance_rays_follow' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']))],
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Branch']['BranchRaysId'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Branch']['BranchRaysLenght'],
+                'id.required' => $ob[$ob['Setting']['Language']]['Branch']['IdIsReq'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Branch']['IdIsInv'],
                 'brance_rays_name.min' => $this->error10,
                 'brance_rays_name.required' => $this->error1,
                 'brance_rays_phone.regex' => $this->error11,
@@ -174,8 +174,8 @@ class BranchesController extends Page implements LangObject
             'brance_rays_country' => ['required', 'min:3'],
             'brance_rays_follow' => ['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['SelectBranchBox']))],
             ], [
-                'id.required' => $ob[$ob['Setting']['Language']]['Branch']['BranchRaysId'],
-                'id.in' => $ob[$ob['Setting']['Language']]['Branch']['BranchRaysLenght'],
+                'id.required' => $ob[$ob['Setting']['Language']]['Branch']['IdIsReq'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Branch']['IdIsInv'],
                 'brance_rays_name.min' => $this->error10,
                 'brance_rays_name.required' => $this->error1,
                 'brance_rays_phone.regex' => $this->error11,
@@ -210,8 +210,8 @@ class BranchesController extends Page implements LangObject
             Validator::make(['id'=>request()->route('id')], [
                 'id'=>['required', Rule::in(array_keys($myBranch))]
             ], [
-                'id.required'=>$ob[$ob['Setting']['Language']]['Branch']['BranchRaysId'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['Branch']['BranchRaysLenght'],
+                'id.required' => $ob[$ob['Setting']['Language']]['Branch']['IdIsReq'],
+                'id.in' => $ob[$ob['Setting']['Language']]['Branch']['IdIsInv'],
             ])->validate();
             request()->session()->put('userId', request()->route('id'));
             $this->successfully1 = Rays::find(request()->route('id'))[Rays::find(request()->route('id'))['Setting']['Language']]['Branch']['BranchesChange'].' '.$myBranch[request()->route('id')]['Name'];
