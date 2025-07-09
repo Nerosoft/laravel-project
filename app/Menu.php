@@ -76,22 +76,12 @@ class Menu
             return 'bi bi-globe-asia-australia';
         else if($key === 'Contracts')
             return 'bi bi-lightbulb-fill';
-        else if($key === 'Patent')
-            return 'bi bi-fonts';
         else if($key === 'AllNamesLanguage')
             return 'bi bi-globe-europe-africa';
         else if($key === 'Html')
             return 'bi bi-table';
         else if($key === 'Menu')
             return 'bi bi-menu-button-fill';
-        else if($key === 'Receipt')
-            return 'bi bi-clipboard2-x-fill';
-        else if($key === 'Test')
-            return 'bi bi-clipboard2-check-fill';
-        else if($key === 'Cultures')
-            return 'bi bi-table';
-        else if($key === 'Packages')
-            return 'bi bi-layout-text-sidebar'; 
         else if($key === 'CheckBox')
             return 'bi bi-layout-text-sidebar'; 
         else if($key === 'CutomLang')
