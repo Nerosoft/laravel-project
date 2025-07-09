@@ -5,7 +5,7 @@ use Illuminate\Validation\Rule;
 class DeleteController extends Controller
 {
     public function __construct(){
-
+        //dd(request()->route('id'));
         $ob = Rays::find(request()->session()->get('userId'));
         if(request()->input('id') === request()->session()->get('userId') && request()->route('id') === 'Branch' && (Rays::find(request()->session()->get('userLogout'))[request()->route('id')])){
             $mainModel = Rays::find(request()->session()->get('userLogout'));

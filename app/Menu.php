@@ -52,15 +52,15 @@ class Menu
             return 'bi bi-pencil';
         else if($key === 'Branches')
             return 'bi bi-hospital';
-        else if($key === 'PatientRegisteration')
+        else if($key === 'Receipt')
             return 'bi bi-person-add';
-        else if($key === 'Patients')
+        else if($key === 'Patent')
             return 'bi bi-people-fill';
-        else if($key === 'AllTestCultures')
+        else if($key === 'Test')
             return 'bi bi-pencil-square';
-        else if($key === 'TheCultures')
+        else if($key === 'Cultures')
             return 'bi bi-globe';
-        else if($key === 'PackagesCultures')
+        else if($key === 'Packages')
             return 'bi bi-box';
         else if($key === 'PackagesContracts')
             return 'bi bi-box';

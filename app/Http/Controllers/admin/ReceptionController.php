@@ -240,14 +240,14 @@ class ReceptionController extends PatientInfo implements LangObject
             ]);
             $this->getEditDataBase($ob, 'Receipt', $this);
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisterationEdit'];
-        }else if(request()->route('id') === 'PatientRegisteration' && $ob['Receipt'] && $ob['Branch']){
+        }else if(request()->route('id') === 'Receipt' && $ob['Receipt'] && $ob['Branch']){
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array(), $ob[$ob['Setting']['Language']]['SelectGenderBox'], $ob[$ob['Setting']['Language']]['SelectNationalityBox'], $ob[$ob['Setting']['Language']]['CheckBox']):array();
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -388,14 +388,14 @@ class ReceptionController extends PatientInfo implements LangObject
                 foreach ($this->arr4 as $key => $packages)
                     $this->arr4[$key]['InputOutputLab'] = $ob[$ob['Setting']['Language']]['SelectTestBox'][$test['InputOutputLab']];
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
-        }else if(request()->route('id') === 'PatientRegisteration' && $ob['Receipt'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
+        }else if(request()->route('id') === 'Receipt' && $ob['Receipt'] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array(), $ob[$ob['Setting']['Language']]['SelectGenderBox'], $ob[$ob['Setting']['Language']]['SelectNationalityBox'], $ob[$ob['Setting']['Language']]['CheckBox']):array();
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -537,12 +537,12 @@ class ReceptionController extends PatientInfo implements LangObject
                     $this->arr4[$key]['InputOutputLab'] = $ob[$ob['Setting']['Language']]['SelectTestBox'][$test['InputOutputLab']];
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
 
-        }else if(request()->route('id') === 'PatientRegisteration' && !$ob['Receipt'] && $ob['Branch']){
+        }else if(request()->route('id') === 'Receipt' && !$ob['Receipt'] && $ob['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -685,12 +685,12 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
 
-        }else if(request()->route('id') === 'PatientRegisteration' && !$ob['Receipt'] && Rays::find(request()->session()->get('userLogout'))['Branch'] ){
+        }else if(request()->route('id') === 'Receipt' && !$ob['Receipt'] && Rays::find(request()->session()->get('userLogout'))['Branch'] ){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -832,14 +832,14 @@ class ReceptionController extends PatientInfo implements LangObject
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array(), $ob[$this->language]['SelectGenderBox'], $ob[$this->language]['SelectNationalityBox'], $ob[$this->language]['CheckBox']):array();
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
-        }else if(request()->route('id') === 'PatientRegisteration' && $ob['Receipt']){
+        }else if(request()->route('id') === 'Receipt' && $ob['Receipt']){
             $this->myPatent = isset($ob['Patent'])?Patent::fromArray($ob['Patent'], isset($ob['Contracts'])?Contracts::fromArray($ob['Contracts']):array(), $ob[$ob['Setting']['Language']]['SelectGenderBox'], $ob[$ob['Setting']['Language']]['SelectNationalityBox'], $ob[$ob['Setting']['Language']]['CheckBox']):array();
             $this->arr1 = isset($ob['Knows']) ? MyKnows::fromArray($ob['Knows']):array();
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -980,12 +980,12 @@ class ReceptionController extends PatientInfo implements LangObject
                 foreach ($this->arr4 as $key => $packages)
                     $this->arr4[$key]['InputOutputLab'] = $ob[$this->language]['SelectTestBox'][$test['InputOutputLab']];
             $this->successfully1 = $ob[$this->language]['Receipt']['LoadMessage'];
-        }else if(request()->route('id') === 'PatientRegisteration'){
+        }else if(request()->route('id') === 'Receipt'){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['Receipt']['TitleDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['LabelDeleteReceipt'],
             $ob[$ob['Setting']['Language']]['Receipt']['ButtonDeleteReceipt'],
-            route('deleteItem', 'Receipt'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Receipt']['PatientRegisteration'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1133,7 +1133,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1234,7 +1234,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1335,7 +1335,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1434,7 +1434,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1534,7 +1534,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1634,7 +1634,7 @@ class ReceptionController extends PatientInfo implements LangObject
             $ob[$ob['Setting']['Language']]['Patent']['TitlePatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['LabelPatentDelete'],
             $ob[$ob['Setting']['Language']]['Patent']['ButtonPatentDelete'],
-            route('deleteItem', 'Patent'),
+            route('deleteItem', request()->route('id')),
             $ob[$ob['Setting']['Language']]['TableInfo'],
             $ob[$ob['Setting']['Language']]['Patent']['Patients'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
@@ -1733,7 +1733,7 @@ class ReceptionController extends PatientInfo implements LangObject
 
     }
     public function index($id){
-        return view($id !== 'Patients'? 'admin.reception.patientRegisteration':'admin.reception.patients', [
+        return view($id === 'Receipt'? 'admin.reception.patientRegisteration':'admin.reception.patients', [
             'lang'=> $this,
             'active'=>'Reception',
             'activeItem'=>$id,

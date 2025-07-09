@@ -624,8 +624,8 @@ class RaysSeeder extends Seeder
                         'Reception'=>[
                             'Name'=>'Reception',
                             'Item'=>[
-                                'PatientRegisteration'=>'Patient registeration',
-                                'Patients'=>'Patients',
+                                'Receipt'=>'Patient registeration',
+                                'Patent'=>'Patients',
                             ]
                         ],
                         'TestCultures'=>[
@@ -639,7 +639,7 @@ class RaysSeeder extends Seeder
                         'Contracts'=>[
                             'Name'=>'Contracts',
                             'Item'=>[
-                                'PackagesContracts'=>'Contracts',
+                                'Contracts'=>'Contracts',
                                 'Knows'=>'Knows',
                             ]
                         ],
@@ -1352,8 +1352,8 @@ class RaysSeeder extends Seeder
                         'Reception'=>[
                             'Name'=>'Reception',
                             'Item'=>[
-                                'PatientRegisteration'=>'Patient registeration',
-                                'Patients'=>'Patients',
+                                'Receipt'=>'Patient registeration',
+                                'Patent'=>'Patients',
                             ]
                         ],
                         'TestCultures'=>[
@@ -1367,7 +1367,7 @@ class RaysSeeder extends Seeder
                         'Contracts'=>[
                             'Name'=>'Contracts',
                             'Item'=>[
-                                'PackagesContracts'=>'Contracts',
+                                'Contracts'=>'Contracts',
                                 'Knows'=>'Knows',
                             ]
                         ],
@@ -2083,8 +2083,8 @@ class RaysSeeder extends Seeder
                         'Reception'=>[
                             'Name'=>'الاستقبال',
                             'Item'=>[
-                                'PatientRegisteration'=>'الفواتير',
-                                'Patients'=>'المرضي',
+                                'Receipt'=>'الفواتير',
+                                'Patent'=>'المرضي',
                             ]
                         ],
                         'TestCultures'=>[
@@ -2098,7 +2098,7 @@ class RaysSeeder extends Seeder
                         'Contracts'=>[
                             'Name'=>'التعاقدات',
                             'Item'=>[
-                                'PackagesContracts'=>'التعاقد',
+                                'Contracts'=>'التعاقد',
                                 'Knows'=>'وسائل التواصل الاجتماعي',
                             ]
                         ],
