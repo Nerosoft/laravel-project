@@ -12,8 +12,10 @@ class IsLogin
      */
     public function handle(Request $request, Closure $next, $state): Response
     {  
-        if($request->session()->exists('userId') && $state === 'admin')
+        if($request->session()->exists('userId') && $state === 'admin' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages')
             return $next($request);
+        else if($request->session()->exists('userId') && $state === 'test')
+            return redirect()->route('Home');
         else
             return redirect('/admin/login');  
     }

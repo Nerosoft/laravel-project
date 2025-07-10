@@ -125,8 +125,7 @@ class TestCulturesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']][request()->route('id')]['ButtonAdd'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['ButtonEdit'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['TableId'],
-            $ob[$ob['Setting']['Language']][request()->route('id')]['TableEdit'],
-            Test::fromArray(array_reverse($ob[request()->route('id')]), $ob[$ob['Setting']['Language']]['SelectTestBox']));  
+            $ob[$ob['Setting']['Language']][request()->route('id')]['TableEdit']);  
         }else if(!$ob[request()->route('id')] && Rays::find(request()->session()->get('userLogout'))['Branch']){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['TitleDelete'], 
@@ -145,8 +144,7 @@ class TestCulturesController extends Page implements LangObject
             $ob[$ob['Setting']['Language']][request()->route('id')]['ButtonAdd'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['ButtonEdit'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['TableId'],
-            $ob[$ob['Setting']['Language']][request()->route('id')]['TableEdit'],
-            Test::fromArray(array_reverse($ob[request()->route('id')]), $ob[$ob['Setting']['Language']]['SelectTestBox']));  
+            $ob[$ob['Setting']['Language']][request()->route('id')]['TableEdit']);  
         }else if($ob[request()->route('id')]){
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']][request()->route('id')]['TitleDelete'], 
@@ -209,7 +207,7 @@ class TestCulturesController extends Page implements LangObject
                 'activeItem'=>$id,        
         ]);
     }
-    public function action($myId = null){
+    public function action(){
         return back()->with('success', $this->successfully1);
     }
     public function getMyObject(){

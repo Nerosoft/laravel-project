@@ -57,9 +57,9 @@ Route::controller(ReceptionController::class)->group(function () {
 });
 //TestCultures
 Route::controller(TestCulturesController::class)->group(function () {
-    Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':admin');
-    Route::post('/createTest/{id?}', 'action')->name('createTest')->middleware(IsLogin::class.':admin');
-    Route::post('/editTest/{id?}', 'action')->name('editTest')->middleware(IsLogin::class.':admin');
+    Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':test');
+    Route::post('/createTest/{id?}', 'action')->name('createTest')->middleware(IsLogin::class.':test');
+    Route::post('/editTest/{id?}', 'action')->name('editTest')->middleware(IsLogin::class.':test');
 });
 //Contracts
 Route::controller(ContractsController::class)->group(function () {
