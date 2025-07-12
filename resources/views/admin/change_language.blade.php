@@ -5,7 +5,7 @@
 @section('containt')
     <div class="space-page container">   
         <div class="text-left"> 
-            <button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->NewLanguage}}</button>
+            <button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button1}}</button>
         <div>
         @include('layout.all_models.admin.change_language')
         <div class="text-center"> 
@@ -15,9 +15,9 @@
         <table id="example" class="table table-striped">
             <thead>
                 <tr>
-                    <th>{{$lang->IdLangaue}}</th>
+                    <th>{{$lang->table7}}</th>
                     <th>{{$lang->NameLangaue}}</th>
-                    <th>{{$lang->EditLangaue}}</th>
+                    <th>{{$lang->table11}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,9 +60,9 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>{{$lang->IdLangaue}}</th>
+                    <th>{{$lang->table7}}</th>
                     <th>{{$lang->NameLangaue}}</th>
-                    <th>{{$lang->EditLangaue}}</th>
+                    <th>{{$lang->table11}}</th>
                 </tr>
             </tfoot>
             

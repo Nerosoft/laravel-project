@@ -1,14 +1,22 @@
 <?php
 namespace App\language\share;
-class Page extends DeleteModel{
-    protected function __construct($Language, $TitleDeleteTest, $LabelDeleteTest, $ButtonDeleteTest, $RouteDeleteTest, $TableInfo, $Title, $AppSettingAdmin, $Direction, $Branch, $Menu, $title2, $title3, $button1, $button2, $button3, $table7, $table11, $tableData = array()){
-        parent::__construct($Language, $TitleDeleteTest, $LabelDeleteTest, $ButtonDeleteTest, $RouteDeleteTest, $TableInfo, $Title, $AppSettingAdmin, $Direction, $Branch, $Menu, $tableData);
-        $this->title2 = $title2;
-        $this->title3 = $title3;
-        $this->button1 = $button1;
-        $this->button2 = $button2;
-        $this->button3 = $button3;
-        $this->table7 = $table7;
-        $this->table11 = $table11;
+use App\Models\Rays;
+use Illuminate\Support\Facades\Route;
+use App\Menu;
+
+class Page extends TableSetting{
+    protected function __construct($state, $ob, $tableData){
+        parent::__construct($ob[$ob['Setting']['Language']][$state]['Title'], new Menu($ob[$ob['Setting']['Language']]['Menu']), $ob, $tableData);
+        $this->title2 = $ob[$this->language][$state]['ScreenModelCreate'];
+        $this->title3 = $ob[$this->language][$state]['ScreenModelEdit'];
+        $this->button1 = $ob[$this->language][$state]['ButtonModelCreate'];
+        $this->button2 = $ob[$this->language][$state]['ButtonModelAdd'];
+        $this->button3 = $ob[$this->language][$state]['ButtonModelEdit'];
+        $this->table7 = $ob[$this->language][$state]['TableId'];
+        $this->table11 = $ob[$this->language][$state]['TabelEvent'];
+        $this->titleModelDelete = $ob[$this->language][$state]['ScreenModelDelete'];
+        $this->messageModelDelete = $ob[$this->language][$state]['MessageModelDelete'];
+        $this->buttonModelDelete = $ob[$this->language][$state]['ButtonModelDelete'];
+        $this->actionDelete = route('deleteItem', $state);
     }
 }

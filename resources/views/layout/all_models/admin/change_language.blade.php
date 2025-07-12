@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{isset($index)?$lang->title3:$lang->TitleNewLang}}</h5>
+                <h5 class="modal-title">{{isset($index)?$lang->title3:$lang->title2}}</h5>
                 <button type="button" onclick="closeForm('{{isset($index)?'copyModel'.$index:'createModel'}}')" class="btn btn-dark">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">{{isset($index)?$lang->button5:$lang->ButtonNewLang}}</button>
+                    <button type="submit" class="btn btn-danger">{{isset($index)?$lang->button3:$lang->button2}}</button>
                 </div>
             </form>
         </div>

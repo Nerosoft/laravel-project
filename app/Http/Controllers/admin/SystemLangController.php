@@ -62,98 +62,56 @@ class SystemLangController extends TableSetting
             $ob[request()->route('lang')] = $var1;
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['SystemLang']['AllLanguageEdit'];
-            return;
-        }else if(isset($ob[request()->route('lang')][request()->route('id')]) && $ob['Branch']){
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['CutomLang'][request()->route('id')],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $ob[request()->route('lang')][request()->route('id')]);
-        }else if(isset($ob[request()->route('lang')][request()->route('id')]) && Rays::find(request()->session()->get('userLogout'))['Branch']){
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['CutomLang'][request()->route('id')],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $ob[request()->route('lang')][request()->route('id')]);
         }else if(isset($ob[request()->route('lang')][request()->route('id')])){
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['CutomLang'][request()->route('id')],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
+            parent::__construct($ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'], 
             new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
             $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $ob[request()->route('lang')][request()->route('id')]);
-        }else if($ob['Branch']){
-            $myAllLanguage = array();
-            foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
-                $myAllLanguage[$key] = $ob[$key];
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $myAllLanguage);
-        }else if(Rays::find(request()->session()->get('userLogout'))['Branch']){
-            $myAllLanguage = array();
-            foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
-                $myAllLanguage[$key] = $ob[$key];
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $myAllLanguage);
+            $ob, $ob[request()->route('lang')][request()->route('id')]);
+
+            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
+            //init label
+            $this->label3 = $ob[$this->language]['SystemLang']['Text'];
+            $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
+            //table
+            $this->table7 = $ob[$this->language]['SystemLang']['LanguageValue'];
+            $this->table8 = $ob[$this->language]['SystemLang']['LanguageEvent'];
+            $this->table9 = $ob[$this->language]['SystemLang']['LanguageId'];
+            $this->table10 = $ob[$this->language]['SystemLang']['LanguageName'];
+            //model
+            $this->model1 = $ob[$this->language]['SystemLang']['Title'];
+            $this->model2 = $ob[$this->language]['SystemLang']['TitleDirection'];
+            //button
+            $this->button2 = $ob[$this->language]['SystemLang']['SaveDirection'];
+            $this->button3 = $ob[$this->language]['SystemLang']['SaveText'];
+           
         }else{
             $myAllLanguage = array();
             foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
                 $myAllLanguage[$key] = $ob[$key];
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'],
-            $ob[$ob['Setting']['Language']]['TableInfo'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
+            parent::__construct($ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'], new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
             $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']), $myAllLanguage);
+            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
+            $ob, $myAllLanguage);
+            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
+            //init label
+            $this->label3 = $ob[$this->language]['SystemLang']['Text'];
+            $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
+            //table
+            $this->table7 = $ob[$this->language]['SystemLang']['LanguageValue'];
+            $this->table8 = $ob[$this->language]['SystemLang']['LanguageEvent'];
+            $this->table9 = $ob[$this->language]['SystemLang']['LanguageId'];
+            $this->table10 = $ob[$this->language]['SystemLang']['LanguageName'];
+            //model
+            $this->model1 = $ob[$this->language]['SystemLang']['Title'];
+            $this->model2 = $ob[$this->language]['SystemLang']['TitleDirection'];
+            //button
+            $this->button2 = $ob[$this->language]['SystemLang']['SaveDirection'];
+            $this->button3 = $ob[$this->language]['SystemLang']['SaveText'];
         }
-        $this->Left = $ob[$this->language]['SystemLang']['ltr'];
-        $this->Right = $ob[$this->language]['SystemLang']['rtl'];
-        //init label
-        $this->label3 = $ob[$this->language]['SystemLang']['Text'];
-        $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
-        //table
-        $this->table7 = $ob[$this->language]['SystemLang']['LanguageValue'];
-        $this->table8 = $ob[$this->language]['SystemLang']['LanguageEvent'];
-        $this->table9 = $ob[$this->language]['SystemLang']['LanguageId'];
-        $this->table10 = $ob[$this->language]['SystemLang']['LanguageName'];
-        //model
-        $this->model1 = $ob[$this->language]['SystemLang']['Title'];
-        $this->model2 = $ob[$this->language]['SystemLang']['TitleDirection'];
-        //button
-        $this->button2 = $ob[$this->language]['SystemLang']['SaveDirection'];
-        $this->button3 = $ob[$this->language]['SystemLang']['SaveText'];
+        
     }
     public function index($nameLanguage = null, $id = 'SystemLang'){
         return view('admin.all_language', $nameLanguage === null?[

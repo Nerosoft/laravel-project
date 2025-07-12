@@ -20,7 +20,9 @@ use App\Http\Middleware\Auth;
 use Illuminate\Http\Request;
 
 Route::controller(ChangeLanguageController::class)->group(function () {
-    Route::post('/language', 'changeLanguage')->name('language.changeLanguage')->middleware(Auth::class.':admin');
+    Route::post('/language', 'action')->name('language.changeLanguage')->middleware(Auth::class.':admin');
+    Route::get('/branchMain/{id?}', 'action')->name('branchMain')->middleware(IsLogin::class.':admin');
+
 });
 Route::controller(LoginAdminController::class)->group(function () {
     Route::get('/admin/login', 'index')->middleware(Auth::class.':admin');
@@ -72,7 +74,6 @@ Route::controller(ContractsController::class)->group(function () {
 //Branches
 Route::controller(BranchesController::class)->group(function () {
     Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
-    Route::get('/branchMain/{id?}', 'action')->name('branchMain')->middleware(IsLogin::class.':admin');
     Route::post('/addBranchRays', 'action')->name('addBranchRays')->middleware(IsLogin::class.':admin');
     Route::post('/editBranchRays', 'action')->name('editBranchRays')->middleware(IsLogin::class.':admin');
 });
