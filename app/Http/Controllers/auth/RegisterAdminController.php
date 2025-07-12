@@ -12,7 +12,6 @@ use App\Http\interface\LangObject;
 
 class RegisterAdminController extends EmailPassInformaion implements LangObject
 {   
-    public $ob;
     public function __construct(){
         parent::__construct('Register');
         $this->UserRepeatPassword = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserRepeatPassword'];
@@ -32,7 +31,7 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             $this->message['codePassword.required'] = $this->error8;
             $this->message['password.confirmed']= $this->error7;
             request()->validate($this->roll,$this->message);       
-            $this->getCreateDataBase($ob, 'User', $this->generateUniqueIdentifier(), $this);     
+            $this->getCreateDataBase($this->ob, 'User', $this->generateUniqueIdentifier(), $this);     
             request()->session()->put('userId', request()->input('id'));
             request()->session()->put('userLogout', request()->input('id'));
             $this->successfully1 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin'];   
