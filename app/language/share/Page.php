@@ -1,11 +1,10 @@
 <?php
 namespace App\language\share;
 use App\Models\Rays;
-use Illuminate\Support\Facades\Route;
 use App\Menu;
 
 class Page extends TableSetting{
-    protected function __construct($state, $ob, $tableData){
+    protected function __construct($actionDelete, $state, $ob, $tableData){
         parent::__construct($ob[$ob['Setting']['Language']][$state]['Title'], new Menu($ob[$ob['Setting']['Language']]['Menu']), $ob, $tableData);
         $this->title2 = $ob[$this->language][$state]['ScreenModelCreate'];
         $this->title3 = $ob[$this->language][$state]['ScreenModelEdit'];
@@ -17,6 +16,6 @@ class Page extends TableSetting{
         $this->titleModelDelete = $ob[$this->language][$state]['ScreenModelDelete'];
         $this->messageModelDelete = $ob[$this->language][$state]['MessageModelDelete'];
         $this->buttonModelDelete = $ob[$this->language][$state]['ButtonModelDelete'];
-        $this->actionDelete = route('deleteItem', $state);
+        $this->actionDelete = $actionDelete;
     }
 }

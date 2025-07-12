@@ -16,6 +16,8 @@ class LangController extends Page
 {
     public function __construct(){
         $ob = Rays::find(request()->session()->get('userId'));
+                    
+
         if(Route::currentRouteName() === 'language.change'){
             request()->validate([
             'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))]
@@ -28,7 +30,6 @@ class LangController extends Page
             $ob['Setting'] = $setting;
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
-            return;
         }else if(Route::currentRouteName() === 'language.copy'){
             request()->validate([
             'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))],
@@ -49,7 +50,6 @@ class LangController extends Page
             $ob[$newKey] = $ob[request()->input('id')];
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['CopyLanguage'].$ob[$ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
-            return;
         }else if(Route::currentRouteName() === 'lang.createLanguage'){
             request()->validate([
                 'lang_name' =>['required', 'min:3']
@@ -70,7 +70,6 @@ class LangController extends Page
             $model[$newKey] = $myLanguage;
             $model->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['NewLanguageMessage'].request()->input('lang_name');
-            return;
         }else if(Route::currentRouteName() === 'language.delete'){
             request()->validate([
                 'id' =>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])), Rule::notIn([$ob['Setting']['Language'], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[0], array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage'])[1]])]
@@ -88,12 +87,11 @@ class LangController extends Page
             unset($ob[request()->input('id')]);
             $ob->save();
             $this->successfully1 = $ob[$ob['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'].$langName;
-            return;
         }else{
             $myRadios = array();
             foreach (array_reverse($ob[$ob['Setting']['Language']]['AllNamesLanguage']) as $key => $value)
                 $myRadios[$key] = new MyLanguage($value);
-            parent::__construct('ChangeLanguage', $ob, $myRadios);
+            parent::__construct(route('language.delete'), 'ChangeLanguage', $ob, $myRadios);
             $this->error1 = $ob[$this->language]['ChangeLanguage']['NewLangNameRequired'];
             $this->error2 = $ob[$this->language]['ChangeLanguage']['NewLangNameInvalid'];
             //init table

@@ -2,7 +2,7 @@
 namespace App\language\share;
 class PatientInfo extends Page{
     protected function __construct($state, $ob, $tableData){
-        parent::__construct($state, $ob, $tableData);
+        parent::__construct(route('deleteItem', $state), $state, $ob, $tableData);
         $this->labelPatient = $ob[$ob['Setting']['Language']][$state]['LabelPatentAvatar'];
         $this->label16 = $ob[$ob['Setting']['Language']][$state]['LabelPatentName'];
         $this->hint1 = $ob[$ob['Setting']['Language']][$state]['HintPatentName'];

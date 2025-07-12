@@ -71,7 +71,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="submit" form="{{ isset($index) ? 'editForm'.$index : 'createForm' }}" class="btn btn-primary">{{isset($index) ? $lang->button4 : $lang->button2}}</button>
+        <button type="submit" form="{{ isset($index) ? 'editForm'.$index : 'createForm' }}" class="btn btn-primary">{{isset($index) ? $lang->button3 : $lang->button2}}</button>
       </div>
     </div>
   </div>

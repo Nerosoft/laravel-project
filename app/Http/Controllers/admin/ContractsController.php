@@ -72,7 +72,7 @@ class ContractsController extends Page implements LangObject
             $this->getEditDataBase($ob, 'Knows', $this);
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Knows']['KnowsEdit'];
         }else if(request()->route('id') === 'Knows'){
-            parent::__construct(request()->route('id'), $ob, $ob[request()->route('id')]?MyKnows::fromArray(array_reverse($ob[request()->route('id')])):array());
+            parent::__construct(route('deleteItem', request()->route('id')), request()->route('id'), $ob, $ob[request()->route('id')]?MyKnows::fromArray(array_reverse($ob[request()->route('id')])):array());
             $this->error1 = $ob[$ob['Setting']['Language']]['Knows']['KnowsNameRequired'];
             $this->error2 = $ob[$ob['Setting']['Language']]['Knows']['KnowsNameInvalid'];
             $this->table8 = $ob[$this->language]['Knows']['TableKnowsName'];
@@ -80,7 +80,7 @@ class ContractsController extends Page implements LangObject
             $this->hint1 = $ob[$this->language]['Knows']['HintKnowsName'];
             $this->successfully1 = $ob[$this->language]['Knows']['LoadMessage'];
         }else{
-            parent::__construct('Contracts', $ob, $ob['Contracts']?Contracts::fromArray(array_reverse($ob['Contracts'])):array());
+            parent::__construct(route('deleteItem', 'Contracts'), 'Contracts', $ob, $ob['Contracts']?Contracts::fromArray(array_reverse($ob['Contracts'])):array());
             $this->error1 = $ob[$this->language]['Contracts']['ContractNameRequired'];
             $this->error2 = $ob[$this->language]['Contracts']['ContractNameInvalid'];
             $this->error3 = $ob[$this->language]['Contracts']['ContractGovernorateRequired'];

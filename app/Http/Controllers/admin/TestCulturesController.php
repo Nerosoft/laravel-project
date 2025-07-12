@@ -68,7 +68,7 @@ class TestCulturesController extends Page implements LangObject
             $this->getEditDataBase($ob, request()->route('id'), $this);
             
         }else{
-            parent::__construct(request()->route('id'), $ob, $ob[request()->route('id')]?Test::fromArray(array_reverse($ob[request()->route('id')]), $ob[$ob['Setting']['Language']]['SelectTestBox']):array());
+            parent::__construct(route('deleteItem', request()->route('id')), request()->route('id'), $ob, $ob[request()->route('id')]?Test::fromArray(array_reverse($ob[request()->route('id')]), $ob[$ob['Setting']['Language']]['SelectTestBox']):array());
             $this->table8 = $ob[$this->language][request()->route('id')]['TableName'];
             $this->table9 = $ob[$this->language][request()->route('id')]['TablePrice'];
             $this->table10 = $ob[$this->language][request()->route('id')]['TableInputOutput'];

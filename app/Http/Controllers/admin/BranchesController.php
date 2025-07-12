@@ -195,7 +195,7 @@ class BranchesController extends Page implements LangObject
             $this->getEditDataBase($ob, 'Branch', $this); 
             $this->successfully1 = $ob[$ob['Setting']['Language']]['Branch']['BranchesEdit'];
         }else{
-            parent::__construct('Branch', $ob, $ob['Branch']?Branch::fromArray($ob['Branch'], $ob[$ob['Setting']['Language']]['SelectBranchBox']):(Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['SelectBranchBox']):array()));
+            parent::__construct(route('deleteItem', 'Branch'),'Branch', $ob, $ob['Branch']?Branch::fromArray($ob['Branch'], $ob[$ob['Setting']['Language']]['SelectBranchBox']):(Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['SelectBranchBox']):array()));
             $this->table8 = $ob[$this->language]['Branch']['BranchStreet'];
             $this->table9 = $ob[$this->language]['Branch']['BranchName'];
             $this->table10 = $ob[$this->language]['Branch']['BranchPhone'];
