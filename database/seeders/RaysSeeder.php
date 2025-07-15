@@ -645,13 +645,6 @@ class RaysSeeder extends Seeder
                         'ChangeLanguage'=>'Change language',        
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
-                        'Reception'=>[
-                            'Name'=>'Reception',
-                            'Item'=>[
-                                'Receipt'=>'Patient registeration',
-                                'Patent'=>'Patients',
-                            ]
-                        ],
                         'TestCultures'=>[
                             'Name'=>'Test cultures',
                             'Item'=>[
@@ -659,14 +652,11 @@ class RaysSeeder extends Seeder
                                 'Cultures'=>'Cultures',
                                 'Packages'=>'Packages',
                             ]
-                        ],  
-                        'Contracts'=>[
-                            'Name'=>'Contracts',
-                            'Item'=>[
-                                'Contracts'=>'Contracts',
-                                'Knows'=>'Knows',
-                            ]
                         ],
+                        'Receipt'=>'Receipt',
+                        'Patent'=>'Patients',
+                        'Knows'=>'Knows',
+                        'Contracts'=>'Contracts',
                         'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[
@@ -1397,13 +1387,6 @@ class RaysSeeder extends Seeder
                         'ChangeLanguage'=>'Change language',        
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
-                        'Reception'=>[
-                            'Name'=>'Reception',
-                            'Item'=>[
-                                'Receipt'=>'Patient registeration',
-                                'Patent'=>'Patients',
-                            ]
-                        ],
                         'TestCultures'=>[
                             'Name'=>'Test cultures',
                             'Item'=>[
@@ -1411,14 +1394,11 @@ class RaysSeeder extends Seeder
                                 'Cultures'=>'Cultures',
                                 'Packages'=>'Packages',
                             ]
-                        ],  
-                        'Contracts'=>[
-                            'Name'=>'Contracts',
-                            'Item'=>[
-                                'Contracts'=>'Contracts',
-                                'Knows'=>'Knows',
-                            ]
                         ],
+                        'Receipt'=>'Receipt',
+                        'Patent'=>'Patients',
+                        'Knows'=>'Knows',
+                        'Contracts'=>'Contracts',
                         'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[
@@ -2148,13 +2128,6 @@ class RaysSeeder extends Seeder
                         'ChangeLanguage'=>'تغير اللغه',        
                         'SystemLang'=>'نظام البرنامج',          
                         'Home'=>'الشاشة الرئيسيه',
-                        'Reception'=>[
-                            'Name'=>'الاستقبال',
-                            'Item'=>[
-                                'Receipt'=>'الفواتير',
-                                'Patent'=>'المرضي',
-                            ]
-                        ],
                         'TestCultures'=>[
                             'Name'=>'الاختبارات',
                             'Item'=>[
@@ -2163,13 +2136,10 @@ class RaysSeeder extends Seeder
                                 'Packages'=>'الحزم',
                             ]
                         ],  
-                        'Contracts'=>[
-                            'Name'=>'التعاقدات',
-                            'Item'=>[
-                                'Contracts'=>'التعاقد',
-                                'Knows'=>'وسائل التواصل الاجتماعي',
-                            ]
-                        ],
+                        'Receipt'=>'الفواتير',
+                        'Patent'=>'المرضي',
+                        'Contracts'=>'التعاقد',
+                        'Knows'=>'وسائل التواصل الاجتماعي',
                         'Branches'=>'الافرع',
                     ],
                     'TableInfo'=>[

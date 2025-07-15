@@ -15,101 +15,79 @@ use App\instance\admin\Branch;
 class SystemLangController extends TableSetting
 {
     public function __construct(){
-        $ob = Rays::find(request()->session()->get('userId'));
-        $this->error1 = $ob[$ob['Setting']['Language']]['SystemLang']['TextRequired'];
-        $this->error2 = $ob[$ob['Setting']['Language']]['SystemLang']['TextLenght'];
+        $this->ob = Rays::find(request()->session()->get('userId'));
+        $this->error1 = $this->ob[$this->ob['Setting']['Language']]['SystemLang']['TextRequired'];
+        $this->error2 = $this->ob[$this->ob['Setting']['Language']]['SystemLang']['TextLenght'];
         if(Route::currentRouteName() === 'edit.editAllLanguage'){
-            Validator::make([...request()->all(), 'myLang'=>request()->route('lang'), 'id'=>request()->route('id'), 'name'=>request()->route('name'), 'item'=>request()->route('item')],
-            [
+            $this->roll = [
                 'word' => ['required', request()->route('id') !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])],
-                'myLang'=>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['AllNamesLanguage']))],
-                'id'=>['required', Rule::in(array_keys($ob[$ob['Setting']['Language']]['CutomLang']))],
-                'name'=>['required', function ($attribute, $value, $fail)use($ob) {
-                    if(!isset($ob[request()->route('lang')][request()->route('id')][request()->route('name')]['Item'][request()->route('item')]) && request()->route('item') !== null){
-                        $fail($ob[$ob['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
-                        $fail($ob[$ob['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
-                    }else if(!isset($ob[request()->route('lang')][request()->route('id')][request()->route('name')]))
-                        $fail($ob[$ob['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
+                'myLang'=>['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']))],
+                'id'=>['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['CutomLang']))],
+                'name'=>['required', function ($attribute, $value, $fail){
+                    if(!isset($this->ob[request()->route('lang')][request()->route('id')][request()->route('name')]['Item'][request()->route('item')]) && request()->route('item') !== null){
+                        $fail($this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
+                        $fail($this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
+                    }else if(!isset($this->ob[request()->route('lang')][request()->route('id')][request()->route('name')]))
+                        $fail($this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
                 }],
-            ],        
-            request()->route('id') !== 'Html' ? [
+            ];
+            $this->message = [
                 'word.required' => $this->error1,
-                'word.min' => $this->error2,
-                'myLang.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditLanguageRequired'],
-                'id.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditTableRequired'],
-                'myLang.in'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditLanguageInvalid'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditTableInvalid'],
-                'name.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditKeyRequired'],
-            ] : [
-                'word.required' => $this->error1,
-                'word.in' => $this->error2,
-                'myLang.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditLanguageRequired'],
-                'id.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditTableRequired'],
-                'myLang.in'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditLanguageInvalid'],
-                'id.in'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditTableInvalid'],
-                'name.required'=>$ob[$ob['Setting']['Language']]['SystemLang']['EditKeyRequired'],
-            ])->validate();
-            $var1 = $ob[request()->route('lang')];
-            //make array first order importaint
-            if(request()->route('id') === 'Menu' && request()->route('item') === null && is_array($var1[request()->route('id')][request()->route('name')]))
-                $var1[request()->route('id')][request()->route('name')]['Name'] = request()->input('word');
-            else if(request()->route('id') === 'Menu' && request()->route('item') !== null)
-                $var1[request()->route('id')][request()->route('name')]['Item'][request()->route('item')] = request()->input('word');
-            else
-                $var1[request()->route('id') === request()->route('lang') ? request()->route('lang') : request()->route('id')][request()->route('name')] = request()->input('word');
-            //my key of site aut and this key not like my key in database
-            //svae data using new object and send my data to constructor and call setValue to save new value and return object                
-            $ob[request()->route('lang')] = $var1;
-            $ob->save();
-            $this->successfully1 = $ob[$ob['Setting']['Language']]['SystemLang']['AllLanguageEdit'];
-        }else if(isset($ob[request()->route('lang')][request()->route('id')])){
-            parent::__construct($ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'], 
-            new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $ob, $ob[request()->route('lang')][request()->route('id')]);
+                'word.'.(request()->route('id') !== 'Html' ?'min':'in') => $this->error2,
+                'myLang.required'=>$this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditLanguageRequired'],
+                'id.required'=>$this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditTableRequired'],
+                'myLang.in'=>$this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditLanguageInvalid'],
+                'id.in'=>$this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditTableInvalid'],
+                'name.required'=>$this->ob[$this->ob['Setting']['Language']]['SystemLang']['EditKeyRequired'],
+            ];
+        }else if(isset($this->ob[request()->route('lang')][request()->route('id')])){
+            parent::__construct($this->ob[$this->ob['Setting']['Language']]['SystemLang']['SystemLang'], 
+            new Menu($this->ob[$this->ob['Setting']['Language']]['Menu'], 'Language',
+            $this->ob[$this->ob['Setting']['Language']]['CutomLang'],
+            $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']),
+            $this->ob, $this->ob[request()->route('lang')][request()->route('id')]);
 
-            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
-            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
+            $this->Left = $this->ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $this->ob[$this->language]['SystemLang']['rtl'];
             //init label
-            $this->label3 = $ob[$this->language]['SystemLang']['Text'];
-            $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
+            $this->label3 = $this->ob[$this->language]['SystemLang']['Text'];
+            $this->label4 = $this->ob[$this->language]['SystemLang']['DirectionPage']; 
             //table
-            $this->table7 = $ob[$this->language]['SystemLang']['LanguageValue'];
-            $this->table8 = $ob[$this->language]['SystemLang']['LanguageEvent'];
-            $this->table9 = $ob[$this->language]['SystemLang']['LanguageId'];
-            $this->table10 = $ob[$this->language]['SystemLang']['LanguageName'];
+            $this->table7 = $this->ob[$this->language]['SystemLang']['LanguageValue'];
+            $this->table8 = $this->ob[$this->language]['SystemLang']['LanguageEvent'];
+            $this->table9 = $this->ob[$this->language]['SystemLang']['LanguageId'];
+            $this->table10 = $this->ob[$this->language]['SystemLang']['LanguageName'];
             //model
-            $this->model1 = $ob[$this->language]['SystemLang']['Title'];
-            $this->model2 = $ob[$this->language]['SystemLang']['TitleDirection'];
+            $this->model1 = $this->ob[$this->language]['SystemLang']['Title'];
+            $this->model2 = $this->ob[$this->language]['SystemLang']['TitleDirection'];
             //button
-            $this->button2 = $ob[$this->language]['SystemLang']['SaveDirection'];
-            $this->button3 = $ob[$this->language]['SystemLang']['SaveText'];
+            $this->button2 = $this->ob[$this->language]['SystemLang']['SaveDirection'];
+            $this->button3 = $this->ob[$this->language]['SystemLang']['SaveText'];
            
         }else{
             $myAllLanguage = array();
-            foreach ($ob[$ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
-                $myAllLanguage[$key] = $ob[$key];
-            parent::__construct($ob[$ob['Setting']['Language']]['SystemLang']['SystemLang'], new Menu($ob[$ob['Setting']['Language']]['Menu'], 'Language',
-            $ob[$ob['Setting']['Language']]['CutomLang'],
-            $ob[$ob['Setting']['Language']]['AllNamesLanguage']),
-            $ob, $myAllLanguage);
-            $this->Left = $ob[$this->language]['SystemLang']['ltr'];
-            $this->Right = $ob[$this->language]['SystemLang']['rtl'];
+            foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
+                $myAllLanguage[$key] = $this->ob[$key];
+            parent::__construct($this->ob[$this->ob['Setting']['Language']]['SystemLang']['SystemLang'], new Menu($this->ob[$this->ob['Setting']['Language']]['Menu'], 'Language',
+            $this->ob[$this->ob['Setting']['Language']]['CutomLang'],
+            $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']),
+            $this->ob, $myAllLanguage);
+            $this->Left = $this->ob[$this->language]['SystemLang']['ltr'];
+            $this->Right = $this->ob[$this->language]['SystemLang']['rtl'];
             //init label
-            $this->label3 = $ob[$this->language]['SystemLang']['Text'];
-            $this->label4 = $ob[$this->language]['SystemLang']['DirectionPage']; 
+            $this->label3 = $this->ob[$this->language]['SystemLang']['Text'];
+            $this->label4 = $this->ob[$this->language]['SystemLang']['DirectionPage']; 
             //table
-            $this->table7 = $ob[$this->language]['SystemLang']['LanguageValue'];
-            $this->table8 = $ob[$this->language]['SystemLang']['LanguageEvent'];
-            $this->table9 = $ob[$this->language]['SystemLang']['LanguageId'];
-            $this->table10 = $ob[$this->language]['SystemLang']['LanguageName'];
+            $this->table7 = $this->ob[$this->language]['SystemLang']['LanguageValue'];
+            $this->table8 = $this->ob[$this->language]['SystemLang']['LanguageEvent'];
+            $this->table9 = $this->ob[$this->language]['SystemLang']['LanguageId'];
+            $this->table10 = $this->ob[$this->language]['SystemLang']['LanguageName'];
             //model
-            $this->model1 = $ob[$this->language]['SystemLang']['Title'];
-            $this->model2 = $ob[$this->language]['SystemLang']['TitleDirection'];
+            $this->model1 = $this->ob[$this->language]['SystemLang']['Title'];
+            $this->model2 = $this->ob[$this->language]['SystemLang']['TitleDirection'];
             //button
-            $this->button2 = $ob[$this->language]['SystemLang']['SaveDirection'];
-            $this->button3 = $ob[$this->language]['SystemLang']['SaveText'];
+            $this->button2 = $this->ob[$this->language]['SystemLang']['SaveDirection'];
+            $this->button3 = $this->ob[$this->language]['SystemLang']['SaveText'];
         }
         
     }
@@ -123,7 +101,20 @@ class SystemLangController extends TableSetting
             'activeItem'=>$id,
         ]);
     }
-    public function action(){
-        return back()->with('success', $this->successfully1);
+    public function makeEditLanguage($lang, $id, $name, $item = null){
+        Validator::make([...request()->all(), 'myLang'=>$lang, 'id'=>$id, 'name'=>$name, 'item'=>$item], $this->roll, $this->message)->validate();
+        $var1 = $this->ob[$lang];
+        //make array first order importaint
+        if($id === 'Menu' && $item === null && is_array($var1[$id][$name]))
+            $var1[$id][$name]['Name'] = request()->input('word');
+        else if($id === 'Menu' && $item !== null)
+            $var1[$id][$name]['Item'][$item] = request()->input('word');
+        else
+            $var1[$id === $lang ? $lang : $id][$name] = request()->input('word');
+        //my key of site aut and this key not like my key in database
+        //svae data using new object and send my data to constructor and call setValue to save new value and return object                
+        $this->ob[$lang] = $var1;
+        $this->ob->save();
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['SystemLang']['AllLanguageEdit']);
     }
 }

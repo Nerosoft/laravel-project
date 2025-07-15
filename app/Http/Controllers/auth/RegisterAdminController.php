@@ -29,12 +29,7 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             $this->message['password_confirmation.required'] = $this->UserRepeatPasswordRequired;
             $this->message['codePassword.min'] = $this->error9;
             $this->message['codePassword.required'] = $this->error8;
-            $this->message['password.confirmed']= $this->error7;
-            request()->validate($this->roll,$this->message);       
-            $this->getCreateDataBase($this->ob, 'User', $this->generateUniqueIdentifier(), $this);     
-            request()->session()->put('userId', request()->input('id'));
-            request()->session()->put('userLogout', request()->input('id'));
-            $this->successfully1 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin'];   
+            $this->message['password.confirmed']= $this->error7;   
         }else{
             $this->labelUserRepeatPassword = $this->ob[$this->language]['Register']['LabelUserRepeatPassword'];
             $this->labelUserCodePassword = $this->ob[$this->language]['Register']['LabelUserCodePassword'];
@@ -47,10 +42,14 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
             'lang'=>$this
         ]);
     }
-    public function action(){
-        return redirect()->route('Home')->with('success', $this->successfully1); 
+    public function makeRegister(){
+        $this->getCreateDataBase($this->ob, 'User', $this->generateUniqueIdentifier(), $this);     
+        request()->session()->put('userId', request()->input('id'));
+        request()->session()->put('userLogout', request()->input('id'));
+        return redirect()->route('Home')->with('success',  $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin']);
     }
     public function getMyObject(){
+        request()->validate($this->roll,$this->message);       
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }
 }

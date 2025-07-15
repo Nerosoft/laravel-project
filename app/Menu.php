@@ -7,10 +7,12 @@ class Menu
     private $Home;
     private $SystemLang;
     private $ChangeLanguage;
-    private $Reception;
     private $TestCultures;
-    private $Contracts;
     private $Branches;
+    private $Knows;
+    private $Contracts;
+    private $Receipt;
+    private $Patent;
     /**
      * Create a new class instance.
      */
@@ -26,10 +28,12 @@ class Menu
             $this->ChangeLanguage = $menu['ChangeLanguage'];
             $this->SystemLang = $menu['SystemLang'];
             $this->Home = $menu['Home'];
-            $this->Reception = new MenuItem($menu['Reception']['Name'], $menu['Reception']['Item']);
             $this->TestCultures = new MenuItem($menu['TestCultures']['Name'], $menu['TestCultures']['Item']);
-            $this->Contracts = new MenuItem($menu['Contracts']['Name'], $menu['Contracts']['Item']);
             $this->Branches = $menu['Branches'];
+            $this->Receipt = $menu['Receipt'];
+            $this->Patent = $menu['Patent'];
+            $this->Knows = $menu['Knows'];
+            $this->Contracts = $menu['Contracts'];
         }
     }
     public function getMenu(){
