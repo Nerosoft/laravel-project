@@ -69,7 +69,8 @@ class TestCulturesController extends Page implements LangObject
         ]);
     }
     public function makeAddTest($id){
-        $this->getCreateDataBase($this->ob, $id, $this->generateUniqueIdentifier(), $this);
+        $this->myDbId = $this->generateUniqueIdentifier();
+        $this->getCreateDataBase($this->ob, $id, $this->myDbId, $this);
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']][$id]['Add']);
     }
     public function makeEditTest($id){
