@@ -45,7 +45,7 @@ class EmailPassInformaion extends InitPage{
             $this->help = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['LabelLoginUser'];
         }else{
             Cookie::queue($this->ob['_id'], serialize($this->ob['Setting']['Language']),2628000);
-            parent::__construct($ob['Setting']['Language'],
+            parent::__construct($this->ob['Setting']['Language'],
             $this->ob[$this->ob['Setting']['Language']][$state]['Title'],
             $this->ob[$this->ob['Setting']['Language']]['Html']['Direction']);
             $this->button1 = $this->ob[$this->ob['Setting']['Language']][$state]['ButtonLanguage'];
