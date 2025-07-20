@@ -10,7 +10,7 @@ abstract class Controller
             $arr[$Id] = $newObject->getMyObject();
             $model[$item] = $arr;
         }else
-            $model[$item] = array($Id=>$newObject->getMyObject());
+            $model[$item] = array($Id=>$newObject->getMyObject($Id));
         $model->save();
     }
     protected function generateUniqueIdentifier($length = 8){

@@ -26,6 +26,8 @@ use App\Models\Rays;
 Route::controller(ChangeLanguageController::class)->group(function () {
     Route::post('/language', 'action')->name('language.changeLanguage')->middleware(Auth::class.':admin');
     Route::get('/branchMain/{id?}', 'action')->name('branchMain')->middleware(IsLogin::class.':admin');
+    Route::post('/changeLanguage', 'action')->name('language.change')->middleware(IsLogin::class.':admin');
+    Route::post('/deleteLanguage', 'action')->name('language.delete')->middleware(IsLogin::class.':admin');
 
 });
 Route::controller(LoginAdminController::class)->group(function () {
@@ -48,9 +50,7 @@ Route::controller(SystemLangController::class)->group(function () {
 Route::controller(LangController::class)->group(function () {
     Route::get('/ChangeLanguage', 'index')->name('ChangeLanguage')->middleware(IsLogin::class.':admin');
     Route::post('/newLanguage', 'makeAddLanguage')->name('lang.createLanguage')->middleware(IsLogin::class.':admin');
-    Route::post('/changeLanguage', 'makeChangeLanguage')->name('language.change')->middleware(IsLogin::class.':admin');
     Route::post('/copyLanguage', 'makeCopyLanguage')->name('language.copy')->middleware(IsLogin::class.':admin');
-    Route::post('/deleteLanguage', 'makeDeleteLanguage')->name('language.delete')->middleware(IsLogin::class.':admin');
 });
 //all route admin
 //Reception
@@ -96,4 +96,3 @@ Route::controller(LogoutController::class)->group(function () {
 });
 //make variable names and ar view and setup app importaint.
 //make button create test and save in all branch or chose option branch to add test value
-//make interface add and edit inside controller

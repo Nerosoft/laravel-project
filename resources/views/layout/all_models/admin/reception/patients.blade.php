@@ -18,7 +18,7 @@
                     <div class="row justify-content-md-center">
                         <div class="col-12 text-center">
                             <input onchange="changeImage(this.files[0], $('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#preview'))" type="file" id="avatar" name="avatar" class="d-none avatar" accept="image/*"/>
-                            <button type="button" class="upload-btn" onclick="openImage($('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#avatar'))" id="uploadBtn">{{$lang->button1}}</button>
+                            <button type="button" class="upload-btn" onclick="openImage($('#{{isset($index) ? "editForm".$index : "createForm"}}').find('#avatar'))" id="uploadBtn">{{$lang->ButtonImage}}</button>
                         </div>
                     </div>
                     @include('layout.patient_information',['state'=>'enable'])

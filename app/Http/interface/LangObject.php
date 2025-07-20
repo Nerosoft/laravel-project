@@ -1,5 +1,5 @@
 <?php
 namespace App\Http\interface;
 interface LangObject{
-    public function getMyObject();
+    public function getMyObject($id);
 }

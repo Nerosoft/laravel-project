@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if($loop->index < (count($lang->tableData) - 2))
+                        @if($index !== $lang->language)
                         @include('layout.model_delete', ['name'=>$myLang->getName()])
                         @endif
                     </th>

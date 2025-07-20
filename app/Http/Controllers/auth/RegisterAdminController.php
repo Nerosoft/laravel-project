@@ -48,7 +48,7 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         request()->session()->put('userLogout', request()->input('id'));
         return redirect()->route('Home')->with('success',  $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin']);
     }
-    public function getMyObject(){
+    public function getMyObject($id = null){
         request()->validate($this->roll,$this->message);       
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }

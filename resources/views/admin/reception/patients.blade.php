@@ -5,7 +5,7 @@
 @extends('layout.nav_admin')
 @section('containt')
 <div class="space-page container">
-<button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button3}}</button>
+<button class="btn btn-primary" onClick="openForm('createModel')">{{$lang->button1}}</button>
 @include('layout.all_models.admin.reception.patients')
 <table id="example" class="table table-striped">
         <thead>

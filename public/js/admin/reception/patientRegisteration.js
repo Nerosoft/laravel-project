@@ -366,7 +366,7 @@ function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, pa
         idSelectBox.attr("class", "d-none");
 }
 
-function validateT2(test_select, tests_name, selectPatient, know, payment_date, payment_amount, payment_method, patent_code, discount, delayedMoney, key, url, message, state){
+function validateT2(test_select, tests_name, selectPatient, know, payment_date, payment_amount, payment_method, patent_code, discount, delayedMoney, key, url, state){
     let isValid = false;
     if(test_select.val() === null && keyValueMap.get(key).length === 0){
         (new bootstrap.Toast('#myToast1', { delay: 10000 })).show();
@@ -461,11 +461,10 @@ function validateT2(test_select, tests_name, selectPatient, know, payment_date, 
         method: "POST",
         data: data,
         success: function (response) {
-            // window.location.href = message;
             $('#myToastActionBody').text(response['message']);
             (new bootstrap.Toast('#myToastAction', { delay: 10000 })).show();
             setTimeout(() => {
-                window.location.href = message;
+                window.location.reload();
             }, 1000);
         },
         error: function (xhr) {
