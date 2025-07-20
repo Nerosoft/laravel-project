@@ -7,7 +7,7 @@ abstract class Controller
      protected function getCreateDataBase($model, $item, $Id, LangObject $newObject){
         if(isset($model[$item])){
             $arr = $model[$item];
-            $arr[$Id] = $newObject->getMyObject();
+            $arr[$Id] = $newObject->getMyObject($Id);
             $model[$item] = $arr;
         }else
             $model[$item] = array($Id=>$newObject->getMyObject($Id));
