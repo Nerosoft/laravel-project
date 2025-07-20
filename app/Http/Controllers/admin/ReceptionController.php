@@ -158,8 +158,8 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit
         $this->message['paymentMethod.required'] = $this->error2;
         $this->message['paymentMethod.in'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'];
         $this->message['item.*.required'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
+        $this->testArr = array();
     }
-    private $testArr = array();
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodRequired'];
