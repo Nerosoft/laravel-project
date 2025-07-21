@@ -196,7 +196,6 @@ class RaysSeeder extends Seeder
                         'IdIsInv'=>'invalid id',
                         'ChangeLang'=>'Seccessfully change language-',
                         'MessageModelEdit'=>'Seccessfully copy language-',
-                        'ChangeLanguageUsed'=>'Invalid language',
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
@@ -936,7 +935,6 @@ class RaysSeeder extends Seeder
                         'IdIsInv'=>'invalid id',
                         'ChangeLang'=>'Seccessfully change language-',
                         'MessageModelEdit'=>'Seccessfully copy language-',
-                        'ChangeLanguageUsed'=>'this language is used',
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
