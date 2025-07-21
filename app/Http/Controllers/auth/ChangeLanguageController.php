@@ -27,7 +27,7 @@ class ChangeLanguageController extends Page implements ActionInit2
     }
     public function makeChangeBranch(){       
         request()->session()->put('userId', request()->input('id'));
-        return back()->with('success', $this->successfulyMessage);
+        return back()->with('success', $this->successfulyMessage.(request()->session()->get('userLogout') === request()->input('id') ? $this->ob[$this->ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']:Rays::find(request()->session()->get('userLogout'))['Branch'][request()->input('id')]['Name']));
     }
     public function makeChangeMyLanguage(){
         $setting = $this->ob['Setting'];
