@@ -15,7 +15,6 @@ class Page extends TableSetting{
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
             ];
-            $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state][Route::currentRouteName() === 'branchMain'?'BranchesChange':(Route::currentRouteName() === 'language.change'||Route::currentRouteName() === 'language.changeLanguage'?'ChangeLang':(Route::currentRouteName()==='language.delete'?'DeleteLanguage':'MessageModelEdit'))];
             $actionInit->initValid();
         }
         else if(request()->all()){

@@ -107,7 +107,7 @@ class BranchesController extends Page implements LangObject, ActionInit
     }
     public function makeEditBranch(){
         $this->getEditDataBase($this->ob['Branch']?$this->ob:Rays::find(request()->session()->get('userLogout')), 'Branch', $this); 
-        return back()->with('success', $this->successfulyMessage);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['MessageModelEdit']);
     }
     public function index(){
         return view('admin.branches',[

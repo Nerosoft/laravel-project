@@ -187,7 +187,7 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit
         $this->getEditDataBase($this->ob, 'Receipt', $this);
         return response()->json([
             'success' => true,
-            'message'=>$this->successfulyMessage
+            'message'=>$this->ob[$this->ob['Setting']['Language']]['Receipt']['MessageModelEdit']
         ]);
     }
     public function getMyObject($id = null){

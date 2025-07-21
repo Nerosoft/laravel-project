@@ -35,7 +35,7 @@ class KnowController extends Page implements LangObject, ActionInit
     }
     public function makeEditKnow(){
         $this->getEditDataBase($this->ob, 'Knows', $this);
-        return back()->with('success',  $this->successfulyMessage);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Knows']['MessageModelEdit']);
     }
     public function index(){
         return view('admin.contracts.knows',[

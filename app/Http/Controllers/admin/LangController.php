@@ -70,6 +70,6 @@ class LangController extends Page implements ActionInit
         //after add new language name
         $this->ob[$this->newKey] = $this->ob[request()->input('id')];
         $this->ob->save();
-        return back()->with('success', $this->successfulyMessage.$this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'].$this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
     }
 }

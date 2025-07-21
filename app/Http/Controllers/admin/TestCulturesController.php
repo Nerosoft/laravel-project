@@ -66,7 +66,7 @@ class TestCulturesController extends Page implements LangObject, ActionInit
     }
     public function makeEditTest($id){
         $this->getEditDataBase($this->ob, $id, $this);
-        return back()->with('success', $this->successfulyMessage);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']][$id]['MessageModelEdit']);
     }
     public function getMyObject($myDbId = null){
         request()->validate($this->roll, $this->message);

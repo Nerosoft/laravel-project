@@ -144,7 +144,7 @@ class PatientController extends PatientInfo implements LangObject, ActionInit
     }
     public function makeEditPatent(){
         $this->getEditDataBase($this->ob, 'Patent', $this);
-        return back()->with('success', $this->successfulyMessage);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Patent']['MessageModelEdit']);
     }
     private function setupImage(){
         return 'data:' . request()->file('avatar')->getClientMimeType() . ';base64,' . base64_encode(file_get_contents(request()->file('avatar')));

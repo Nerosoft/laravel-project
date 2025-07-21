@@ -27,14 +27,14 @@ class ChangeLanguageController extends Page implements ActionInit2
     }
     public function makeChangeBranch(){       
         request()->session()->put('userId', request()->input('id'));
-        return back()->with('success', $this->successfulyMessage.(request()->session()->get('userLogout') === request()->input('id') ? $this->ob[$this->ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']:Rays::find(request()->session()->get('userLogout'))['Branch'][request()->input('id')]['Name']));
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['BranchesChange'].(request()->session()->get('userLogout') === request()->input('id') ? $this->ob[$this->ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']:Rays::find(request()->session()->get('userLogout'))['Branch'][request()->input('id')]['Name']));
     }
     public function makeChangeMyLanguage(){
         $setting = $this->ob['Setting'];
         $setting['Language'] = request()->input('id');
         $this->ob['Setting'] = $setting;
         $this->ob->save();
-        return back()->with('success', $this->successfulyMessage.$this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
     }
     public function makeDeleteMyLanguage(){
         $langName = $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
@@ -45,10 +45,10 @@ class ChangeLanguageController extends Page implements ActionInit2
         }
         unset($this->ob[request()->input('id')]);
         $this->ob->save();
-        return back()->with('success', $this->successfulyMessage.$langName);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'].$langName);
     }
     public function makeChangeAuthLang(){
         Cookie::queue(request()->input('userAdmin'), serialize(request()->input('id')),2628000);
-        return back()->with('success', $this->successfulyMessage.$this->ob[request()->input('id')]['AllNamesLanguage'][request()->input('id')]);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$this->ob[request()->input('id')]['AllNamesLanguage'][request()->input('id')]);
     }
 }

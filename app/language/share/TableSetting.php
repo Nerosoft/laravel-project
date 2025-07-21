@@ -12,7 +12,6 @@ class TableSetting extends AdminTopMenu
 {
     protected function __construct(ActionInit $actionInit, $title, $menu, $ob){
         if(Route::currentRouteName() === 'edit.editAllLanguage'){
-            $this->sucessfullyMessage = $ob[$ob['Setting']['Language']]['SystemLang']['AllLanguageEdit'];
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['CutomLang']))],
             ];

@@ -56,7 +56,7 @@ class ContractsController extends Page implements LangObject, ActionInit
     }
     public function makeEditContracts(){
         $this->getEditDataBase($this->ob, 'Contracts', $this);
-        return back()->with('success', $this->successfulyMessage);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Contracts']['MessageModelEdit']);
     }
     public function getMyObject($id = null){
         request()->validate($this->roll, $this->message);
