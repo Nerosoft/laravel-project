@@ -91,6 +91,6 @@ class SystemLangController extends TableSetting implements ActionInit
         //svae data using new object and send my data to constructor and call setValue to save new value and return object                
         $this->ob[$lang] = $var1;
         $this->ob->save();
-        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['SystemLang']['MessageModelEdit']);
+        return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['SystemLang']['AllLanguageEdit']);
     }
 }
