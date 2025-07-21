@@ -67,6 +67,18 @@ h2 {
   }
 
 
+.mybranch{
+    background-color: deepskyblue;
+    padding: 5px;
+    border-radius: 8px;
+    border-width: 1px;
+}
+.mybranch_active, .mybranch:hover{
+    background-color: orange;
+}
+.form_branch{
+    text-align: center;
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 700px) {
     .space-page{

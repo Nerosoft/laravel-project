@@ -13,7 +13,11 @@
       </a>
       <ul class="dropdown-menu">
       @foreach($lang->MyBranch as $keyBranch=>$branch)
-      <li><a class="dropdown-item {{request()->session()->get('userId') === $keyBranch? 'active' : ''}}" href="{{ route('branchMain', $keyBranch) }}">{{$branch->getName()}}</a></li>
+      <form class="form_branch" method="POST" action="{{ route('branchMain') }}">
+        @csrf
+        <input type="hidden" value="{{$keyBranch}}" name="id">
+        <button type="submit" class="mybranch {{request()->session()->get('userId') === $keyBranch? 'mybranch_active' : ''}}">{{$branch->getName()}}</button>
+      </form>
       @endforeach
       </ul>
   </div>

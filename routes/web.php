@@ -23,11 +23,12 @@ use App\Http\Middleware\Auth;
 use Illuminate\Http\Request;
 use App\Models\Rays;
 
+
 Route::controller(ChangeLanguageController::class)->group(function () {
-    Route::post('/language', 'action')->name('language.changeLanguage')->middleware(Auth::class.':admin');
-    Route::get('/branchMain/{id?}', 'action')->name('branchMain')->middleware(IsLogin::class.':admin');
-    Route::post('/changeLanguage', 'action')->name('language.change')->middleware(IsLogin::class.':admin');
-    Route::post('/deleteLanguage', 'action')->name('language.delete')->middleware(IsLogin::class.':admin');
+    Route::post('/branchMain', 'makeChangeBranch')->name('branchMain')->middleware(IsLogin::class.':admin');
+    Route::post('/language', 'makeChangeAuthLang')->name('language.changeLanguage')->middleware(Auth::class.':admin');
+    Route::post('/changeLanguage', 'makeChangeMyLanguage')->name('language.change')->middleware(IsLogin::class.':admin');
+    Route::post('/deleteLanguage', 'makeDeleteMyLanguage')->name('language.delete')->middleware(IsLogin::class.':admin');
 
 });
 Route::controller(LoginAdminController::class)->group(function () {

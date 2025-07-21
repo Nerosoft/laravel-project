@@ -6,16 +6,16 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 use App\Models\Rays;
 class Page extends TableSetting{
-    protected function __construct(ActionInit $actionInit, $state, $ob){
+    protected function __construct($actionInit, $state, $ob){
         if(request()->input('id')){
             $this->roll = [
-                'id' =>['required', Rule::in($ob[$state] || Rays::find(request()->session()->get('userLogout'))[$state] || $state === 'ChangeLanguage'?(array_keys($ob[$state]?$ob[$state]:($state === 'ChangeLanguage' ? $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']:Rays::find(request()->session()->get('userLogout'))[$state]))):null)]
+                'id' =>['required', Route::currentRouteName() === 'branchMain'?Rule::in(Rays::find(request()->session()->get('userLogout'))[$state]?array_merge([request()->session()->get('userLogout')], array_keys(Rays::find(request()->session()->get('userLogout'))[$state])):[request()->session()->get('userLogout')]):Rule::in($state === 'ChangeLanguage' || $ob[$state] || Rays::find(request()->session()->get('userLogout'))[$state]?(array_keys($state === 'ChangeLanguage' ?$ob[$ob['Setting']['Language']]['AllNamesLanguage']:($ob[$state]?$ob[$state]:Rays::find(request()->session()->get('userLogout'))[$state]))):null)]
             ];
             $this->message = [
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
             ];
-            $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelEdit'];
+            $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state][Route::currentRouteName() === 'branchMain'?'BranchesChange':(Route::currentRouteName() === 'language.change'||Route::currentRouteName() === 'language.changeLanguage'?'ChangeLang':(Route::currentRouteName()==='language.delete'?'DeleteLanguage':'MessageModelEdit'))];
             $actionInit->initValid();
         }
         else if(request()->all()){
