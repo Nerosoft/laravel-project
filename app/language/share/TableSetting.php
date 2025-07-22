@@ -24,7 +24,7 @@ class TableSetting extends AdminTopMenu
             parent::__construct($ob['Setting']['Language'],
             $ob[$ob['Setting']['Language']]['AppSettingAdmin'], 
             $ob[$ob['Setting']['Language']]['Html']['Direction'], 
-            $ob['Branch']||Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::makeBranch($ob['Branch']?$ob['Branch']:Rays::find(request()->session()->get('userLogout'))['Branch'],$ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']):Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
+            Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'],$ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']):Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
             $title, $menu);
             $this->table1 = $ob[$this->language]['TableInfo']['Ssearch'];
             $this->table2 = $ob[$this->language]['TableInfo']['InfoEmpty'];

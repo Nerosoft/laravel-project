@@ -17,8 +17,8 @@ use App\Http\interface\ActionInit;
 class BranchesController extends Page implements LangObject, ActionInit
 {
     public function initView(){
-        $this->tableData = $this->ob['Branch'] || Rays::find(request()->session()->get('userLogout'))['Branch']?
-        Branch::fromArray($this->ob['Branch']? $this->ob['Branch'] : Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->ob['Setting']['Language']]['SelectBranchBox']):array();
+        $this->tableData = Rays::find(request()->session()->get('userLogout'))['Branch']?
+        Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->ob['Setting']['Language']]['SelectBranchBox']):array();
         $this->table8 = $this->ob[$this->language]['Branch']['BranchStreet'];
         $this->table9 = $this->ob[$this->language]['Branch']['BranchName'];
         $this->table10 = $this->ob[$this->language]['Branch']['BranchPhone'];
@@ -93,7 +93,7 @@ class BranchesController extends Page implements LangObject, ActionInit
     }
     public function makeAddBranch(){
         $myId = Str::uuid()->toString();
-        $this->getCreateDataBase($this->ob['Branch']?$this->ob:Rays::find(request()->session()->get('userLogout')), 'Branch', $myId, $this);
+        $this->getCreateDataBase(Rays::find(request()->session()->get('userLogout')), 'Branch', $myId, $this);
         //conver model database to array        
         $myBranch = $this->ob->toArray();
         //delete object user
@@ -106,7 +106,7 @@ class BranchesController extends Page implements LangObject, ActionInit
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditBranch(){
-        $this->getEditDataBase($this->ob['Branch']?$this->ob:Rays::find(request()->session()->get('userLogout')), 'Branch', $this); 
+        $this->getEditDataBase(Rays::find(request()->session()->get('userLogout')), 'Branch', $this); 
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['MessageModelEdit']);
     }
     public function index(){

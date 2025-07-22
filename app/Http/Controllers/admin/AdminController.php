@@ -10,28 +10,14 @@ use App\instance\admin\Branch;
 class AdminController extends AdminTopMenu
 {   
     public function __construct(){
-        $ob = Rays::find(request()->session()->get('userId'));      
-        if($ob['Branch'])
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch($ob['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['Admin']['AdminUser'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu']));
-        else if(Rays::find(request()->session()->get('userLogout'))['Branch'])
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['Admin']['AdminUser'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu']));
-        else
-            parent::__construct($ob['Setting']['Language'],
-            $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
-            $ob[$ob['Setting']['Language']]['Html']['Direction'],
-            Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']), 
-            $ob[$ob['Setting']['Language']]['Admin']['AdminUser'],
-            new Menu($ob[$ob['Setting']['Language']]['Menu']));
+        $ob = Rays::find(request()->session()->get('userId'));
+        parent::__construct($ob['Setting']['Language'],
+        $ob[$ob['Setting']['Language']]['AppSettingAdmin'],
+        $ob[$ob['Setting']['Language']]['Html']['Direction'],
+        Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'], $ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']):Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
+        $ob[$ob['Setting']['Language']]['Admin']['AdminUser'],
+        new Menu($ob[$ob['Setting']['Language']]['Menu'])); 
+             
         //init label
         $this->label3 = $ob[$this->language]['Admin']['TotalVaul'];
         $this->label4 = $ob[$this->language]['Admin']['ReceivedCach'];
