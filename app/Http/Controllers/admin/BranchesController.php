@@ -72,7 +72,7 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         $this->message['brance_rays_follow.in'] = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob['Branch']?array_keys($this->ob['Branch']):null));
+        array_push($this->roll['id'], Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null));
     }
     public function __construct(){
 
