@@ -28,7 +28,7 @@ class IsLogin
         
         )
             return $next($request);
-        else if($request->session()->exists('userId') && $state === 'test')
+        else if($request->session()->exists('userId') && $state === 'test' || $request->session()->exists('userId') && $state === 'delete')
             return redirect()->route('Home');
         else
             return redirect('/admin/login');  
