@@ -14,7 +14,6 @@ class Page extends TableSetting{
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
             ];
-            // $actionInit->initValid();
         }
         else if(request()->all()){
             $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelCreate'];
