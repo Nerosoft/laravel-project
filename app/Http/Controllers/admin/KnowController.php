@@ -34,7 +34,8 @@ class KnowController extends Page implements LangObject, ActionInit, ValidRull, 
         $this->message['name.min'] = $this->error2;
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob['Knows']?array_keys($this->ob['Knows']):null));
+        $this->initValid();
+        return Rule::in($this->ob['Knows']?array_keys($this->ob['Knows']):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

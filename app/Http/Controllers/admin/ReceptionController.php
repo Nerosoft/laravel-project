@@ -171,7 +171,8 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->testArr = array();
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob['Receipt']?array_keys($this->ob['Receipt']):null));
+        $this->initValid();
+        return Rule::in($this->ob['Receipt']?array_keys($this->ob['Receipt']):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

@@ -27,14 +27,16 @@ class ChangeLanguageController extends Page implements ActionInit2, ValidRull
         $this->message['not_in'] = $this->ob[$this->ob['Setting']['Language']][Route::currentRouteName() === 'branchMain'?'Branch':'ChangeLanguage']['IdIsInv'];
     }
     public function initValidRull(){
-        array_push($this->roll['id'],  Route::currentRouteName() === 'branch.delete'?Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null):Rule::in(Route::currentRouteName() === 'branchMain'?(Rays::find(request()->session()->get('userLogout'))['Branch']?array_merge([request()->session()->get('userLogout')],array_keys(Rays::find(request()->session()->get('userLogout'))['Branch'])):request()->session()->get('userLogout')):array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'])));
-        request()->validate($this->roll, $this->message);
+        $this->initValid();
+        return Route::currentRouteName() === 'branch.delete'?Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null):Rule::in(Route::currentRouteName() === 'branchMain'?(Rays::find(request()->session()->get('userLogout'))['Branch']?array_merge([request()->session()->get('userLogout')],array_keys(Rays::find(request()->session()->get('userLogout'))['Branch'])):request()->session()->get('userLogout')):array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']));
     }
-    public function makeChangeBranch(){       
+    public function makeChangeBranch(){   
+        request()->validate($this->roll, $this->message);
         request()->session()->put('userId', request()->input('id'));
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['BranchesChange'].(request()->session()->get('userLogout') === request()->input('id') ? $this->ob[$this->ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']:Rays::find(request()->session()->get('userLogout'))['Branch'][request()->input('id')]['Name']));
     }
     public function makeChangeMyLanguage(){
+        request()->validate($this->roll, $this->message);
         $setting = $this->ob['Setting'];
         $setting['Language'] = request()->input('id');
         $this->ob['Setting'] = $setting;
@@ -42,6 +44,7 @@ class ChangeLanguageController extends Page implements ActionInit2, ValidRull
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
     }
     public function makeDeleteMyLanguage(){
+        request()->validate($this->roll, $this->message);
         $langName = $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'][request()->input('id')];
         foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
             $myLang = $this->ob[$key];
@@ -53,10 +56,12 @@ class ChangeLanguageController extends Page implements ActionInit2, ValidRull
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['DeleteLanguage'].$langName);
     }
     public function makeChangeAuthLang(){
+        request()->validate($this->roll, $this->message);
         Cookie::queue(request()->input('userAdmin'), serialize(request()->input('id')),2628000);
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['ChangeLang'].$this->ob[request()->input('id')]['AllNamesLanguage'][request()->input('id')]);
     }
     public function makeDeleteMyBranch(){
+        request()->validate($this->roll, $this->message);
         $this->getDeleteDatabade(Rays::find(request()->session()->get('userLogout')), 'Branch');
         Rays::find(request()->input('id'))->delete();
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['Delete']);

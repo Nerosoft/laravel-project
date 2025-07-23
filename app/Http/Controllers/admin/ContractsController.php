@@ -45,7 +45,8 @@ class ContractsController extends Page implements LangObject, ActionInit, ValidR
         $this->message['area.min'] = $this->error1;
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob['Contracts']?array_keys($this->ob['Contracts']):null));
+        $this->initValid();
+        return Rule::in($this->ob['Contracts']?array_keys($this->ob['Contracts']):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

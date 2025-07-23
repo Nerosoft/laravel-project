@@ -113,7 +113,8 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
 
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob['Patent']?array_keys($this->ob['Patent']):null));
+        $this->initValid();
+        return Rule::in($this->ob['Patent']?array_keys($this->ob['Patent']):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

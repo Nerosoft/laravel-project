@@ -52,7 +52,8 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->message['input-output-lab.in'] = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null));
+        $this->initValid();
+        return Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

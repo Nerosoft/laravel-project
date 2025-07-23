@@ -54,7 +54,8 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
         }
     }
     public function initValidRull(){
-        array_push($this->roll['id'], Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'])));
+        $this->initValid();
+        return Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

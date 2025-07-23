@@ -8,14 +8,13 @@ class Page extends TableSetting{
     protected function __construct($actionInit, $state, $ob){
         if(request()->input('id')){
             $this->roll = [
-                'id' =>['required']
+                'id' =>['required', $actionInit->initValidRull()]
             ];
             $this->message = [
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
             ];
-            $actionInit->initValid();
-            $actionInit->initValidRull();
+            // $actionInit->initValid();
         }
         else if(request()->all()){
             $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelCreate'];
@@ -33,7 +32,7 @@ class Page extends TableSetting{
             $this->titleModelDelete = $ob[$this->language][$state]['ScreenModelDelete'];
             $this->messageModelDelete = $ob[$this->language][$state]['MessageModelDelete'];
             $this->buttonModelDelete = $ob[$this->language][$state]['ButtonModelDelete'];
-            $this->actionDelete = $actionInit->getDeleteRoute();//route($state === 'Branch'?'branch.delete':($state === 'ChangeLanguage'?'language.delete':'deleteItem'), $state);
+            $this->actionDelete = $actionInit->getDeleteRoute();
             $this->successfully1 = $ob[$this->language][$state]['LoadMessage'];
         }
         
