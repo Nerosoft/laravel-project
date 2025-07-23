@@ -10,9 +10,15 @@ use App\Http\interface\ValidRull;
 use App\instance\admin\contracts\Contracts;
 use App\Models\Rays;
 use Illuminate\Validation\Rule;
+use App\Http\interface\ActionInit2;
+use Illuminate\Support\Facades\Route;
+use App\Http\interface\DeleteRoute;
 
-class ContractsController extends Page implements LangObject, ActionInit, ValidRull
+class ContractsController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('deleteItem', 'Contracts');
+    }
     public function getData(){
         return $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
     }

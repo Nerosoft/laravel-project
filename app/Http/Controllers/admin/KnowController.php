@@ -6,14 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\interface\LangObject;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ActionInit2;
 use App\Http\interface\ValidRull;
+use App\Http\interface\DeleteRoute;
 use App\language\share\Page;
 use App\instance\admin\reception\MyKnows;
 use App\Models\Rays;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 
-class KnowController extends Page implements LangObject, ActionInit, ValidRull
+class KnowController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('deleteItem', 'Knows');
+    }
     public function getData(){
         return $this->ob['Knows']?MyKnows::fromArray(array_reverse($this->ob['Knows'])):array();
     }

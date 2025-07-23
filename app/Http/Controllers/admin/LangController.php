@@ -9,10 +9,16 @@ use App\Models\Rays;
 use App\MyLanguage;
 use App\Http\interface\ActionInit;
 use App\Http\interface\ValidRull;
+use App\Http\interface\DeleteRoute;
 use Illuminate\Validation\Rule;
+use App\Http\interface\ActionInit2;
+use Illuminate\Support\Facades\Route;
 
-class LangController extends Page implements ActionInit, ValidRull
+class LangController extends Page implements ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('language.delete');
+    }
     public function getData(){
         $tableData = array();
         foreach (array_reverse($this->ob[$this->language]['AllNamesLanguage']) as $key => $value)

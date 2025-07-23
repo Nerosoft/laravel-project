@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Route;
 use App\language\share\TableSetting;
 use Illuminate\Support\Facades\Validator;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ActionInit2;
 
-class SystemLangController extends TableSetting implements ActionInit
+class SystemLangController extends TableSetting implements ActionInit, ActionInit2
 {
     public function getData(){
         $tableData = array();

@@ -3,7 +3,6 @@ namespace App\language\share;
 use App\Menu;
 use App\Http\interface\ActionInit;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Route;
 use App\Models\Rays;
 class Page extends TableSetting{
     protected function __construct($actionInit, $state, $ob){
@@ -34,8 +33,19 @@ class Page extends TableSetting{
             $this->titleModelDelete = $ob[$this->language][$state]['ScreenModelDelete'];
             $this->messageModelDelete = $ob[$this->language][$state]['MessageModelDelete'];
             $this->buttonModelDelete = $ob[$this->language][$state]['ButtonModelDelete'];
-            $this->actionDelete = route($state === 'ChangeLanguage'?'language.delete':'deleteItem', $state);
+            $this->actionDelete = $actionInit->getDeleteRoute();//route($state === 'Branch'?'branch.delete':($state === 'ChangeLanguage'?'language.delete':'deleteItem'), $state);
             $this->successfully1 = $ob[$this->language][$state]['LoadMessage'];
         }
+        
+    }
+    protected function getDeleteDatabade($model, $item){
+        if(count($model[$item]) === 1)
+            unset($model[$item]);
+        else{
+            $arr = $model[$item];
+            unset($arr[request()->input('id')]);
+            $model[$item] = $arr;
+        }
+        $model->save();
     }
 }

@@ -12,13 +12,19 @@ use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\Cultures;
 use App\Http\interface\ActionInit;
 use App\Http\interface\ValidRull;
+use App\Http\interface\DeleteRoute;
 use App\instance\admin\reception\Patent;
 use App\instance\admin\reception\MyKnows;
 use App\instance\admin\contracts\Contracts;
+use App\Http\interface\ActionInit2;
+use Illuminate\Support\Facades\Route;
 
 
-class ReceptionController extends PatientInfo implements LangObject, ActionInit, ValidRull
+class ReceptionController extends PatientInfo implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('deleteItem', 'Receipt');
+    }
     public function getData(){
         $this->myPatent = isset($this->ob['Patent'])?Patent::fromArray($this->ob['Patent'], isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
         $this->arr1 = isset($this->ob['Knows']) ? MyKnows::fromArray($this->ob['Knows']):array();

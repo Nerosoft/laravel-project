@@ -29,6 +29,7 @@ Route::controller(ChangeLanguageController::class)->group(function () {
     Route::post('/language', 'makeChangeAuthLang')->name('language.changeLanguage')->middleware(Auth::class.':admin');
     Route::post('/changeLanguage', 'makeChangeMyLanguage')->name('language.change')->middleware(IsLogin::class.':admin');
     Route::post('/deleteLanguage', 'makeDeleteMyLanguage')->name('language.delete')->middleware(IsLogin::class.':admin');
+    Route::post('/deleteBranch', 'makeDeleteMyBranch')->name('branch.delete')->middleware(IsLogin::class.':admin');
 
 });
 Route::controller(LoginAdminController::class)->group(function () {

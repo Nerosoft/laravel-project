@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\interface;
-interface ActionInit extends ActionInit2{
+interface ActionInit{
     public function initView();
     public function getData();
 }

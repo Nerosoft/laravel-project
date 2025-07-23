@@ -11,9 +11,14 @@ use App\Http\interface\ActionInit;
 use App\Http\interface\ValidRull;
 use App\instance\admin\test_cultures\Test;
 use App\Models\Rays;
+use App\Http\interface\ActionInit2;
+use App\Http\interface\DeleteRoute;
 
-class TestCulturesController extends Page implements LangObject, ActionInit, ValidRull
+class TestCulturesController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('deleteItem', request()->route('id'));
+    }
     public function getData(){
         return $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->ob[$this->language]['SelectTestBox']):array();
     }

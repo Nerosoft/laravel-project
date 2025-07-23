@@ -10,11 +10,17 @@ use App\language\share\PatientInfo;
 use App\instance\admin\contracts\Contracts;
 use App\Http\interface\ActionInit;
 use App\Http\interface\ValidRull;
+use App\Http\interface\DeleteRoute;
 use App\instance\admin\reception\Patent;
 use App\Models\Rays;
+use App\Http\interface\ActionInit2;
+use Illuminate\Support\Facades\Route;
 
-class PatientController extends PatientInfo implements LangObject, ActionInit, ValidRull
+class PatientController extends PatientInfo implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('deleteItem', 'Patent');
+    }
     public function getData(){
         $this->myContract = isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array();            
         return $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();    

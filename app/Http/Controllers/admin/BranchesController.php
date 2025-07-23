@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\interface\ActionInit;
 use App\Http\interface\ValidRull;
+use App\Http\interface\ActionInit2;
+use App\Http\interface\DeleteRoute;
 
-class BranchesController extends Page implements LangObject, ActionInit, ValidRull
+class BranchesController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
 {
+    public function getDeleteRoute(){
+        return route('branch.delete');
+    }
     public function getData(){
         return  Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->language]['SelectBranchBox']):array();
     }
