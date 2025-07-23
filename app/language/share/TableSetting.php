@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class TableSetting extends AdminTopMenu
 {
-    protected function __construct(ActionInit $actionInit, $title, $menu, $ob){
+    protected function __construct($actionInit, $title, $menu, $ob){
         if(Route::currentRouteName() === 'edit.editAllLanguage'){
             $this->roll = [
                 'id'=>['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['CutomLang']))],
@@ -26,6 +26,7 @@ class TableSetting extends AdminTopMenu
             $ob[$ob['Setting']['Language']]['Html']['Direction'], 
             Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'],$ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']):Branch::makeMainBranch($ob[$ob['Setting']['Language']]['AppSettingAdmin']['BranchMain']),
             $title, $menu);
+            $this->tableData = $actionInit->getData();
             $this->table1 = $ob[$this->language]['TableInfo']['Ssearch'];
             $this->table2 = $ob[$this->language]['TableInfo']['InfoEmpty'];
             $this->table3 = $ob[$this->language]['TableInfo']['ZeroRecords'];

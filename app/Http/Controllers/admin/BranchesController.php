@@ -17,9 +17,10 @@ use App\Http\interface\ValidRull;
 
 class BranchesController extends Page implements LangObject, ActionInit, ValidRull
 {
+    public function getData(){
+        return  Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->ob['Setting']['Language']]['SelectBranchBox']):array();
+    }
     public function initView(){
-        $this->tableData = Rays::find(request()->session()->get('userLogout'))['Branch']?
-        Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->ob['Setting']['Language']]['SelectBranchBox']):array();
         $this->table8 = $this->ob[$this->language]['Branch']['BranchStreet'];
         $this->table9 = $this->ob[$this->language]['Branch']['BranchName'];
         $this->table10 = $this->ob[$this->language]['Branch']['BranchPhone'];

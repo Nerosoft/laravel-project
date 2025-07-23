@@ -14,8 +14,10 @@ use App\Models\Rays;
 
 class TestCulturesController extends Page implements LangObject, ActionInit, ValidRull
 {
+    public function getData(){
+        return $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->ob[$this->ob['Setting']['Language']]['SelectTestBox']):array();
+    }
     public function initView(){
-        $this->tableData = $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->ob[$this->ob['Setting']['Language']]['SelectTestBox']):array();
         $this->table8 = $this->ob[$this->language][request()->route('id')]['TableName'];
         $this->table9 = $this->ob[$this->language][request()->route('id')]['TablePrice'];
         $this->table10 = $this->ob[$this->language][request()->route('id')]['TableInputOutput'];

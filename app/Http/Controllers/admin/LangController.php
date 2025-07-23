@@ -13,10 +13,13 @@ use Illuminate\Validation\Rule;
 
 class LangController extends Page implements ActionInit, ValidRull
 {
-    public function initView(){
+    public function getData(){
+        $tableData = array();
         foreach (array_reverse($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']) as $key => $value)
-            $this->tableData[$key] = new MyLanguage($value);
-        
+            $tableData[$key] = new MyLanguage($value);
+        return $tableData;
+    }
+    public function initView(){
         //init table
         $this->NameLangaue = $this->ob[$this->language]['ChangeLanguage']['NameLangaue'];
         //init label

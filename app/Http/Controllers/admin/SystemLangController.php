@@ -14,13 +14,17 @@ use App\Http\interface\ActionInit;
 
 class SystemLangController extends TableSetting implements ActionInit
 {
-    public function initView(){
+    public function getData(){
+        $tableData = array();
         if(isset($this->ob[request()->route('lang')][request()->route('id')]))
-            $this->tableData = $this->ob[request()->route('lang')][request()->route('id')];
-        else{
+            $tableData = $this->ob[request()->route('lang')][request()->route('id')];
+        else
             foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
-                $this->tableData[$key] = $this->ob[$key];
-        }
+                $tableData[$key] = $this->ob[$key];
+        
+        return $tableData;
+    }
+    public function initView(){
         $this->Left = $this->ob[$this->language]['SystemLang']['ltr'];
         $this->Right = $this->ob[$this->language]['SystemLang']['rtl'];
         //init label

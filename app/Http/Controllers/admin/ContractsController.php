@@ -13,8 +13,10 @@ use Illuminate\Validation\Rule;
 
 class ContractsController extends Page implements LangObject, ActionInit, ValidRull
 {
+    public function getData(){
+        return $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
+    }
     public function initView(){
-        $this->tableData = $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
         $this->table8 = $this->ob[$this->language]['Contracts']['TableContractName'];
         $this->table9 = $this->ob[$this->language]['Contracts']['TableContractGovernorate'];
         $this->table10 = $this->ob[$this->language]['Contracts']['TableContractArea'];

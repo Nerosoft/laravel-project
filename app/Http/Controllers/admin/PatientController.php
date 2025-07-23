@@ -15,9 +15,11 @@ use App\Models\Rays;
 
 class PatientController extends PatientInfo implements LangObject, ActionInit, ValidRull
 {
-    public function initView(){
+    public function getData(){
         $this->myContract = isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array();            
-        $this->tableData = $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'], $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'], $this->ob[$this->ob['Setting']['Language']]['CheckBox']):array();    
+        return $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'], $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'], $this->ob[$this->ob['Setting']['Language']]['CheckBox']):array();    
+    }
+    public function initView(){
         $this->title5 = $this->ob[$this->language]['Patent']['PatentIamge'];
         $this->ButtonImage = $this->ob[$this->language]['Patent']['ButtonImage'];
         //init table

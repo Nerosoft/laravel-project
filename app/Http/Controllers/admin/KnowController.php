@@ -14,8 +14,10 @@ use Illuminate\Validation\Rule;
 
 class KnowController extends Page implements LangObject, ActionInit, ValidRull
 {
+    public function getData(){
+        return $this->ob['Knows']?MyKnows::fromArray(array_reverse($this->ob['Knows'])):array();
+    }
     public function initView(){
-        $this->tableData = $this->ob['Knows']?MyKnows::fromArray(array_reverse($this->ob['Knows'])):array();
         $this->table8 = $this->ob[$this->language]['Knows']['TableKnowsName'];
         $this->label3 = $this->ob[$this->language]['Knows']['LabelKnowsName'];
         $this->hint1 = $this->ob[$this->language]['Knows']['HintKnowsName'];
