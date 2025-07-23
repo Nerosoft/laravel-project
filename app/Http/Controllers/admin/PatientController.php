@@ -17,7 +17,7 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
 {
     public function getData(){
         $this->myContract = isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array();            
-        return $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'], $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'], $this->ob[$this->ob['Setting']['Language']]['CheckBox']):array();    
+        return $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();    
     }
     public function initView(){
         $this->title5 = $this->ob[$this->language]['Patent']['PatentIamge'];

@@ -20,9 +20,9 @@ use App\instance\admin\contracts\Contracts;
 class ReceptionController extends PatientInfo implements LangObject, ActionInit, ValidRull
 {
     public function getData(){
-        $this->myPatent = isset($this->ob['Patent'])?Patent::fromArray($this->ob['Patent'], isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'], $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'], $this->ob[$this->ob['Setting']['Language']]['CheckBox']):array();
+        $this->myPatent = isset($this->ob['Patent'])?Patent::fromArray($this->ob['Patent'], isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
         $this->arr1 = isset($this->ob['Knows']) ? MyKnows::fromArray($this->ob['Knows']):array();
-        return $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->ob['Setting']['Language']]['SelectTestBox'],$this->ob[$this->ob['Setting']['Language']]['PaymentMethodBox']):array();
+        return $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->language]['SelectTestBox'],$this->ob[$this->language]['PaymentMethodBox']):array();
         
     }
     public function initView(){

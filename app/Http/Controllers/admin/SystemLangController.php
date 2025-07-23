@@ -19,7 +19,7 @@ class SystemLangController extends TableSetting implements ActionInit
         if(isset($this->ob[request()->route('lang')][request()->route('id')]))
             $tableData = $this->ob[request()->route('lang')][request()->route('id')];
         else
-            foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value)
+            foreach ($this->ob[$this->language]['AllNamesLanguage'] as $key=>$value)
                 $tableData[$key] = $this->ob[$key];
         
         return $tableData;

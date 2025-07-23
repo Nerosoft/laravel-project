@@ -15,7 +15,7 @@ class LangController extends Page implements ActionInit, ValidRull
 {
     public function getData(){
         $tableData = array();
-        foreach (array_reverse($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']) as $key => $value)
+        foreach (array_reverse($this->ob[$this->language]['AllNamesLanguage']) as $key => $value)
             $tableData[$key] = new MyLanguage($value);
         return $tableData;
     }
