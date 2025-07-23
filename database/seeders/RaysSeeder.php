@@ -670,7 +670,6 @@ class RaysSeeder extends Seeder
                         'AdminDashboard'=>'Salamatak for medical analysis and radiology',
                         'BranchesCompany'=>'Select branches',
                         'BranchMain'=>'Branch main',
-                        'MessageError'=>'Error id',
                     ],
                     'SelectTestBox'=>[
                         'TestInput'=>'Input',
@@ -1409,7 +1408,6 @@ class RaysSeeder extends Seeder
                         'AdminDashboard'=>'Salamatak for medical analysis and radiology',
                         'BranchesCompany'=>'Select branches',
                         'BranchMain'=>'Branch main',
-                        'MessageError'=>'Error id',
                     ],
                     'SelectTestBox'=>[
                         'TestInput'=>'Input',

@@ -90,7 +90,7 @@ Route::controller(BranchesController::class)->group(function () {
     Route::post('/editBranchRays', 'makeEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
 });
 Route::controller(DeleteController::class)->group(function () {
-    Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':admin');
+    Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':delete');
 });
 //all logout admin and doctor and admin
 Route::controller(LogoutController::class)->group(function () {

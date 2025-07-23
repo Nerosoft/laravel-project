@@ -12,7 +12,21 @@ class IsLogin
      */
     public function handle(Request $request, Closure $next, $state): Response
     {  
-        if($request->session()->exists('userId') && $state === 'admin' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages')
+        if($request->session()->exists('userId') && $state === 'admin' 
+
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' 
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' 
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages'
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Test' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Cultures' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Packages'
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Contracts' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Knows' 
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Patent'
+        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Receipt'
+        
+        
+        )
             return $next($request);
         else if($request->session()->exists('userId') && $state === 'test')
             return redirect()->route('Home');
