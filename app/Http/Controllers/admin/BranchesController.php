@@ -13,8 +13,9 @@ use App\instance\admin\Branch;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 
-class BranchesController extends Page implements LangObject, ActionInit
+class BranchesController extends Page implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->tableData = Rays::find(request()->session()->get('userLogout'))['Branch']?
@@ -68,6 +69,9 @@ class BranchesController extends Page implements LangObject, ActionInit
         $this->message['brance_rays_country.required'] = $this->error8;
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob['Branch']?array_keys($this->ob['Branch']):null));
     }
     public function __construct(){
 

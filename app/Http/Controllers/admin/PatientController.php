@@ -9,10 +9,11 @@ use App\Http\interface\LangObject;
 use App\language\share\PatientInfo;
 use App\instance\admin\contracts\Contracts;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 use App\instance\admin\reception\Patent;
 use App\Models\Rays;
 
-class PatientController extends PatientInfo implements LangObject, ActionInit
+class PatientController extends PatientInfo implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->myContract = isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array();            
@@ -102,6 +103,9 @@ class PatientController extends PatientInfo implements LangObject, ActionInit
         $this->message['patent-other.required_without'] =$this->error16;
         $this->avatar = request()->file('avatar') ? $this->setupImage():(isset($this->ob['Patent'][request()->input('id')]['Avatar'])?$this->ob['Patent'][request()->input('id')]['Avatar']:null);
 
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob['Patent']?array_keys($this->ob['Patent']):null));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

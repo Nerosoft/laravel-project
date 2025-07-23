@@ -10,7 +10,7 @@
 <table id="example" class="table table-striped">
         <thead>
             <tr>
-                <th>{{$lang->table7}}</th>
+                <th>{{$lang->table11}}</th>
                 <th>{{$lang->table24}}</th>
                 <th>{{$lang->table8}}</th>
                 <th>{{$lang->table9}}</th>
@@ -27,7 +27,7 @@
                 <th>{{$lang->table19}}</th>
                 <th>{{$lang->table20}}</th>
                 <th>{{$lang->table21}}</th>
-                <th>{{$lang->table11}}</th>
+                <th>{{$lang->table7}}</th>
             </tr>
         </thead>
         <tbody>
@@ -88,7 +88,7 @@
         </tbody>
         <tfoot>
              <tr>
-                <th>{{$lang->table7}}</th>
+                <th>{{$lang->table11}}</th>
                 <th>{{$lang->table24}}</th>
                 <th>{{$lang->table8}}</th>
                 <th>{{$lang->table9}}</th>
@@ -105,7 +105,7 @@
                 <th>{{$lang->table19}}</th>
                 <th>{{$lang->table20}}</th>
                 <th>{{$lang->table21}}</th>
-                <th>{{$lang->table11}}</th>
+                <th>{{$lang->table7}}</th>
             </tr>
         </tfoot>
     </table>

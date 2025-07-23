@@ -8,10 +8,11 @@ use App\Http\interface\LangObject;
 use App\language\share\Page;
 use Illuminate\Support\Facades\Route;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 use App\instance\admin\test_cultures\Test;
 use App\Models\Rays;
 
-class TestCulturesController extends Page implements LangObject, ActionInit
+class TestCulturesController extends Page implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->tableData = $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->ob[$this->ob['Setting']['Language']]['SelectTestBox']):array();
@@ -42,6 +43,9 @@ class TestCulturesController extends Page implements LangObject, ActionInit
         $this->message['price.integer'] = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['PriceInvalid'];
         $this->message['input-output-lab.required.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

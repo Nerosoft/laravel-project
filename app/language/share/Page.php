@@ -9,13 +9,15 @@ class Page extends TableSetting{
     protected function __construct($actionInit, $state, $ob){
         if(request()->input('id')){
             $this->roll = [
-                'id' =>['required', Route::currentRouteName() === 'branchMain'?Rule::in(Rays::find(request()->session()->get('userLogout'))[$state]?array_merge([request()->session()->get('userLogout')], array_keys(Rays::find(request()->session()->get('userLogout'))[$state])):[request()->session()->get('userLogout')]):Rule::in($state === 'ChangeLanguage' || $ob[$state] || Rays::find(request()->session()->get('userLogout'))['Branch']?(array_keys($state === 'ChangeLanguage' ?$ob[$ob['Setting']['Language']]['AllNamesLanguage']:($ob[$state]?$ob[$state]:Rays::find(request()->session()->get('userLogout'))[$state]))):null)]
+                // 'id' =>['required', Route::currentRouteName() === 'branchMain'?Rule::in(Rays::find(request()->session()->get('userLogout'))[$state]?array_merge([request()->session()->get('userLogout')], array_keys(Rays::find(request()->session()->get('userLogout'))[$state])):[request()->session()->get('userLogout')]):Rule::in($state === 'ChangeLanguage' || $ob[$state] || Rays::find(request()->session()->get('userLogout'))['Branch']?(array_keys($state === 'ChangeLanguage' ?$ob[$ob['Setting']['Language']]['AllNamesLanguage']:($ob[$state]?$ob[$state]:Rays::find(request()->session()->get('userLogout'))[$state]))):null)]
+                'id' =>['required']
             ];
             $this->message = [
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
             ];
             $actionInit->initValid();
+            $actionInit->initValidRull();
         }
         else if(request()->all()){
             $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelCreate'];

@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\interface\LangObject;
 use App\language\share\Page;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 use App\instance\admin\contracts\Contracts;
 use App\Models\Rays;
+use Illuminate\Validation\Rule;
 
-class ContractsController extends Page implements LangObject, ActionInit
+class ContractsController extends Page implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->tableData = $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
@@ -33,6 +35,9 @@ class ContractsController extends Page implements LangObject, ActionInit
         $this->message['governorate.min'] = $this->error1;
         $this->message['area.required'] = $this->error1;
         $this->message['area.min'] = $this->error1;
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob['Contracts']?array_keys($this->ob['Contracts']):null));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

@@ -8,8 +8,10 @@ use App\language\share\Page;
 use App\Models\Rays;
 use App\MyLanguage;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
+use Illuminate\Validation\Rule;
 
-class LangController extends Page implements ActionInit
+class LangController extends Page implements ActionInit, ValidRull
 {
     public function initView(){
         foreach (array_reverse($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']) as $key => $value)
@@ -32,17 +34,18 @@ class LangController extends Page implements ActionInit
         $this->title2 = $this->ob[$this->language]['ChangeLanguage']['TitleChangeLanguageMessage'];
     }
     public function initValid(){
-        $this->roll = ['lang_name' =>['required', 'min:3']];
-        $this->message = [
-            'lang_name.required' => $this->error1,
-            'lang_name.min' => $this->error2,
-        ];
+        $this->roll['lang_name'] = ['required', 'min:3'];
+        $this->message['lang_name.required'] = $this->error1;
+        $this->message['lang_name.min'] = $this->error2;
         $this->newKey = $this->generateUniqueIdentifier();
         foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
             $myLang = $this->ob[$key];
             $myLang['AllNamesLanguage'][$this->newKey] = request()->input('lang_name');
             $this->ob[$key] = $myLang;
         }
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'])));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

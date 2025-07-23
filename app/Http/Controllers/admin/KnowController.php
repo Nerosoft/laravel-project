@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\interface\LangObject;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 use App\language\share\Page;
 use App\instance\admin\reception\MyKnows;
 use App\Models\Rays;
+use Illuminate\Validation\Rule;
 
-class KnowController extends Page implements LangObject, ActionInit
+class KnowController extends Page implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->tableData = $this->ob['Knows']?MyKnows::fromArray(array_reverse($this->ob['Knows'])):array();
@@ -22,6 +24,9 @@ class KnowController extends Page implements LangObject, ActionInit
         $this->roll['name'] = ['required', 'min:3'];
         $this->message['name.required'] = $this->error1;
         $this->message['name.min'] = $this->error2;
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob['Knows']?array_keys($this->ob['Knows']):null));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

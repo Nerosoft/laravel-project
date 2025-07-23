@@ -11,12 +11,13 @@ use App\instance\admin\test_cultures\Test;
 use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\Cultures;
 use App\Http\interface\ActionInit;
+use App\Http\interface\ValidRull;
 use App\instance\admin\reception\Patent;
 use App\instance\admin\reception\MyKnows;
 use App\instance\admin\contracts\Contracts;
 
 
-class ReceptionController extends PatientInfo implements LangObject, ActionInit
+class ReceptionController extends PatientInfo implements LangObject, ActionInit, ValidRull
 {
     public function initView(){
         $this->myPatent = isset($this->ob['Patent'])?Patent::fromArray($this->ob['Patent'], isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'], $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'], $this->ob[$this->ob['Setting']['Language']]['CheckBox']):array();
@@ -159,6 +160,9 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit
         $this->message['paymentMethod.in'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'];
         $this->message['item.*.required'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
         $this->testArr = array();
+    }
+    public function initValidRull(){
+        array_push($this->roll['id'], Rule::in($this->ob['Receipt']?array_keys($this->ob['Receipt']):null));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
