@@ -34,15 +34,15 @@ class ContractsController extends Page implements LangObject, ActionInit, ValidR
         $this->hint3 = $this->ob[$this->language]['Contracts']['HintContractArea'];
     }
     public function initValid(){
-        $this->roll['name'] =['required', 'min:3'];
-        $this->roll['governorate'] =['required', 'min:3'];
-        $this->roll['area'] =['required', 'min:3'];
+        $this->roll['name'] = ['required', 'min:3'];
+        $this->roll['governorate'] = ['required', 'min:3'];
+        $this->roll['area'] = ['required', 'min:3'];
         $this->message['name.required'] = $this->error1;
-        $this->message['name.min'] = $this->error1;
-        $this->message['governorate.required'] = $this->error1;
-        $this->message['governorate.min'] = $this->error1;
-        $this->message['area.required'] = $this->error1;
-        $this->message['area.min'] = $this->error1;
+        $this->message['name.min'] = $this->error2;
+        $this->message['governorate.required'] = $this->error3;
+        $this->message['governorate.min'] = $this->error4;
+        $this->message['area.required'] = $this->error5;
+        $this->message['area.min'] = $this->error6;
     }
     public function initValidRull(){
         $this->initValid();

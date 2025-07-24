@@ -8,10 +8,8 @@ class Page extends TableSetting{
     protected function __construct($actionInit, $state, $ob){
         if(request()->input('id')){
             $this->roll['id'] = ['required', $actionInit->initValidRull()];
-            $this->message = [
-                'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
-                'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']
-            ];
+            $this->message['id.required'] = $ob[$ob['Setting']['Language']][$state]['IdIsReq'];
+            $this->message['id.in'] = $ob[$ob['Setting']['Language']][$state]['IdIsInv'];    
         }
         else if(request()->all()){
             $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelCreate'];
