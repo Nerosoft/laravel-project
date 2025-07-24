@@ -21,7 +21,7 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
     }
     public function getData(){
         $tableData = array();
-        foreach (array_reverse($this->ob[$this->language]['AllNamesLanguage']) as $key => $value)
+        foreach (array_reverse($this->allNames) as $key => $value)
             $tableData[$key] = new MyLanguage($value);
         return $tableData;
     }
@@ -47,7 +47,7 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
         $this->message['lang_name.required'] = $this->error1;
         $this->message['lang_name.min'] = $this->error2;
         $this->newKey = $this->generateUniqueIdentifier();
-        foreach ($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'] as $key=>$value) {
+        foreach ($this->allNames as $key=>$value) {
             $myLang = $this->ob[$key];
             $myLang['AllNamesLanguage'][$this->newKey] = request()->input('lang_name');
             $this->ob[$key] = $myLang;
@@ -55,12 +55,13 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
     }
     public function initValidRull(){
         $this->initValid();
-        return Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage']));
+        return Rule::in(array_keys($this->allNames));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['NewLangNameRequired'];
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['NewLangNameInvalid'];
+        $this->allNames = $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'];
         parent::__construct($this, 'ChangeLanguage', $this->ob);
     }
     public function index(){

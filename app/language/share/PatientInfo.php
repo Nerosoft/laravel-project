@@ -4,6 +4,7 @@ use App\Http\interface\ActionInit;
 
 class PatientInfo extends Page{
     protected function __construct(ActionInit $actionInit, $state, $ob){
+        $this->myPat = $this->ob['Patent'];
         parent::__construct($actionInit, $state, $ob);
         $this->labelPatient = $this->ob[$this->ob['Setting']['Language']][$state]['LabelPatentAvatar'];
         $this->label16 = $this->ob[$this->ob['Setting']['Language']][$state]['LabelPatentName'];

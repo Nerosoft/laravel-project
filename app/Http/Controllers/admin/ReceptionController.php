@@ -26,9 +26,9 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         return route('deleteItem', 'Receipt');
     }
     public function getData(){
-        $this->myPatent = isset($this->ob['Patent'])?Patent::fromArray($this->ob['Patent'], isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
-        $this->arr1 = isset($this->ob['Knows']) ? MyKnows::fromArray($this->ob['Knows']):array();
-        return $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->language]['SelectTestBox'],$this->ob[$this->language]['PaymentMethodBox']):array();
+        $this->myPatent = isset($this->myPat)?Patent::fromArray($this->myPat, isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
+        $this->arr1 = isset($this->myKnow) ? MyKnows::fromArray($this->myKnow):array();
+        return $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->language]['SelectTestBox'],$this->payment):array();
         
     }
     public function initView(){
@@ -111,12 +111,8 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->selectBox5 = $this->ob[$this->language]['Receipt']['Patientknow'];
         $this->selectBox6 = $this->ob[$this->language]['Receipt']['PatientTest'];
         $this->selectBox7 = $this->ob[$this->language]['Receipt']['ReceiptPatientPrint'];
-        $this->payment = $this->ob[$this->language]['PaymentMethodBox'];
         $this->allTests = $this->ob[$this->language]['OptionTestBox'];
         //add test
-        $this->arr2 = isset($this->ob['Test'])?(array)$this->ob['Test']:null;
-        $this->arr3 = isset($this->ob['Cultures'])?(array)$this->ob['Cultures']:null;
-        $this->arr4 = isset($this->ob['Packages'])?(array)$this->ob['Packages']:null;
         if($this->arr2)
             foreach ($this->arr2 as $key=>$test)
                 $this->arr2[$key]['InputOutputLab'] = $this->ob[$this->language]['SelectTestBox'][$test['InputOutputLab']];
@@ -129,25 +125,26 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
                 $this->arr4[$key]['InputOutputLab'] = $this->ob[$this->language]['SelectTestBox'][$test['InputOutputLab']];
     }
     public function initValid(){
+        $this->testArr = array();
         $this->roll['item'] = ['required', 'array'];
         $this->roll['item.*'] = ['required',
             function ($attribute, $value, $fail) {// use for loop
-                if (isset($this->ob['Test'][$value]))
-                    array_push($this->testArr, new Test($this->ob['Test'][$value]['Name'], $this->ob['Test'][$value]['Shortcut'], $this->ob['Test'][$value]['Price'], $this->ob['Test'][$value]['InputOutputLab'], $this->ob['Test'][$value]['Id']));
-                else if(isset($this->ob['Packages'][$value]))
-                    array_push($this->testArr, new Test($this->ob['Packages'][$value]['Name'], $this->ob['Packages'][$value]['Shortcut'], $this->ob['Packages'][$value]['Price'], $this->ob['Packages'][$value]['InputOutputLab'], $this->ob['Packages'][$value]['Id']));
-                else if(isset($this->ob['Cultures'][$value]))
-                    array_push($this->testArr, new Test($this->ob['Cultures'][$value]['Name'], $this->ob['Cultures'][$value]['Shortcut'], $this->ob['Cultures'][$value]['Price'], $this->ob['Cultures'][$value]['InputOutputLab'], $this->ob['Cultures'][$value]['Id']));
+                if (isset($this->arr2[$value]))
+                    array_push($this->testArr, new Test($this->arr2[$value]['Name'], $this->arr2[$value]['Shortcut'], $this->arr2[$value]['Price'], $this->arr2[$value]['InputOutputLab'], $this->arr2[$value]['Id']));
+                else if(isset($this->arr4[$value]))
+                    array_push($this->testArr, new Test($this->arr4[$value]['Name'], $this->arr4[$value]['Shortcut'], $this->arr4[$value]['Price'], $this->arr4[$value]['InputOutputLab'], $this->arr4[$value]['Id']));
+                else if(isset($this->arr3[$value]))
+                    array_push($this->testArr, new Test($this->arr3[$value]['Name'], $this->arr3[$value]['Shortcut'], $this->arr3[$value]['Price'], $this->arr3[$value]['InputOutputLab'], $this->arr3[$value]['Id']));
                 else
                     $fail($this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']);
             },];
-        $this->roll['patentCode'] = ['required', Rule::in(isset($this->ob['Patent'])?array_keys($this->ob['Patent']):null)];
-        $this->roll['know'] = ['required', Rule::in(isset($this->ob['Knows'])?array_keys($this->ob['Knows']):null)];
+        $this->roll['patentCode'] = ['required', Rule::in(isset($this->myPat)?array_keys($this->myPat):null)];
+        $this->roll['know'] = ['required', Rule::in(isset($this->myKnow)?array_keys($this->myKnow):null)];
         $this->roll['discount'] = ['required', 'numeric', 'min:0'];
         $this->roll['delayedMoney'] = ['required', 'numeric', 'min:0'];
         $this->roll['paymentDate'] = ['required', 'date'];
         $this->roll['paymentAmount'] = ['required', 'numeric', 'min:0'];
-        $this->roll['paymentMethod'] = ['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['PaymentMethodBox']))];
+        $this->roll['paymentMethod'] = ['required', Rule::in(array_keys($this->payment))];
         $this->message['item.required'] = $this->error5;
         $this->message['item.array'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
         $this->message['patentCode.required'] = $this->error3;
@@ -168,7 +165,6 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->message['paymentMethod.required'] = $this->error2;
         $this->message['paymentMethod.in'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'];
         $this->message['item.*.required'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
-        $this->testArr = array();
     }
     public function initValidRull(){
         $this->initValid();
@@ -182,6 +178,11 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->error5 = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemRequired'];
         $this->error6 = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentDateRequired'];
         $this->error7 = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentAmountRequired'];
+        $this->payment = $this->ob[$this->ob['Setting']['Language']]['PaymentMethodBox'];
+        $this->arr2 = (array)$this->ob['Test'];
+        $this->arr3 = (array)$this->ob['Cultures'];
+        $this->arr4 = (array)$this->ob['Packages'];
+        $this->myKnow = $this->ob['Knows'];
         parent::__construct($this, 'Receipt', $this->ob);
     }
     public function index(){

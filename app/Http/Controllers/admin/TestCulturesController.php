@@ -20,7 +20,7 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         return route('deleteItem', request()->route('id'));
     }
     public function getData(){
-        return $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->ob[$this->language]['SelectTestBox']):array();
+        return $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->inputOutPut):array();
     }
     public function initView(){
         $this->table8 = $this->ob[$this->language][request()->route('id')]['TableName'];
@@ -31,7 +31,6 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->label4 = $this->ob[$this->language][request()->route('id')]['LabelPrice'];
         $this->label5 = $this->ob[$this->language][request()->route('id')]['LabelInputOutLab'];
         $this->label7 = $this->ob[$this->language][request()->route('id')]['LabelShortcut'];
-        $this->inputOutPut = $this->ob[$this->language]['SelectTestBox'];
         $this->selectBox1 = $this->ob[$this->language][request()->route('id')]['InputOutLab'];
         $this->hint1 = $this->ob[$this->language][request()->route('id')]['HintName'];
         $this->hint2 = $this->ob[$this->language][request()->route('id')]['HintPrice'];
@@ -41,7 +40,7 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->roll['name'] = ['required', 'min:3'];
         $this->roll['shortcut'] = ['required', 'min:3'];
         $this->roll['price'] = ['required', 'integer'];
-        $this->roll['input-output-lab'] = ['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['SelectTestBox']))];
+        $this->roll['input-output-lab'] = ['required', Rule::in(array_keys($this->inputOutPut))];
         $this->message['name.required'] = $this->error1;
         $this->message['name.min'] = $this->error2;
         $this->message['shortcut.required'] = $this->error9;
@@ -63,6 +62,7 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->error10 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['ShortcutInvalid'];
         $this->error3 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['PriceRequired'];
         $this->error4 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['InputOutputLabRequired'];
+        $this->inputOutPut = $this->ob[$this->ob['Setting']['Language']]['SelectTestBox'];
         parent::__construct($this, request()->route('id'), $this->ob);
     }
     public function index($id){

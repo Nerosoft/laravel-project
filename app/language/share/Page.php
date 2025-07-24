@@ -7,9 +7,7 @@ use App\Models\Rays;
 class Page extends TableSetting{
     protected function __construct($actionInit, $state, $ob){
         if(request()->input('id')){
-            $this->roll = [
-                'id' =>['required', $actionInit->initValidRull()]
-            ];
+            $this->roll['id'] = ['required', $actionInit->initValidRull()];
             $this->message = [
                 'id.required' => $ob[$ob['Setting']['Language']][$state]['IdIsReq'],
                 'id.in' => $ob[$ob['Setting']['Language']][$state]['IdIsInv']

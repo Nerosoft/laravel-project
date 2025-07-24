@@ -22,8 +22,8 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
         return route('deleteItem', 'Patent');
     }
     public function getData(){
-        $this->myContract = isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array();            
-        return $this->ob['Patent']?Patent::fromArray(array_reverse($this->ob['Patent']), $this->myContract, $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();    
+        $this->myContract = isset($this->contr)?Contracts::fromArray($this->contr):array();            
+        return $this->myPat?Patent::fromArray(array_reverse($this->myPat), $this->myContract, $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->disBox):array();    
     }
     public function initView(){
         $this->title5 = $this->ob[$this->language]['Patent']['PatentIamge'];
@@ -49,8 +49,6 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
         $this->label4 = $this->ob[$this->language]['Patent']['LabelPatentNationality'];
         $this->label9 = $this->ob[$this->language]['Patent']['LabelPatentGender'];
         $this->label13 = $this->ob[$this->language]['Patent']['LabelPatentContracting'];
-        $this->nationality = $this->ob[$this->language]['SelectNationalityBox'];
-        $this->gender = $this->ob[$this->language]['SelectGenderBox'];
         $this->selectBox1 = $this->ob[$this->language]['Patent']['SelectBoxPatentNationality'];
         $this->selectBox2 = $this->ob[$this->language]['Patent']['SelectBoxPatentGender'];
         $this->selectBox5 = $this->ob[$this->language]['Patent']['SelectBoxPatentContracting'];
@@ -58,20 +56,20 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
     public function initValid(){
         $this->roll['avatar' ] = ['image', 'mimes:jpg,png', 'max:1024', 'dimensions:min_width=300,min_height=300'];
         $this->roll['patent-name' ] = ['required', 'min:3'];
-        $this->roll['patent-nationality' ] = ['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox']))];
+        $this->roll['patent-nationality' ] = ['required', Rule::in(array_keys($this->nationality))];
         $this->roll['patent-national-id' ] = ['required', 'min:3'];
         $this->roll['patent-passport-no' ] = ['required', 'min:3'];
         $this->roll['patent-email' ] = ['required', 'email'];
         $this->roll['patent-phone' ] = ['required', 'regex:/^[0-9]{11}$/'];
         $this->roll['patent-phone2' ] = ['required', 'regex:/^[0-9]{11}$/'];
-        $this->roll['patent-gender' ] = ['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['SelectGenderBox']))];
+        $this->roll['patent-gender' ] = ['required', Rule::in(array_keys($this->gender))];
         $this->roll['last-period-date' ] = ['required', 'date'];
         $this->roll['date-birth' ] = ['required', 'date'];
         $this->roll['patent-address' ] = ['required', 'min:3'];
-        $this->roll['patent-contracting' ] = ['required', Rule::in(isset($this->ob['Contracts'])?array_keys($this->ob['Contracts']):null)];
+        $this->roll['patent-contracting' ] = ['required', Rule::in(isset($this->contr)?array_keys($this->contr):null)];
         $this->roll['patent-hours' ] = ['required', 'integer'];
         $this->roll['choices' ] = ['required_without:patent-other', 'array']; // Ensure at least one checkbox is selected
-        $this->roll['choices.*'] = [Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['CheckBox']))];
+        $this->roll['choices.*'] = [Rule::in(array_keys($this->disBox))];
         $this->roll['patent-other'] = ['required_without:choices', 'nullable', 'min:3'];
         $this->message['patent-name.required'] = $this->error1;
         $this->message['patent-name.min'] = $this->error2;
@@ -109,12 +107,11 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
         $this->message['avatar.uploaded'] =$this->error23;
         $this->message['choices.required_without'] =$this->error16;
         $this->message['patent-other.required_without'] =$this->error16;
-        $this->avatar = request()->file('avatar') ? $this->setupImage():(isset($this->ob['Patent'][request()->input('id')]['Avatar'])?$this->ob['Patent'][request()->input('id')]['Avatar']:null);
-
+        $this->avatar = request()->file('avatar') ? $this->setupImage():(isset($this->myPat[request()->input('id')]['Avatar'])?$this->myPat[request()->input('id')]['Avatar']:null);
     }
     public function initValidRull(){
         $this->initValid();
-        return Rule::in($this->ob['Patent']?array_keys($this->ob['Patent']):null);
+        return Rule::in($this->myPat?array_keys($this->myPat):null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
@@ -143,6 +140,10 @@ class PatientController extends PatientInfo implements LangObject, ActionInit, V
         $this->error23 = $this->ob[$this->ob['Setting']['Language']]['Patent']['PatentAvatarImage'];
         $this->error32 = $this->ob[$this->ob['Setting']['Language']]['Patent']['PatentAvatarMax'];
         $this->PatentAvatarDimensions = $this->ob[$this->ob['Setting']['Language']]['Patent']['PatentAvatarDimensions'];
+        $this->gender = $this->ob[$this->ob['Setting']['Language']]['SelectGenderBox'];
+        $this->contr = $this->ob['Contracts'];
+        $this->nationality = $this->ob[$this->ob['Setting']['Language']]['SelectNationalityBox'];
+        $this->disBox = $this->ob[$this->ob['Setting']['Language']]['CheckBox'];
         parent::__construct($this, 'Patent', $this->ob);
     }
     public function index(){

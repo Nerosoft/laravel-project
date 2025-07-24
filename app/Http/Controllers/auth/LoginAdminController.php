@@ -28,7 +28,6 @@ class LoginAdminController extends EmailPassInformaion
                 //save user session logout
                 request()->session()->put('userLogout', request()->input('id'));
                 return redirect()->route('Home')->with('success', $this->ob[$this->ob['Setting']['Language']]['LoginAdmin']['LoginMessage']);
-                return;
             }         
         // return error email exsist
         return back()->withInput()->withErrors($this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['LoginAdmin']['UserPasswordDntMatch']);

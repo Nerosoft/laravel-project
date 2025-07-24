@@ -6,10 +6,6 @@ use App\language\share\Page;
 use App\Http\interface\ValidRull;
 class DeleteController extends Page implements ValidRull
 {
-
-    public function initValid(){
-       
-    }
     public function initValidRull(){
         $this->successfully1 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['Delete'];
         return Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null);
