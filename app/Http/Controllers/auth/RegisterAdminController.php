@@ -19,25 +19,12 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         $this->error7 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserPasswordDntMatch'];
         $this->error8 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserCodePasswordRequired'];
         $this->error9 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserCodePassword'];
-        if(Route::currentRouteName() === 'register.registerUser'){
-            array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
-            array_push($this->roll['password'], 'confirmed');
-            $this->roll['password_confirmation'] = ['required', 'min:8'];
-            $this->roll['codePassword'] = ['required', 'min:8'];
-            $this->message['email.not_in'] = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserEmailExist'];
-            $this->message['password_confirmation.min'] = $this->UserRepeatPassword;
-            $this->message['password_confirmation.required'] = $this->UserRepeatPasswordRequired;
-            $this->message['codePassword.min'] = $this->error9;
-            $this->message['codePassword.required'] = $this->error8;
-            $this->message['password.confirmed']= $this->error7;   
-        }else{
-            $this->labelUserRepeatPassword = $this->ob[$this->language]['Register']['LabelUserRepeatPassword'];
-            $this->labelUserCodePassword = $this->ob[$this->language]['Register']['LabelUserCodePassword'];
-            $this->hintUserRepeatPassword = $this->ob[$this->language]['Register']['HintUserRepeatPassword'];
-            $this->hintUserCodePassword = $this->ob[$this->language]['Register']['HintUserCodePassword'];
-        }
     }
     public function index(){
+        $this->labelUserRepeatPassword = $this->ob[$this->language]['Register']['LabelUserRepeatPassword'];
+        $this->labelUserCodePassword = $this->ob[$this->language]['Register']['LabelUserCodePassword'];
+        $this->hintUserRepeatPassword = $this->ob[$this->language]['Register']['HintUserRepeatPassword'];
+        $this->hintUserCodePassword = $this->ob[$this->language]['Register']['HintUserCodePassword'];
         return view('login.register',[
             'lang'=>$this
         ]);
@@ -49,6 +36,16 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         return redirect()->route('Home')->with('success',  $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin']);
     }
     public function getMyObject($id = null){
+        array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
+        array_push($this->roll['password'], 'confirmed');
+        $this->roll['password_confirmation'] = ['required', 'min:8'];
+        $this->roll['codePassword'] = ['required', 'min:8'];
+        $this->message['email.not_in'] = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserEmailExist'];
+        $this->message['password_confirmation.min'] = $this->UserRepeatPassword;
+        $this->message['password_confirmation.required'] = $this->UserRepeatPasswordRequired;
+        $this->message['codePassword.min'] = $this->error9;
+        $this->message['codePassword.required'] = $this->error8;
+        $this->message['password.confirmed']= $this->error7;
         request()->validate($this->roll,$this->message);       
         return array('Key'=>request()->input('codePassword'), 'Password'=>request()->input('password'), 'Email'=>request()->input('email'));
     }
