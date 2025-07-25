@@ -5,24 +5,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\interface\LangObject;
 use App\language\share\Page;
-use App\Http\interface\ActionInit;
-use App\Http\interface\ValidRull;
 use App\instance\admin\contracts\Contracts;
 use App\Models\Rays;
 use Illuminate\Validation\Rule;
-use App\Http\interface\ActionInit2;
 use Illuminate\Support\Facades\Route;
-use App\Http\interface\DeleteRoute;
 
-class ContractsController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
+class ContractsController extends Page implements LangObject
 {
-    public function getDeleteRoute(){
-        return route('deleteItem', 'Contracts');
-    }
-    public function getData(){
-        return $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
-    }
     public function initView(){
+        $this->tableData = $this->ob['Contracts']?Contracts::fromArray(array_reverse($this->ob['Contracts'])):array();
+        $this->actionDelete = route('deleteItem', 'Contracts');
         $this->table8 = $this->ob[$this->language]['Contracts']['TableContractName'];
         $this->table9 = $this->ob[$this->language]['Contracts']['TableContractGovernorate'];
         $this->table10 = $this->ob[$this->language]['Contracts']['TableContractArea'];
@@ -44,10 +36,6 @@ class ContractsController extends Page implements LangObject, ActionInit, ValidR
         $this->message['area.required'] = $this->error5;
         $this->message['area.min'] = $this->error6;
     }
-    public function initValidRull(){
-        $this->initValid();
-        return Rule::in($this->ob['Contracts']?array_keys($this->ob['Contracts']):null);
-    }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']]['Contracts']['ContractNameRequired'];
@@ -56,9 +44,10 @@ class ContractsController extends Page implements LangObject, ActionInit, ValidR
         $this->error4 = $this->ob[$this->ob['Setting']['Language']]['Contracts']['ContractGovernorateInvalid'];
         $this->error5 = $this->ob[$this->ob['Setting']['Language']]['Contracts']['ContractAreaRequired'];
         $this->error6 = $this->ob[$this->ob['Setting']['Language']]['Contracts']['ContractAreaInvalid'];
-        parent::__construct($this, 'Contracts', $this->ob);
+        parent::__construct('Contracts', $this->ob);
     }
     public function index(){
+        $this->initView();
         return view('admin.contracts.packages_contracts',[
             'lang'=> $this,
             'active'=>'Contracts',
@@ -69,10 +58,12 @@ class ContractsController extends Page implements LangObject, ActionInit, ValidR
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditContracts(){
+        array_push($this->roll['id'], Rule::in($this->ob['Contracts']?array_keys($this->ob['Contracts']):null));
         $this->getEditDataBase($this->ob, 'Contracts', $this);
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Contracts']['MessageModelEdit']);
     }
     public function getMyObject($id = null){
+        $this->initValid();
         request()->validate($this->roll, $this->message);
         return array('Name'=>request()->input('name'), 'Governorate'=>request()->input('governorate'), 'Area'=>request()->input('area'));
     }

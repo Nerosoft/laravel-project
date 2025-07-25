@@ -12,20 +12,12 @@ use App\language\share\Page;
 use App\instance\admin\Branch;
 use Illuminate\Support\Facades\Validator;
 
-use App\Http\interface\ActionInit;
-use App\Http\interface\ValidRull;
-use App\Http\interface\ActionInit2;
-use App\Http\interface\DeleteRoute;
 
-class BranchesController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
+class BranchesController extends Page implements LangObject
 {
-    public function getDeleteRoute(){
-        return route('branch.delete');
-    }
-    public function getData(){
-        return  Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(Rays::find(request()->session()->get('userLogout'))['Branch'], $this->ob[$this->language]['SelectBranchBox']):array();
-    }
     public function initView(){
+        $this->tableData = Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(array_reverse(Rays::find(request()->session()->get('userLogout'))['Branch']), $this->ob[$this->language]['SelectBranchBox']):array();
+        $this->actionDelete = route('branch.delete');
         $this->table8 = $this->ob[$this->language]['Branch']['BranchStreet'];
         $this->table9 = $this->ob[$this->language]['Branch']['BranchName'];
         $this->table10 = $this->ob[$this->language]['Branch']['BranchPhone'];
@@ -44,7 +36,6 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         $this->hint6 = $this->ob[$this->language]['Branch']['BranchRaysStreet'];
         $this->hint7 = $this->ob[$this->language]['Branch']['BranchRaysBuilding'];
         $this->hint8 = $this->ob[$this->language]['Branch']['BranchRaysAddress'];
-        $this->branchInputOutput = $this->ob[$this->language]['SelectBranchBox'];
         $this->selectBox1 = $this->ob[$this->language]['Branch']['WithRaysOut'];
     }
     public function initValid(){
@@ -56,7 +47,7 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         $this->roll['brance_rays_building'] = ['required', 'min:3'];
         $this->roll['brance_rays_address'] = ['required', 'min:3'];
         $this->roll['brance_rays_country'] = ['required', 'min:3'];
-        $this->roll['brance_rays_follow'] = ['required', Rule::in(array_keys($this->ob[$this->ob['Setting']['Language']]['SelectBranchBox']))];
+        $this->roll['brance_rays_follow'] = ['required', Rule::in(array_keys($this->branchInputOutput))];
         $this->message['brance_rays_name.min'] = $this->error10;
         $this->message['brance_rays_name.required'] = $this->error1;
         $this->message['brance_rays_phone.regex'] = $this->error11;
@@ -76,12 +67,7 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
     }
-    public function initValidRull(){
-        $this->initValid();
-        return Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null);
-    }
     public function __construct(){
-
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysNameRequired'];
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysPhoneRequired'];
@@ -100,7 +86,8 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         $this->error15 = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysBuildingLength'];
         $this->error16 = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysAddressLength'];
         $this->error17 = $this->ob[$this->ob['Setting']['Language']]['Branch']['BranceRaysCountryLength'];
-        parent::__construct($this, 'Branch', $this->ob);
+        $this->branchInputOutput = $this->ob[$this->ob['Setting']['Language']]['SelectBranchBox'];
+        parent::__construct('Branch', $this->ob);
     }
     public function makeAddBranch(){
         $myId = Str::uuid()->toString();
@@ -117,10 +104,12 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditBranch(){
+        array_push($this->roll['id'], Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null));
         $this->getEditDataBase(Rays::find(request()->session()->get('userLogout')), 'Branch', $this); 
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']]['Branch']['MessageModelEdit']);
     }
     public function index(){
+        $this->initView();
         return view('admin.branches',[
             'lang'=> $this,
             'newBranchRays'=>route('addBranchRays'),
@@ -128,6 +117,7 @@ class BranchesController extends Page implements LangObject, ActionInit, ValidRu
         ]);
     }
     public function getMyObject($id = null){
+        $this->initValid();
         request()->validate($this->roll, $this->message);
         return array('Name'=>request()->input('brance_rays_name'),
             'Phone'=>request()->input('brance_rays_phone'),

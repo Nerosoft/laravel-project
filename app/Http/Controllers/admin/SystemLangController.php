@@ -10,22 +10,15 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 use App\language\share\TableSetting;
 use Illuminate\Support\Facades\Validator;
-use App\Http\interface\ActionInit;
-use App\Http\interface\ActionInit2;
-
-class SystemLangController extends TableSetting implements ActionInit, ActionInit2
+class SystemLangController extends TableSetting
 {
-    public function getData(){
-        $tableData = array();
+    
+    public function initView(){
         if(isset($this->ob[request()->route('lang')][request()->route('id')]))
-            $tableData = $this->ob[request()->route('lang')][request()->route('id')];
+            $this->tableData = $this->ob[request()->route('lang')][request()->route('id')];
         else
             foreach ($this->ob[$this->language]['AllNamesLanguage'] as $key=>$value)
-                $tableData[$key] = $this->ob[$key];
-        
-        return $tableData;
-    }
-    public function initView(){
+                $this->tableData[$key] = $this->ob[$key];
         $this->Left = $this->ob[$this->language]['SystemLang']['ltr'];
         $this->Right = $this->ob[$this->language]['SystemLang']['rtl'];
         //init label
@@ -65,7 +58,7 @@ class SystemLangController extends TableSetting implements ActionInit, ActionIni
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']]['SystemLang']['TextRequired'];
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['SystemLang']['TextLenght'];
-        parent::__construct($this, 
+        parent::__construct(
         $this->ob[$this->ob['Setting']['Language']]['SystemLang']['SystemLang'],
          new Menu($this->ob[$this->ob['Setting']['Language']]['Menu'], 'Language',
             $this->ob[$this->ob['Setting']['Language']]['CutomLang'],
@@ -73,6 +66,7 @@ class SystemLangController extends TableSetting implements ActionInit, ActionIni
             $this->ob);        
     }
     public function index($nameLanguage = null, $id = 'SystemLang'){
+        $this->initView();
         return view('admin.all_language', $nameLanguage === null?[
             'lang'=> $this,
             'active'=>$id,
@@ -83,6 +77,7 @@ class SystemLangController extends TableSetting implements ActionInit, ActionIni
         ]);
     }
     public function makeEditLanguage($lang, $id, $name, $item = null){
+        $this->initValid();
         Validator::make([...request()->all(), 'myLang'=>$lang, 'id'=>$id, 'name'=>$name, 'item'=>$item], $this->roll, $this->message)->validate();
         $var1 = $this->ob[$lang];
         //make array first order importaint

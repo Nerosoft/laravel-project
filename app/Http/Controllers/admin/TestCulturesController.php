@@ -7,22 +7,14 @@ use Illuminate\Validation\Rule;
 use App\Http\interface\LangObject;
 use App\language\share\Page;
 use Illuminate\Support\Facades\Route;
-use App\Http\interface\ActionInit;
-use App\Http\interface\ValidRull;
 use App\instance\admin\test_cultures\Test;
 use App\Models\Rays;
-use App\Http\interface\ActionInit2;
-use App\Http\interface\DeleteRoute;
 
-class TestCulturesController extends Page implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
+class TestCulturesController extends Page implements LangObject
 {
-    public function getDeleteRoute(){
-        return route('deleteItem', request()->route('id'));
-    }
-    public function getData(){
-        return $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->inputOutPut):array();
-    }
     public function initView(){
+        $this->tableData = $this->ob[request()->route('id')]?Test::fromArray(array_reverse($this->ob[request()->route('id')]), $this->inputOutPut):array();
+        $this->actionDelete = route('deleteItem', request()->route('id'));
         $this->table8 = $this->ob[$this->language][request()->route('id')]['TableName'];
         $this->table9 = $this->ob[$this->language][request()->route('id')]['TablePrice'];
         $this->table10 = $this->ob[$this->language][request()->route('id')]['TableInputOutput'];
@@ -50,10 +42,6 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->message['input-output-lab.required.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
     }
-    public function initValidRull(){
-        $this->initValid();
-        return Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null);
-    }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['NameRequired'];
@@ -63,9 +51,10 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         $this->error3 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['PriceRequired'];
         $this->error4 = $this->ob[$this->ob['Setting']['Language']][request()->route('id')]['InputOutputLabRequired'];
         $this->inputOutPut = $this->ob[$this->ob['Setting']['Language']]['SelectTestBox'];
-        parent::__construct($this, request()->route('id'), $this->ob);
+        parent::__construct(request()->route('id'), $this->ob);
     }
     public function index($id){
+        $this->initView();
         return view('admin.test_cultures.all_test_cultures',[
                 'lang'=> $this,
                 'active'=>'TestCultures',
@@ -77,10 +66,12 @@ class TestCulturesController extends Page implements LangObject, ActionInit, Val
         return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditTest($id){
+        array_push($this->roll['id'], Rule::in($this->ob[request()->route('id')]?array_keys($this->ob[request()->route('id')]):null));
         $this->getEditDataBase($this->ob, $id, $this);
         return back()->with('success', $this->ob[$this->ob['Setting']['Language']][$id]['MessageModelEdit']);
     }
     public function getMyObject($myDbId = null){
+        $this->initValid();
         request()->validate($this->roll, $this->message);
         return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$myDbId?$myDbId:request()->input('id'));
     }

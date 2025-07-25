@@ -7,25 +7,15 @@ use Illuminate\Http\Request;
 use App\language\share\Page;
 use App\Models\Rays;
 use App\MyLanguage;
-use App\Http\interface\ActionInit;
-use App\Http\interface\ValidRull;
-use App\Http\interface\DeleteRoute;
 use Illuminate\Validation\Rule;
-use App\Http\interface\ActionInit2;
 use Illuminate\Support\Facades\Route;
 
-class LangController extends Page implements ActionInit, ValidRull, ActionInit2, DeleteRoute
+class LangController extends Page
 {
-    public function getDeleteRoute(){
-        return route('language.delete');
-    }
-    public function getData(){
-        $tableData = array();
-        foreach (array_reverse($this->allNames) as $key => $value)
-            $tableData[$key] = new MyLanguage($value);
-        return $tableData;
-    }
     public function initView(){
+        foreach (array_reverse($this->allNames) as $key => $value)
+            $this->tableData[$key] = new MyLanguage($value);
+        $this->actionDelete = route('language.delete');
         //init table
         $this->NameLangaue = $this->ob[$this->language]['ChangeLanguage']['NameLangaue'];
         //init label
@@ -53,24 +43,22 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
             $this->ob[$key] = $myLang;
         }
     }
-    public function initValidRull(){
-        $this->initValid();
-        return Rule::in(array_keys($this->allNames));
-    }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['NewLangNameRequired'];
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['ChangeLanguage']['NewLangNameInvalid'];
         $this->allNames = $this->ob[$this->ob['Setting']['Language']]['AllNamesLanguage'];
-        parent::__construct($this, 'ChangeLanguage', $this->ob);
+        parent::__construct('ChangeLanguage', $this->ob);
     }
     public function index(){
+        $this->initView();
         return view('admin.change_language',[
                 'lang'=>$this,
                 'active'=>'ChangeLanguage',
         ]);
     }
     public function makeAddLanguage(){
+        $this->initValid();
         request()->validate($this->roll, $this->message);
         //after add new language name
         $myLanguage = $this->ob['MyLanguage'];
@@ -80,6 +68,8 @@ class LangController extends Page implements ActionInit, ValidRull, ActionInit2,
         return back()->with('success', $this->successfulyMessage.request()->input('lang_name'));
     }
     public function makeCopyLanguage(){
+        $this->initValid();
+        array_push($this->roll['id'], Rule::in(array_keys($this->allNames)));
         request()->validate($this->roll, $this->message);
         //after add new language name
         $this->ob[$this->newKey] = $this->ob[request()->input('id')];

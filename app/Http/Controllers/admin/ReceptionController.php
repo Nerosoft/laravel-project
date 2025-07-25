@@ -10,28 +10,19 @@ use App\language\share\PatientInfo;
 use App\instance\admin\test_cultures\Test;
 use App\instance\admin\test_cultures\Packages;
 use App\instance\admin\test_cultures\Cultures;
-use App\Http\interface\ActionInit;
-use App\Http\interface\ValidRull;
-use App\Http\interface\DeleteRoute;
 use App\instance\admin\reception\Patent;
 use App\instance\admin\reception\MyKnows;
 use App\instance\admin\contracts\Contracts;
-use App\Http\interface\ActionInit2;
 use Illuminate\Support\Facades\Route;
 
 
-class ReceptionController extends PatientInfo implements LangObject, ActionInit, ValidRull, ActionInit2, DeleteRoute
+class ReceptionController extends PatientInfo implements LangObject
 {
-    public function getDeleteRoute(){
-        return route('deleteItem', 'Receipt');
-    }
-    public function getData(){
-        $this->myPatent = isset($this->myPat)?Patent::fromArray($this->myPat, isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
-        $this->arr1 = isset($this->myKnow) ? MyKnows::fromArray($this->myKnow):array();
-        return $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->language]['SelectTestBox'],$this->payment):array();
-        
-    }
     public function initView(){
+        $this->myPatent = isset($this->myPat)?Patent::fromArray($this->myPat, isset($this->ob['Contracts'])?Contracts::fromArray($this->ob['Contracts']):array(), $this->ob[$this->language]['SelectGenderBox'], $this->ob[$this->language]['SelectNationalityBox'], $this->ob[$this->language]['CheckBox']):array();
+        $this->arr1 = isset($this->ob['Knows']) ? MyKnows::fromArray($this->ob['Knows']):array();        
+        $this->tableData = $this->ob['Receipt']?Receipt::fromArray2(array_reverse($this->ob['Receipt']),$this->myPatent, $this->arr1, $this->ob[$this->language]['SelectTestBox'],$this->payment):array();
+        $this->actionDelete = route('deleteItem', 'Receipt');
         $this->title5 = $this->ob[$this->language]['Receipt']['ReceiptPatient'];  
         $this->myCodePatient = $this->ob[$this->language]['Receipt']['PatientCode'];
         //init table
@@ -139,7 +130,7 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
                     $fail($this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']);
             },];
         $this->roll['patentCode'] = ['required', Rule::in(isset($this->myPat)?array_keys($this->myPat):null)];
-        $this->roll['know'] = ['required', Rule::in(isset($this->myKnow)?array_keys($this->myKnow):null)];
+        $this->roll['know'] = ['required', Rule::in(isset($this->ob['Knows'])?array_keys($this->ob['Knows']):null)];
         $this->roll['discount'] = ['required', 'numeric', 'min:0'];
         $this->roll['delayedMoney'] = ['required', 'numeric', 'min:0'];
         $this->roll['paymentDate'] = ['required', 'date'];
@@ -166,10 +157,6 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->message['paymentMethod.in'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'];
         $this->message['item.*.required'] = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
     }
-    public function initValidRull(){
-        $this->initValid();
-        return Rule::in($this->ob['Receipt']?array_keys($this->ob['Receipt']):null);
-    }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error2 = $this->ob[$this->ob['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodRequired'];
@@ -182,10 +169,10 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         $this->arr2 = (array)$this->ob['Test'];
         $this->arr3 = (array)$this->ob['Cultures'];
         $this->arr4 = (array)$this->ob['Packages'];
-        $this->myKnow = $this->ob['Knows'];
-        parent::__construct($this, 'Receipt', $this->ob);
+        parent::__construct('Receipt', $this->ob);
     }
     public function index(){
+        $this->initView();
         return view('admin.reception.patientRegisteration', [
             'lang'=> $this,
             'active'=>'Receipt',
@@ -199,6 +186,7 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         ]);
     }
     public function makeEditReceipt(){
+        array_push($this->roll['id'], Rule::in($this->ob['Receipt']?array_keys($this->ob['Receipt']):null));
         $this->getEditDataBase($this->ob, 'Receipt', $this);
         return response()->json([
             'success' => true,
@@ -206,6 +194,7 @@ class ReceptionController extends PatientInfo implements LangObject, ActionInit,
         ]);
     }
     public function getMyObject($id = null){
+        $this->initValid();
         request()->validate($this->roll, $this->message);
         return (new Receipt(request()->input('know'), $this->testArr, (int)request()->input('discount'), (int)request()->input('delayedMoney'), request()->input('paymentDate'), (int)request()->input('paymentAmount'), request()->input('paymentMethod'), request()->input('patentCode')))->getObject();
     }
