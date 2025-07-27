@@ -38,7 +38,7 @@ class RaysSeeder extends Seeder
                         'DisplayCustody'=>'View custody',
                         'DisplayExpenses'=>'View expenses',
                         'DisplaySafe'=>'View safe',
-                        'AdminUser'=>'Admin user',
+                        'Title'=>'Admin user',
                     ],
                     'Branch'=>[
                         'LoadMessage'=>'welcome in branch main',
@@ -776,7 +776,7 @@ class RaysSeeder extends Seeder
                         'DisplayCustody'=>'View custody',
                         'DisplayExpenses'=>'View expenses',
                         'DisplaySafe'=>'View safe',
-                        'AdminUser'=>'Admin user',
+                        'Title'=>'Admin user',
                     ],
                     'Branch'=>[
                         'LoadMessage'=>'welcome in branch main',

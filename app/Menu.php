@@ -2,6 +2,7 @@
 
 namespace App;
 use App\MenuItem;
+use App\Http\interface\DbRays;
 class Menu
 {
     private $Home;
@@ -16,24 +17,24 @@ class Menu
     /**
      * Create a new class instance.
      */
-    public function __construct($menu, $state = null, $CutomLang = null, $MyLanguage = null)
+    public function __construct(DbRays $ob, $state, $language)
     {
-        if($state === 'Language'){
-            $this->Home = $menu['Home'];
-            $this->SystemLang = $menu['SystemLang'];
-            foreach ($MyLanguage as $key => $value)
-                $this->CustomMenu[$key] = new MenuItem($value, $CutomLang);
+        if($state === 'SystemLang'){
+            $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
+            $this->SystemLang = $ob->getDataBase()[$language]['Menu']['SystemLang'];
+            foreach ($ob->getDataBase()[$language]['AllNamesLanguage'] as $key => $value)
+                $this->CustomMenu[$key] = new MenuItem($value, $ob->getDataBase()[$language]['CutomLang']);
         }
         else{
-            $this->ChangeLanguage = $menu['ChangeLanguage'];
-            $this->SystemLang = $menu['SystemLang'];
-            $this->Home = $menu['Home'];
-            $this->TestCultures = new MenuItem($menu['TestCultures']['Name'], $menu['TestCultures']['Item']);
-            $this->Branches = $menu['Branches'];
-            $this->Receipt = $menu['Receipt'];
-            $this->Patent = $menu['Patent'];
-            $this->Knows = $menu['Knows'];
-            $this->Contracts = $menu['Contracts'];
+            $this->ChangeLanguage = $ob->getDataBase()[$language]['Menu']['ChangeLanguage'];
+            $this->SystemLang = $ob->getDataBase()[$language]['Menu']['SystemLang'];
+            $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
+            $this->TestCultures = new MenuItem($ob->getDataBase()[$language]['Menu']['TestCultures']['Name'], $ob->getDataBase()[$language]['Menu']['TestCultures']['Item']);
+            $this->Branches = $ob->getDataBase()[$language]['Menu']['Branches'];
+            $this->Receipt = $ob->getDataBase()[$language]['Menu']['Receipt'];
+            $this->Patent = $ob->getDataBase()[$language]['Menu']['Patent'];
+            $this->Knows = $ob->getDataBase()[$language]['Menu']['Knows'];
+            $this->Contracts = $ob->getDataBase()[$language]['Menu']['Contracts'];
         }
     }
     public function getMenu(){

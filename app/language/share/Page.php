@@ -1,32 +1,36 @@
 <?php
 namespace App\language\share;
-use App\Menu;
+use App\Http\interface\DbRays;
 class Page extends TableSetting{
-    protected function __construct($state, $ob){
+    protected function __construct(DbRays $ob, $state){
         if(request()->input('id')){
-            $this->roll= [
+            $this->roll = [
                 'id'=>['required']
             ];
             $this->message = [
-                'id.required'=>$ob[$ob['Setting']['Language']][$state]['IdIsReq'],
-                'id.in'=>$ob[$ob['Setting']['Language']][$state]['IdIsInv']
+                'id.required'=>$ob->getDataBase()[$ob->getDataBase()['Setting']['Language']][$state]['IdIsReq'],
+                'id.in'=>$ob->getDataBase()[$ob->getDataBase()['Setting']['Language']][$state]['IdIsInv']
             ];
+            $ob->getValidRule();
         }
-        else if(request()->all())
-            $this->successfulyMessage = $ob[$ob['Setting']['Language']][$state]['MessageModelCreate'];
+        else if(request()->all()){
+            $this->successfulyMessage = $ob->getDataBase()[$ob->getDataBase()['Setting']['Language']][$state]['MessageModelCreate'];
+            $ob->initValid();
+        }
         else{
-            parent::__construct($ob[$ob['Setting']['Language']][$state]['Title'], new Menu($ob[$ob['Setting']['Language']]['Menu']), $ob);
-            $this->title2 = $ob[$this->language][$state]['ScreenModelCreate'];
-            $this->title3 = $ob[$this->language][$state]['ScreenModelEdit'];
-            $this->button1 = $ob[$this->language][$state]['ButtonModelCreate'];
-            $this->button2 = $ob[$this->language][$state]['ButtonModelAdd'];
-            $this->button3 = $ob[$this->language][$state]['ButtonModelEdit'];
-            $this->table7 = $ob[$this->language][$state]['TableId'];
-            $this->table11 = $ob[$this->language][$state]['TabelEvent'];
-            $this->titleModelDelete = $ob[$this->language][$state]['ScreenModelDelete'];
-            $this->messageModelDelete = $ob[$this->language][$state]['MessageModelDelete'];
-            $this->buttonModelDelete = $ob[$this->language][$state]['ButtonModelDelete'];
-            $this->successfully1 = $ob[$this->language][$state]['LoadMessage'];
+            parent::__construct($ob, $state);
+            $this->title2 = $ob->getDataBase()[$this->language][$state]['ScreenModelCreate'];
+            $this->title3 = $ob->getDataBase()[$this->language][$state]['ScreenModelEdit'];
+            $this->button1 = $ob->getDataBase()[$this->language][$state]['ButtonModelCreate'];
+            $this->button2 = $ob->getDataBase()[$this->language][$state]['ButtonModelAdd'];
+            $this->button3 = $ob->getDataBase()[$this->language][$state]['ButtonModelEdit'];
+            $this->table7 = $ob->getDataBase()[$this->language][$state]['TableId'];
+            $this->table11 = $ob->getDataBase()[$this->language][$state]['TabelEvent'];
+            $this->titleModelDelete = $ob->getDataBase()[$this->language][$state]['ScreenModelDelete'];
+            $this->messageModelDelete = $ob->getDataBase()[$this->language][$state]['MessageModelDelete'];
+            $this->buttonModelDelete = $ob->getDataBase()[$this->language][$state]['ButtonModelDelete'];
+            $this->successfully1 = $ob->getDataBase()[$this->language][$state]['LoadMessage'];
+            $this->actionDelete = $ob->getRouteDelete();
         }
         
     }

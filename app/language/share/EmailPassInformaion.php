@@ -4,7 +4,6 @@ use App\MyLanguage;
 use Illuminate\Support\Facades\Route;
 use App\Models\Rays;
 use Illuminate\Support\Facades\Cookie;
-
 class EmailPassInformaion extends InitPage{
     protected function __construct($state){
         $this->ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());

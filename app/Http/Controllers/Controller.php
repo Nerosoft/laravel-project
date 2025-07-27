@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 use App\Http\interface\LangObject;
 abstract class Controller
 {
-     protected function getCreateDataBase($model, $item, $Id, LangObject $newObject){
+    protected function getCreateDataBase($model, $item, $Id, LangObject $newObject){
         if(isset($model[$item])){
             $arr = $model[$item];
             $arr[$Id] = $newObject->getMyObject($Id);
