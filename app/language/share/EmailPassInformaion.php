@@ -24,26 +24,25 @@ class EmailPassInformaion extends InitPage{
                 'password.required' => $this->errorUserPasswordRequired,
             ];
             $this->users = $this->ob['User'] ? $this->ob['User'] : array();
-        }else if(isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) && $state === 'Register' || isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) && $state === 'LoginAdmin'){
+        }else if(isset($this->ob[unserialize(request()->cookie($this->ob['_id']))])){
             parent::__construct(unserialize(request()->cookie($this->ob['_id'])),
             $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['Title'],
             $this->ob[unserialize(request()->cookie($this->ob['_id']))]['Html']['Direction']);
             
-            $this->button1 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['ButtonLanguage'];
-            $this->button2 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['ButtonSaveLanguage'];
-            $this->button3 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['ButtonLoginUser'];
-            $this->label4 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['LabelSettingLanguage'];
+            $this->button1 = $this->ob[$this->language][$state]['ButtonLanguage'];
+            $this->button2 = $this->ob[$this->language][$state]['ButtonSaveLanguage'];
+            $this->button3 = $this->ob[$this->language][$state]['ButtonLoginUser'];
+            $this->label4 = $this->ob[$this->language][$state]['LabelSettingLanguage'];
             $this->myRadios = array();
-            foreach ($this->ob[unserialize(request()->cookie($this->ob['_id']))]['AllNamesLanguage'] as $key => $value)
+            foreach ($this->ob[$this->language]['AllNamesLanguage'] as $key => $value)
                 $this->myRadios[$key] = new MyLanguage($value);
             $this->RaysId = $this->ob['_id'];
-            $this->label1 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['LabelUserEmail'];
-            $this->label2 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['LabelUserPassword'];
-            $this->hint1 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['HintUserEmail'];
-            $this->hint2 = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['HintUserPassword'];
-            $this->help = $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['LabelLoginUser'];
+            $this->label1 = $this->ob[$this->language][$state]['LabelUserEmail'];
+            $this->label2 = $this->ob[$this->language][$state]['LabelUserPassword'];
+            $this->hint1 = $this->ob[$this->language][$state]['HintUserEmail'];
+            $this->hint2 = $this->ob[$this->language][$state]['HintUserPassword'];
+            $this->help = $this->ob[$this->language][$state]['LabelLoginUser'];
         }else{
-
             Cookie::queue($this->ob['_id'], serialize($this->ob['Setting']['Language']),2628000);
             parent::__construct($this->ob['Setting']['Language'],
             $this->ob[$this->ob['Setting']['Language']][$state]['Title'],
