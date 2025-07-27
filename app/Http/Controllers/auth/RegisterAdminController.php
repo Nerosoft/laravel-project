@@ -14,11 +14,11 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
 {   
     public function __construct(){
         parent::__construct('Register');
-        $this->UserRepeatPassword = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserRepeatPassword'];
-        $this->UserRepeatPasswordRequired = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserRepeatPasswordRequired'];
-        $this->error7 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserPasswordDntMatch'];
-        $this->error8 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserCodePasswordRequired'];
-        $this->error9 = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserCodePassword'];
+        $this->UserRepeatPassword = $this->ob[$this->language]['Register']['UserRepeatPassword'];
+        $this->UserRepeatPasswordRequired = $this->ob[$this->language]['Register']['UserRepeatPasswordRequired'];
+        $this->error7 = $this->ob[$this->language]['Register']['UserPasswordDntMatch'];
+        $this->error8 = $this->ob[$this->language]['Register']['UserCodePasswordRequired'];
+        $this->error9 = $this->ob[$this->language]['Register']['UserCodePassword'];
     }
     public function index(){
         $this->labelUserRepeatPassword = $this->ob[$this->language]['Register']['LabelUserRepeatPassword'];
@@ -33,14 +33,14 @@ class RegisterAdminController extends EmailPassInformaion implements LangObject
         $this->getCreateDataBase($this->ob, 'User', $this->generateUniqueIdentifier(), $this);     
         request()->session()->put('userId', request()->input('id'));
         request()->session()->put('userLogout', request()->input('id'));
-        return redirect()->route('Home')->with('success',  $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['AdminLogin']);
+        return redirect()->route('Home')->with('success',  $this->ob[$this->ob['Setting']['Language']]['Register']['AdminLogin']);
     }
     public function getMyObject($id = null){
         array_push($this->roll['email'], Rule::notIn(array_values(array_map(function($users) {return $users['Email'];}, $this->users))));
         array_push($this->roll['password'], 'confirmed');
         $this->roll['password_confirmation'] = ['required', 'min:8'];
         $this->roll['codePassword'] = ['required', 'min:8'];
-        $this->message['email.not_in'] = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']]['Register']['UserEmailExist'];
+        $this->message['email.not_in'] = $this->ob[$this->language]['Register']['UserEmailExist'];
         $this->message['password_confirmation.min'] = $this->UserRepeatPassword;
         $this->message['password_confirmation.required'] = $this->UserRepeatPasswordRequired;
         $this->message['codePassword.min'] = $this->error9;

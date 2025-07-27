@@ -12,6 +12,7 @@ class EmailPassInformaion extends InitPage{
         $this->errorUserPassword = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['UserPassword'];
         $this->errorUserPasswordRequired = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['UserPasswordRequired'];
         if(Route::currentRouteName() === 'loginUser.loginUser' || Route::currentRouteName() === 'register.registerUser'){
+            parent::__construct(isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']);
             $this->roll = [
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
