@@ -351,15 +351,15 @@ function addItem3(test_select, tests_name, table, subtotal, totalDiscount, disco
 function handleChange2(idSelectBox, idHeddinSelectBox, event, test, Cultures, packageCultures){
     idHeddinSelectBox.empty(); // Clear all existing options
     idSelectBox.removeClass('d-none');
-    if(event.target.value === 'Test' && test !== null)
+    if(event.target.value === 'Test' && test.length !== 0)
         for (let key in test)
             idHeddinSelectBox.append(`<option value='${JSON.stringify(test[key])}'>${test[key].Name}</option>`);
     //package
-    else if(event.target.value === 'Packages' && packageCultures !== null)
+    else if(event.target.value === 'Packages' && packageCultures.length !== 0)
         for (let key in packageCultures)
             idHeddinSelectBox.append(`<option value='${JSON.stringify(packageCultures[key])}'>${packageCultures[key].Name}</option>`);
     //Cultures
-    else if(event.target.value === 'Cultures' && Cultures !== null)
+    else if(event.target.value === 'Cultures' && Cultures.length !== 0)
         for (let key in Cultures)
             idHeddinSelectBox.append(`<option value='${JSON.stringify(Cultures[key])}'>${Cultures[key].Name}</option>`);
     else 
