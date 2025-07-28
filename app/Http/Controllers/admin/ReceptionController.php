@@ -27,7 +27,6 @@ class ReceptionController extends PatientInfo implements LangObject, ValidRule, 
         $this->myPatent = isset($this->myPat)?Patent::fromArray($this->myPat, isset($this->getDataBase()['Contracts'])?Contracts::fromArray($this->getDataBase()['Contracts']):array(), $this->getDataBase()[$this->language]['SelectGenderBox'], $this->getDataBase()[$this->language]['SelectNationalityBox'], $this->getDataBase()[$this->language]['CheckBox']):array();
         $this->arr1 = isset($this->getDataBase()['Knows']) ? MyKnows::fromArray($this->getDataBase()['Knows']):array();        
         return $this->getDataBase()['Receipt']?Receipt::fromArray2(array_reverse($this->getDataBase()['Receipt']),$this->myPatent, $this->arr1, $this->getDataBase()[$this->language]['SelectTestBox'],$this->payment):array();
-        
     }
     public function getRouteDelete(){
         return route('deleteItem', 'Receipt');
@@ -119,14 +118,14 @@ class ReceptionController extends PatientInfo implements LangObject, ValidRule, 
         $this->selectBox7 = $this->getDataBase()[$this->language]['Receipt']['ReceiptPatientPrint'];
         $this->allTests = $this->getDataBase()[$this->language]['OptionTestBox'];
         //add test
-        if($this->arr2)
+        if(!empty($this->arr2))
             foreach ($this->arr2 as $key=>$test)
                 $this->arr2[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$test['InputOutputLab']];
-        if($this->arr3)
+        if(!empty($this->arr3))
             foreach ($this->arr3 as $key => $cultures)
                 $this->arr3[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$cultures['InputOutputLab']];
         //init Packages
-        if($this->arr4)
+        if(!empty($this->arr4))
             foreach ($this->arr4 as $key => $packages)
                 $this->arr4[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$packages['InputOutputLab']];
     }
