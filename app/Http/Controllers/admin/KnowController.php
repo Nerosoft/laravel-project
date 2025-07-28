@@ -46,7 +46,7 @@ class KnowController extends Page implements LangObject, ValidRule, PageTable
         return back()->with('success', $this->successfulyMessage);
     }
     public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->getDataBase()['Knows']?array_keys($this->getDataBase()['Knows']):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()['Knows'])));
         $this->initValid();
     }
     public function makeEditKnow(){

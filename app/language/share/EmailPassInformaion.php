@@ -31,7 +31,7 @@ class EmailPassInformaion extends InitPage{
                 'password.min' => $this->errorUserPassword ,
                 'password.required' => $this->errorUserPasswordRequired,
             ];
-            $this->users = $this->ob['User'] ? $this->ob['User'] : array();
+            $this->users = (array)$this->ob['User'];
         }else if(isset($this->ob[unserialize(request()->cookie($this->ob['_id']))])){
             parent::__construct(unserialize(request()->cookie($this->ob['_id'])),
             $this->ob[unserialize(request()->cookie($this->ob['_id']))][$state]['Title'],

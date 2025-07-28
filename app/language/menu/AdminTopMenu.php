@@ -20,6 +20,6 @@ class AdminTopMenu extends InitPage
         $this->label1 = $ob->getDataBase()[$this->language]['AppSettingAdmin']['Logout'];
         $this->label2 = $ob->getDataBase()[$this->language]['AppSettingAdmin']['AdminDashboard'];
         $this->myMenuApp =  new Menu($ob, $state, $this->language);
-        $this->MyBranch = Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::makeBranch(Rays::find(request()->session()->get('userLogout'))['Branch'],$ob->getDataBase()[$ob->getDataBase()['Setting']['Language']]['AppSettingAdmin']['BranchMain']):Branch::makeMainBranch($ob->getDataBase()[$ob->getDataBase()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
+        $this->MyBranch = Branch::makeBranch((array)Rays::find(request()->session()->get('userLogout'))['Branch'],$ob->getDataBase()[$ob->getDataBase()['Setting']['Language']]['AppSettingAdmin']['BranchMain']);
     }
 }

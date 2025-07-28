@@ -18,7 +18,8 @@ class ChangeLanguageController extends Page implements ValidRule
         return $this->ob;
     }
     public function getValidRule(){
-        array_push($this->roll['id'], Route::currentRouteName() === 'branch.delete'?Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null):Rule::in(Route::currentRouteName() === 'branchMain'?(Rays::find(request()->session()->get('userLogout'))['Branch']?array_merge([request()->session()->get('userLogout')],array_keys(Rays::find(request()->session()->get('userLogout'))['Branch'])):request()->session()->get('userLogout')):array_keys($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'])));
+        array_push($this->roll['id'], Route::currentRouteName() === 'branch.delete'?Rule::in(array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch'])):
+        Rule::in(Route::currentRouteName() === 'branchMain'?(array_merge([request()->session()->get('userLogout')],array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch']))):array_keys($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'])));
         array_push($this->roll['id'], Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete'?Rule::notIn(request()->session()->get('userId')):Rule::notIn(request()->session()->get('userId')?$this->getDataBase()['Setting']['Language']:(request()->cookie(request()->input('userAdmin'))&&request()->input('id') === unserialize(request()->cookie(request()->input('userAdmin')))?unserialize(request()->cookie(request()->input('userAdmin'))):array())));
     }
     public function __construct(){

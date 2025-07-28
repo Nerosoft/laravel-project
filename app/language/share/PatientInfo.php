@@ -5,7 +5,7 @@ use App\Http\interface\initValid;
 use App\Http\interface\initView;
 class PatientInfo extends Page{
     protected function __construct(ValidRule|initView|initValid $ob, $state){
-        $this->myPat = $ob->getDataBase()['Patent'];
+        $this->myPat = (array)$ob->getDataBase()['Patent'];
         $this->dis = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['CheckBox'];
         parent::__construct($ob, $state);
 

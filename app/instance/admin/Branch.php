@@ -63,13 +63,10 @@ class Branch
         return $allBranch;
     }
     public static function makeBranch($branch, $branchMain){
-        $allBranch = Branch::makeMainBranch($branchMain);
+        $allBranch = array(request()->session()->get('userLogout')=>new Branch($branchMain));
         foreach ($branch as $key => $branch)
             $allBranch[$key] = new Branch($branch['Name']);        
         return $allBranch;
-    }
-    public static function makeMainBranch($branchMain){
-        return array(request()->session()->get('userLogout')=>new Branch($branchMain));
     }
 
 }

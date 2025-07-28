@@ -10,7 +10,7 @@ class DeleteController extends Page implements ValidRule
         return $this->ob;
     }
     public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->getDataBase()[request()->route('id')]?array_keys($this->getDataBase()[request()->route('id')]):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()[request()->route('id')])));
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));

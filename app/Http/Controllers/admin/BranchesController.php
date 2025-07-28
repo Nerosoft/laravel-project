@@ -28,7 +28,7 @@ class BranchesController extends Page implements LangObject, ValidRule, PageTabl
         return route('branch.delete');
     }
      public function getValidRule(){
-        array_push($this->roll['id'], Rule::in(Rays::find(request()->session()->get('userLogout'))['Branch']?array_keys(Rays::find(request()->session()->get('userLogout'))['Branch']):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch'])));
         $this->initValid();
     }
     public function initView(){

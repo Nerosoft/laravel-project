@@ -26,7 +26,7 @@ class ContractsController extends Page implements LangObject, ValidRule, PageTab
         return route('deleteItem', 'Contracts');
     }
      public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->getDataBase()['Contracts']?array_keys($this->getDataBase()['Contracts']):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()['Contracts'])));
         $this->initValid();
     }
     public function initView(){

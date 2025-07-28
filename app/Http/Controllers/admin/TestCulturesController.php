@@ -26,7 +26,7 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
         return route('deleteItem', request()->route('id'));
     }
      public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->getDataBase()[request()->route('id')]?array_keys($this->getDataBase()[request()->route('id')]):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()[request()->route('id')])));
         $this->initValid();
     }
     public function initView(){

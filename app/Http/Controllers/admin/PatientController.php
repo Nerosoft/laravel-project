@@ -25,7 +25,7 @@ class PatientController extends PatientInfo implements LangObject, ValidRule, Pa
         return route('deleteItem', 'Patent');
     }
      public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->myPat?array_keys($this->myPat):null));
+        array_push($this->roll['id'], Rule::in(array_keys($this->myPat)));
         $this->initValid();
     }
     public function initView(){
@@ -70,7 +70,7 @@ class PatientController extends PatientInfo implements LangObject, ValidRule, Pa
         $this->roll['last-period-date' ] = ['required', 'date'];
         $this->roll['date-birth' ] = ['required', 'date'];
         $this->roll['patent-address' ] = ['required', 'min:3'];
-        $this->roll['patent-contracting' ] = ['required', Rule::in(isset($this->getDataBase()['Contracts'])?array_keys($this->getDataBase()['Contracts']):null)];
+        $this->roll['patent-contracting' ] = ['required', Rule::in(array_keys((array)$this->getDataBase()['Contracts']))];
         $this->roll['patent-hours' ] = ['required', 'integer'];
         $this->roll['choices' ] = ['required_without:patent-other', 'array']; // Ensure at least one checkbox is selected
         $this->roll['choices.*'] = [Rule::in(array_keys($this->dis))];

@@ -33,7 +33,7 @@ class ReceptionController extends PatientInfo implements LangObject, ValidRule, 
         return route('deleteItem', 'Receipt');
     }
      public function getValidRule(){
-        array_push($this->roll['id'], Rule::in($this->getDataBase()['Receipt']?array_keys($this->getDataBase()['Receipt']):null));
+        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()['Receipt'])));
         $this->initValid();
     }
     public function initView(){
@@ -144,8 +144,8 @@ class ReceptionController extends PatientInfo implements LangObject, ValidRule, 
                 else
                     $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid']);
             },];
-        $this->roll['patentCode'] = ['required', Rule::in(isset($this->myPat)?array_keys($this->myPat):null)];
-        $this->roll['know'] = ['required', Rule::in(isset($this->getDataBase()['Knows'])?array_keys($this->getDataBase()['Knows']):null)];
+        $this->roll['patentCode'] = ['required', Rule::in(array_keys($this->myPat))];
+        $this->roll['know'] = ['required', Rule::in(array_keys((array)$this->getDataBase()['Knows']))];
         $this->roll['discount'] = ['required', 'numeric', 'min:0'];
         $this->roll['delayedMoney'] = ['required', 'numeric', 'min:0'];
         $this->roll['paymentDate'] = ['required', 'date'];
