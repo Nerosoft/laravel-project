@@ -124,11 +124,11 @@ class ReceptionController extends PatientInfo implements LangObject, ValidRule, 
                 $this->arr2[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$test['InputOutputLab']];
         if($this->arr3)
             foreach ($this->arr3 as $key => $cultures)
-                $this->arr3[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$test['InputOutputLab']];
+                $this->arr3[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$cultures['InputOutputLab']];
         //init Packages
         if($this->arr4)
             foreach ($this->arr4 as $key => $packages)
-                $this->arr4[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$test['InputOutputLab']];
+                $this->arr4[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$packages['InputOutputLab']];
     }
     public function initValid(){
         $this->testArr = array();
