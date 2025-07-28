@@ -54,7 +54,7 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
         $this->message['shortcut.min'] = $this->error10;
         $this->message['price.required'] = $this->error3;
         $this->message['price.integer'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['PriceInvalid'];
-        $this->message['input-output-lab.required.required'] = $this->error4;
+        $this->message['input-output-lab.required'] = $this->error4;
         $this->message['input-output-lab.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['InputOutputLabInvalid'];
     }
     public function __construct(){

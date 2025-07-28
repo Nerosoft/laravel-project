@@ -1,9 +1,23 @@
 <?php
 namespace App\language\share;
 use App\Http\interface\DbRays;
+use Illuminate\Support\Facades\Route;
 class Page extends TableSetting{
     protected function __construct(DbRays $ob, $state){
-        if(request()->input('id')){
+        if(
+        Route::currentRouteName() === 'branchMain'||
+        Route::currentRouteName() === 'language.changeLanguage'||
+        Route::currentRouteName() === 'language.change'||
+        Route::currentRouteName() === 'language.delete'||
+        Route::currentRouteName() === 'language.copy'||
+        Route::currentRouteName() === 'editPatientServices'||
+        Route::currentRouteName() === 'editPatent'||
+        Route::currentRouteName() === 'editTest'||
+        Route::currentRouteName() === 'editContract'||
+        Route::currentRouteName() === 'editKnows'||
+        Route::currentRouteName() === 'editBranchRays'||
+        Route::currentRouteName() === 'deleteItem'||
+        Route::currentRouteName() === 'branch.delete'){
             $this->roll = [
                 'id'=>['required']
             ];
@@ -13,7 +27,14 @@ class Page extends TableSetting{
             ];
             $ob->getValidRule();
         }
-        else if(request()->all()){
+        else if(
+        Route::currentRouteName() === 'lang.createLanguage'||
+        Route::currentRouteName() === 'createPatientServices'||
+        Route::currentRouteName() === 'createPatent'||
+        Route::currentRouteName() === 'createTest'||
+        Route::currentRouteName() === 'createContract'||
+        Route::currentRouteName() === 'createKnows'||
+        Route::currentRouteName() === 'addBranchRays'){
             $this->successfulyMessage = $ob->getDataBase()[$ob->getDataBase()['Setting']['Language']][$state]['MessageModelCreate'];
             $ob->initValid();
         }
