@@ -594,6 +594,8 @@ class RaysSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'LoginAdmin'=>[
+                        'IdReq'=>'id required',
+                        'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
                         'UserEmailRequired'=>'error email required',
                         'UserPassword'=>'Password less than 8 characters',
@@ -612,6 +614,8 @@ class RaysSeeder extends Seeder
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
                     ],
                     'Register'=>[
+                        'IdReq'=>'id required',
+                        'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
                         'UserEmailRequired'=>'error email required',
                         'UserPassword'=>'Password less than 8 characters',
@@ -1332,6 +1336,8 @@ class RaysSeeder extends Seeder
                         'Delete'=>'Seccessfully delete Packages',
                     ],
                     'LoginAdmin'=>[
+                        'IdReq'=>'id required',
+                        'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
                         'UserEmailRequired'=>'error email required',
                         'UserPassword'=>'Password less than 8 characters',
@@ -1350,6 +1356,8 @@ class RaysSeeder extends Seeder
                         'UserPasswordDntMatch'=>'User and Password dos not Match',
                     ],
                     'Register'=>[
+                        'IdReq'=>'id required',
+                        'IdInv'=>'id invalid',
                         'UserEmail'=>'error email',
                         'UserEmailRequired'=>'error email required',
                         'UserPassword'=>'Password less than 8 characters',

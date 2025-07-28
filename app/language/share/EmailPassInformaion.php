@@ -4,9 +4,13 @@ use App\MyLanguage;
 use Illuminate\Support\Facades\Route;
 use App\Models\Rays;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Validation\Rule;
 class EmailPassInformaion extends InitPage{
     protected function __construct($state){
-        $this->ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):(Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
+        $this->ob = Rays::find(request()->route('id'))?Rays::find(request()->route('id')):
+        (Rays::find(request()->input('id'))?Rays::find(request()->input('id')):Rays::first());
+        $this->errorIdReq = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['IdReq'];
+        $this->errorIdInv = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['IdInv'];
         $this->errorUserEmail = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['UserEmail'];
         $this->errorUserEmailRequired = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['UserEmailRequired'];
         $this->errorUserPassword = $this->ob[isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']][$state]['UserPassword'];
@@ -14,10 +18,13 @@ class EmailPassInformaion extends InitPage{
         if(Route::currentRouteName() === 'loginUser.loginUser' || Route::currentRouteName() === 'register.registerUser'){
             parent::__construct(isset($this->ob[unserialize(request()->cookie($this->ob['_id']))]) ? unserialize(request()->cookie($this->ob['_id'])) : $this->ob['Setting']['Language']);
             $this->roll = [
+                'id' => ['required', Rule::in($this->ob['_id'])],
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
             ];
             $this->message = [
+                'id.required'=>$this->errorIdReq,
+                'id.in'=>$this->errorIdInv,
                 'email.email' => $this->errorUserEmail ,
                 'email.required' => $this->errorUserEmailRequired,
     
