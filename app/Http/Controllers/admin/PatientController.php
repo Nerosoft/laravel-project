@@ -111,7 +111,6 @@ class PatientController extends PatientInfo implements LangObject, ValidRule, Pa
         $this->message['avatar.uploaded'] =$this->error23;
         $this->message['choices.required_without'] =$this->error16;
         $this->message['patent-other.required_without'] =$this->error16;
-        $this->avatar = request()->file('avatar') ? $this->setupImage():(isset($this->myPat[request()->input('id')]['Avatar'])?$this->myPat[request()->input('id')]['Avatar']:null);
     }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
@@ -163,6 +162,6 @@ class PatientController extends PatientInfo implements LangObject, ValidRule, Pa
     }
     public function getMyObject($myDbId = null){
         request()->validate($this->roll, $this->message);
-        return array('PatentCode'=>$myDbId?$myDbId:request()->input('id'), 'Avatar'=>$this->avatar, 'Name'=>request()->input('patent-name'), 'Nationality'=>request()->input('patent-nationality'), 'NationalId'=>request()->input('patent-national-id'), 'PassportNo'=>request()->input('patent-passport-no'), 'Email'=>request()->input('patent-email'), 'Phone'=>request()->input('patent-phone'), 'Phone2'=>request()->input('patent-phone2'), 'Gender'=>request()->input('patent-gender'), 'LastPeriodDate'=>request()->input('last-period-date'), 'DateBirth'=>request()->input('date-birth'), 'Address'=>request()->input('patent-address'), 'Contracting'=>request()->input('patent-contracting'), 'Hours'=>request()->input('patent-hours'), 'Disease'=>request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices'));
+        return array('PatentCode'=>$myDbId?$myDbId:request()->input('id'), 'Avatar'=>request()->file('avatar') ? $this->setupImage():(isset($this->myPat[request()->input('id')]['Avatar'])?$this->myPat[request()->input('id')]['Avatar']:null),'Name'=>request()->input('patent-name'), 'Nationality'=>request()->input('patent-nationality'), 'NationalId'=>request()->input('patent-national-id'), 'PassportNo'=>request()->input('patent-passport-no'), 'Email'=>request()->input('patent-email'), 'Phone'=>request()->input('patent-phone'), 'Phone2'=>request()->input('patent-phone2'), 'Gender'=>request()->input('patent-gender'), 'LastPeriodDate'=>request()->input('last-period-date'), 'DateBirth'=>request()->input('date-birth'), 'Address'=>request()->input('patent-address'), 'Contracting'=>request()->input('patent-contracting'), 'Hours'=>request()->input('patent-hours'), 'Disease'=>request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices'));
     }
 }
