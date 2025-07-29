@@ -81,6 +81,7 @@ class BranchesController extends Page implements LangObject, ValidRule, PageTabl
         $this->message['brance_rays_follow.required'] = $this->error9;
         $this->message['brance_rays_follow.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
     }
+    
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysNameRequired'];

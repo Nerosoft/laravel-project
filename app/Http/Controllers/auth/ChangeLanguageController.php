@@ -10,9 +10,10 @@ use App\Models\Rays;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use App\Http\interface\ValidRule;
+use App\Http\interface\DbRays;
 use App\language\share\Page;
 
-class ChangeLanguageController extends Page implements ValidRule
+class ChangeLanguageController extends Page implements ValidRule, DbRays
 {
     public function getDataBase(){
         return $this->ob;

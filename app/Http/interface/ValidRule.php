@@ -1,5 +1,5 @@
 <?php
 namespace App\Http\interface;
-interface ValidRule extends DbRays{
+interface ValidRule{
     public function getValidRule();
 }

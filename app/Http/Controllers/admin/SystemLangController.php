@@ -44,24 +44,6 @@ class SystemLangController extends TableSetting implements initView
         $this->button2 = $this->getDataBase()[$this->language]['SystemLang']['SaveDirection'];
         $this->button3 = $this->getDataBase()[$this->language]['SystemLang']['SaveText'];
     }
-    public function initValid(){
-        $this->roll['word' ] = ['required', request()->route('id') !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])];
-        $this->roll['myLang'] = ['required', Rule::in(array_keys($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage']))];
-        $this->roll['name'] = ['required', function ($attribute, $value, $fail){
-            if(!isset($this->getDataBase()[request()->route('lang')][request()->route('id')][request()->route('name')]['Item'][request()->route('item')]) && request()->route('item') !== null){
-                $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
-                $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
-            }else if(!isset($this->getDataBase()[request()->route('lang')][request()->route('id')][request()->route('name')]))
-                $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
-        }];
-        $this->message['word.required'] = $this->error1;
-        $this->message['word.'.(request()->route('id') !== 'Html' ?'min':'in')] = $this->error2;
-        $this->message['myLang.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditLanguageRequired'];
-        $this->message['myLang.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditLanguageInvalid'];
-        $this->message['id.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableRequired'];
-        $this->message['id.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableInvalid'];
-        $this->message['name.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyRequired'];
-    }
     public function __construct(){
         $this->ob = Rays::find(request()->session()->get('userId'));
         $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['TextRequired'];
@@ -74,7 +56,22 @@ class SystemLangController extends TableSetting implements initView
                 'id.required'=>$this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableRequired'],
                 'id.in'=>$this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableInvalid'],
             ];
-            $this->initValid();
+                    $this->roll['word' ] = ['required', request()->route('id') !== 'Html' ? 'min:2' : Rule::in(['ltr', 'rtl'])];
+            $this->roll['myLang'] = ['required', Rule::in(array_keys($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage']))];
+            $this->roll['name'] = ['required', function ($attribute, $value, $fail){
+                if(!isset($this->getDataBase()[request()->route('lang')][request()->route('id')][request()->route('name')]['Item'][request()->route('item')]) && request()->route('item') !== null){
+                    $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
+                    $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKey2Invalid']);
+                }else if(!isset($this->getDataBase()[request()->route('lang')][request()->route('id')][request()->route('name')]))
+                    $fail($this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyInvalid']);
+            }];
+            $this->message['word.required'] = $this->error1;
+            $this->message['word.'.(request()->route('id') !== 'Html' ?'min':'in')] = $this->error2;
+            $this->message['myLang.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditLanguageRequired'];
+            $this->message['myLang.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditLanguageInvalid'];
+            $this->message['id.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableRequired'];
+            $this->message['id.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableInvalid'];
+            $this->message['name.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyRequired'];
         }else
             parent::__construct($this, 'SystemLang');        
     }

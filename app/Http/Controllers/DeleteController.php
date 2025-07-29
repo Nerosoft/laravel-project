@@ -4,7 +4,8 @@ use App\Models\Rays;
 use Illuminate\Validation\Rule;
 use App\language\share\Page;
 use App\Http\interface\ValidRule;
-class DeleteController extends Page implements ValidRule
+use App\Http\interface\DbRays;
+class DeleteController extends Page implements ValidRule, DbRays
 {
     public function getDataBase(){
         return $this->ob;
