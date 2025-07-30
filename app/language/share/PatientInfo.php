@@ -1,10 +1,8 @@
 <?php
 namespace App\language\share;
-use App\Http\interface\ValidRule;
-use App\Http\interface\initValid;
-use App\Http\interface\initView;
+use App\Http\interface\DbRays;
 class PatientInfo extends Page{
-    protected function __construct(ValidRule|initView|initValid $ob, $state){
+    protected function __construct(DbRays $ob, $state){
         $this->myPat = (array)$ob->getDataBase()['Patent'];
         $this->dis = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['CheckBox'];
         parent::__construct($ob, $state);

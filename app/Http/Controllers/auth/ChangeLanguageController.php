@@ -24,7 +24,7 @@ class ChangeLanguageController extends Page implements ValidRule, DbRays
         array_push($this->roll['id'], Route::currentRouteName() === 'branchMain' || Route::currentRouteName() === 'branch.delete'?Rule::notIn(request()->session()->get('userId')):Rule::notIn(request()->session()->get('userId')?$this->getDataBase()['Setting']['Language']:(request()->cookie(request()->input('userAdmin'))&&request()->input('id') === unserialize(request()->cookie(request()->input('userAdmin')))?unserialize(request()->cookie(request()->input('userAdmin'))):array())));
     }
     public function __construct(){
-        $this->ob = Rays::find(request()->session()->get('userId'))?Rays::find(request()->session()->get('userId')):(Rays::find(request()->input('userAdmin'))?Rays::find(request()->input('userAdmin')):Rays::first());
+        $this->ob = request()->session()->get('userId')?Rays::find(request()->session()->get('userId')):(Rays::find(request()->input('userAdmin'))?Rays::find(request()->input('userAdmin')):Rays::first());
         parent::__construct($this, Route::currentRouteName() === 'branchMain'?'Branch':'ChangeLanguage');
         $this->message['not_in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][Route::currentRouteName() === 'branchMain'?'Branch':'ChangeLanguage']['IdIsInv'];
         request()->validate($this->roll, $this->message);
