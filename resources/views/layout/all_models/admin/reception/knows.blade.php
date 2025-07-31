@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{isset($index) ? route('editKnows') : route('createKnows')}}" method="POST" onsubmit="return validateKnows($(this).find('#name'))">
+        <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{ isset($index) ? route('editTest', $activeItem) : route('createTest', $activeItem) }}" method="POST" onsubmit="return validateKnows($(this).find('#name'))">
             @csrf
             @isset($index)
               @include('layout.my_id', ['myId'=>$index])

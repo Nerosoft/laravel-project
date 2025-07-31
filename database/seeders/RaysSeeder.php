@@ -652,12 +652,12 @@ class RaysSeeder extends Seeder
                                 'Test'=>'Test',
                                 'Cultures'=>'Cultures',
                                 'Packages'=>'Packages',
+                                'Knows'=>'Knows',
+                                'Contracts'=>'Contracts',
+                                'Patent'=>'Patent',
+                                'Receipt'=>'Receipt',
                             ]
                         ],
-                        'Receipt'=>'Receipt',
-                        'Patent'=>'Patients',
-                        'Knows'=>'Knows',
-                        'Contracts'=>'Contracts',
                         'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[
@@ -1394,12 +1394,12 @@ class RaysSeeder extends Seeder
                                 'Test'=>'Test',
                                 'Cultures'=>'Cultures',
                                 'Packages'=>'Packages',
+                                'Knows'=>'Knows',
+                                'Contracts'=>'Contracts',
+                                'Patent'=>'Patent',
+                                'Receipt'=>'Receipt',
                             ]
                         ],
-                        'Receipt'=>'Receipt',
-                        'Patent'=>'Patients',
-                        'Knows'=>'Knows',
-                        'Contracts'=>'Contracts',
                         'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[

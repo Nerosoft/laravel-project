@@ -17,18 +17,15 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Test' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Cultures' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Packages'
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Test' 
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Cultures' 
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Packages'
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Contracts' 
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Knows' 
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Patent'
-        || $request->session()->exists('userId') && $state === 'delete' && $request->route('id') === 'Receipt'
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Contracts' 
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Knows' 
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Patent'
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Receipt'
         
         
         )
             return $next($request);
-        else if($request->session()->exists('userId') && $state === 'test' || $request->session()->exists('userId') && $state === 'delete')
+        else if($request->session()->exists('userId') && $state === 'test')
             return redirect()->route('Home');
         else
             return redirect('/admin/login');  

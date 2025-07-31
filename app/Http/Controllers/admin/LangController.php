@@ -28,6 +28,7 @@ class LangController extends Page implements ValidRule, PageTable
         return route('language.delete');
     }
      public function getValidRule(){
+        $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
         array_push($this->roll['id'], Rule::in(array_keys($this->allNames)));
         $this->initValid();
     }
@@ -86,6 +87,6 @@ class LangController extends Page implements ValidRule, PageTable
         //after add new language name
         $this->getDataBase()[$this->newKey] = $this->getDataBase()[request()->input('id')];
         $this->getDataBase()->save();
-        return back()->with('success', $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'].$this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
+        return back()->with('success', $this->successfulyMessage.$this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'][request()->input('id')]);
     }
 }

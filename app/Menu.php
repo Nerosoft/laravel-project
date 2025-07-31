@@ -10,10 +10,6 @@ class Menu
     private $ChangeLanguage;
     private $TestCultures;
     private $Branches;
-    private $Knows;
-    private $Contracts;
-    private $Receipt;
-    private $Patent;
     /**
      * Create a new class instance.
      */
@@ -31,10 +27,6 @@ class Menu
             $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
             $this->TestCultures = new MenuItem($ob->getDataBase()[$language]['Menu']['TestCultures']['Name'], $ob->getDataBase()[$language]['Menu']['TestCultures']['Item']);
             $this->Branches = $ob->getDataBase()[$language]['Menu']['Branches'];
-            $this->Receipt = $ob->getDataBase()[$language]['Menu']['Receipt'];
-            $this->Patent = $ob->getDataBase()[$language]['Menu']['Patent'];
-            $this->Knows = $ob->getDataBase()[$language]['Menu']['Knows'];
-            $this->Contracts = $ob->getDataBase()[$language]['Menu']['Contracts'];
         }
     }
     public function getMenu(){

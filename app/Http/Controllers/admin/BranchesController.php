@@ -28,6 +28,7 @@ class BranchesController extends Page implements LangObject, ValidRule, PageTabl
         return route('branch.delete');
     }
      public function getValidRule(){
+        $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['MessageModelEdit'];
         array_push($this->roll['id'], Rule::in(array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch'])));
         $this->initValid();
     }
@@ -120,7 +121,7 @@ class BranchesController extends Page implements LangObject, ValidRule, PageTabl
     }
     public function makeEditBranch(){
         $this->getEditDataBase(Rays::find(request()->session()->get('userLogout')), 'Branch', $this); 
-        return back()->with('success', $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['MessageModelEdit']);
+        return back()->with('success', $this->successfulyMessage);
     }
     public function index(){
         return view('admin.branches',[

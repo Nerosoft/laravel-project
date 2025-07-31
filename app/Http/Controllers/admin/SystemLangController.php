@@ -72,6 +72,7 @@ class SystemLangController extends TableSetting implements initView
             $this->message['id.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableRequired'];
             $this->message['id.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditTableInvalid'];
             $this->message['name.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['EditKeyRequired'];
+            $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['AllLanguageEdit'];
         }else
             parent::__construct($this, 'SystemLang');        
     }
@@ -99,6 +100,6 @@ class SystemLangController extends TableSetting implements initView
         //svae data using new object and send my data to constructor and call setValue to save new value and return object                
         $this->getDataBase()[$lang] = $var1;
         $this->getDataBase()->save();
-        return back()->with('success', $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SystemLang']['AllLanguageEdit']);
+        return back()->with('success', $this->successfulyMessage);
     }
 }

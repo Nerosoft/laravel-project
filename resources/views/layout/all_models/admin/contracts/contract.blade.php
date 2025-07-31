@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{isset($index) ? route('editContract') : route('createContract')}}" method="POST" onsubmit="return validateContract($(this).find('#name'), $(this).find('#governorate'), $(this).find('#area'))">
+        <form id="{{isset($index) ? 'editForm'.$index : 'createForm'}}" action="{{ isset($index) ? route('editTest', $activeItem) : route('createTest', $activeItem) }}" method="POST" onsubmit="return validateContract($(this).find('#name'), $(this).find('#governorate'), $(this).find('#area'))">
             @csrf
                 @isset($index)
                   @include('layout.my_id', ['myId'=>$index])
