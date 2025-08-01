@@ -9,7 +9,6 @@ class Menu
     private $SystemLang;
     private $ChangeLanguage;
     private $TestCultures;
-    private $Branches;
     /**
      * Create a new class instance.
      */
@@ -26,7 +25,7 @@ class Menu
             $this->SystemLang = $ob->getDataBase()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
             $this->TestCultures = new MenuItem($ob->getDataBase()[$language]['Menu']['TestCultures']['Name'], $ob->getDataBase()[$language]['Menu']['TestCultures']['Item']);
-            $this->Branches = $ob->getDataBase()[$language]['Menu']['Branches'];
+            // $this->Branches = $ob->getDataBase()[$language]['Menu']['Branches'];
         }
     }
     public function getMenu(){
@@ -47,8 +46,6 @@ class Menu
             return 'bi bi-pencil-square';
         else if($key === 'Contracts')
             return 'bi bi-pencil';
-        else if($key === 'Branches')
-            return 'bi bi-hospital';
         else if($key === 'Receipt')
             return 'bi bi-person-add';
         else if($key === 'Patent')
@@ -70,7 +67,7 @@ class Menu
         else if($key === 'Admin')
             return 'bi bi-file-richtext';
         else if($key === 'Branch')
-            return 'bi bi-globe-asia-australia';
+            return 'bi bi-hospital';
         else if($key === 'Contracts')
             return 'bi bi-lightbulb-fill';
         else if($key === 'AllNamesLanguage')

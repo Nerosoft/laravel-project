@@ -21,6 +21,7 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Knows' 
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Patent'
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Receipt'
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branch'
         
         
         )

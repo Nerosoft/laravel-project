@@ -10,9 +10,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\TestCulturesController;
 
-use App\Http\Controllers\admin\BranchesController;
 use App\Http\Controllers\DeleteController;
-use App\instance\admin\Branch;
 
 use App\Http\Middleware\IsLogin;
 use App\Http\Middleware\Auth;
@@ -55,12 +53,6 @@ Route::controller(TestCulturesController::class)->group(function () {
     Route::get('/testCultures/{id?}', 'index')->name('TestCultures')->middleware(IsLogin::class.':test');
     Route::post('/createTest/{id?}', 'makeAddTest')->name('createTest')->middleware(IsLogin::class.':test');
     Route::post('/editTest/{id?}', 'makeEditTest')->name('editTest')->middleware(IsLogin::class.':test');
-});
-//Branches
-Route::controller(BranchesController::class)->group(function () {
-    Route::get('/branches', 'index')->name('Branches')->middleware(IsLogin::class.':admin');
-    Route::post('/addBranchRays', 'makeAddBranch')->name('addBranchRays')->middleware(IsLogin::class.':admin');
-    Route::post('/editBranchRays', 'makeEditBranch')->name('editBranchRays')->middleware(IsLogin::class.':admin');
 });
 Route::controller(DeleteController::class)->group(function () {
     Route::post('/deleteItem/{id?}', 'action')->name('deleteItem')->middleware(IsLogin::class.':test');

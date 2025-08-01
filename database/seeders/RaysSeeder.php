@@ -656,9 +656,9 @@ class RaysSeeder extends Seeder
                                 'Contracts'=>'Contracts',
                                 'Patent'=>'Patent',
                                 'Receipt'=>'Receipt',
+                                'Branch'=>'Branch',
                             ]
                         ],
-                        'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[
                         'Ssearch'=>'Quick Search:',
@@ -1398,9 +1398,9 @@ class RaysSeeder extends Seeder
                                 'Contracts'=>'Contracts',
                                 'Patent'=>'Patent',
                                 'Receipt'=>'Receipt',
+                                'Branch'=>'Branch',
                             ]
                         ],
-                        'Branches'=>'Branches',
                     ],
                     'TableInfo'=>[
                         'Ssearch'=>'Quick Search:',

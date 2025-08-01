@@ -17,6 +17,8 @@ use App\instance\admin\reception\MyKnows;
 use App\instance\admin\contracts\Contracts;
 use App\instance\admin\reception\Patent;
 use App\instance\admin\reception\Receipt;
+use App\instance\admin\Branch;
+use Illuminate\Support\Str;
 
 class TestCulturesController extends Page implements LangObject, ValidRule, PageTable
 {
@@ -37,16 +39,23 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->arr1 = isset($this->getDataBase()['Knows']) ? MyKnows::fromArray($this->getDataBase()['Knows']):array();        
             return $this->getDataBase()[request()->route('id')]?Receipt::fromArray2(array_reverse($this->getDataBase()[request()->route('id')]),$this->myPatent, $this->arr1, $this->getDataBase()[$this->language]['SelectTestBox'],$this->payment):array();
         }
-
+        else if(request()->route('id') === 'Branch')
+            return Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(array_reverse(Rays::find(request()->session()->get('userLogout'))['Branch']), $this->getDataBase()[$this->language]['SelectBranchBox']):array();
         else
             return $this->getDataBase()[request()->route('id')]?Test::fromArray(array_reverse($this->getDataBase()[request()->route('id')]), $this->inputOutPut):array();
     }
     public function getRouteDelete(){
-        return route('deleteItem', request()->route('id'));
+        if(request()->route('id') === 'Branch')
+            return route('branch.delete');
+        else
+            return route('deleteItem', request()->route('id'));
     }
     public function getValidRule(){
         $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
-        array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()[request()->route('id')])));
+        if(request()->route('id') === 'Branch')
+            array_push($this->roll['id'], Rule::in(array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch'])));
+        else
+            array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()[request()->route('id')])));
         $this->initValid();
     }
     public function initView(){
@@ -189,6 +198,26 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
                 foreach ($this->arr4 as $key => $packages)
                     $this->arr4[$key]['InputOutputLab'] = $this->getDataBase()[$this->language]['SelectTestBox'][$packages['InputOutputLab']];
             
+        }else if(request()->route('id') === 'Branch'){
+            $this->table8 = $this->getDataBase()[$this->language]['Branch']['BranchStreet'];
+            $this->table9 = $this->getDataBase()[$this->language]['Branch']['BranchName'];
+            $this->table10 = $this->getDataBase()[$this->language]['Branch']['BranchPhone'];
+            $this->table16 = $this->getDataBase()[$this->language]['Branch']['BranchGovernments'];
+            $this->table17 = $this->getDataBase()[$this->language]['Branch']['BranchCity'];
+            $this->table12 = $this->getDataBase()[$this->language]['Branch']['BranchBuilding'];
+            $this->table13 = $this->getDataBase()[$this->language]['Branch']['BranchAddress'];
+            $this->table14 = $this->getDataBase()[$this->language]['Branch']['BranchCountry'];
+            $this->table15 = $this->getDataBase()[$this->language]['Branch']['BranchFollow'];
+            //get all hint
+            $this->hint1 = $this->getDataBase()[$this->language]['Branch']['BranchRaysName'];
+            $this->hint2 = $this->getDataBase()[$this->language]['Branch']['BranchRaysPhone'];
+            $this->hint3 = $this->getDataBase()[$this->language]['Branch']['BranchRaysCountry'];
+            $this->hint4 = $this->getDataBase()[$this->language]['Branch']['BranchRaysGovernments'];
+            $this->hint5 = $this->getDataBase()[$this->language]['Branch']['BranchRaysCity'];
+            $this->hint6 = $this->getDataBase()[$this->language]['Branch']['BranchRaysStreet'];
+            $this->hint7 = $this->getDataBase()[$this->language]['Branch']['BranchRaysBuilding'];
+            $this->hint8 = $this->getDataBase()[$this->language]['Branch']['BranchRaysAddress'];
+            $this->selectBox1 = $this->getDataBase()[$this->language]['Branch']['WithRaysOut'];
         }
         else{
             $this->table8 = $this->getDataBase()[$this->language][request()->route('id')]['TableName'];
@@ -318,6 +347,34 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->message['paymentMethod.required'] = $this->error2;
             $this->message['paymentMethod.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Receipt']['PatientRegisterationPaymentMethodInvalid'];
             $this->message['item.*.required'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Receipt']['PatientRegisterationItemInvalid'];
+        }else if(request()->route('id') === 'Branch'){
+            $this->roll['brance_rays_name'] = ['required', 'min:3'];
+            $this->roll['brance_rays_phone'] = ['required', 'regex:/^[0-9]{11}$/'];
+            $this->roll['brance_rays_governments'] = ['required', 'min:3'];
+            $this->roll['brance_rays_city'] = ['required', 'min:3'];
+            $this->roll['brance_rays_street'] = ['required', 'min:3'];
+            $this->roll['brance_rays_building'] = ['required', 'min:3'];
+            $this->roll['brance_rays_address'] = ['required', 'min:3'];
+            $this->roll['brance_rays_country'] = ['required', 'min:3'];
+            $this->roll['brance_rays_follow'] = ['required', Rule::in(array_keys($this->branchInputOutput))];
+            $this->message['brance_rays_name.min'] = $this->error10;
+            $this->message['brance_rays_name.required'] = $this->error1;
+            $this->message['brance_rays_phone.regex'] = $this->error11;
+            $this->message['brance_rays_phone.required'] = $this->error2;
+            $this->message['brance_rays_governments.min'] = $this->error12;
+            $this->message['brance_rays_governments.required'] = $this->error3;
+            $this->message['brance_rays_city.min'] = $this->error13;
+            $this->message['brance_rays_city.required'] = $this->error4;
+            $this->message['brance_rays_street.min'] = $this->error14;
+            $this->message['brance_rays_street.required'] = $this->error5;
+            $this->message['brance_rays_building.min'] = $this->error15;
+            $this->message['brance_rays_building.required'] = $this->error6;
+            $this->message['brance_rays_address.min'] = $this->error16;
+            $this->message['brance_rays_address.required'] = $this->error7;
+            $this->message['brance_rays_country.min'] = $this->error17;
+            $this->message['brance_rays_country.required'] = $this->error8;
+            $this->message['brance_rays_follow.required'] = $this->error9;
+            $this->message['brance_rays_follow.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
         }
         else{
             $this->roll['name'] = ['required', 'min:3'];
@@ -389,7 +446,27 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->arr4 = (array)$this->getDataBase()['Packages'];
             $this->myPat = (array)$this->getDataBase()['Patent'];
             $this->dis = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['CheckBox']; 
-        }else{
+        }else if(request()->route('id') === 'Branch'){
+            $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysNameRequired'];
+            $this->error2 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysPhoneRequired'];
+            $this->error3 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysGovernmentsRequired'];
+            $this->error4 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysCityRequired'];
+            $this->error5 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysStreetRequired'];
+            $this->error6 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysBuildingRequired'];
+            $this->error7 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysAddressRequired'];
+            $this->error8 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysCountryRequired'];
+            $this->error9 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysFollowRequired'];
+            $this->error10 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysNameLength'];
+            $this->error11 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysPhoneLength'];
+            $this->error12 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysGovernmentsLength'];
+            $this->error13 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysCityLength'];
+            $this->error14 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysStreetLength'];
+            $this->error15 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysBuildingLength'];
+            $this->error16 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysAddressLength'];
+            $this->error17 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysCountryLength'];
+            $this->branchInputOutput = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SelectBranchBox'];
+        }
+        else{
             $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['NameRequired'];
             $this->error2 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['NameInvalid'];
             $this->error9 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['ShortcutRequired'];
@@ -425,6 +502,12 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
                     'active'=>'TestCultures',
                     'activeItem'=>$id,        
             ]);
+        else if($id === 'Branch')
+            return view('admin.branches',[
+                'lang'=> $this,
+                'active'=>'TestCultures',
+                'activeItem'=>$id,
+            ]);
         else
             return view('admin.test_cultures.all_test_cultures',[
                     'lang'=> $this,
@@ -433,14 +516,27 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             ]);
     }
     public function makeAddTest($id){
-        $this->getCreateDataBase($this->getDataBase(), $id, $this->generateUniqueIdentifier(), $this);
-        return $id === 'Receipt'?response()->json([
-            'success' => true,
-            'message'=>$this->successfulyMessage
-        ]):back()->with('success', $this->successfulyMessage);
+        $this->getCreateDataBase($id === 'Branch'?Rays::find(request()->session()->get('userLogout')):$this->getDataBase(), $id, $id === 'Branch'?Str::uuid()->toString():$this->generateUniqueIdentifier(), $this);
+        if($id === 'Receipt')
+            return response()->json([
+                'success' => true,
+                'message'=>$this->successfulyMessage
+            ]);
+        else if($id === 'Branch'){
+            //conver model database to array        
+            $myBranch = $this->getDataBase()->toArray();
+            //delete object user
+            unset($myBranch['User']);
+            unset($myBranch['Branch']);
+            //save brance name in _id 
+            $myBranch['_id'] = array_keys(Rays::find(request()->session()->get('userLogout'))['Branch'])[count(Rays::find(request()->session()->get('userLogout'))['Branch']) - 1];
+            //insert the object in database
+            Rays::insert($myBranch);
+        }
+        return back()->with('success', $this->successfulyMessage);
     }
     public function makeEditTest($id){
-        $this->getEditDataBase($this->getDataBase(), $id, $this);
+        $this->getEditDataBase($id === 'Branch'?Rays::find(request()->session()->get('userLogout')):$this->getDataBase(), $id, $this);
         return $id === 'Receipt'?response()->json([
             'success' => true,
             'message'=>$this->successfulyMessage
@@ -456,6 +552,16 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             return array('PatentCode'=>$myDbId?$myDbId:request()->input('id'), 'Avatar'=>request()->file('avatar') ? $this->setupImage():(isset($this->myPat[request()->input('id')]['Avatar'])?$this->myPat[request()->input('id')]['Avatar']:null),'Name'=>request()->input('patent-name'), 'Nationality'=>request()->input('patent-nationality'), 'NationalId'=>request()->input('patent-national-id'), 'PassportNo'=>request()->input('patent-passport-no'), 'Email'=>request()->input('patent-email'), 'Phone'=>request()->input('patent-phone'), 'Phone2'=>request()->input('patent-phone2'), 'Gender'=>request()->input('patent-gender'), 'LastPeriodDate'=>request()->input('last-period-date'), 'DateBirth'=>request()->input('date-birth'), 'Address'=>request()->input('patent-address'), 'Contracting'=>request()->input('patent-contracting'), 'Hours'=>request()->input('patent-hours'), 'Disease'=>request()->input('patent-other') ? request()->input('patent-other'): request()->input('choices'));
         else if(request()->route('id') === 'Receipt')
             return (new Receipt(request()->input('know'), $this->testArr, (int)request()->input('discount'), (int)request()->input('delayedMoney'), request()->input('paymentDate'), (int)request()->input('paymentAmount'), request()->input('paymentMethod'), request()->input('patentCode')))->getObject();
+        else if(request()->route('id') === 'Branch')
+            return array('Name'=>request()->input('brance_rays_name'),
+            'Phone'=>request()->input('brance_rays_phone'),
+            'Governments'=>request()->input('brance_rays_governments'),
+            'City'=>request()->input('brance_rays_city'),
+            'Street'=>request()->input('brance_rays_street'),
+            'Building'=>request()->input('brance_rays_building'),
+            'Address'=>request()->input('brance_rays_address'),
+            'Country'=>request()->input('brance_rays_country'),
+            'Follow'=>request()->input('brance_rays_follow'));
         else
             return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$myDbId?$myDbId:request()->input('id'));
     }
