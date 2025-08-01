@@ -529,7 +529,7 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             unset($myBranch['User']);
             unset($myBranch['Branch']);
             //save brance name in _id 
-            $myBranch['_id'] = array_keys(Rays::find(request()->session()->get('userLogout'))['Branch'])[count(Rays::find(request()->session()->get('userLogout'))['Branch']) - 1];
+            $myBranch['_id'] = array_key_last(Rays::find(request()->session()->get('userLogout'))['Branch']);
             //insert the object in database
             Rays::insert($myBranch);
         }

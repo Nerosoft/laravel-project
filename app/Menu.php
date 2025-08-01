@@ -25,7 +25,6 @@ class Menu
             $this->SystemLang = $ob->getDataBase()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
             $this->TestCultures = new MenuItem($ob->getDataBase()[$language]['Menu']['TestCultures']['Name'], $ob->getDataBase()[$language]['Menu']['TestCultures']['Item']);
-            // $this->Branches = $ob->getDataBase()[$language]['Menu']['Branches'];
         }
     }
     public function getMenu(){
