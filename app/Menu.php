@@ -7,7 +7,6 @@ class Menu
 {
     private $Home;
     private $SystemLang;
-    private $ChangeLanguage;
     private $TestCultures;
     /**
      * Create a new class instance.
@@ -21,7 +20,6 @@ class Menu
                 $this->CustomMenu[$key] = new MenuItem($value, $ob->getDataBase()[$language]['CutomLang']);
         }
         else{
-            $this->ChangeLanguage = $ob->getDataBase()[$language]['Menu']['ChangeLanguage'];
             $this->SystemLang = $ob->getDataBase()[$language]['Menu']['SystemLang'];
             $this->Home = $ob->getDataBase()[$language]['Menu']['Home'];
             $this->TestCultures = new MenuItem($ob->getDataBase()[$language]['Menu']['TestCultures']['Name'], $ob->getDataBase()[$language]['Menu']['TestCultures']['Item']);

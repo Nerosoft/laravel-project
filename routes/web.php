@@ -2,7 +2,6 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\SystemLangController;
-use App\Http\Controllers\admin\LangController;
 use App\Http\Controllers\auth\LoginAdminController;
 use App\Http\Controllers\auth\RegisterAdminController;
 use App\Http\Controllers\auth\ChangeLanguageController;
@@ -41,11 +40,6 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(SystemLangController::class)->group(function () {
     Route::get('/system/language/{lang?}/{id?}', 'index')->name('SystemLang')->middleware(IsLogin::class.':admin');
     Route::post('/edit/{lang?}/{id?}/{name?}/{item?}', 'makeEditLanguage')->name('edit.editAllLanguage')->middleware(IsLogin::class.':admin');
-});
-Route::controller(LangController::class)->group(function () {
-    Route::get('/ChangeLanguage', 'index')->name('ChangeLanguage')->middleware(IsLogin::class.':admin');
-    Route::post('/newLanguage', 'makeAddLanguage')->name('lang.createLanguage')->middleware(IsLogin::class.':admin');
-    Route::post('/copyLanguage', 'makeCopyLanguage')->name('language.copy')->middleware(IsLogin::class.':admin');
 });
 //all route admin
 //TestCultures

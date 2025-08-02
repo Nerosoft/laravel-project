@@ -170,9 +170,9 @@ class RaysSeeder extends Seeder
                         'ButtonModelAdd'=>'Create language',
                         'ScreenModelCreate'=>'Screen create language',
                         'ButtonModelCreate'=>'Create language',
-                        'MessageModelCreate'=>'Seccessfully create language-',
+                        'MessageModelCreate'=>'Seccessfully create language',
                         'LabelCreateLanguage'=>'Name Langaue',
-                        'HintCopyLangName'=>'Enter copy lang name',
+                        'HintCopyLangName'=>'Enter new lang name',
                         'ScreenModelDelete'=>'Screen delete language',
                         'MessageModelDelete'=>'do you want to delete language',
                         'ButtonModelDelete'=>'delete language',
@@ -185,17 +185,17 @@ class RaysSeeder extends Seeder
                         'LanguageInfo'=>'Hello, Welcome!',
                         'LanguageSelect'=>'Select a language to change the content:',
                         'LabelChangeLanguageMessage'=>'do you want to change language',
-                        'LabelCopyLanguageMessage'=>'Copy language',
+                        'LabelCopyLanguageMessage'=>'Edit language',
                         'LabelNewLangName'=>'Name',
                         'HintNewLangName'=>'Enter new lang name',
                         'ButtonChangeLanguageMessage'=>'Change language',
-                        'ButtonModelEdit'=>'Copy language',
+                        'ButtonModelEdit'=>'Edit language',
                         'TitleChangeLanguageMessage'=>'Screen change language',
-                        'ScreenModelEdit'=>'Screen copy language',
+                        'ScreenModelEdit'=>'Screen Edit language',
                         'IdIsReq'=>'Required id',
                         'IdIsInv'=>'invalid id',
                         'ChangeLang'=>'Seccessfully change language-',
-                        'MessageModelEdit'=>'Seccessfully copy language-',
+                        'MessageModelEdit'=>'Seccessfully edit language',
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
@@ -643,7 +643,6 @@ class RaysSeeder extends Seeder
                         'AdminLogin'=>'seccessfully register admin'
                     ],
                     'Menu'=>[
-                        'ChangeLanguage'=>'Change language',        
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'TestCultures'=>[
@@ -657,6 +656,7 @@ class RaysSeeder extends Seeder
                                 'Patent'=>'Patent',
                                 'Receipt'=>'Receipt',
                                 'Branch'=>'Branch',
+                                'ChangeLanguage'=>'Change language',
                             ]
                         ],
                     ],
@@ -912,9 +912,9 @@ class RaysSeeder extends Seeder
                         'ButtonModelAdd'=>'Create language',
                         'ScreenModelCreate'=>'Screen create language',
                         'ButtonModelCreate'=>'Create language',
-                        'MessageModelCreate'=>'Seccessfully create language-',
+                        'MessageModelCreate'=>'Seccessfully create language',
                         'LabelCreateLanguage'=>'Name Langaue',
-                        'HintCopyLangName'=>'Enter copy lang name',
+                        'HintCopyLangName'=>'Enter new lang name',
                         'ScreenModelDelete'=>'Screen delete language',
                         'MessageModelDelete'=>'do you want to delete language',
                         'ButtonModelDelete'=>'delete language',
@@ -927,17 +927,17 @@ class RaysSeeder extends Seeder
                         'LanguageInfo'=>'Hello, Welcome!',
                         'LanguageSelect'=>'Select a language to change the content:',
                         'LabelChangeLanguageMessage'=>'do you want to change language',
-                        'LabelCopyLanguageMessage'=>'Copy language',
+                        'LabelCopyLanguageMessage'=>'Edit language',
                         'LabelNewLangName'=>'Name',
                         'HintNewLangName'=>'Enter new lang name',
                         'ButtonChangeLanguageMessage'=>'Change language',
-                        'ButtonModelEdit'=>'Copy language',
+                        'ButtonModelEdit'=>'Edit language',
                         'TitleChangeLanguageMessage'=>'Screen change language',
-                        'ScreenModelEdit'=>'Screen copy language',
+                        'ScreenModelEdit'=>'Screen Edit language',
                         'IdIsReq'=>'Required id',
                         'IdIsInv'=>'invalid id',
                         'ChangeLang'=>'Seccessfully change language-',
-                        'MessageModelEdit'=>'Seccessfully copy language-',
+                        'MessageModelEdit'=>'Seccessfully edit language',
                         'DeleteLanguage'=>'Seccessfully delete language-'
                     ],
                     'Patent'=>[
@@ -1385,7 +1385,6 @@ class RaysSeeder extends Seeder
                         'AdminLogin'=>'seccessfully register admin'
                     ],
                     'Menu'=>[
-                        'ChangeLanguage'=>'Change language',        
                         'SystemLang'=>'Edit my language',          
                         'Home'=>'Home',
                         'TestCultures'=>[
@@ -1399,6 +1398,7 @@ class RaysSeeder extends Seeder
                                 'Patent'=>'Patent',
                                 'Receipt'=>'Receipt',
                                 'Branch'=>'Branch',
+                                'ChangeLanguage'=>'Change language',
                             ]
                         ],
                     ],

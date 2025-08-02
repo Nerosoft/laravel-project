@@ -17,3 +17,8 @@ function validName(name){
         name.removeClass('error-message');
     return true;
 }
+
+function displayModel(index, value){
+    openForm(index);
+    $('#'+index).find('#lang_name').val(value);
+}

@@ -18,6 +18,7 @@ use App\instance\admin\contracts\Contracts;
 use App\instance\admin\reception\Patent;
 use App\instance\admin\reception\Receipt;
 use App\instance\admin\Branch;
+use App\MyLanguage;
 use Illuminate\Support\Str;
 
 class TestCulturesController extends Page implements LangObject, ValidRule, PageTable
@@ -41,12 +42,20 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
         }
         else if(request()->route('id') === 'Branch')
             return Rays::find(request()->session()->get('userLogout'))['Branch']?Branch::fromArray(array_reverse(Rays::find(request()->session()->get('userLogout'))['Branch']), $this->getDataBase()[$this->language]['SelectBranchBox']):array();
+        else if(request()->route('id') === 'ChangeLanguage'){
+             $tableData = array();
+            foreach (array_reverse($this->allNames) as $key => $value)
+                $tableData[$key] = new MyLanguage($value);
+            return $tableData;
+        }
         else
             return $this->getDataBase()[request()->route('id')]?Test::fromArray(array_reverse($this->getDataBase()[request()->route('id')]), $this->inputOutPut):array();
     }
     public function getRouteDelete(){
         if(request()->route('id') === 'Branch')
             return route('branch.delete');
+        else if(request()->route('id') === 'ChangeLanguage')
+            return route('language.delete');
         else
             return route('deleteItem', request()->route('id'));
     }
@@ -54,6 +63,10 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
         $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['MessageModelEdit'];
         if(request()->route('id') === 'Branch')
             array_push($this->roll['id'], Rule::in(array_keys((array)Rays::find(request()->session()->get('userLogout'))['Branch'])));
+        else if(request()->route('id') === 'ChangeLanguage'){
+            $this->successfulyMessage = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['ChangeLanguage']['MessageModelEdit'];
+            array_push($this->roll['id'], Rule::in(array_keys($this->allNames)));
+        }
         else
             array_push($this->roll['id'], Rule::in(array_keys((array)$this->getDataBase()[request()->route('id')])));
         $this->initValid();
@@ -219,6 +232,24 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->hint8 = $this->getDataBase()[$this->language]['Branch']['BranchRaysAddress'];
             $this->selectBox1 = $this->getDataBase()[$this->language]['Branch']['WithRaysOut'];
         }
+        else if(request()->route('id') === 'ChangeLanguage'){
+            //init table
+            $this->NameLangaue = $this->getDataBase()[$this->language]['ChangeLanguage']['NameLangaue'];
+            //init label
+            $this->label3 = $this->getDataBase()[$this->language]['ChangeLanguage']['LanguageInfo'];     
+            $this->label4 = $this->getDataBase()[$this->language]['ChangeLanguage']['LanguageSelect'];
+            $this->label5 = $this->getDataBase()[$this->language]['ChangeLanguage']['LabelChangeLanguageMessage'];
+            $this->label6 = $this->getDataBase()[$this->language]['ChangeLanguage']['LabelCopyLanguageMessage'];
+            $this->LabelNameLanguage = $this->getDataBase()[$this->language]['ChangeLanguage']['LabelCreateLanguage'];
+            $this->HintCopyLanguage = $this->getDataBase()[$this->language]['ChangeLanguage']['HintCopyLangName'];
+            $this->label7 = $this->getDataBase()[$this->language]['ChangeLanguage']['LabelNewLangName'];
+            //hint
+            $this->hint1 = $this->getDataBase()[$this->language]['ChangeLanguage']['HintNewLangName'];
+            //init button
+            $this->button4 = $this->getDataBase()[$this->language]['ChangeLanguage']['ButtonChangeLanguageMessage'];
+            $this->title2 = $this->getDataBase()[$this->language]['ChangeLanguage']['TitleChangeLanguageMessage'];
+        }
+
         else{
             $this->table8 = $this->getDataBase()[$this->language][request()->route('id')]['TableName'];
             $this->table9 = $this->getDataBase()[$this->language][request()->route('id')]['TablePrice'];
@@ -376,6 +407,12 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->message['brance_rays_follow.required'] = $this->error9;
             $this->message['brance_rays_follow.in'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysFollowValue'];
         }
+        else if(request()->route('id') === 'ChangeLanguage'){
+            $this->roll['lang_name'] = ['required', 'min:3'];
+            $this->message['lang_name.required'] = $this->error1;
+            $this->message['lang_name.min'] = $this->error2;
+        }
+
         else{
             $this->roll['name'] = ['required', 'min:3'];
             $this->roll['shortcut'] = ['required', 'min:3'];
@@ -465,6 +502,10 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $this->error16 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysAddressLength'];
             $this->error17 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['Branch']['BranceRaysCountryLength'];
             $this->branchInputOutput = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['SelectBranchBox'];
+        }else if(request()->route('id') === 'ChangeLanguage'){
+            $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['ChangeLanguage']['NewLangNameRequired'];
+            $this->error2 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['ChangeLanguage']['NewLangNameInvalid'];
+            $this->allNames = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'];
         }
         else{
             $this->error1 = $this->getDataBase()[$this->getDataBase()['Setting']['Language']][request()->route('id')]['NameRequired'];
@@ -497,13 +538,19 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
                     'activeItem'=>$id,        
             ]);
         else if($id === 'Receipt')
-        return view('admin.reception.patientRegisteration', [
+            return view('admin.reception.patientRegisteration', [
                     'lang'=> $this,
                     'active'=>'TestCultures',
                     'activeItem'=>$id,        
             ]);
         else if($id === 'Branch')
             return view('admin.branches',[
+                'lang'=> $this,
+                'active'=>'TestCultures',
+                'activeItem'=>$id,
+            ]);
+        else if($id === 'ChangeLanguage')
+            return view('admin.change_language',[
                 'lang'=> $this,
                 'active'=>'TestCultures',
                 'activeItem'=>$id,
@@ -516,13 +563,15 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             ]);
     }
     public function makeAddTest($id){
-        $this->getCreateDataBase($id === 'Branch'?Rays::find(request()->session()->get('userLogout')):$this->getDataBase(), $id, $id === 'Branch'?Str::uuid()->toString():$this->generateUniqueIdentifier(), $this);
-        if($id === 'Receipt')
+        if($id === 'Receipt'){
+            $this->getCreateDataBase($this->getDataBase(), $id, $this->generateUniqueIdentifier(), $this);
             return response()->json([
                 'success' => true,
                 'message'=>$this->successfulyMessage
             ]);
+        }
         else if($id === 'Branch'){
+            $this->getCreateDataBase(Rays::find(request()->session()->get('userLogout')), $id, Str::uuid()->toString(), $this);
             //conver model database to array        
             $myBranch = $this->getDataBase()->toArray();
             //delete object user
@@ -532,15 +581,40 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
             $myBranch['_id'] = array_key_last(Rays::find(request()->session()->get('userLogout'))['Branch']);
             //insert the object in database
             Rays::insert($myBranch);
+            return back()->with('success', $this->successfulyMessage);
+        }else if($id === 'ChangeLanguage'){
+            $newKey = $this->generateUniqueIdentifier();
+            $this->getMyObject($newKey);
+            $myLanguage = $this->getDataBase()['MyLanguage'];
+            $myLanguage['AllNamesLanguage'] = $this->getDataBase()[$this->getDataBase()['Setting']['Language']]['AllNamesLanguage'];
+            $this->getDataBase()[$newKey] = $myLanguage;
+            $this->getDataBase()->save();
+            return back()->with('success', $this->successfulyMessage);
         }
-        return back()->with('success', $this->successfulyMessage);
+        else{
+            $this->getCreateDataBase($this->getDataBase(), $id, $this->generateUniqueIdentifier(), $this);
+            return back()->with('success', $this->successfulyMessage);
+        }
     }
     public function makeEditTest($id){
-        $this->getEditDataBase($id === 'Branch'?Rays::find(request()->session()->get('userLogout')):$this->getDataBase(), $id, $this);
-        return $id === 'Receipt'?response()->json([
-            'success' => true,
-            'message'=>$this->successfulyMessage
-        ]):back()->with('success', $this->successfulyMessage);
+        if($id === 'Receipt'){
+                $this->getEditDataBase($this->getDataBase(), $id, $this);
+                return response()->json([
+                    'success' => true,
+                    'message'=>$this->successfulyMessage
+                ]);
+        }else if($id === 'Branch'){
+            $this->getEditDataBase(Rays::find(request()->session()->get('userLogout')), $id, $this);
+            return back()->with('success', $this->successfulyMessage);
+        }else if($id === 'ChangeLanguage'){
+            $this->getMyObject();
+            $this->getDataBase()->save();
+            return back()->with('success', $this->successfulyMessage);
+        }
+        else{
+            $this->getEditDataBase($this->getDataBase(), $id, $this);
+            return back()->with('success', $this->successfulyMessage);
+        }
     }
     public function getMyObject($myDbId = null){
         request()->validate($this->roll, $this->message);
@@ -553,15 +627,15 @@ class TestCulturesController extends Page implements LangObject, ValidRule, Page
         else if(request()->route('id') === 'Receipt')
             return (new Receipt(request()->input('know'), $this->testArr, (int)request()->input('discount'), (int)request()->input('delayedMoney'), request()->input('paymentDate'), (int)request()->input('paymentAmount'), request()->input('paymentMethod'), request()->input('patentCode')))->getObject();
         else if(request()->route('id') === 'Branch')
-            return array('Name'=>request()->input('brance_rays_name'),
-            'Phone'=>request()->input('brance_rays_phone'),
-            'Governments'=>request()->input('brance_rays_governments'),
-            'City'=>request()->input('brance_rays_city'),
-            'Street'=>request()->input('brance_rays_street'),
-            'Building'=>request()->input('brance_rays_building'),
-            'Address'=>request()->input('brance_rays_address'),
-            'Country'=>request()->input('brance_rays_country'),
-            'Follow'=>request()->input('brance_rays_follow'));
+            return array('Name'=>request()->input('brance_rays_name'), 'Phone'=>request()->input('brance_rays_phone'), 'Governments'=>request()->input('brance_rays_governments'), 'City'=>request()->input('brance_rays_city'), 'Street'=>request()->input('brance_rays_street'), 'Building'=>request()->input('brance_rays_building'), 'Address'=>request()->input('brance_rays_address'), 'Country'=>request()->input('brance_rays_country'), 'Follow'=>request()->input('brance_rays_follow'));
+        else if(request()->route('id') === 'ChangeLanguage')
+            foreach ($this->allNames as $key=>$value) {
+                $myLang = $this->getDataBase()[$key];
+                $myLang['AllNamesLanguage'][$myDbId !== null ? $myDbId : request()->input('id')] = request()->input('lang_name');
+                $this->getDataBase()[$key] = $myLang;
+            }
+ 
+        
         else
             return array('Name'=>request()->input('name'), 'Shortcut'=>request()->input('shortcut'), 'Price'=>request()->input('price'), 'InputOutputLab'=>request()->input('input-output-lab'), 'Id'=>$myDbId?$myDbId:request()->input('id'));
     }

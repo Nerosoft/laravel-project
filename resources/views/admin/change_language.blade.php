@@ -26,7 +26,7 @@
                     <th>{{$loop->index+1}}</th>
                     <th>{{$myLang->getName()}}</th>
                     <th>
-                        <i class="bi bi-copy edit" onclick="openForm('copyModel{{$index}}')"></i>
+                        <i class="bi bi-copy edit" onclick="displayModel('copyModel{{$index}}', '{{$myLang->getName()}}')"></i>
                         @include('layout.all_models.admin.change_language')
                         <i class="{{$index === $lang->language ? 'bi bi-lightbulb-fill' : 'bi bi-lightbulb'}} edit" onclick="openForm('selectLanguage{{$index}}')"></i>
                         <div class="modal" id="selectLanguage{{$index}}" tabindex="-1" role="dialog">

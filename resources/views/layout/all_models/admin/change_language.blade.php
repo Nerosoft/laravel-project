@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route(isset($index)?'language.copy':'lang.createLanguage')}}" method="POST" onsubmit="return validName($(this).find('#lang_name'))">
+            <form action="{{isset($index) ? route('editTest', $activeItem) : route('createTest', $activeItem)}}" method="POST" onsubmit="return validName($(this).find('#lang_name'))">
                 <div class="modal-body">
                     @csrf
                     @isset($index)
@@ -15,7 +15,7 @@
                     @endisset
                     <div class="form-group">
                         <label for="lang_name" class="form-label">{{isset($index)?$lang->label6:$lang->LabelNameLanguage}}</label>
-                        <input type="text" name="lang_name" id="lang_name" placeholder='{{isset($index)?$lang->HintCopyLanguage:$lang->hint1}}' class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                        <input type="text" name="lang_name" id="lang_name" value="{{isset($index)?$myLang->getName():''}}" placeholder='{{isset($index)?$lang->HintCopyLanguage:$lang->hint1}}' class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </div>
                 <div class="modal-footer">

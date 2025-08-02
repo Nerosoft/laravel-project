@@ -22,8 +22,7 @@ class IsLogin
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Patent'
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Receipt'
         || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'Branch'
-        
-        
+        || $request->session()->exists('userId') && $state === 'test' && $request->route('id') === 'ChangeLanguage'
         )
             return $next($request);
         else if($request->session()->exists('userId') && $state === 'test')
